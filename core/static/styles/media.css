@@ -1,0 +1,28 @@
+@media screen and (max-width: 1800px){
+
+    header{
+        width: 100%;
+        height: 150px;
+    }
+    .menu{
+        height: 600px;
+    }
+    .menu_info, .menu_image{
+        height: 600px;
+    }
+}
+@media screen and (max-width: 1700px){
+    header{
+        width: 100%;
+        height: 150px;
+    }
+    .menu{
+        height: 550px;
+    }
+    .menu_info, .menu_image{
+        height: 550px;
+    }
+    .menu_info h1{
+        font-size: 48pt;
+    }
+}
