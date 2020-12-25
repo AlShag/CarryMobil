@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "7f7606f08e0544d8d012ef4d097dabdd6df6843a28793eb6551245d4b2db4242"
+            "sha256": "902a3a65b3d6d7dd242c3894287eb34d9eb8c819b0fd7846718b28fb41716044"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -15,6 +15,18 @@
             }
         ]
     },
-    "default": {},
+    "default": {
+        "mysqlclient": {
+            "hashes": [
+                "sha256:1f4d3c3fa7d7f1683071ad12096e5494179e7fa837c5210c3032c81d72f33e3a",
+                "sha256:4c82187dd6ab3607150fbb1fa5ef4643118f3da122b8ba31c3149ddd9cf0cb39",
+                "sha256:9e6080a7aee4cc6a06b58b59239f20f1d259c1d2fddf68ddeed242d2311c7087",
+                "sha256:f3fdaa9a38752a3b214a6fe79d7cae3653731a53e577821f9187e67cbecb2e16",
+                "sha256:f646f8d17d02be0872291f258cce3813497bc7888cd4712a577fd1e719b2f213"
+            ],
+            "path": "./../mysqlclient-1.4.6-cp38-cp38-win32.whl",
+            "version": "==1.4.6"
+        }
+    },
     "develop": {}
 }
