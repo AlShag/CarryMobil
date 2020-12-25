@@ -1,0 +1,107 @@
+{% extends "main/index.html" %}
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+    <div class='to_up'><a href="#up">&laquo;</a></div>
+    <div class="menu" id="menu">
+        <div class="container">
+            <div class="flex">
+                <div class="menu_info">
+                    <section>
+                        <h1><a style="color: #474747;">CARRY</a>MOBIL</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ac odio eu dolor commodo mollis in in quam.</p>
+                        <br><input type="button" value="заказать" onclick="window.location='/order'" id="to_order">
+                    </section>
+                </div>
+                <div class="menu_image">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="label_title">CarryMobil</div>
+    <div class="advantages">
+        <div class="container">
+            <h1>Преимущества</h1>
+            <div class="slider">
+                <div class="slide_left"></div>
+                <div class="slide_right"></div>
+                <div class="flex">
+                    <div class="advan">
+                        <div class="advan_image">
+                            <div class="advan_icon_1"></div>
+                        </div>
+                        <div class="advan_text">
+                            <h2>Простота</h2>
+                            <p>Все, что нужно иметь под рукой, всегда там, где вы ожидаете это увидеть</p></div>
+                    </div>
+                    <div class="advan">
+                        <div class="advan_image">
+                            <div class="advan_icon_2"></div>
+                        </div>
+                        <div class="advan_text">
+                            <h2>Функциональность</h2>
+                            <p>Все функции по управлению, контролю и ведению проектов собраны в одном продукте. В Weeek</p>  
+                        </div>
+                    </div>
+                    <div class="advan">
+                        <div class="advan_image">
+                            <div class="advan_icon_3"></div>
+                        </div>
+                        <div class="advan_text">
+                            <h2>Безопасность</h2>
+                            <p>Терять данные обидно и неприятно. А еще критично для проектов. Мы всерьез заботимся о том, чтобы все данные были в сохранности и безопасности. Все что было в Weeek, останется в Weeek</p>
+                        </div>
+                    </div>
+                    <div class="advan">
+                        <div class="advan_image">
+                            <div class="advan_icon_4"></div>
+                        </div>
+                        <div class="advan_text">
+                            <h2>Гибкость</h2>
+                            <p>Система способна адаптироваться под управление любыми проектами</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="spec">
+        <div class="container">
+            <div class="spec_icon"><img src="" alt="" id="spec_icon"></div>
+            <h1>Спец предложения</h1>
+            <div class="spec_list">
+                <div class="flex">
+                    <div class="spec_form">
+                        <div class="spec_1">
+                            <h2>Попутный груз</h2>
+                            <h3>19.10.2020</h3>
+                            <p>С детства нас приучают, что ошибки — это плохо. Причём везде: и в учёбе, и в жизни, и в работе. Но так ли страшны ошибки в работе? Я разобрался и пришёл к неоднозначным выводам.</p>
+                        </div>
+                    </div>
+                    <div class="spec_form">
+                        <div class="spec_2">
+                            
+                        </div>
+                    </div>
+                    <div class="spec_form">
+                        <div class="spec_3">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="comment">
+        <div class="container">
+            <div class="comment_area">
+                <div id="comment_1" class="user_comment">
+                    <h2>Frank Tomsan</h2>
+                    <h3>12/12/12</h3>
+                    <p>ipsum ipsum ipsum ipsum ipsum ipsum ipsum ipsum ipsum ipsum ipsum ipsum</p>
+                </div>
+            </div>
+            <input type="button" value="Есть что сказать? Оставьте отзыв" id="send_comment">
+        </div>
+    </div>
+{% endblock %}

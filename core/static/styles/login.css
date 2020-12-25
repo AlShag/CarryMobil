@@ -1,0 +1,133 @@
+header{
+    background-color: white;
+}
+body{
+    background-color: #f3f3f3;
+}
+.login.form input{color:black;}
+.login_form h2{
+    color: black;
+    text-align: left;
+}
+.login_form span{
+    color:#474747;
+    font-size: 16pt;
+}
+.login_form{
+    width: 500px;
+    height: 600px;
+    background-color: white;
+    border-radius: 50px;
+    margin: 5% auto;
+    text-align: center; 
+}
+.login_form form{
+    width: 65%;
+    margin: 0 auto;
+}
+.login_form input[type='text'], input[type='password']{
+    font-size: 16pt;
+    width: 100%;
+    color: black;
+    text-align: left;
+    cursor:text;
+}
+.for_input:hover{
+    border-bottom: 1px solid #0085FF;
+    transition: 0.25s;
+}
+.for_input{
+    border-bottom: 1px solid #474747;
+    margin-top: 5.5%;
+}
+.for_input_icn{
+    color: #474747;
+    width: 20px;
+    height: 20px;
+    margin-top: 1.5%;
+    margin-left: 5%;
+    font-size: 15pt;
+}
+.for_input_func{
+    color: #474747;
+    font-size: 15pt;
+    width: 22px;
+    height: 22px;
+    margin-right:2%;
+    margin-top: 1.5%;
+}
+.login_form a{
+    color: #474747;
+}
+.forget_password{
+    text-align: right;
+    margin-top: 1%;
+}
+.login input::placeholder{
+    color: #474747;
+    text-align: left;
+    padding-left: 3.5%;
+}
+.login_form input[type='submit']{
+    font-size: 20pt;
+    color: white;
+    background-color: #0085FF;
+    border-radius: 50pt;
+    width: 100%;
+    text-align: center;
+    margin-top: 17%;
+    margin-bottom: 5%;
+}
+.login_form h1{
+    text-align: center;
+    color: black;
+    padding-bottom: 10%;
+    padding-top: 7%;
+}
+#register h1{
+    padding-bottom: 5%;
+}
+.login_with ul li{
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    margin: 1% 2%;
+}
+
+.login_form input[type='radio']{
+    display: none;
+}
+.login_form label{
+    position: relative;
+    top: 89%;
+    color: #474747;
+    font-size: 16pt;
+    user-select: none;
+}
+label[for='to_login']{
+    display: none;
+}
+#to_register:checked~#register{
+    display: block;
+}
+#to_register:checked~#login{
+    display: none;
+}
+#to_register:checked~label[for='to_register']{
+    display: none;
+}
+#to_register:checked~label[for='to_login']{
+    display: block;
+}
+#to_login:checked~#login{
+    display: block;
+}
+#to_login:checked~#register{
+    display: none;
+}
+#to_login:checked~label[for='to_login']{
+    display: none;
+}
+#to_login:checked~label[for='to_register']{
+    display: block;
+}
