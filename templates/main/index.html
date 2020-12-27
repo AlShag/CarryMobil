@@ -18,7 +18,7 @@
     <div class="for_header"></div>
     <header id="up">
         <div class="container">
-            <div class="logo"><a href="/main">CM</a></div>
+            <div class="logo"><a href="{% url 'index' %}">CM</a></div>
             <a href="#" id="show_nawmenu">&#9776;</a>
             <div class="navmenu">
                 <nav>
@@ -32,11 +32,13 @@
                 </nav>
             </div>
             {% if user.is_authenticated %}
-                <button id="login_a"><a href="login.html">{{ user.username }}</a></button>
+                <button id="login_a"><a href="{% url 'index' %}">{{ user.username }}</a></button>
+                <button id="login_a"><a href="{% url 'logout' %}">Выйти</a></button>
+
             {% else %}
             <div class="login_register">
-                <button id="login_a"><a href="{% url 'sign_in' %}">Войти</a></button>
-                <button id="register_a"><a href="{% url 'sign_up' %}">Регистрация</a></button>
+                <button id="login_a"><a href="{% url 'login' %}">Войти</a></button>
+                <button id="register_a"><a href="{% url 'register' %}">Регистрация</a></button>
             </div>
             {% endif %}
         </div>
