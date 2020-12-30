@@ -1,0 +1,48 @@
+{% extends "main/index.html" %}
+{% block title %}Авторизация{% endblock %}
+
+{% block content %}
+{% load static %}
+    {% if form.errors %}
+        <p class="error">Сожалеем, вы неправильно ввели логин или пароль</p>
+    {% endif %}
+    <div class="for_login">
+        <div class="login_form">
+            <h1>Вход</h1>
+            <form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <section class="for_input">
+                    <h2>Имя пользователя</h2>
+                    <div class="input_container" id="login_insert">
+                        <img src="{% static '/images/login/user.svg' %}" class="for_input_icn">
+                        {{ form.username }}
+                        <label for="for_input_func">?</label>
+                    </div>
+                </section>
+                <section class="for_input">
+                    <h2>Пароль</h2>
+                    <div class="input_container">
+                        <img src="{% static '/images/login/padlock.svg' %}" class='for_input_icn'>
+                        {{ form.password }}
+                        <input type="checkbox" value="" name="" id="view_password">
+                        <label for="view_password"><img src="{% static '/images/login/visibility.svg' %}" alt="" class="for_input_func" id="view_password"></label>
+                    </div>
+                </section>
+                <section class="forget_password">
+                    <a href="">Забыли пароль?</a><br>
+                </section>
+                <input type="submit" value="Войти"><br>
+                <span>Войти через:</span><br>
+                <section class="login_with">
+                    <ul>
+                        <li><a href=""><img src="{% static '/images/login/vk.svg' %}"></a></li>
+                        <li><a href=""><img src="{% static '/images/login/google.svg' %}"></a></li>
+                        <li><a href=""><img src="{% static '/images/login/facebook.svg' %}"></a></li>
+                    </ul>
+                </section>
+                <span>Или <a href="{% url 'register' %}">зарегистрироваться</a></span>
+                <input type="hidden" name="next" value="{{ next }}">
+                </form>
+        </div>
+    </div>
+{% endblock %}
