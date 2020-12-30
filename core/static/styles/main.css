@@ -61,8 +61,11 @@ nav li a:hover{
 .container{
     max-width: 1920px;
     margin: 0 auto;
+    height: 100%;
 }
 .flex{display: flex;width: 100%;}
+.flex_al{display: flex;width: 100%;}
+
 .logo{
     text-align: center;
 }
@@ -71,33 +74,48 @@ nav li a:hover{
     color:#474747;
     font-weight: bold;
 }
-.login_register{
+.login_register,.user_head_inf{
     width: 25%;
     position: relative;
-    top:-30px;
+    top:-25px;
     left:75%;
 }
-.login_register button{
-    height: 2.5em;
-    margin: 0 2%;
+.user_head_inf{
+    top:-25px;
+    left:75%;
+}
+.user_head_inf a{
+    margin: 0 5%;
+    color: black;
 }
 .login_register a{
-    font-size: 14pt;
+    padding: 1% 8%;
+    border-radius: 12pt;
+    margin: 0 1%;
 }
 #login_a{
-    width: 30%;
-    border: 1px solid #474747;
+    border: 1px solid #0085ff;
     border-radius: 12pt;
+    color:#0085ff;
 }
-#login_a a{
-    font-weight: 300;
-    color:black;
-    width: 100px;
+#login_a:hover{
+    background-color: #0085ff;
+    border: 1px solid #0085ff;
+    color: white;
+    transition: 0.25s;
 }
 #register_a{
+    border: 1px solid #0085ff;
     background-color: #0085FF;
     border-radius: 12pt;
-    width: 40%;
+}
+#register_a:hover{
+    background-color: white;
+    color: #0085ff;
+    transition: 0.25s;
+}
+#logout_a{
+    color: #FF7058;
 }
 /* Меню начало*/
 .menu{
@@ -348,4 +366,131 @@ nav li a:hover{
     height: 25px;
     background-color: #0085ff;
     border-radius: 8pt;
+}
+/* Для логин */
+#logaut_a:hover{
+    color: white;
+    background: #FF7058;
+}
+.for_login{
+    height: 800px;
+    width: 100%;
+    background-color:#f5f5f5;
+    padding-top: 4%;
+}
+.login_form h2{
+    color: black;
+    text-align: left;
+}
+.login_form span{
+    color:#474747;
+    font-size: 16pt;
+    margin-top: 25px;
+}
+.login_form{
+    width: 500px;
+    height: 600px;
+    background-color: white;
+    border-radius: 50px;
+    margin: 0 auto;
+    text-align: center; 
+}
+.login_form form{
+    width: 65%;
+    margin: 0 auto;
+}
+.login_form input[type='text'], input[type='password']{
+    font-size: 16pt;
+    width: 100%;
+    color: black;
+    text-align: left;
+    cursor:text;
+}
+.input_container{
+    display: flex;
+    border-bottom: 1px solid #474747;
+}
+/* .for_input:hover{
+    border-bottom: 1px solid #0085FF;
+    transition: 0.25s;
+} */
+.for_input{
+    margin-top: 5%;
+}
+.for_input_icn{
+    color: #474747;
+    width: 20px;
+    font-size: 15pt;
+    pointer-events: none;
+}
+.input_container label img{
+    top: 50%;
+    pointer-events: none;
+    user-select: none;
+}
+.for_input_func{
+    color: #474747;
+    font-size: 16pt;
+    width: 20px;
+    pointer-events: none;
+    height: 100%;
+}
+.login_form a{
+    color: #474747;
+}
+.login_form label{
+    color:#474747;
+    user-select: none;
+    font-size: 16pt;
+}
+.forget_password{
+    text-align: right;
+    margin-top: 1%;
+}
+.login input::placeholder{
+    color: #474747;
+    text-align: left;
+    padding-left: 3.5%;
+}
+.login_form input[type='submit']{
+    font-size: 20pt;
+    color: white;
+    background-color: #0085FF;
+    border-radius: 50pt;
+    width: 100%;
+    text-align: center;
+    margin-top: 17%;
+    margin-bottom: 5%;
+}
+.login_form h1{
+    text-align: center;
+    color: black;
+    padding-bottom: 10%;
+    padding-top: 7%;
+}
+#register h1{
+    padding-bottom: 5%;
+}
+.login_with ul li{
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    margin: 2% 2%;
+}
+.login_form input[type='checkbox']{
+    display: none;
+}
+/* для order */
+.order_area{
+    height: 750px;
+    background-color: #f5f5f5;
+}
+.order_form{
+    height:60%;
+    width: 90%;
+    background-color: white;
+    margin: 0 auto;
+}
+.order_title{
+    height: 40%;
 }

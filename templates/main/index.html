@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="{% static 'styles/animation.css' %}">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Pattaya&display=swap" rel="stylesheet">
-
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="{% static 'scripts/main.js' %}"></script>
 </head>
 <body>
     <div class="for_header"></div>
@@ -25,20 +26,23 @@
                     <ul>
                         <li><a href="{% url 'index' %}">Главная</a></li>
                         <li><a href="#help">Помощь</a></li>
-                        <li><a href="#order">Оформить заказ</a></li>
+                        <li><a href="{% url 'order' %}">Оформить заказ</a></li>
                         <li><a href="#ab_us">О нас</a></li>
                         <li><a href="#contacts">Контакты</a></li>
                     </ul>
                 </nav>
             </div>
             {% if user.is_authenticated %}
-                <button id="login_a"><a href="{% url 'index' %}">{{ user.username }}</a></button>
-                <button id="login_a"><a href="{% url 'logout' %}">Выйти</a></button>
-
+            <div class="user_head_inf">
+                <div class="flex">
+                    <a href="{% url 'index' %}" id="user_login_a">{{ user.username }}</a>
+                    <a href="{% url 'logout' %}" id="logout_a">Выйти</a>
+                </div>
+            </div>
             {% else %}
             <div class="login_register">
-                <button id="login_a"><a href="{% url 'login' %}">Войти</a></button>
-                <button id="register_a"><a href="{% url 'register' %}">Регистрация</a></button>
+                <a href="{% url 'login' %}" id="login_a">Войти</a>
+                <a href="{% url 'register' %}" id="register_a">Регистрация</a>
             </div>
             {% endif %}
         </div>
