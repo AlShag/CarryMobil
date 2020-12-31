@@ -36,18 +36,6 @@
         width: 50%;
         height: 450px;
     }
-    .to_up{
-        top: 87%;
-        height: 40px;
-        width: 40px;
-    }
-    .to_up a{
-        position: relative;
-        left: 35%;
-        display: block;
-        height: 40px;
-        font-size: 32pt;
-    }
     .label_title{
         font-size: 100pt;
         height: 190px;

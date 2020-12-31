@@ -1,5 +1,10 @@
+top=$(document).scrollTop();
 $(document).ready(function (){
     $('#view_password').click(function(){view_password()});
+});
+$(document).scroll(function (){
+   let top=$(document).scrollTop();
+    if(top>1000){$('.to_up').show()} else $('.to_up').hide();
 });
 function view_password(){
     if($('#view_password').is(':checked')){
