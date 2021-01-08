@@ -419,7 +419,7 @@ nav li a:hover{
 }
 .for_input_icn{
     color: #474747;
-    width: 20px;
+    width: 14px;
     font-size: 15pt;
     pointer-events: none;
 }
@@ -431,7 +431,7 @@ nav li a:hover{
 .for_input_func{
     color: #474747;
     font-size: 16pt;
-    width: 20px;
+    width: 14px;
     pointer-events: none;
     height: 100%;
 }
