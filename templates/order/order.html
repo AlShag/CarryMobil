@@ -1,0 +1,243 @@
+{% extends "main/index.html" %}
+{% block title %}Оформление заказа{% endblock %}
+
+{% block content %}
+{% load static %}
+    <div class="order_area">
+        <div class="order_main">
+            <div class="container">
+                <div class="order_title">
+                    <div class="list_head" id="list_head_1">
+                        <section class="order_title_icon">
+                            <img src="{% static '/images/order/map.svg' %}" alt="">
+                        </section>
+                        <h1>Выберите дату, время и маршрут</h1>
+                    </div>
+                    <div class="list_head" id="list_head_2">
+                        <section class="order_title_icon">
+                            <img src="{% static '/images/order/delivery-box.svg' %}" alt="">
+                        </section>
+                        <h1>Информация о грузе</h1>
+                    </div>
+                    <div class="list_head" id="list_head_3">
+                        <section class="order_title_icon">
+                            <img src="{% static '/images/order/delivery-man.svg' %}" alt="">
+                        </section>
+                        <h1>Услуга грузчиков</h1>
+                    </div>
+                    <div class="list_head" id="list_head_4">
+                        <section class="order_title_icon">
+                            <img src="{% static '/images/order/note.svg' %}" alt="">
+                        </section>
+                        <h1>Финальный лист</h1>
+                    </div>
+                    <div class="list_head" id="list_head_5">
+                        <section class="order_title_icon">
+                            <img src="{% static '/images/order/final.svg' %}" alt="">
+                        </section>
+                        <h1>Заказ оформлен</h1>
+                    </div>
+                </div>
+                <div class="order_form">
+                    <form action="" method="post"  id="order_form" action="order/proces">
+                        {% csrf_token %}
+                        <div class="list" id="list_1">
+                            <div class="flex">
+                                <div class="road_select">
+                                    <div class="road_select_form">
+                                        <h2>{{ form.non_field_errors }}</h2>
+                                        <span>{{ error }}</span>
+                                        <section>
+                                            <h2>Откуда</h2>
+                                            {{ form.from_adress }}
+                                        </section>
+                                        <section>
+                                            <h2>Куда</h2>
+                                            {{ form.to_adress }}
+                                        </section>
+                                        <section>
+                                            <h2>Комментарий</h2>
+                                            {{ form.road_comment }}
+                                        </section>
+                                        <div class="roads_add">
+                                            <button>1</button>
+                                            <button>+</button>
+                                        </div>
+                                        <section id="time_select">
+                                            <div class="flex">
+                                                <h2>Дата отправки:</h2>
+                                                {{ form.start_time }}
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                                <div class="map">
+                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d73416.8711652847!2d52.2386084848836!3d54.898056310490446!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x41605c5672d84245%3A0xc5e4cdd6efdd5177!2z0JDQu9GM0LzQtdGC0YzQtdCy0YHQuiwg0KDQtdGB0L8uINCi0LDRgtCw0YDRgdGC0LDQvQ!5e0!3m2!1sru!2sru!4v1609421542062!5m2!1sru!2sru" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list" id="list_2">
+                            <div class="type_select">
+                                <section>
+                                    <div class="flex">
+                                        <h2 class="select_type_info_title">Тип груза</h2>
+                                        {{ form.gruz_type }}
+                                        <!-- <select name="" id="" aria-placeholder="Выберите тип товара" id="goods_type_select" value="{{ form.gruz_type }}">
+                                            <option value="">Переезд</option>
+                                            <option value="">2</option>
+                                            <option value="">3</option>
+                                            <option value="">4</option>
+                                        </select> -->
+                                    </div>
+                                </section>
+                                <section>
+                                    <div class="flex">
+                                        <h2 class="select_type_info_title">Высота</h2>
+                                        <input type="number" min="0" step="0.1">
+                                    </div>
+                                </section>
+                                <section>
+                                    <div class="flex">
+                                        <h2 class="select_type_info_title">Ширина</h2>
+                                        <input type="number" min="0" step="0.1">
+                                    </div>
+                                </section>
+                                <section>
+                                    <div class="flex">
+                                        <h2 class="select_type_info_title">Вес</h2>
+                                        <input type="number" min="0" step="10">
+                                    </div>
+                                </section>
+                                <section id="type_comment">
+                                    <div class="flex">
+                                        <h2 class="select_type_info_title">Комментарий</h2>
+                                        {{ form.gruz_type_comment }}
+                                    </div>
+                                </section>
+                                <div class="type_dop_info">
+                                    <span>Размеры указываются в метрах</span><br>
+                                    <span>Вес указывается в кг</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list" id="list_3">
+                            <div class="flex">
+                                <div class="list3_image">
+                                </div>
+                                <div class="list3_params">
+                                    <section class="list3_param">
+                                        <table>
+                                            <tr>
+                                                <td class="list_3_param_name"><h2>Количество</h2></td>
+                                                <td class="list_3_param_select">{{ form.loader_count }}</td>
+                                            </tr>
+                                        </table>
+                                    </section>
+                                    <section class="list3_param">
+                                        <table>
+                                            <tr>
+                                                <td class="list_3_param_name"><h2>Время</h2></td>
+                                                <td class="list_3_param_select">{{ form.loader_time_count }}</td>
+                                            </tr>
+                                        </table>
+                                    </section>
+                                    <div class="list_3_dop_info">
+                                        <span>Размеры указываются в метрах</span><br>
+                                        <span>Вес указывается в кг</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="list" id="list_4">
+                            <div class="flex">
+                                <div class="personal_selects">
+                                    <h1>Выбранные настройки</h1>
+                                    <div class="PS_container">
+                                        <section class="full_road">
+                                            <div class="flex_al">
+                                                <label for=""><h2>Маршрут:</h2></label>
+                                                <select name="" id="" size="4">
+                                                    <option value=""><span>От ленина 107</span><span>в ленина 112</span></option>
+                                                </select>
+                                            </div>
+                                        </section>
+                                        <section class="full_type">
+                                            <div class="flex_al">
+                                                <label for=""><h2>Вид груза:</h2></label>
+                                                <input type="text" name="" id="">
+                                            </div>
+                                        </section>
+                                        <section class="full_loader">
+                                            <div class="flex_al">
+                                                <label><h2>Грузчики:</h2></label>
+                                                <table>
+                                                    <tr>
+                                                        <td><span id="gruzchik_count">1 чел</span></td>
+                                                        <td><span id="gruzchik_hours">1 час</span></td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+                                        </section>
+                                        <section class="user_tel_number">
+                                            <span><h1>Введите номер телефона:</h1></span>
+                                            {{ form.user_tel_nomer }}
+                                        </section>
+                                    </div>
+                                </div>
+                                <div class="total_price_list">
+                                    <div class="TP_container">
+                                        <h1>Итог</h1>
+                                        <div class="total_price_info">
+                                            <table>
+                                                <tr>
+                                                    <td><h2>Маршрут</h2></td>
+                                                    <td><span id='road_full_price'>500р</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><h2>Вид груза</h2></td>
+                                                    <td><span id='type_full_price'>300р</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><h2>Грузчики</h2></td>
+                                                    <td><span id='gruzchiki_full_price'>700р</span></td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                        <section class="total_full_price">
+                                            <div class="flex_al">
+                                                <h2>Предварительная стоимость</h2>
+                                                <span>1500</span>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </div>
+                            </div>
+                            <input type="submit" id="order_send">
+                        </form>
+                    </div>
+                    <div class="list" id="list_5">
+                        <section class="list_5_container">
+                            <div class="list_5_image"></div>
+                            <div class="list_5_text">
+                                <h2>На ваш номер в скором времени поступит звонок
+                                    для уточнения заказа</h2>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="order_transition">
+            <div class="container">
+                <div class="order_transition_buttons">
+                    <div class="flex">
+                        <input type="button" value="Назад" id='order_back_list'>
+                        <input type="button" value="Далее" id='order_next_list'>
+                        <input type="button" value="Отправить" id='order_send_button'>
+                        <input type="button" value="На главную" id='to_main' onclick="window.location.href=`{% url 'index' %}`">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
