@@ -49,10 +49,22 @@
                                         <span>{{ error }}</span>
                                         <section>
                                             <h2>Откуда</h2>
+                                            <input type="search" list="adress_from_search" placeholder="Населенный пункт, улица, дом отправления груза..." id="from_adress">
+                                            <datalist id="adress_from_search">
+                                                {% for el in all_adress %}
+                                                <option value="{{ el.adress }}"></option>
+                                                {% endfor %}
+                                            </datalist>
                                             {{ form.from_adress }}
                                         </section>
                                         <section>
                                             <h2>Куда</h2>
+                                            <input type="search" list="adress_to_search" placeholder="Населенный пункт, улица, дом направления груза..." id="to_adress">
+                                            <datalist id="adress_to_search">
+                                                {% for el in all_adress %}
+                                                <option value="{{ el.adress }}"></option>
+                                                {% endfor %}
+                                            </datalist>
                                             {{ form.to_adress }}
                                         </section>
                                         <section>

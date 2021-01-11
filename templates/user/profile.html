@@ -1,0 +1,38 @@
+{% extends "main/index.html" %}
+{% block title %}Профиль{% endblock %}
+
+{% block content %}
+    {% load static %}
+    {% if user.is_authenticated %}
+        <div class="profil_area">
+            <div class="container">
+                <div class="profile_content">
+                    <div class="user_content">
+                        <div class="flex">
+                            <div class="user_image">
+                                <div class="user_image_content">
+                                    <img src="{% static '/images/profile/stock.svg' %}">
+                                    <input type="button" value="Редактировать">
+                                </div>
+                            </div>
+                            <div class="user_personal_info">
+                                <div class="user_info">
+                                    <h1>{{ user.first_name }} {{ user.last_name }}
+                                        {% if user.is_staff %}
+                                            <span>(Администратор)</span>
+                                        {% else %}
+                                            <span>(Пользователь)</span>
+                                        {% endif %}
+                                    </h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{ user.username }}
+            </div>
+        </div>
+    {% else %}
+        <p>Вы не авторизированы</p>
+    {% endif %}
+{% endblock %}

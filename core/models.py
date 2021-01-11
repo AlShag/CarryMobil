@@ -19,4 +19,8 @@ class Orders(models.Model):
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
 
-# class Adress()
+class Adresses(models.Model):
+    adress=models.CharField('Адрес', max_length=150,blank=True)
+
+    def __str__(self):
+        return self.adress

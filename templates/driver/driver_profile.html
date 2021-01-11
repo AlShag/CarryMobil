@@ -4,8 +4,15 @@
 {% block content %}
 {% load static %}
 {{ all_orders }}
-<div>
+<div><div style="background-color: gray;">
     <h1>Водители</h1>
+    <input type="search" list="123">
+<datalist id="123">
+    {% for el  in all_orders %}
+    <option value="{{ el.from_adress }}"></option>
+    
+    {% endfor %}
+</datalist>
     {% if all_orders %}
         {% for el  in all_orders %}
             <div style="background-color: gray;">

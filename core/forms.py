@@ -1,4 +1,5 @@
 from .models import Orders
+from .models import Adresses
 from django import forms
 from django.forms import ModelForm, TextInput, DateTimeInput, Textarea, NumberInput
 from django.contrib.auth.models import User
@@ -37,5 +38,19 @@ class OrdersForm(ModelForm):
             'user_tel_nomer':  NumberInput(attrs={
                 'id': 'user_telephone',
                 'required':'',
+            }),
+        }
+
+
+class AdressesForm(ModelForm):
+    class Meta:
+        model = Adresses
+        fields = ['adress']
+        
+        widgets = {
+            'adress':  TextInput(attrs={
+                'placeholder': 'улица, дом, населенный пункт отправки груза...',
+                'required':'',
+                'type': 'search',
             }),
         }

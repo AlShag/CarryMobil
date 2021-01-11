@@ -1,0 +1,53 @@
+.profil_area{
+    height: 2000px;
+    background-color: #e5e5e5;
+}
+.profile_content{
+    padding-top: 5%;
+    height: 90%;
+    width: 70%;
+    margin: 0 auto;
+}
+.user_content{
+    width: 100%;
+    height: 25%;
+    background-color: white;
+    border-radius: 50px;
+}
+.user_image{
+    margin-top: 1%;
+    width: 30%;
+    height: 95%;
+    border-right: 2px solid #474747;
+}
+.user_image_content{
+    padding-top: 20%;
+    width: 70%;
+    height: 90%;
+    margin: 0 auto;
+}
+.user_image img{
+    width: 100%;
+}
+.user_image input{
+    margin-top: 5%;
+    font-size: 18pt;
+    border-radius: 50px;
+    width: 100%;
+    height: 9%;
+    background-color: #41A4FF;
+}
+.user_personal_info{
+    width: 100%;
+}
+.user_info{
+    width: 80%;
+    margin: 5% auto;
+}
+.user_info h1{
+    color: black;
+}
+.user_info span{
+    font-size: 16pt;
+    color: #474747;
+}

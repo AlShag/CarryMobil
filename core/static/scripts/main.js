@@ -10,6 +10,12 @@ $(document).ready(function (){
         result = $('#goods_type_select :selected').text();
         $('#id_gruz_type').val(result);
       });
+    $('#from_adress').on('change', function() {
+        $('#id_from_adress').val($('#from_adress').val());
+      });
+    $('#to_adress').on('change', function() {
+        $('#id_to_adress').val($('#to_adress').val());
+      });
 });
 $(document).scroll(function (){
    let top=$(document).scrollTop();
