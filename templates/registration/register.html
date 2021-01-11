@@ -1,10 +1,51 @@
 {% extends "main/index.html" %}
  
 {% block content %}
-<h2>Sign up</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Sign up</button>
-</form>
+{% load static %}
+  <div class="for_login">
+    <div class="login_form">
+      <h1>Регистрация</h1>
+      <form method="post">
+        {% csrf_token %}
+        <section class="for_input">
+          <h2>Имя пользователя</h2>
+          <div class="input_container" id="login_insert">
+              <img src="{% static '/images/login/user.svg' %}" class="for_input_icn">
+              {{ form.username }}
+              <label for="for_input_func" class="for_input_func">?</label>
+          </div>
+        </section>
+        <section class="for_input">
+          <h2>Пароль</h2>
+          <div class="input_container">
+              <img src="{% static '/images/login/padlock.svg' %}" class='for_input_icn'>
+              {{ form.password1 }}
+              <input type="checkbox" value="" name="" id="view_password">
+              <label for="view_password"><img src="{% static '/images/login/visibility.svg' %}" alt="" class="for_input_func" id="view_password"></label>
+          </div>
+        </section>
+        <section class="for_input">
+          <h2>Повторите пароль</h2>
+          <div class="input_container">
+              <img src="{% static '/images/login/padlock.svg' %}" class='for_input_icn'>
+              {{ form.password2 }}
+              <input type="checkbox" value="" name="" id="view_password">
+              <label for="view_password"><img src="{% static '/images/login/visibility.svg' %}" alt="" class="for_input_func" id="view_password"></label>
+          </div>
+        </section>
+        <input type="submit" value="Зарегистрироваться">
+        {% if form.errors %}
+          <section class="form_error">
+          {% for field in form %}
+
+              {% for error in field.errors %}
+                    {{field.label}}: {{ error|escape }}
+              {% endfor %}
+
+          {% endfor %}
+        </section>
+      {% endif %}
+    </form>
+    </div>
+  </div>
 {% endblock content %}

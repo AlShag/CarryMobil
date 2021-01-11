@@ -82,32 +82,40 @@
                                     <div class="flex">
                                         <h2 class="select_type_info_title">Тип груза</h2>
                                         {{ form.gruz_type }}
-                                        <!-- <select name="" id="" aria-placeholder="Выберите тип товара" id="goods_type_select" value="{{ form.gruz_type }}">
+                                        <select name="" aria-placeholder="Выберите тип товара" id="goods_type_select">
                                             <option value="">Переезд</option>
-                                            <option value="">2</option>
-                                            <option value="">3</option>
-                                            <option value="">4</option>
-                                        </select> -->
+                                            <option value="">Мебель</option>
+                                            <option value="">Бытовая техника</option>
+                                            <option value="">Стройматериалы</option>
+                                            <option value="">Мусор</option>
+                                            <option value="">Мото-техника</option>
+                                            <option value="">Спец-техника</option>
+                                            <option value="">Спец-груз</option>
+                                            <option value="">Опасный-груз</option>
+                                            <option value="">Другой</option>
+                                        </select>
                                     </div>
                                 </section>
-                                <section>
-                                    <div class="flex">
-                                        <h2 class="select_type_info_title">Высота</h2>
-                                        <input type="number" min="0" step="0.1">
-                                    </div>
-                                </section>
-                                <section>
-                                    <div class="flex">
-                                        <h2 class="select_type_info_title">Ширина</h2>
-                                        <input type="number" min="0" step="0.1">
-                                    </div>
-                                </section>
-                                <section>
-                                    <div class="flex">
-                                        <h2 class="select_type_info_title">Вес</h2>
-                                        <input type="number" min="0" step="10">
-                                    </div>
-                                </section>
+                                <div class="type_info" hidden>
+                                    <section>
+                                        <div class="flex">
+                                            <h2 class="select_type_info_title">Высота</h2>
+                                            <input type="number" min="0" step="0.1">
+                                        </div>
+                                    </section>
+                                    <section>
+                                        <div class="flex">
+                                            <h2 class="select_type_info_title">Ширина</h2>
+                                            <input type="number" min="0" step="0.1">
+                                        </div>
+                                    </section>
+                                    <section>
+                                        <div class="flex">
+                                            <h2 class="select_type_info_title">Вес</h2>
+                                            <input type="number" min="0" step="10">
+                                        </div>
+                                    </section>
+                                </div>
                                 <section id="type_comment">
                                     <div class="flex">
                                         <h2 class="select_type_info_title">Комментарий</h2>

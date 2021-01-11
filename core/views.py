@@ -1,7 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib import auth
 from django.http import HttpResponseRedirect
-
 from .models import Orders
 from .forms import OrdersForm
 from django.urls import reverse_lazy
@@ -42,6 +41,8 @@ def order(request):
         'error': error
     }
     return render(request, 'order/order.html', data)
+
+
 def Myorders(request):
     all_orders = Orders.objects.all()
     return render(request, 'driver/driver_profile.html', {'all_orders': all_orders})

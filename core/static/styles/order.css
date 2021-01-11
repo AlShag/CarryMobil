@@ -1,0 +1,396 @@
+.order_area{
+    height: 900px;
+    background-color: #f5f5f5;
+}
+.order_form{
+    height:65%;
+    width: 70%;
+    background-color: white;
+    border-radius: 20px;
+    margin: 0 auto;
+}
+.order_main{
+    height: 90%;
+    width: 100%;
+}
+.order_title{
+    padding-top: 3%;
+    height: 22%;
+    text-align: center;
+}
+.order_title h1{
+    color: black;
+}
+.order_title_icon{
+    height: 80px;
+    width: 80px;
+    border-radius: 30px;
+    transform: rotate(135deg);
+    background-color: #0085ff;
+    margin: 0 auto;
+    border: 8px solid #aaabb8;
+}
+.order_title_icon img{
+    transform: rotate(-135deg);
+}
+.list_head:not(#list_head_1){
+    display: none;
+}
+.order_transition{
+    height: 10%;
+    width: 100%;
+    background-color: white;
+    text-align: center;
+}
+.list:not(#list_1){
+    display: none;
+}
+.list{height: 100%;}
+.list #list1{
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+.road_select{
+    width: 50%;
+    background-color: #0085ff;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+.road_select h2{
+    font-size: 20pt;
+}
+.map{
+    width: 50%;
+}
+.map iframe{
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+.road_select_form{
+    margin-top: 7%;
+    height: 90%;
+    width: 100%;
+}
+.road_select section{
+    height: 25%;
+    width: 80%;
+    text-align: center;
+    margin: 0 auto;
+}
+.roads_add{
+    text-align: left;
+    height: 10%;
+    margin-left: 10%;
+}
+.roads_add button{
+    margin-top: 2%;
+    font-size: 16pt;
+    height: 30px;
+    width: 30px;
+    color: #0085ff;
+    background-color: white;
+    border-radius: 10px;
+}
+.road_select section input, .road_select section textarea{
+    font-size: 16pt;
+    color: black;
+    height: 65%;
+    width: 100%;
+    border-radius: 10pt;
+    background-color: white;
+    cursor: text;
+}
+#time_select{
+    height: 15%;
+    text-align: left;
+    width: 80%;
+}
+.road_select input[type='datetime-local']{
+    height: 60%;
+    margin: 0 5%;
+    font-size: 16pt;
+    width: 40%; 
+}
+.order_transition_buttons{
+    width: 38%;
+    height: 100%;
+    margin: 0 auto;
+}
+.order_transition input[type='button'], .order_transition button{
+    height: 50%;
+    width: 42%;
+    font-size: 18pt;
+    margin: 4% auto;
+    background-color: #0085ff;
+    border-radius: 20px;
+}
+#order_back_list{
+    display: none;
+    background-color:#FF7058;
+}
+.type_select{
+    padding: 2.5% 0;
+    width: 80%;
+    height: 95%;
+    margin: 0 auto;
+}
+.type_select input, .type_select textarea{
+    border-radius: 30px;
+    width: 40%;
+    color:black;
+    border: 1px solid #474747;
+    height: 80%;
+    cursor: text;
+    font-size: 16pt;
+}
+.type_select input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    height: 45px;
+    padding-right: 5%;
+}
+.type_select section{
+    height: 10%;
+    padding-top: 2.5%;
+}
+.select_type_info_title{
+    width: 25%;
+}
+.type_select h2{
+    color: #474747;
+    cursor: help;
+}
+.type_select select{
+    outline: none;
+    padding-left: 2%;
+    font-size: 16pt;
+    background-color: #0085ff;
+    border: 1px solid #0085ff;
+    width: 40%;
+    border-radius: 30px;
+    cursor:pointer;
+    appearance: none;
+}
+.type_select select:focus{
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.type_select select option{
+    text-align: center;
+    padding-left: 5%;
+}
+#id_gruz_type{
+    display: none;
+}
+.type_select textarea{
+    width: 37%;
+    padding: 0.5% 1.5%;
+}
+#type_comment{
+    height: 20%;
+}
+.type_dop_info span{
+    background: url('../images/order/info.svg');
+    background-repeat: no-repeat;
+    background-position: 0 50%;
+    background-size: 20px;
+    padding-left: 25px;
+    color: #474747;
+    font-size: 12pt;
+}
+.list3_image{
+    width: 50%;
+    height: 100%;
+    background-image: url('../images/order/list_3.png');
+    background-repeat: no-repeat;
+    background-size: 70%;
+    background-position: 50%;
+}
+.list3_params{width: 50%;height: 50%; margin: 10% 0;}
+.list3_param{
+    width: 70%;
+    height: 40%;
+    margin-top: 3%;
+}
+.list_3_param_name{
+    width: 60%;
+    background-color: #00a66c;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+.list_3_param_name h2{
+    padding: 10%;
+    text-align: center;
+    vertical-align:middle;
+}
+.list_3_param_select{
+    background-color: #f5f5f5;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+.list_3_param_select input{
+    width: 90%;
+    color: black;
+    font-size: 18pt;
+}
+.list_3_dop_info span{
+    background: url('../images/order/info_green.svg');
+    background-repeat: no-repeat;
+    background-position: 0 50%;
+    background-size: 20px;
+    padding-left: 25px;
+    color: #474747;
+    font-size: 12pt;
+}
+.personal_selects{
+    width: 45%;
+    background-color: #0085ff;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    text-align: center;
+}
+.personal_selects h1{margin-top: 5%; font-size: 20pt;}
+.PS_container{
+    height: 95%;
+    text-align: center;
+    width: 95%;
+    margin-right: 5%;
+}
+.PS_container section{
+    padding: 2% 0;
+}
+.PS_container label{
+    width: 35%;
+    text-align: center;
+}
+.full_road{
+    height: 30%;
+}
+.full_road select{
+    height: 90%;
+    width: 65%;
+    background-color: white;
+    border-radius: 20px;
+    outline: none;
+}
+.full_road option{
+    padding-left: 2pt;
+    color: black;
+    font-size: 16pt;
+}
+.full_type{
+    height: 10%;
+}
+.full_type input{
+    background-color: white;
+    color: black;
+    font-size: 16pt;
+    height: 70%;
+    border-radius: 20px;
+    width: 65%;
+}
+.full_loader{
+    height: 5%;
+}
+.full_loader table{
+    background-color: white;
+    border-radius: 20px;
+    height: 80%;
+    width: 65%;
+}
+.full_loader span{
+    color: black;
+    font-size: 16pt;
+}
+.user_tel_number{
+    height: 25%;
+}
+.user_tel_number input{
+    height: 50%;
+    background-color: white;
+    color: black;
+    width: 99%;
+    margin-right: 1%;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    font-size: 20pt;
+}
+.total_price_list{
+    height: 100%;
+    width: 65%;
+}
+.TP_container{
+    width: 90%;
+    height: 90%;
+    margin: 2.5% auto;
+    text-align: left;
+    color: black;
+}
+.TP_container h1{
+    color: black;
+}
+.TP_container h2{
+    color: black;
+}
+.TP_container span{
+    color: black;
+}
+.total_price_info{
+    width: 80%;
+    height: 65%;
+    margin: 5% auto;
+}
+.total_price_info table{
+    height: 80%;
+    font-size: 16pt;
+    text-align: center;
+    width: 100%;
+} 
+.total_price_info table tr{
+    height: 15%;
+}
+.total_price_info table td{
+    width: 50%  ;
+}
+.total_full_price h2{
+    font-size: 20pt;
+}
+.total_full_price span{
+    color: #00a66c;
+    padding-left: 5%;
+    font-size: 24pt;
+}
+#order_send_button{
+    display: none;
+    background-color: #00a66c;
+}
+#order_form{
+    height: 100%;
+    width: 100%;
+}
+.list_5_container{
+    width: 60%;
+    height: 90%;
+    margin: 0 auto;
+}
+.list_5_image{
+    width: 100%;
+    height: 55%;
+    background-image: url('../images/order/final_list.svg');
+    background-repeat: no-repeat;
+    background-size: 20%;
+    background-position: 50% 90%;
+}
+.list_5_text{
+    width: 100%;
+    text-align: center;
+    height: 45%;
+    color: black;
+}
+.list_5_text h2{
+    color: black;
+    font-size: 24pt;
+}
+#to_main{
+    display: none;
+}

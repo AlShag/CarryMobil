@@ -4,7 +4,12 @@ $(document).ready(function (){
     $('#view_password').click(function(){view_password()});
     $('#order_next_list').click(function(){order_next_list()});
     $('#order_back_list').click(function(){order_back_list()});
+    $('#id_gruz_type').val($('#goods_type_select :selected').text());
     $('#order_send_button').click(function(){$('#order_send').click();});
+    $('#goods_type_select').on('change', function() {
+        result = $('#goods_type_select :selected').text();
+        $('#id_gruz_type').val(result);
+      });
 });
 $(document).scroll(function (){
    let top=$(document).scrollTop();
