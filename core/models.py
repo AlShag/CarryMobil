@@ -1,15 +1,15 @@
 from django.db import models
 
-# Create your models here.
+
 class Orders(models.Model):
     from_adress = models.CharField('Откуда', max_length=150)
     to_adress = models.CharField('Куда', max_length=150)
-    start_time = models.DateTimeField('Время прибытия на заказ',null=True,blank=True)
-    road_comment = models.TextField('Комментарий к доргоге',null=True,blank=True)
-    cargo_type = models.CharField('Тип груза',max_length=50,blank=True)
-    cargo_type_comment = models.TextField('Тип груза комментарий',null=True,blank=True)
-    loader_count = models.IntegerField('Количество грузчиков',null=True,blank=True)
-    loader_time_count = models.IntegerField('Количество часов для грузчиков',null=True,blank=True)
+    start_time = models.DateTimeField('Время прибытия на заказ', null=True, blank=True)
+    road_comment = models.TextField('Комментарий к доргоге', null=True, blank=True)
+    cargo_type = models.CharField('Тип груза', max_length=50, blank=True)
+    cargo_type_comment = models.TextField('Тип груза комментарий', null=True, blank=True)
+    loader_count = models.IntegerField('Количество грузчиков', null=True, blank=True)
+    loader_time_count = models.IntegerField('Количество часов для грузчиков', null=True, blank=True)
     order_price = models.IntegerField('Стоимость заказа')
     user_tel_nomer = models.CharField('Номер телефона заказчика', max_length=20)
     status = models.IntegerField('Состояние заказа', null=True, blank=True)
@@ -21,8 +21,9 @@ class Orders(models.Model):
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
 
+
 class Adresses(models.Model):
-    adress=models.CharField('Адрес', max_length=150,blank=True)
+    adress = models.CharField('Адрес', max_length=150,blank=True)
 
     def __str__(self):
         return self.adress

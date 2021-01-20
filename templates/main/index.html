@@ -47,6 +47,16 @@
                     <a href="{% url 'logout' %}" id="logout_a">Выйти</a>
                 </div>
             </div>
+            {% if user.is_staff %}
+            <div class="navmenu">
+                <nav>
+                    <ul>
+                        <li><a href="/admin/">Админ.страница</a></li>
+                        <li><a href="{% url 'order_table' %}">Журнал заявок</a></li>
+                    </ul>
+                </nav>
+            </div>
+            {% endif %}
             {% else %}
             <div class="login_register">
                 <a href="{% url 'login' %}" id="login_a">Войти</a>

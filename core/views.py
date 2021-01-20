@@ -1,4 +1,5 @@
-from django.shortcuts import render,redirect
+from django.utils import timezone
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import auth
 from django.http import HttpResponseRedirect
 from .models import Orders
@@ -43,7 +44,7 @@ def order(request):
     all_cityprice = CityPrice.objects.all()
     all_types = CargoType.objects.all()
     form = OrdersForm()
-    form.use_required_attribute=False
+    form.use_required_attribute = False
 
     data = {
         'form': form,
@@ -66,3 +67,19 @@ def Myorders(request):
 
 def ordered(request):
     return render(request, 'order/ordered.html')
+
+
+def order_table(request):
+    orders = Orders.objects.filter(start_time=timezone.now()).order_by('start_time')
+    return render(request, 'order/order_table.html', {'orders': orders})
+
+
+def order_delete(request, pk):
+    try:
+        order = get_object_or_404(Orders, pk=pk)
+        order.delete()
+        orders = Orders.objects.filter(date__lte=timezone.now()).order_by('date')
+        return render(request, 'order/order_table.html', {'orders': orders})
+
+    except ValueError:
+        return render(request, 'order/order_table.html')

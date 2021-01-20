@@ -195,6 +195,9 @@ nav li a:hover{
     font-weight: bold;
     height: 250px;
 }
+.label_title::selection {
+    background: transparent;
+ }
 /* Преимущества начало*/
 .advantages{
     width: 100%;
@@ -323,6 +326,9 @@ nav li a:hover{
     font-weight: 400;
     margin-top: 7%;
 }
+.footer_block section h3::selection {
+    background: transparent;
+ }
 .footer_block section table{
     margin: 3% 2%;
 }
@@ -343,6 +349,9 @@ nav li a:hover{
     font-weight: 400;
     color: #f5f5f5;
 }
+.footer_block h2::selection {
+    background: transparent;
+ }
 #footer_ab_us{
     margin-left: 1%;
 }
