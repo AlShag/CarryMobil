@@ -1,24 +1,56 @@
 from .models import Orders
 from .models import Adresses
 from django import forms
-from django.forms import ModelForm, TextInput, DateTimeInput, Textarea, NumberInput
+from django.forms import ModelForm, TextInput, DateTimeInput, Textarea, NumberInput, PasswordInput
+from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
 
-class UserRegisterForm(UserCreationForm):
-  email = forms.EmailField()
+# class UserRegisterForm(UserCreationForm):
+#   email = forms.EmailField()
 
-  class Meta:
-      model = User
-      fields = ['username', 'email', 'first_name']
+#   class Meta:
+#       model = User
+#       fields = ['username', 'email', 'first_name']
 
+#       widgets = {
+#           'username': TextInput(attrs={
+#               'placeholder':'Придумайте логин для авторизации',
+#           }),
+#       }
+
+
+class SignInForm(AuthenticationForm):
+    class Meta:
+        username = forms.CharField(widget=TextInput(attrs={'class':'validate','placeholder': 'Email'}))
+        password = forms.CharField(widget=PasswordInput(attrs={'placeholder':'Password'}))
+
+
+class SignUpForm(UserCreationForm):
+    class Meta:
+        model = User 
+        fields = ('username','password1','password2',)
+        widgets = {
+            'username': forms.TextInput(attrs={
+                        'class':'form-control',
+                        'placeholder':'Придумайте свой логин',
+                }),
+            'password1': forms.TextInput(attrs={
+                        'class':'form-control',
+                        'placeholder':'Придумайте пароль',
+                }),
+            'password2': forms.TextInput(attrs={
+                        'class':'form-control',
+                        'placeholder':'Повторите пароль',
+                }),
+        }
 
 
 class OrdersForm(ModelForm):
     class Meta:
         model = Orders
-        fields = ['from_adress','to_adress','start_time','road_comment','gruz_type','gruz_type_comment','loader_count','loader_time_count','user_tel_nomer']
+        fields = ['from_adress','to_adress','start_time','road_comment','cargo_type','cargo_type_comment','loader_count','loader_time_count','order_price','user_tel_nomer','status']
 
         widgets = {
             'from_adress':  TextInput(attrs={
@@ -34,6 +66,16 @@ class OrdersForm(ModelForm):
             }),
             'road_comment':  Textarea(attrs={
                 'placeholder': 'Уточнения к указанным местам',
+            }),
+            'loader_count':  NumberInput(attrs={
+                'placeholder': '0 чел.',
+                'max':'12',
+                'min':'0',
+            }),
+            'loader_time_count':  NumberInput(attrs={
+                'placeholder': '0 час.',
+                'max':'8',
+                'min':'0',
             }),
             'user_tel_nomer':  NumberInput(attrs={
                 'id': 'user_telephone',
@@ -54,3 +96,4 @@ class AdressesForm(ModelForm):
                 'type': 'search',
             }),
         }
+

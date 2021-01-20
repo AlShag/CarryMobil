@@ -33,7 +33,7 @@
 .order_title_icon img{
     transform: rotate(-135deg);
 }
-.list_head:not(#list_head_1){
+.list_head:not(#list_head_1):not(#list_head_5){
     display: none;
 }
 .order_transition{
@@ -42,10 +42,10 @@
     background-color: white;
     text-align: center;
 }
-.list:not(#list_1){
+.list:not(#list_1):not(#list_5){
     display: none;
 }
-.list{height: 100%;}
+.list{height: 100%; width: 100%;}
 .list #list1{
     display: block;
     height: 100%;
@@ -79,12 +79,16 @@
     margin: 0 auto;
 }
 .roads_add{
-    text-align: left;
+    margin-top: 2.5%;
     height: 10%;
     margin-left: 10%;
+    width: 80%;
+}
+.roads_add section{
+    text-align: left;
+    height: 100%;
 }
 .roads_add button{
-    margin-top: 2%;
     font-size: 16pt;
     height: 30px;
     width: 30px;
@@ -110,7 +114,7 @@
     height: 60%;
     margin: 0 5%;
     font-size: 16pt;
-    width: 40%; 
+    width: 50%; 
 }
 .order_transition_buttons{
     width: 38%;
@@ -171,6 +175,9 @@ input[type="number"]::-webkit-inner-spin-button {
     cursor:pointer;
     appearance: none;
 }
+#goods_type_select option span{
+    display: none;
+}
 .type_select select:focus{
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
@@ -178,9 +185,6 @@ input[type="number"]::-webkit-inner-spin-button {
 .type_select select option{
     text-align: center;
     padding-left: 5%;
-}
-#id_gruz_type{
-    display: none;
 }
 .type_select textarea{
     width: 37%;
@@ -212,16 +216,18 @@ input[type="number"]::-webkit-inner-spin-button {
     height: 40%;
     margin-top: 3%;
 }
+.list3_param table{
+    height: 80%;
+    width: 90%;
+}
 .list_3_param_name{
     width: 60%;
+    height: 100%;
     background-color: #00a66c;
+    vertical-align: middle;
+    text-align: center;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
-}
-.list_3_param_name h2{
-    padding: 10%;
-    text-align: center;
-    vertical-align:middle;
 }
 .list_3_param_select{
     background-color: #f5f5f5;
@@ -229,6 +235,7 @@ input[type="number"]::-webkit-inner-spin-button {
     border-bottom-right-radius: 30px;
 }
 .list_3_param_select input{
+    height: 100%;
     width: 90%;
     color: black;
     font-size: 18pt;
@@ -243,7 +250,7 @@ input[type="number"]::-webkit-inner-spin-button {
     font-size: 12pt;
 }
 .personal_selects{
-    width: 45%;
+    width: 50%;
     background-color: #0085ff;
     border-top-left-radius: 30px;
     border-bottom-left-radius: 30px;
@@ -266,17 +273,17 @@ input[type="number"]::-webkit-inner-spin-button {
 .full_road{
     height: 30%;
 }
-.full_road select{
+#full_road{
     height: 90%;
     width: 65%;
     background-color: white;
     border-radius: 20px;
     outline: none;
 }
-.full_road option{
+#full_road option{
     padding-left: 2pt;
     color: black;
-    font-size: 16pt;
+    font-size: 14pt;
 }
 .full_type{
     height: 10%;
@@ -317,7 +324,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 .total_price_list{
     height: 100%;
-    width: 65%;
+    width: 50%;
 }
 .TP_container{
     width: 90%;
@@ -391,9 +398,9 @@ input[type="number"]::-webkit-inner-spin-button {
     color: black;
     font-size: 24pt;
 }
-#to_main{
+#id_from_adress, #id_to_adress, #id_order_price, #id_cargo_type{
     display: none;
 }
-#id_from_adress, #id_to_adress{
+#list_4 input[type="number"]::-webkit-inner-spin-button {
     display: none;
-}
+} 

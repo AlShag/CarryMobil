@@ -91,9 +91,17 @@ nav li a:hover{
     top:-25px;
     left:75%;
 }
-.user_head_inf a{
-    margin: 0 5%;
+.user_head_inf select{
+    margin: -1% 5%;
     color: black;
+    border: none;
+    font-size: 14pt;
+}
+.user_head_inf select option{
+    color: black;
+    background-color: none;
+    border: none;
+    font-size: 14pt;
 }
 .login_register a{
     padding: 1% 8%;
