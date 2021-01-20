@@ -70,7 +70,7 @@ def ordered(request):
 
 
 def order_table(request):
-    orders = Orders.objects.filter(start_time=timezone.now()).order_by('start_time')
+    orders = Orders.objects.all()
     return render(request, 'order/order_table.html', {'orders': orders})
 
 
