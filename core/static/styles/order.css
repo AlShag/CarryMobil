@@ -398,7 +398,7 @@ input[type="number"]::-webkit-inner-spin-button {
     color: black;
     font-size: 24pt;
 }
-#id_from_adress, #id_to_adress, #id_order_price, #id_cargo_type{
+#id_from_address, #id_to_address, #id_order_price, #id_cargo_type{
     display: none;
 }
 #list_4 input[type="number"]::-webkit-inner-spin-button {

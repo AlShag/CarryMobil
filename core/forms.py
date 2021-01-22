@@ -1,5 +1,5 @@
-from .models import Orders
-from .models import Adresses
+from .models import Order
+from .models import Address
 from django import forms
 from django.forms import ModelForm, TextInput, DateTimeInput, Textarea, NumberInput, PasswordInput
 from django.contrib.auth.forms import AuthenticationForm
@@ -29,7 +29,7 @@ class SignInForm(AuthenticationForm):
 
 class SignUpForm(UserCreationForm):
     class Meta:
-        model = User 
+        model = User
         fields = ('username','password1','password2',)
         widgets = {
             'username': forms.TextInput(attrs={
@@ -47,17 +47,17 @@ class SignUpForm(UserCreationForm):
         }
 
 
-class OrdersForm(ModelForm):
+class OrderForm(ModelForm):
     class Meta:
-        model = Orders
-        fields = ['from_adress','to_adress','start_time','road_comment','cargo_type','cargo_type_comment','loader_count','loader_time_count','order_price','user_tel_nomer','status']
+        model = Order
+        fields = ['from_address','to_address','start_time','road_comment','cargo_type','cargo_type_comment','loader_count','loader_time_count','order_price','user_tel_nomer','status']
 
         widgets = {
-            'from_adress':  TextInput(attrs={
+            'from_address':  TextInput(attrs={
                 'placeholder': 'Населенный пункт, улица, дом отправления груза...',
                 'required':'',
             }),
-            'to_adress':  TextInput(attrs={
+            'to_address':  TextInput(attrs={
                 'placeholder': 'Населенный пункт, улица, дом направления груза...',
                 'required':'',
             }),
@@ -84,16 +84,15 @@ class OrdersForm(ModelForm):
         }
 
 
-class AdressesForm(ModelForm):
+class AddressForm(ModelForm):
     class Meta:
-        model = Adresses
-        fields = ['adress']
-        
+        model = Address
+        fields = ['address']
+
         widgets = {
-            'adress':  TextInput(attrs={
+            'address':  TextInput(attrs={
                 'placeholder': 'улица, дом, населенный пункт отправки груза...',
                 'required':'',
                 'type': 'search',
             }),
         }
-

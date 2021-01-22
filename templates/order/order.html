@@ -63,23 +63,23 @@
                                                 {% endfor %}
                                             </table>
                                             <h2>Откуда</h2>
-                                            <input type="search" list="adress_from_search" value="г. Альметьевск, улица Ленина" placeholder="Населенный пункт, улица, дом отправления груза..." id="from_adress">
-                                            <datalist id="adress_from_search">
-                                                {% for el in all_adress %}
-                                                <option value="{{ el.adress }}"></option>
+                                            <input type="search" list="address_from_search" value="г. Альметьевск, улица Ленина" placeholder="Населенный пункт, улица, дом отправления груза..." id="from_address">
+                                            <datalist id="address_from_search">
+                                                {% for el in all_address %}
+                                                <option value="{{ el.address }}"></option>
                                                 {% endfor %}
                                             </datalist>
-                                            {{ form.from_adress }}
+                                            {{ form.from_address }}
                                         </section>
                                         <section>
                                             <h2>Куда</h2>
-                                            <input type="search" list="adress_to_search" placeholder="Населенный пункт, улица, дом направления груза..." id="to_adress">
-                                            <datalist id="adress_to_search">
-                                                {% for el in all_adress %}
-                                                <option value="{{ el.adress }}"></option>
+                                            <input type="search" list="address_to_search" placeholder="Населенный пункт, улица, дом направления груза..." id="to_address">
+                                            <datalist id="address_to_search">
+                                                {% for el in all_address %}
+                                                <option value="{{ el.address }}"></option>
                                                 {% endfor %}
                                             </datalist>
-                                            {{ form.to_adress }}
+                                            {{ form.to_address }}
                                         </section>
                                         <section>
                                             <h2>Комментарий</h2>

@@ -1,9 +1,9 @@
 from django.db import models
 
 
-class Orders(models.Model):
-    from_adress = models.CharField('Откуда', max_length=150)
-    to_adress = models.CharField('Куда', max_length=150)
+class Order(models.Model):
+    from_address = models.CharField('Откуда', max_length=150)
+    to_address = models.CharField('Куда', max_length=150)
     start_time = models.DateTimeField('Время прибытия на заказ', null=True, blank=True)
     road_comment = models.TextField('Комментарий к доргоге', null=True, blank=True)
     cargo_type = models.CharField('Тип груза', max_length=50, blank=True)
@@ -15,19 +15,19 @@ class Orders(models.Model):
     status = models.IntegerField('Состояние заказа', null=True, blank=True)
 
     def __str__(self):
-        return self.from_adress
+        return self.from_address
 
     class Meta:
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
 
 
-class Adresses(models.Model):
-    adress = models.CharField('Адрес', max_length=150,blank=True)
+class Address(models.Model):
+    address = models.CharField('Адрес', max_length=150,blank=True)
 
     def __str__(self):
-        return self.adress
-    
+        return self.address
+
     class Meta:
         verbose_name = 'Адрес'
         verbose_name_plural = 'Адреса'
