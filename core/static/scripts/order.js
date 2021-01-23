@@ -3,9 +3,9 @@ let cargo_type='';
 let city_name1='';
 let city_name2='';
 let roads_counter=1;
-let from_adress=$('#from_adress').val();
-let to_adress=$('#to_adress').val();
-to_adress='';
+let from_address=$('#from_address').val();
+let to_address=$('#to_address').val();
+to_address='';
 let current_road_price=0;
 let full_road = {from:[],to:[]};
 let full_type = {type:[],options:[],comment:[]}
@@ -23,8 +23,8 @@ $(document).ready(function (){
     $('#add_dop_road').click(function(){road_add()});
     $('#id_cargo_type').val($('#goods_type_select :selected').text());
     $('#order_send_button').click(function(){$('#order_send').click();});
-    $('#from_adress').on('change', function(){road_change();});
-    $('#to_adress').on('change', function(){road_change();});
+    $('#from_address').on('change', function(){road_change();});
+    $('#to_address').on('change', function(){road_change();});
     $('#goods_type_select').on('change', function(){
         $('#goods_type_select').blur();
         result = $('#goods_type_select :selected').text();
@@ -35,16 +35,16 @@ $(document).ready(function (){
         cargo_type=result;
         $('#full_cargo_type').val(cargo_type);
       });
-    $('#from_adress').on('change', function() {
-        from_adress=$('#from_adress').val();
-        // let city_name_pos1 = from_adress.indexOf('г.')+3;
-        // let city_name_pos2 = from_adress.indexOf(',')-2;
-        // let city_name = from_adress.substr(city_name_pos1,city_name_pos2);
+    $('#from_address').on('change', function() {
+        from_address=$('#from_address').val();
+        // let city_name_pos1 = from_address.indexOf('г.')+3;
+        // let city_name_pos2 = from_address.indexOf(',')-2;
+        // let city_name = from_address.substr(city_name_pos1,city_name_pos2);
         // alert(city_name);
       });
-    $('#to_adress').on('change', function() {
-        to_adress=$('#to_adress').val();
-        $('#id_to_adress').val(to_adress);
+    $('#to_address').on('change', function() {
+        to_address=$('#to_address').val();
+        $('#id_to_address').val(to_address);
       });
 });
 function order_next_list(){
@@ -69,34 +69,36 @@ function order_back_list(){
 }
 function road_add(){
   if(roads_counter==1){
-    from_adress=$('#from_adress').val();
-    to_adress=$('#to_adress').val();
+    from_address=$('#from_address').val();
+    to_address=$('#to_address').val();
   }
-  if((from_adress!='') && (to_adress!='')){
-    full_road.from.push(from_adress);
-    full_road.to.push(to_adress);
+  if((from_address!='') && (to_address!='')){
+    full_road.from.push(from_address);
+    full_road.to.push(to_address);
     roads_counter++;
     $('.roads').append('<button class="road_button" id="road_'+roads_counter+'" onclick="roads_transition(this)">'+roads_counter+'</button>');
-    $('#from_adress').val('');
-    $('#to_adress').val('');
-    from_adress='';
-    to_adress='';
+    $('#from_address').val('');
+    $('#to_address').val('');
+    from_address='';
+    to_address='';
     transition_number++;
   }
 }
 function roads_transition(obj){
   button_id=obj.id;
+  $('.road_button').css('background-color','white');
+  $('#'+obj.id).css('background-color','black');
   transition_number=parseInt(button_id.replace('road_',''));
-  $('#from_adress').val(full_road.from[transition_number-1]);
-  $('#to_adress').val(full_road.to[transition_number-1]);
+  $('#from_address').val(full_road.from[transition_number-1]);
+  $('#to_address').val(full_road.to[transition_number-1]);
 }
 
 function road_change(){
-  from_adress=$('#from_adress').val();
-  to_adress=$('#to_adress').val();
+  from_address=$('#from_address').val();
+  to_address=$('#to_address').val();
   console.log(transition_number);
-  full_road.from[transition_number-1]=from_adress;
-  full_road.to[transition_number-1]=to_adress;
+  full_road.from[transition_number-1]=from_address;
+  full_road.to[transition_number-1]=to_address;
 }
 
 function final_list(){
@@ -105,16 +107,16 @@ function final_list(){
   order_price=0;
   if(full_road.from!='' & full_road.to!=''){
     for (let n = 0; n <= roads_counter-1; n++){
-      from_adress=full_road.from[n];
-      to_adress=full_road.to[n];
+      from_address=full_road.from[n];
+      to_address=full_road.to[n];
       full_road_price+=road_price();
-      $('#full_road').append('<option name="from" id="adress_from_'+n+'">'+full_road.from[n]+'</option>');
-      $('#full_road').append('<option name="to" id="adress_to_'+n+'">'+full_road.to[n]+'</option>');
+      $('#full_road').append('<option name="from" id="address_from_'+n+'">'+full_road.from[n]+'</option>');
+      $('#full_road').append('<option name="to" id="address_to_'+n+'">'+full_road.to[n]+'</option>');
     }
   }
   $('#road_full_price').text(full_road_price+' р');
-  $('#id_from_adress').val(full_road.from);
-  $('#id_to_adress').val(full_road.to);
+  $('#id_from_address').val(full_road.from);
+  $('#id_to_address').val(full_road.to);
   loader_count=$('#id_loader_count').val();
   loader_time=$('#id_loader_time_count').val();
   type_price=parseInt($('#goods_type_select :selected').val());
@@ -136,7 +138,7 @@ function road_price(){
     for(var i = 0, l = $('#city_price tr').length; i <= l; i++){
       let city_name1 = $('#city_price tr').eq(i).find('td').eq(1).text();
       let city_name2 = $('#city_price tr').eq(i).find('td').eq(2).text();
-      if(((to_adress.includes(city_name1) & from_adress.includes(city_name2)) || (from_adress.includes(city_name1) & to_adress.includes(city_name2))) & ((city_name1!='') & (city_name2!=''))){
+      if(((to_address.includes(city_name1) & from_address.includes(city_name2)) || (from_address.includes(city_name1) & to_address.includes(city_name2))) & ((city_name1!='') & (city_name2!=''))){
         current_road_price=parseInt($('#city_price tr').eq(i).find('td').eq(4).text());
         console.log($('#city_price tr').eq(i).find('td').eq(4).text());
         i=l;

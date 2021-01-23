@@ -1,15 +1,9 @@
 from django.utils import timezone
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.contrib import auth
 from django.http import HttpResponseRedirect
-from .models import Orders
-from .models import Adresses
-from .models import CityPrice
-from .models import CargoType
-from .forms import OrdersForm
-from .forms import AdressesForm
-from .forms import SignInForm
-from .forms import SignUpForm
+from .models import Order, Address, CityPrice, CargoType
+from .forms import OrderForm, AddressForm, SignInForm, SignUpForm
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
 from django.views import generic
@@ -24,7 +18,7 @@ def sign_in(request):
     return render(request, 'accounts/login.html', {'form': form})
 
 
-class SignUpView(generic.CreateView):
+class SignUp(generic.CreateView):
     form_class = SignUpForm
     success_url = reverse_lazy('login')
     template_name = 'registration/register.html'
@@ -33,23 +27,23 @@ class SignUpView(generic.CreateView):
 def order(request):
     error = ''
     if request.method == 'POST':
-        form = OrdersForm(request.POST)
+        form = OrderForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('ordered')
         else:
             error = 'Форма была неверной'
 
-    all_adress = Adresses.objects.all()
+    all_address = Address.objects.all()
     all_cityprice = CityPrice.objects.all()
     all_types = CargoType.objects.all()
-    form = OrdersForm()
+    form = OrderForm()
     form.use_required_attribute = False
 
     data = {
         'form': form,
         'error': error,
-        'all_adress': all_adress,
+        'all_address': all_address,
         'all_cityprice': all_cityprice,
         'all_types': all_types,
     }
@@ -60,26 +54,51 @@ def profile(request):
     return render(request, 'user/profile.html', {})
 
 
-def Myorders(request):
-    all_orders = Orders.objects.all()
-    return render(request, 'driver/driver_profile.html', {'all_orders': all_orders})
-
-
 def ordered(request):
     return render(request, 'order/ordered.html')
 
 
+def myorders(request):
+    orders = Order.objects.all()
+    return render(request, 'driver/driver_profile.html', {'orders': orders})
+
+
+def order_detail(request, pk):
+    order = get_object_or_404(Order, pk=pk)
+    return render(request, 'order/order_detail.html', {'order': order})
+
+
 def order_table(request):
-    orders = Orders.objects.all()
+    orders = Order.objects.all()
     return render(request, 'order/order_table.html', {'orders': orders})
+
+
+def order_edit(request, pk):
+    order = get_object_or_404(Order, pk=request.user.pk)
+    if request.method == "POST":
+        form = OrderForm(request.POST, request.FILES or None, instance=order)
+        if form.is_valid():
+            order = form.save(commit=False)
+            order.save()
+            return redirect('order_detail', pk=order.pk)
+    else:
+        form = OrderForm(instance=order)
+    redirect_url = reverse(order_table)
+    return redirect(redirect_url)
+
+
+class OrderEdit(generic.UpdateView):
+    form_class = OrderForm
+    success_url = reverse_lazy('order_table')
+    template_name = 'order/order_edit.html'
 
 
 def order_delete(request, pk):
     try:
-        order = get_object_or_404(Orders, pk=pk)
+        order = get_object_or_404(Order, pk=pk)
         order.delete()
-        orders = Orders.objects.filter(date__lte=timezone.now()).order_by('date')
-        return render(request, 'order/order_table.html', {'orders': orders})
+        redirect_url = reverse(order_table)
+        return redirect(redirect_url)
 
     except ValueError:
         return render(request, 'order/order_table.html')
