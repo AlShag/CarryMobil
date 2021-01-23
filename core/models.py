@@ -1,6 +1,7 @@
 from django.db import models
+from django.conf import settings
 
-
+ 
 class Orders(models.Model):
     from_adress = models.CharField('Откуда', max_length=150)
     to_adress = models.CharField('Куда', max_length=150)

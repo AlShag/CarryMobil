@@ -17,17 +17,47 @@
                             </div>
                             <div class="user_personal_info">
                                 <div class="user_info">
-                                    <h1>{{ user.first_name }} {{ user.last_name }}
+                                    <h1>{{ user.first_name }} {{ user.last_name }} {{ user.patronymic }}
                                         {% if user.is_staff %}
-                                            <span>(Администратор)</span>
+                                            <label>(Администратор)</label>
                                         {% else %}
-                                            <span>(Пользователь)</span>
+                                            <label>(Пользователь)</label>
                                         {% endif %}
                                     </h1>
-                                    <label for=""></label><span></span>
+                                    <section class="user_dop_info">
+                                        <label for="">Место работы:</label><span></span>
+                                    </section>
+                                    <section class="user_dop_info">
+                                        <label for="">Город:</label><span></span>
+                                    </section>
+                                    <section class="user_dop_info">
+                                        <label for="">Язык:</label><span></span>
+                                    </section>
+                                    <section class="user_dop_info">
+                                        <label for="">День рождения:</label><span></span><br>
+                                    </section>
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="transition_block">
+                        <div class="flex_al">
+                            <section class="transiton_param">
+                                <input type="button" value="Настройки">
+                            </section>
+                            <section class="transiton_param">
+                                <input type="button" value="Партнёры">
+                            </section>
+                            <section class="transiton_param">
+                                <input type="button" value="Сообщения">
+                            </section>
+                            <section class="transiton_param">
+                                <input type="button" value="Статистика">
+                            </section>
+                        </div>
+                    </div>
+                    <div class="post_add_block">
+                        
                     </div>
                 </div>
                 {{ user.username }}

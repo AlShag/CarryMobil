@@ -96,4 +96,3 @@ class AdressesForm(ModelForm):
                 'type': 'search',
             }),
         }
-
