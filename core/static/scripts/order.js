@@ -18,6 +18,7 @@ let loader_time=0;
 let loader_price=0;
 let type_price=0;
 let available_lists=[1];
+let last_road='';
 $(document).ready(function (){
     $('#order_next_list').click(function(){order_next_list()});
     $('#order_back_list').click(function(){order_back_list()});
@@ -85,6 +86,7 @@ function road_add(){
     full_road.to.push(to_address);
     roads_counter++;
     $('.roads').append('<button class="road_button" id="road_'+roads_counter+'" onclick="roads_transition(this)">'+roads_counter+'</button>');
+    last_road=$('.road_button').last().attr('id');
     $('#from_address').val('');
     $('#to_address').val('');
     from_address='';
@@ -94,9 +96,16 @@ function road_add(){
 }
 function roads_transition(obj){
   button_id=obj.id;
-  $('.road_button').css('background-color','white');
-  $('#'+obj.id).css('background-color','black');
+  if(roads_counter=parseInt(last_road.replace('road_',''))){
+    full_road.from.push(from_address);
+    full_road.to.push(to_address);
+  }
+  $('.road_button').css('background','none');
+  $('.road_button').css('color','white');
+  $('#'+obj.id).css('background-color','white');
+  $('#'+obj.id).css('color','#0085ff');
   transition_number=parseInt(button_id.replace('road_',''));
+  console.log(last_road);
   $('#from_address').val(full_road.from[transition_number-1]);
   $('#to_address').val(full_road.to[transition_number-1]);
 }
