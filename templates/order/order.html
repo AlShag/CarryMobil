@@ -38,6 +38,21 @@
                         </section>
                         <h1>Финальный лист</h1>
                     </div>
+                    <progress  value="1" max="4" id="order_progress"></progress>
+                </div>
+                <div class="mobile_title" hidden>
+                    <div class="mb_list_head" id="mb_list_head_1">
+                        <h1>Точки направления: Шаг 1 из 4</h1>
+                    </div>
+                    <div class="mb_list_head" id="mb_list_head_2">
+                        <h1>Вид груза: Шаг 2 из 4</h1>
+                    </div>
+                    <div class="mb_list_head" id="mb_list_head_3">
+                        <h1>Услуги грузчиков: Шаг 3 из 4</h1>
+                    </div>
+                    <div class="mb_list_head" id="mb_list_head_4">
+                        <h1>Финальный лист: Шаг 4 из 4</h1>
+                    </div>
                 </div>
                 <div class="order_form">
                     <form action="" method="post"  id="order_form" action="order/proces">
@@ -283,7 +298,7 @@
                                             </table>
                                         </div>
                                         <section class="total_full_price">
-                                            <div class="flex_al">
+                                            <div class="flex">
                                                 <h2>Предварительная стоимость</h2>
                                                 <span id="order_price">1500</span>
                                                 {{ form.order_price }}
@@ -292,7 +307,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <input type="submit" id="order_send">
+                            <input type="submit" id="order_send" hidden>
                         </form>
                     </div>
                 </div>

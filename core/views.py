@@ -102,3 +102,7 @@ def order_delete(request, pk):
 
     except ValueError:
         return render(request, 'order/order_table.html')
+
+
+def licenses(request):
+    return render(request, 'licenses/licenses.html', {})

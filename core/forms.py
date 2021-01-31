@@ -66,6 +66,11 @@ class OrderForm(ModelForm):
             }),
             'road_comment':  Textarea(attrs={
                 'placeholder': 'Уточнения к указанным местам',
+                'rows': '5',
+            }),
+            'cargo_type_comment':  Textarea(attrs={
+                'placeholder': 'Уточнения к указанным местам',
+                'rows': '4',
             }),
             'loader_count':  NumberInput(attrs={
                 'placeholder': '0 чел.',

@@ -17,6 +17,7 @@
     {% endblock %}
     {% block script %}
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="{% static 'scripts/jquery.touchSwipe.min.js' %}"></script>
         <script src="{% static 'scripts/main.js' %}"></script>
     {% endblock %}
 </head>
@@ -25,7 +26,7 @@
     <header id="up">
         <div class="container">
             <div class="logo"><a href="{% url 'index' %}">CM</a></div>
-            <a href="#" id="show_nawmenu">&#9776;</a>
+            <button id="show_nawmenu">&#9776;</button>
             <div class="navmenu">
                 <nav>
                     <ul>
@@ -34,35 +35,29 @@
                         <li><a href="{% url 'order' %}">Оформить заказ</a></li>
                         <li><a href="#ab_us">О нас</a></li>
                         <li><a href="#contacts">Контакты</a></li>
-                    </ul>
-                </nav>
-            </div>
-            {% if user.is_authenticated %}
-            <div class="user_head_inf">
-                <div class="flex">
-                    <select name="" id="" onchange="top.location=this.value">
-                        <option value="" disabled selected hidden>{{ user.username }}</option>
-                        <option value="{% url 'profile' %}">Профиль</option>
-                    </select>
-                    <a href="{% url 'logout' %}" id="logout_a">Выйти</a>
-                </div>
-            </div>
-            {% if user.is_staff %}
-            <div class="navmenu">
-                <nav>
-                    <ul>
+                        {% if user.is_staff %}
                         <li><a href="/admin/">Админ.страница</a></li>
                         <li><a href="{% url 'order_table' %}">Журнал заявок</a></li>
+                        {% endif %}
                     </ul>
                 </nav>
             </div>
-            {% endif %}
-            {% else %}
             <div class="login_register">
-                <a href="{% url 'login' %}" id="login_a">Войти</a>
-                <a href="{% url 'register' %}" id="register_a">Регистрация</a>
+                {% if user.is_authenticated %}
+                    <div class="user_head_inf">
+                        <div class="flex">
+                            <select name="" id="" onchange="top.location=this.value">
+                                <option value="" disabled selected hidden>{{ user.username }}</option>
+                                <option value="{% url 'profile' %}">Профиль</option>
+                                <option value="{% url 'logout' %}" id="logout_a">Выйти</option>
+                            </select>
+                        </div>
+                    </div>
+                {% else %}
+                    <a href="{% url 'login' %}" id="login_a">Войти</a>
+                    <a href="{% url 'register' %}" id="register_a">Регистрация</a>
+                {% endif %}
             </div>
-            {% endif %}
         </div>
     </header>
 
@@ -86,6 +81,8 @@
                             <span>carrymobil@mail.ru</span>
                             <h3>&#9742; Номер телефона</h3>
                             <span>8(8553)35-33-35</span>
+                            <h3>&#9745; Документация</h3>
+                            <span><a href="{% url 'licenses' %}">Лицензии</a></span>
                         </section>  
                     </div>
                     <div class="footer_block">
@@ -100,7 +97,7 @@
                             <table>
                                 <tr>
                                     <td></td>
-                                    <td><a href="vk.com/carrymobil">vk.com/carrymobil</a></td>
+                                    <td><a href="https://vk.com/carrymobil">vk.com/carrymobil</a></td>
                                 </tr>
                                 <tr>
                                     <td></td>
@@ -108,7 +105,7 @@
                                 </tr>
                                 <tr>
                                     <td></td>
-                                    <td><a href="facebook.com/carrymobil">facebook.com/carrymobil</a></td>
+                                    <td><a href="https://facebook.com/carrymobil">facebook.com/carrymobil</a></td>
                                 </tr>
                             </table>
                         </section>

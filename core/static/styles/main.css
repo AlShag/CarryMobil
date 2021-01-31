@@ -2,7 +2,6 @@
     margin: 0;
     padding: 0;
     font-family: Jost;
-    color: white;
     vertical-align: baseline;
 }
 @font-face {
@@ -25,7 +24,7 @@ nav{
     text-align:center;
 }
 a{text-decoration: none;}
-h1{font-weight: 300;}
+h1{font-weight: 300; font-size: 40pt;}
 h2{font-weight: 300;}
 button, input{
     background: none;
@@ -81,19 +80,16 @@ nav li a:hover{
     color:#474747;
     font-weight: bold;
 }
-.login_register,.user_head_inf{
+.login_register{
     width: 25%;
     position: relative;
     top:-25px;
     left:75%;
 }
-.user_head_inf{
-    top:-25px;
-    left:75%;
-}
+
 .user_head_inf select{
-    margin: -1% 5%;
     color: black;
+    background: none;
     border: none;
     font-size: 14pt;
 }
@@ -134,18 +130,17 @@ nav li a:hover{
 }
 /* Меню начало*/
 .menu{
-    height: 600px;
+    height: auto;
     background-color: #0085ff;
 }
 .menu_info, .menu_image{
     width: 50%;
-    height: 600px;
 }
 .menu_info p{
     color: white;
 }
 .menu_info section{
-    padding-top: 20%;
+    padding: 20% 0;
     width: 65%;
     text-align: center;
     margin: 0 auto;
@@ -153,6 +148,7 @@ nav li a:hover{
 .menu_info h1{
     font-size: 62pt;
     font-weight: 400;
+    color: white;
 }
 .menu_image{
     background-image: url('/static/images/menu_image.jpg');
@@ -165,10 +161,11 @@ nav li a:hover{
     width: 25%;
     height: 40px;
     font-size: 20pt;
+    color: white;
 }
 #to_order:hover{
     border-bottom: 1px solid #474747;
-    transition: 0.3s;
+    transition: 0.25s;
     color:#474747;
 }
 /* Меню конец*/
@@ -191,9 +188,10 @@ nav li a:hover{
     width: 100%;
     text-align: center;
     background-color: #f5f5f5;
+    color: white;
     font-style:italic;
     font-weight: bold;
-    height: 250px;
+    height: auto;
 }
 .label_title::selection {
     background: transparent;
@@ -201,7 +199,8 @@ nav li a:hover{
 /* Преимущества начало*/
 .advantages{
     width: 100%;
-    height: 600px;
+    height: auto;
+    padding: 10% 0;
     text-align: center;
     color: black;
     overflow: hidden;
@@ -213,27 +212,47 @@ nav li a:hover{
 }
 .advan_text h2,p{color: #474747;}
 .slider{width: 90%; margin: 0 auto;}
+.slider label{font-size: 36pt;}
 .advan{
     width: 20%;
     margin: 0 2%;
 }
 .advan_image{
-    padding-top: 10%;
-    height: 250px;
-    background-color: #474747;
+    padding: 5% 0;
 }
-.advan_image div{
-    margin: 0 auto;
-    margin-top: 10%;
+.advan_icon{
+    margin: 10% auto;
     background-color:#F5F5F5;
     border-radius: 30px;
     width: 150px;
     height: 150px;
+    background-size: 80%;
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+#advan_icon_1{
+    background-image: url('../../static/images/landing/simple.svg');
+}
+#advan_icon_2{
+    background-image: url('../../static/images/landing/spec.svg');
+}
+#advan_icon_3{
+    background-image: url('../../static/images/landing/person.svg');
+}
+#advan_icon_4{
+    background-image: url('../../static/images/landing/flexibility.svg');
+}
+
+input[type="radio"][name="advan_slider"]{display: none;}
+.slider_label{display: none;}
+.slider_label{
+    margin: 10% 2%;
 }
 /*Преимущества конец*/
 /* Спец-предложения начало*/
 .spec{
-    height: 700px;
+    height: auto;
+    padding-bottom: 10%;
     background-color: #0085ff;
     width: 100%;
     color: white;
@@ -248,17 +267,16 @@ nav li a:hover{
     padding-top: 2%;
 }
 .spec h1{
-    padding-top: 2%;
     padding-bottom: 2%;
 }
-.spec h2{color: black;}
+.spec h2{color: #333333;}
 .spec_list{
     width: 80%;
     margin: 0 auto;
 }
 .spec_form{
     height: 350px;
-    width: 30%;
+    width: 350px;
     background-color: white;
     margin: 0 2%;
     border-radius: 20px;
@@ -268,21 +286,32 @@ nav li a:hover{
     width: 80%;
     padding-left: 5%;
 }
+.slider{
+    display: flex;
+}
+.spec h1{
+    padding-top: 1%;
+}
 .spec_form div h2{
     padding-top: 5%;
     padding-bottom: 20%;
     font-weight: 500;
 }
 .comment{
-    height: 700px;
+    height: auto;
+    padding: 5% 0;
     width: 100%;
     text-align: center;
 }
 .comment_area{
-    margin: 5% 32%;
+    margin: 5% auto;
     width: 40%;
     height: 500px;
     overflow-y: scroll;
+}
+.user_comment h3,.user_comment p,.user_comment{
+    color: white;
+
 }
 .user_comment{
     width: 95%;
@@ -308,7 +337,8 @@ nav li a:hover{
     transition: 0.25s;
 }
 .footer{
-    height: 700px;
+    height: auto;
+    padding-bottom: 7%;
     background-color: #151A26;
 }
 .footer_nav{
@@ -343,6 +373,7 @@ nav li a:hover{
 }
 .footer_block section span{
     margin-left: 6%;
+    color: white;
 }
 .footer_block h2{
     font-size: 24pt;
@@ -383,4 +414,7 @@ nav li a:hover{
     height: 25px;
     background-color:#0085ff;
     border-radius: 8pt;
+}
+#footer_to_order a{
+    color: white;
 }
