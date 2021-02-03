@@ -102,8 +102,8 @@
     font-size: 16pt;
     height: 30px;
     width: 30px;
-    color: #0085ff;
-    background-color: white;
+    color: white;
+    border: 1px solid white;
     border-radius: 10px;
 }
 .road_select section input, .road_select section textarea{
@@ -455,7 +455,7 @@ input[type="number"]::-webkit-inner-spin-button {
     }
     .mb_list_head h1{
         font-size: 22pt;
-        padding: 3% 2%;
+        padding: 2% 2%;
         text-align: right;
     }
     .mb_list_head:not(#mb_list_head_1){
@@ -543,6 +543,8 @@ input[type="number"]::-webkit-inner-spin-button {
         height: 30%;
         background-size: 40%;
         padding-top: 15%;
+        padding-top: 20%;
+        background-size: 50%;
     }
     .list3_params{
         width: 100%;
@@ -572,9 +574,16 @@ input[type="number"]::-webkit-inner-spin-button {
         text-align: center;
     }
 }
+@media screen and (max-width: 479px) {
+    .mb_list_head h1 {
+        font-size: 18pt;
+        padding: 3% 2%;
+    }
+}
 @media screen and (max-width: 379px) {
     .mb_list_head h1{
-        font-size: 18pt;
+        font-size: 14pt;
+        padding: 5% 2%;
     }
     .list3_image {
         background-size: 50%;

@@ -81,6 +81,10 @@
         position: absolute;
         left: 75%;
         top:30%;
+        width: auto;
+    }
+    #register_a{
+        display: none;
     }
     .menu_info section{
         padding-top: 5%;
