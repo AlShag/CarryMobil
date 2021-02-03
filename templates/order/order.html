@@ -127,7 +127,8 @@
                                     <div class="flex">
                                         <h2 class="select_type_info_title">Тип груза</h2>
                                         {{ form.cargo_type }}
-                                        <select name="" aria-placeholder="Выберите тип товара" id="goods_type_select">
+                                        <select name="" id="goods_type_select">
+                                                <option value="0" disabled selected hidden>Выберите тип груза</option>
                                             {% for el in all_types %}
                                                 <option value="{{ el.price }}" class="{{ el.cargo_class }}">{{ el.cargo }}</option>
                                             {% endfor %}

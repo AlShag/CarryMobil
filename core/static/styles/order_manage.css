@@ -1,0 +1,11 @@
+.order_area{
+    width: 100%;
+    height: auto;
+    background-color: #e5e5e5;
+}
+.orders_form{
+    width: 90%;
+    margin: 0 auto;
+    height: auto;
+    background-color: white;
+}

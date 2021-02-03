@@ -1,71 +1,117 @@
 {% extends "main/index.html" %}
+{% load static %}
 {% block title %}Журнал заявок{% endblock %}
-
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'styles/order-manage.css' %}">
+{% endblock %}
 {% block content %}
 
 {% if user.is_staff %}
-<div>
-    <table class="">
-        <tr>
-            <th class="">
-                Номер заявки
-            </th >
-            <th class="">
-                Дата исполнения
-            </th>
-            <th class="">
-                Отправная точка
-            </th>
-            <th class="">
-                Грузчики<br>( чел/час )
-            </th>
-            <th class="">
-                Вид груза
-            </th>
-            <th class="">
-                Сумма
-            </th>
-            <th class="">
-                Статус
-            </th>
-            <th class="">
-                Действие
-            </th>
-        </tr>
-    {% for order in orders %}
-            <tr>
-                <td class="">
-                    <a href="{% url 'order_detail' pk=order.pk %}">{{ order.id }}</a>
-                </td>
-                <td class="">
-                    {{ order.start_time }}
-                </td>
-                <td class="">
-                    {{ order.from_address }}
-                </td>
-                <td class="">
-                    {{ order.loader_count }}, {{ order.loader_time_count }}
-                </td>
-                <td class="">
-                    {{ order.cargo_type }}
-                </td>
-                <td class="">
-                    {{ order.order_price }}
-                </td>
-                <td class="">
-                    {{ order.status }}
-                </td>
-                <td class="">
-                    <a href="{% url 'order_delete' pk=order.pk %}"><button type="button">Удалить</button></a>
-                </td>
-                <td class="">
-                    <a href="{% url 'order_edit' pk=order.pk %}"><button type="button">Редактировать</button></a>
-                </td>
-            </tr>
-    {% endfor %}
-    </table>
-    {% else %}
-    <span class="text-red font-bold italic text-xl">У вас нет доступа к этой странице</span>
+<div class="oreders_area">
+    <div class="orders_form">
+        <div class="container">
+            <div class="orders_filter">
+                <div class="flex">
+                    <section>
+                        <h2>Дата отправки:</h2>
+                        <div class="filter_value">
+
+                        </div>
+                    </section>
+                    <section>
+                        <h2>Вид груза:</h2>
+                        <div class="filter_value">
+                            <input type="checkbox" name="" id="">
+                        </div>
+                    </section>
+                    <section>
+                        <h2>Статус заявки:</h2>
+                        <div class="filter_value">
+                            <ul>
+                                <li>
+                                    <input type="checkbox" name="" id="complited_orders" value="Выполнена">
+                                    <label for="complited_orders">Выполнена</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" name="" id="expected_orders" value="Ожидается">
+                                    <label for="expected_orders">Ожидается</label>
+                                </li>
+                                <li>
+                                    <input type="checkbox" name="" id="canceled_orders" value="Отменена">
+                                    <label for="canceled_orders">Отменена</label>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+                    <input type="submit" value="Применить">
+                </div>
+            </div>
+            <div>
+                <table class="">
+                    <tr>
+                        <th class="">
+                            Номер заявки
+                        </th >
+                        <th class="">
+                            Дата исполнения
+                        </th>
+                        <th class="">
+                            Отправная точка
+                        </th>
+                        <th class="">
+                            Грузчики<br>( чел/час )
+                        </th>
+                        <th class="">
+                            Вид груза
+                        </th>
+                        <th class="">
+                            Сумма
+                        </th>
+                        <th class="">
+                            Статус
+                        </th>
+                        <th class="">
+                            Действие
+                        </th>
+                    </tr>
+                {% for order in orders %}
+                        <tr>
+                            <td class="">
+                                <a href="{% url 'order_detail' pk=order.pk %}">{{ order.id }}</a>
+                            </td>
+                            <td class="">
+                                {{ order.start_time }}
+                            </td>
+                            <td class="">
+                                {{ order.from_address }}
+                            </td>
+                            <td class="">
+                                {{ order.loader_count }}, {{ order.loader_time_count }}
+                            </td>
+                            <td class="">
+                                {{ order.cargo_type }}
+                            </td>
+                            <td class="">
+                                {{ order.order_price }}
+                            </td>
+                            <td class="">
+                                {{ order.status }}
+                            </td>
+                            <td class="">
+                                <a href="{% url 'order_delete' pk=order.pk %}"><button type="button">Удалить</button></a>
+                            </td>
+                            <td class="">
+                                <a href="{% url 'order_edit' pk=order.pk %}"><button type="button">Редактировать</button></a>
+                            </td>
+                        </tr>
+                {% endfor %}
+                </table>
+                {% else %}
+                <span class="text-red font-bold italic text-xl">У вас нет доступа к этой странице</span>
+            </div>
+        </div>
+    </div>
 </div>
 {% endif %}
 {% endblock %}

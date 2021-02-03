@@ -85,6 +85,7 @@ class OrderForm(ModelForm):
             'user_tel_nomer':  NumberInput(attrs={
                 'id': 'user_telephone',
                 'required':'',
+                'type': 'telephone',
             }),
         }
 
