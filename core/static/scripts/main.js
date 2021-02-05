@@ -7,8 +7,9 @@ $(document).ready(function (){
     $('#view_password').click(function(){view_password()});
     $('#left_slide').click(function(){left_slide()});
     $('#right_slide').click(function(){right_slide()});
+    $('#to_up').click(function(){$(document).scrollTop(0)});
     $('#show_nawmenu').click(function(){
-        if($('.navmenu').css('display')!='block'){$('.navmenu').show();} else $('.navmenu').hide();
+        if($('.navmenu').css('right')>'25%'){$('.navmenu').addClass('showed');} else{$('.navmenu').removeClass('showed');};
     });
     if($(window).width() < 768) {
         on_mobile();
@@ -16,7 +17,7 @@ $(document).ready(function (){
 });
 $(document).scroll(function (){
    let top=$(document).scrollTop();
-    if(top>1000){$('.to_up').show()} else $('.to_up').hide();
+    if(top>1000){$('#to_up').show()} else $('#to_up').hide();
 });
 jQuery('.slider').swipe({});
 function view_password(){
@@ -34,6 +35,8 @@ function left_slide(){
     if(slide_id!='advan_1'){
         slide_count--;
         $('#advan_'+slide_count).prop('checked', true);
+        $('.advan').removeClass('slided');
+        $('#advan'+slide_count).addClass('slided');
     }
     else $('#advan_4').prop('checked', true);
 }
@@ -49,7 +52,6 @@ function right_slide(){
 }
 
 function on_mobile(){
-    swiper=false;
     jQuery('.slider').swipe({
         swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
             console.log(direction);
@@ -58,10 +60,13 @@ function on_mobile(){
         }
     });
     jQuery('body').swipe({
-        swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-            console.log(swiper);
-            if(($('.navmenu').css('display')=='none') & (direction=='right') & (duration>300))$('#show_nawmenu').click();
-            if(($('.navmenu').css('display')=='block') & (direction=='left') & (duration>150)) $('#show_nawmenu').click();
+        swipe:function(event, direction, distance, duration, fingerCount, fingerData){
+            console.log(fingerData);
+            console.log(duration);
+            console.log(fingerData[0].start['x']);
+            console.log()
+            if(($('.navmenu').css('right')>'25%') & (direction=='right') & (fingerData[0].start['x']<=100))$('.navmenu').addClass('showed');
+            if(($('.navmenu').css('display')=='block') & (direction=='left') & (duration>150))$('.navmenu').removeClass('showed');
         }
     });
 }

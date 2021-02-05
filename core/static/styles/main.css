@@ -169,7 +169,7 @@ nav li a:hover{
     color:#474747;
 }
 /* Меню конец*/
-.to_up{
+#to_up{
     position: fixed;
     display: none;
     left: 90%;
@@ -179,7 +179,7 @@ nav li a:hover{
     text-align: center;
     border-radius: 100%;
 }
-.to_up img{
+#to_up img{
    height: 100%;
    width: 100%;
 }
