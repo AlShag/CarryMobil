@@ -119,6 +119,7 @@ nav li a:hover{
     border: 1px solid #0085ff;
     background-color: #0085ff;
     border-radius: 12pt;
+    color: white;
 }
 #register_a:hover{
     background-color: white;

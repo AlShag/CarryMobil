@@ -138,14 +138,13 @@
 
     .slider_label{display: block;}
     input[type="radio"][name="advan_slider"]:checked ~ .advan{display: none; opacity: 0;}
-    input[type="radio"][id="advan_1"]:checked ~ #advan1{display: flex;}
-    input[type="radio"][id="advan_2"]:checked ~ #advan2{display: flex;}
-    input[type="radio"][id="advan_3"]:checked ~ #advan3{display: flex;}
-    input[type="radio"][id="advan_4"]:checked ~ #advan4{display: flex;}
+    input[type="radio"][id="advan_1"]:checked ~ #advan1{display: flex; opacity: 1;}
+    input[type="radio"][id="advan_2"]:checked ~ #advan2{display: flex; opacity: 1;}
+    input[type="radio"][id="advan_3"]:checked ~ #advan3{display: flex; opacity: 1;}
+    input[type="radio"][id="advan_4"]:checked ~ #advan4{display: flex; opacity: 1;}
     .slided{opacity: 1; transition: 0.5s;}
-    .advan:not(#advan1){
-        display: none;
-        opacity: 0;
+    #advan1{
+        opacity: 1;
     }
     .comment_area{
         width: 80%;

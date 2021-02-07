@@ -1,4 +1,5 @@
-.order_area{
+.orders_area{
+    padding-top: 5%;
     width: 100%;
     height: auto;
     background-color: #e5e5e5;
@@ -8,4 +9,34 @@
     margin: 0 auto;
     height: auto;
     background-color: white;
+}
+.orders_filter{
+    padding-top: 8%;
+    background-color: #545454;
+}
+.orders_filter h2{
+    color: white;
+    font-size: 18pt;
+}
+.orders_filter_form{
+    width: 80%;
+    margin: 0 auto;
+}
+.orders_filter_form section{
+    width: 33%;
+}
+.filter_value li{
+    list-style-type: none;
+    color: white;
+}
+#filter_applay{
+    text-align: right;
+    padding-top: 15%;
+    padding-bottom: 2%;
+}
+#filter_applay input{
+    color: white;
+}
+#orders_table_title{
+    border-bottom: 1px solid #949494;
 }

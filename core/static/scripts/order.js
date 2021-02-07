@@ -93,6 +93,7 @@ function road_add(){
 }
 function roads_transition(obj){
   button_id=obj.id;
+  console.log(button_id);
   if(roads_counter=parseInt(last_road.replace('road_',''))){
     full_road.from.push(from_address);
     full_road.to.push(to_address);
