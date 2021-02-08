@@ -1,17 +1,17 @@
 .orders_area{
-    padding-top: 5%;
+    padding: 0.1% 0;
     width: 100%;
     height: auto;
     background-color: #e5e5e5;
 }
 .orders_form{
     width: 90%;
-    margin: 0 auto;
+    margin: 5% auto;
     height: auto;
     background-color: white;
 }
 .orders_filter{
-    padding-top: 8%;
+    padding-top: 5%;
     background-color: #545454;
 }
 .orders_filter h2{
@@ -31,7 +31,7 @@
 }
 #filter_applay{
     text-align: right;
-    padding-top: 15%;
+    padding-top: 10%;
     padding-bottom: 2%;
 }
 #filter_applay input{
@@ -39,4 +39,13 @@
 }
 #orders_table_title{
     border-bottom: 1px solid #949494;
+}
+#orders_table tr td, #orders_table th{
+    text-align: center;
+    height: 100%;
+    border-right: 1px solid black;
+}
+#orders_table{
+    border: 1px solid white;
+    border-collapse: collapse;
 }

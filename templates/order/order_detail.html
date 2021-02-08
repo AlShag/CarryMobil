@@ -1,9 +1,44 @@
 {% extends "main/index.html" %}
+{% load static %}
 {% block title %}Журнал заявок{% endblock %}
-
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'styles/order_manage.css' %}">
+{% endblock %}
 {% block content %}
-
-{% if user.is_staff %}
+    {% if user.is_staff %}
+        <div class="orders_area">
+            <div class="orders_form">
+                <div class="order_info">
+                    <section><h2>Клиент</h2></section>
+                    <table>
+                        <tr>
+                            <th> {{ order.status }}</th>
+                            <th>Цена</th>
+                        </tr>
+                        <tr>
+                            <th>Маршрут</th>
+                            <td> {{ order.from_address }} --> {{ order.to_address }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Грузчики</th>
+                            <td>{{ order.loader_count }} чел. / {{ order.loader_time_count }} час.</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Вид груза</th>
+                            <td>{{ order.cargo_type }}</td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <th>Номер тел. клиента:</th>
+                            <td>{{ order.user_tel_nomer }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
 {% endif %}
 
 {% endblock %}

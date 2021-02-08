@@ -88,13 +88,14 @@ function road_add(){
     from_address='';
     to_address='';
     transition_number++;
+    console.log(roads_counter);
     roads_transition($('#road_'+'roads_counter'));
   }
 }
 function roads_transition(obj){
   button_id=obj.id;
   console.log(button_id);
-  if(roads_counter=parseInt(last_road.replace('road_',''))){
+  if(roads_counter==parseInt(last_road.replace('road_',''))){
     full_road.from.push(from_address);
     full_road.to.push(to_address);
   }
@@ -108,7 +109,7 @@ function roads_transition(obj){
     'color' : '#0085ff'
  });
   transition_number=parseInt(button_id.replace('road_',''));
-  console.log(last_road);
+  // console.log(last_road);
   $('#from_address').val(full_road.from[transition_number-1]);
   $('#to_address').val(full_road.to[transition_number-1]);
 }
@@ -116,7 +117,7 @@ function roads_transition(obj){
 function road_change(){
   from_address=$('#from_address').val();
   to_address=$('#to_address').val();
-  console.log(transition_number);
+  // console.log(transition_number);
   full_road.from[transition_number-1]=from_address;
   full_road.to[transition_number-1]=to_address;
 }
@@ -175,13 +176,13 @@ function road_price(){
 function type_add(){
   if($('#goods_type_select :selected').text()){
   full_type.type.push($('#goods_type_select :selected').text());
-  console.log(full_type.type[1]);
+  // console.log(full_type.type[1]);
   }
 }
 
 function available_list(){
   if((full_road.from!='') | (full_road.to!='')){  
-    console.log(available_lists.indexOf(2));
+    // console.log(available_lists.indexOf(2));
     if(available_lists.indexOf(2)==-1) available_lists.push(2);
     else if(available_lists.indexOf(3)==-1) available_lists.push(3);
     else if(available_lists.indexOf(4)==-1) available_lists.push(4);
