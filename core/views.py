@@ -67,7 +67,7 @@ def update_profile(request):
             user_form.save()
             profile_form.save()
             messages.success(request, ('Ваш профиль был успешно обновлен!'))
-            return render( =request, 'user/profile.html')
+            return render(request, 'user/profile.html')
         else:
             messages.error(request, ('Пожалуйста, исправьте ошибки.'))
     else:
