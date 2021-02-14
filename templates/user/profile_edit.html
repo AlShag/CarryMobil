@@ -1,0 +1,18 @@
+{% extends "main/index.html" %}
+{% block title %}Редактировать профиль{% endblock %}
+
+{% block content %}
+    {% load static %}
+    {% if user.is_authenticated %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
+        <button type="submit">Сохранить изменения</button>
+    </form>
+
+    {% else %}
+    <p>Вы не авторизированы</p>
+{% endif %}
+{% endblock %}

@@ -12,12 +12,12 @@
                             <div class="user_image">
                                 <div class="user_image_content">
                                     <img src="{% static '/images/profile/stock.svg' %}">
-                                    <input type="button" value="Редактировать">
+                                    <a href="{% url 'update_profile' %}"><input type="button" value="Редактировать"></a>
                                 </div>
                             </div>
                             <div class="user_personal_info">
                                 <div class="user_info">
-                                    <h1>{{ user.first_name }} {{ user.last_name }} {{ user.patronymic }}
+                                    <h1>{{ user.username }}
                                         {% if user.is_staff %}
                                             <label>(Администратор)</label>
                                         {% else %}
@@ -25,16 +25,13 @@
                                         {% endif %}
                                     </h1>
                                     <section class="user_dop_info">
-                                        <label for="">Место работы:</label><span></span>
+                                        <label for="">Город: {{ user.profile.location }}</label><span></span>
                                     </section>
                                     <section class="user_dop_info">
-                                        <label for="">Город:</label><span></span>
+                                        <label for="">Компания: {{ user.profile.company }}</label><span></span>
                                     </section>
                                     <section class="user_dop_info">
-                                        <label for="">Язык:</label><span></span>
-                                    </section>
-                                    <section class="user_dop_info">
-                                        <label for="">День рождения:</label><span></span><br>
+                                        <label for="">День рождения: {{ user.profile.birth_date }}</label><span></span><br>
                                     </section>
                                 </div>
                             </div>
@@ -60,7 +57,6 @@
                         
                     </div>
                 </div>
-                {{ user.username }}
             </div>
         </div>
     {% else %}

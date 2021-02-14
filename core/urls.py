@@ -10,6 +10,7 @@ urlpatterns = [
     path('register', SignUp.as_view(), name='register'),
     path('order', views.order, name='order'),
     path('profile', views.profile, name='profile'),
+    path('profile_edit', views.update_profile, name='update_profile'),
     path('driver', views.myorders, name='myorders'),
     path('ordered', views.ordered, name='ordered'),
     path('licenses', views.licenses, name='licenses'),
