@@ -43,6 +43,7 @@
 #orders_table tr td, #orders_table th{
     text-align: center;
     height: 100%;
+    padding: 1% 0;
     border-right: 1px solid black;
 }
 #orders_table{

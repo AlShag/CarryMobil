@@ -76,11 +76,11 @@ class OrderForm(ModelForm):
                 'type': 'datetime-local',
             }),
             'road_comment':  Textarea(attrs={
-                'placeholder': 'Уточнения к указанным местам',
+                'placeholder': 'Необязательное поле',
                 'rows': '5',
             }),
             'cargo_type_comment':  Textarea(attrs={
-                'placeholder': 'Уточнения к указанным местам',
+                'placeholder': 'Необязательное поле',
                 'rows': '4',
             }),
             'loader_count':  NumberInput(attrs={
