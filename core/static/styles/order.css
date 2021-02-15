@@ -106,8 +106,41 @@
     border: 1px solid white;
     border-radius: 10px;
 }
-.road_select section input, .road_select section textarea{
-    font-size: 16pt;
+#road_del{
+    position: relative;
+    z-index: 1;
+    color: #FF7058;
+    font-size: 20pt;
+    margin-left: 90%;
+    top: -92%;
+    height: 0;
+}
+#road_add_choice{
+    display: none;
+    background-color: white;
+    width: 35%;
+    border: 2px solid rgba(0, 0, 0, 0.5);
+    position: fixed;
+    top:32%;
+    left: 32%;
+}
+#road_add_choice button:not(#road_choice_exit){
+    padding: 10% 0;
+    width: 100%;
+    font-size: 18pt;
+}
+.road_add_select:hover{
+    background-color: #0085ff;
+    color: white;
+}
+#road_choice_exit{
+    color:#FF7058;
+    position: relative;
+    left: 94%;
+    font-size: 18pt;
+}
+.road_select section input, .road_select section textarea, .road_select input[type='datetime-local']{
+    font-size: 14pt;
     color: black;
     height: 65%;
     width: 100%;
@@ -123,7 +156,6 @@
 .road_select input[type='datetime-local']{
     height: 60%;
     margin: 0 5%;
-    font-size: 16pt;
     width: 50%; 
 }
 .order_transition_buttons{
@@ -418,6 +450,12 @@ input[type="number"]::-webkit-inner-spin-button {
     display: none;
 }
 
+@media screen and (max-width: 1600px){
+    .order_main h2{
+        font-size: 18pt;
+    }
+}
+
 @media screen and (max-width: 1400px){
     .order_form{
         width: 85%;
@@ -434,7 +472,7 @@ input[type="number"]::-webkit-inner-spin-button {
     .order_form{
         width: 90%;
     }
-    .road_select section input, .road_select section textarea{
+    .road_select section input, .road_select section textarea, .road_select input[type='datetime-local']{
         font-size: 12pt;
     }
     .order_main h2{
