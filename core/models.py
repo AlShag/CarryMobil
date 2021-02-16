@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.utils import timezone
 
 
 class Profile(models.Model):
@@ -78,3 +79,16 @@ class CargoType(models.Model):
     class Meta:
         verbose_name = 'Вид груза'
         verbose_name_plural = 'Виды грузов'
+
+
+class Review(models.Model):
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    text = models.TextField()
+    published_date = models.DateTimeField(default=timezone.now)
+
+    def publish(self):
+        self.published_date = timezone.now()
+        self.save()
+
+    def __str__(self):
+        return self.text

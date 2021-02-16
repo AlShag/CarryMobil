@@ -2,18 +2,14 @@ from django.utils import timezone
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.contrib import auth
 from django.http import HttpResponseRedirect
-from .models import Order, Address, CityPrice, CargoType
-from .forms import OrderForm, AddressForm, SignInForm, SignUpForm, UserForm, ProfileForm
+from .models import Order, Address, CityPrice, CargoType, Review
+from .forms import OrderForm, AddressForm, SignInForm, SignUpForm, UserForm, ProfileForm, ReviewForm
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
 from django.views import generic
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.contrib import messages
-
-
-def index(request):
-    return render(request, 'main/landing.html', {})
 
 
 def sign_in(request):
@@ -131,3 +127,27 @@ def order_delete(request, pk):
 
 def licenses(request):
     return render(request, 'licenses/licenses.html', {})
+
+
+@login_required
+def review_create(request):
+    if request.method == 'POST':
+        review_form = ReviewForm(request.POST)
+        if review_form.is_valid():
+            review = review_form.save(commit=False)
+            review.author = request.user
+            review.published_date = timezone.now()
+            review.save()
+            return redirect(index)
+        else:
+            return redirect(review_create)
+    else:
+        review_form = ReviewForm
+    return render(request, 'main/review.html', {
+        'review_form': review_form
+    })
+
+
+def index(request):
+    reviews = Review.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    return render(request, 'main/landing.html', {'reviews': reviews})

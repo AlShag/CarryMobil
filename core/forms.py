@@ -1,4 +1,4 @@
-from .models import Order, Address, Profile
+from .models import Order, Address, Profile, Review
 from django import forms
 from django.forms import ModelForm, TextInput, DateTimeInput, Textarea, NumberInput, PasswordInput
 from django.contrib.auth.forms import AuthenticationForm
@@ -113,3 +113,9 @@ class AddressForm(ModelForm):
                 'type': 'search',
             }),
         }
+
+
+class ReviewForm(ModelForm):
+    class Meta:
+        model = Review
+        fields = ['text']
