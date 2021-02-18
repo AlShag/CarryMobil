@@ -5,40 +5,72 @@
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'styles/order_manage.css' %}">
 {% endblock %}
+{% block script %}
+{{ block.super }}
+    <script src="{% static 'scripts/order.js' %}"></script>
+{% endblock %}
 {% block content %}
     {% if user.is_staff %}
-        <div class="orders_area">
-            <div class="orders_form">
+    <div class="orders_area">
+        <div class="orders_form">
                 <div class="order_info">
+                    <a href="{% url 'order_table' %}" id="to_orders_list">&#8617;</a>
+                    <h1>Номер заказа № {{ order.id }}</h1>
+                    <div class="flex_al">
+                        <h2>Детали заказа</h2>
+                        <h2 id="order_sended_time">{{ order.sended_in }}</h2>
+                    </div>
                     <section><h2>Клиент</h2></section>
                     <table>
                         <tr>
-                            <th> {{ order.status }}</th>
-                            <th>Цена</th>
+                            <th><h2  id="order_status"for="">{{ order.status }}</h2></th>
+                            <th></th>
+                            <th class="order_price">Цена</th>
+                            <label id="prices">{{ order.prices }}</label>
                         </tr>
                         <tr>
                             <th>Маршрут</th>
-                            <td> {{ order.from_address }} --> {{ order.to_address }}
+                            <td class="order_data">
+                                <div class="roads">
+                                    <label for="" id="full_road_info">{{ order.full_road }}</label>
+                                </div>
+                            </td>
+                            <td class="order_price">
+                                <label id="full_road_price"></label>
                             </td>
                         </tr>
                         <tr>
                             <th>Грузчики</th>
-                            <td>{{ order.loader_count }} чел. / {{ order.loader_time_count }} час.</td>
-                            <td></td>
+                            <td class="order_data">
+                                {{ order.loader_count }} чел. / {{ order.loader_time_count }} час.
+                            </td>
+                            <td class="order_price">
+                                <label id="loader_price"></label>
+                            </td>
                         </tr>
                         <tr>
                             <th>Вид груза</th>
-                            <td>{{ order.cargo_type }}</td>
-                            <td></td>
+                            <td class="order_data">
+                                {{ order.cargo_type }}
+                            </td>
+                            <td class="order_price">
+                                <label id="type_price"></label>
+                            </td>
                         </tr>
                         <tr>
                             <th>Номер тел. клиента:</th>
-                            <td>{{ order.user_tel_nomer }}</td>
+                            <td class="order_data">
+                                {{ order.user_tel_nomer }}
+                            </td>
+                            <td class="order_price">
+                                Итог: {{ order.order_price }} руб.
+                            </td>
                         </tr>
                     </table>
                 </div>
             </div>
         </div>
+        <script>order_detail()</script>
 {% endif %}
 
 {% endblock %}

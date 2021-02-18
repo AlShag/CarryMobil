@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+import datetime
 
 
 class Profile(models.Model):
@@ -24,8 +25,7 @@ def save_user_profile(sender, instance, **kwargs):
 
 
 class Order(models.Model):
-    from_address = models.CharField('Откуда', max_length=150)
-    to_address = models.CharField('Куда', max_length=150)
+    full_road = models.CharField('Маршрут', max_length=300)
     start_time = models.DateTimeField('Время прибытия на заказ', null=True, blank=True)
     road_comment = models.TextField('Комментарий к доргоге', null=True, blank=True)
     cargo_type = models.CharField('Тип груза', max_length=50, blank=True)
@@ -33,11 +33,13 @@ class Order(models.Model):
     loader_count = models.IntegerField('Количество грузчиков', null=True, blank=True)
     loader_time_count = models.IntegerField('Количество часов для грузчиков', null=True, blank=True)
     order_price = models.IntegerField('Стоимость заказа')
+    prices = models.CharField('Цены заказа', null=True, blank=True, max_length=150)
     user_tel_nomer = models.CharField('Номер телефона заказчика', max_length=20)
-    status = models.IntegerField('Состояние заказа', null=True, blank=True)
+    sended_in = models.DateTimeField('Время отправки заявки', null=True, blank=True, default=datetime.datetime.now())
+    status = models.IntegerField('Состояние заказа', null=True, blank=True, default=0)
 
     def __str__(self):
-        return self.from_address
+        return self.full_road
 
     class Meta:
         verbose_name = 'Заказ'

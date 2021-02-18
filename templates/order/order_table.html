@@ -55,12 +55,12 @@
                             <tr id="orders_table_title">
                                 <th class="">
                                     Номер заявки
-                                </th >
+                                </th>
                                 <th class="">
                                     Дата исполнения
                                 </th>
                                 <th class="">
-                                    Отправная точка
+                                    Маршрут
                                 </th>
                                 <th class="">
                                     Грузчики<br>( чел/час )
@@ -79,27 +79,27 @@
                                 </th>
                             </tr>
                         {% for order in orders %}
-                                <tr>
+                                <tr data-href="{% url 'order_detail' pk=order.pk %}" class="orders_tr">
                                     <td class="">
                                         <a href="{% url 'order_detail' pk=order.pk %}">{{ order.id }}</a>
                                     </td>
                                     <td class="">
-                                        {{ order.start_time }}
+                                        <a href="{% url 'order_detail' pk=order.pk %}">{{ order.start_time }}</a>
                                     </td>
                                     <td class="">
-                                        {{ order.from_address }}
+                                        <a href="{% url 'order_detail' pk=order.pk %}">{{ order.full_road }}</a>
                                     </td>
                                     <td class="">
-                                        {{ order.loader_count }}, {{ order.loader_time_count }}
+                                        <a href="{% url 'order_detail' pk=order.pk %}">{{ order.loader_count }}, {{ order.loader_time_count }}</a>
                                     </td>
                                     <td class="">
-                                        {{ order.cargo_type }}
+                                        <a href="{% url 'order_detail' pk=order.pk %}">{{ order.cargo_type }}</a>
                                     </td>
                                     <td class="">
-                                        {{ order.order_price }}
+                                        <a href="{% url 'order_detail' pk=order.pk %}">{{ order.order_price }}</a>
                                     </td>
                                     <td class="">
-                                        {{ order.status }}
+                                        <a href="{% url 'order_detail' pk=order.pk %}">{{ order.status }}</a>
                                     </td>
                                     <td class="">
                                         <a href="{% url 'order_delete' pk=order.pk %}"><button type="button">Удалить</button></a>

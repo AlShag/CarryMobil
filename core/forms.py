@@ -6,20 +6,6 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
 
-# class UserRegisterForm(UserCreationForm):
-#   email = forms.EmailField()
-
-#   class Meta:
-#       model = User
-#       fields = ['username', 'email', 'first_name']
-
-#       widgets = {
-#           'username': TextInput(attrs={
-#               'placeholder':'Придумайте логин для авторизации',
-#           }),
-#       }
-
-
 class UserForm(forms.ModelForm):
     class Meta:
         model = User
@@ -61,7 +47,7 @@ class SignUpForm(UserCreationForm):
 class OrderForm(ModelForm):
     class Meta:
         model = Order
-        fields = ['from_address','to_address','start_time','road_comment','cargo_type','cargo_type_comment','loader_count','loader_time_count','order_price','user_tel_nomer','status']
+        fields = ['full_road','start_time','road_comment','cargo_type','cargo_type_comment','loader_count','loader_time_count','prices','order_price','user_tel_nomer','sended_in','status']
 
         widgets = {
             'from_address':  TextInput(attrs={

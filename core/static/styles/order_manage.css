@@ -4,11 +4,15 @@
     height: auto;
     background-color: #e5e5e5;
 }
+a{
+    color: black;
+}
 .orders_form{
     width: 90%;
     margin: 5% auto;
     height: auto;
     background-color: white;
+    border-radius: 50px;
 }
 .orders_filter{
     padding-top: 5%;
@@ -49,4 +53,44 @@
 #orders_table{
     border: 1px solid white;
     border-collapse: collapse;
+    height: 90%;
+}
+#full_road_info{
+    display: none;
+}
+.order_info{
+    padding: 5% 10%;
+}
+.order_info h1{
+    text-align: center;
+    font-size: 26pt;
+}
+.order_info table{
+    border-collapse: collapse;
+    width: 100%;
+}
+.order_info table th h2{
+    font-size: 24pt;
+}
+.order_info table tr td, .order_info table th{
+    text-align: center;
+    height: 100%;
+    padding: 1% 0;
+    border-bottom: 1px solid black;
+}
+.order_price{
+    width: 30%;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+}
+#order_status{
+    color: #9e7200;
+}
+#order_sended_time{
+    text-align: right;
+    width: 80%;
+}
+#to_orders_list{
+    font-size: 28pt;
+    color:#0085ff;
 }

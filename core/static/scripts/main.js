@@ -7,6 +7,11 @@ $(document).ready(function (){
     $('#view_password').click(function(){view_password()});
     $('#left_slide').click(function(){left_slide()});
     $('#right_slide').click(function(){right_slide()});
+    $('#create_comment').click(function(){
+        if($('.comment_create').css('display')=='none'){
+            $('.comment_create').show();
+        } else $('.comment_create').hide();
+    });
     $('#to_up').click(function(){$(document).scrollTop(0)});
     $('#show_nawmenu').click(function(){
         if($('.navmenu').css('right')!=($(document).width()/100*25)+'px'){$('.navmenu').addClass('showed');} else{$('.navmenu').removeClass('showed');};

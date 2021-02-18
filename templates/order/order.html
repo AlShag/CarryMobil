@@ -84,7 +84,6 @@
                                                 <option value="{{ el.address }}"></option>
                                                 {% endfor %}
                                             </datalist>
-                                            {{ form.from_address }}
                                         </section>
                                         <section>
                                             <h2>Куда</h2>
@@ -94,7 +93,6 @@
                                                 <option value="{{ el.address }}"></option>
                                                 {% endfor %}
                                             </datalist>
-                                            {{ form.to_address }}
                                         </section>
                                         <section>
                                             <h2>Комментарий</h2>
@@ -268,8 +266,8 @@
                                                 <label for=""><h2>Маршрут:</h2></label>
                                                 <select name="" id="full_road" size="4">
                                                 </select>
+                                                {{ form.full_road }}
                                             </div>
-                                        </section>
                                         <section class="full_type">
                                             <div class="flex_al">
                                                 <label for=""><h2>Вид груза:</h2></label>
@@ -311,6 +309,8 @@
                                                     <td><span id='loader_price'>700р</span></td>
                                                 </tr>
                                             </table>
+                                            {{ form.prices }}
+                                            {{ form.sended_in }}
                                         </div>
                                         <section class="total_full_price">
                                             <div class="flex">

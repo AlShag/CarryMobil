@@ -320,7 +320,7 @@ input[type="radio"][name="advan_slider"]{display: none;}
     background-color: #0085ff;
     border-radius: 30px;
 }
-#send_comment{
+#create_comment{
     border: 1px solid #474747;
     height: 80px;
     font-size: 14pt;
@@ -331,11 +331,22 @@ input[type="radio"][name="advan_slider"]{display: none;}
     width: 250px;
     white-space: pre-line;
 }
-#send_comment:hover{
+#create_comment:hover{
     background-color: #0085ff;
     color: white;
     border: 1px solid white;
     transition: 0.25s;
+}
+.comment_create{
+    display: none;
+    position: fixed;
+    top:20%;
+    left: 36%;
+    height: 50%;
+    width: 28%;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 30px;
 }
 .footer{
     height: auto;
@@ -377,7 +388,7 @@ input[type="radio"][name="advan_slider"]{display: none;}
     color: white;
 }
 .footer_block h2{
-    font-size: 24pt;
+    font-size: 20pt;
     font-weight: 400;
     color: #f5f5f5;
 }
