@@ -107,18 +107,22 @@
     <div class="comment">
         <div class="container">
             <div class="comment_area">
-                <div id="comment_1" class="user_comment">
-                    <h2>Ганиев Артур Айратович</h2>
-                    <h3>27.01.20</h3>
-                    <p></p>
+                {% for review in reviews %}
+                <div id="comment_1" class="user_comment"> 
+                    <div>
+                        {{ review.author }}
+                        {{ review.text }}
+                        {{ review.published_date }}
+                    </div>
                 </div>
+                {% endfor %}
             </div>
             <input type="button" value="Есть что сказать? Оставьте отзыв" id="create_comment">
         </div>
         <div class="comment_create">
             <form action="">
-                
-            </form>
+        
+            <a href="review_create"><input type="button" value="Есть что сказать? Оставьте отзыв" id="send_comment"></a>
         </div>
     </div>
 {% endblock %}
