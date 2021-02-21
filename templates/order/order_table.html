@@ -5,6 +5,10 @@
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'styles/order_manage.css' %}">
 {% endblock %}
+{% block script %}
+{{ block.super }}
+    <script src="{% static 'scripts/order.js' %}"></script>
+{% endblock %}
 {% block content %}
     {% if user.is_staff %}
         <div class="orders_area">
@@ -16,7 +20,8 @@
                                 <section>
                                     <h2>Дата отправки:</h2>
                                     <div class="filter_value">
-
+                                        <label for="">От:</label><input type="datetime-local" name="date" class="data_filter" id="filter_date1"><br>
+                                        <label for="">До:</label><input type="datetime-local" name="date" class="data_filter" id="filter_date2">
                                     </div>
                                 </section>
                                 <section>
@@ -30,15 +35,15 @@
                                     <div class="filter_value">
                                         <ul>
                                             <li>
-                                                <input type="checkbox" name="" id="complited_orders" value="Выполнена">
+                                                <input type="checkbox" name="status" id="complited_orders" value="Выполнена">
                                                 <label for="complited_orders">Выполнена</label>
                                             </li>
                                             <li>
-                                                <input type="checkbox" name="" id="expected_orders" value="Ожидается">
+                                                <input type="checkbox" name="status" id="expected_orders" value="Ожидается">
                                                 <label for="expected_orders">Ожидается</label>
                                             </li>
                                             <li>
-                                                <input type="checkbox" name="" id="canceled_orders" value="Отменена">
+                                                <input type="checkbox" name="status" id="canceled_orders" value="Отменена">
                                                 <label for="canceled_orders">Отменена</label>
                                             </li>
                                         </ul>
@@ -84,13 +89,17 @@
                                         <a href="{% url 'order_detail' pk=order.pk %}">{{ order.id }}</a>
                                     </td>
                                     <td class="">
-                                        <a href="{% url 'order_detail' pk=order.pk %}">{{ order.start_time }}</a>
+                                        {% if not order.start_time == None %}
+                                        <a href="{% url 'order_detail' pk=order.pk %}">{{ order.start_time | date:'c' }}</a>
+                                        {% endif %}
+                                    </td>
+                                    <td class="full_roads">
+                                        <a href="{% url 'order_detail' pk=order.pk %}">{{ order.full_road | truncatewords:7 }}</a>
                                     </td>
                                     <td class="">
-                                        <a href="{% url 'order_detail' pk=order.pk %}">{{ order.full_road }}</a>
-                                    </td>
-                                    <td class="">
-                                        <a href="{% url 'order_detail' pk=order.pk %}">{{ order.loader_count }}, {{ order.loader_time_count }}</a>
+                                        {% if not order.loader_count == None %}
+                                            <a href="{% url 'order_detail' pk=order.pk %}">{{ order.loader_count }}, {{ order.loader_time_count }}</a>
+                                        {% endif %}
                                     </td>
                                     <td class="">
                                         <a href="{% url 'order_detail' pk=order.pk %}">{{ order.cargo_type }}</a>
@@ -98,13 +107,23 @@
                                     <td class="">
                                         <a href="{% url 'order_detail' pk=order.pk %}">{{ order.order_price }}</a>
                                     </td>
-                                    <td class="">
-                                        <a href="{% url 'order_detail' pk=order.pk %}">{{ order.status }}</a>
+                                    <td class="order_status">
+                                        {% if not order.status == None %}
+                                            {% if order.status == 0 %}
+                                                <a href="{% url 'order_detail' pk=order.pk %}">Ожидается</a>
+                                            {% endif %}
+                                            {% if order.status == 1 %}
+                                                <a href="{% url 'order_detail' pk=order.pk %}">Выполнено</a>
+                                            {% endif %}
+                                            {% if order.status == -1 %}
+                                                <a href="{% url 'order_detail' pk=order.pk %}">Отменено</a>
+                                            {% endif %}
+                                        {% endif %}
                                     </td>
                                     <td class="">
                                         <a href="{% url 'order_delete' pk=order.pk %}"><button type="button">Удалить</button></a>
                                     </td>
-                                    <td class="">
+                                    <td class="order_change">
                                         <a href="{% url 'order_edit' pk=order.pk %}"><button type="button">Редактировать</button></a>
                                     </td>
                                 </tr>

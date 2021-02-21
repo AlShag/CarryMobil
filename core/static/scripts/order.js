@@ -10,7 +10,6 @@
   let full_road = [{from:[],to:[],passing_to:0}];
   let passing_road = [{type:'',road: 0,in_road:[]}];
   let passing_roads_info = [];
-  console.log(full_road[0]);
   let full_type = {type:[],options:[],comment:[]}
   let transition_number=1;
   let transition_road = 0;
@@ -49,6 +48,8 @@
       $('#road_del').click(function(){ del_road()});
       $('#from_address').on('change', function(){road_change();});
       $('#to_address').on('change', function(){road_change();});
+      $('.filter_value input').on('change', function(){orders_filter(this)});
+
       $('#goods_type_select').on('change', function(){
           $('#goods_type_select').blur();
           result = $('#goods_type_select :selected').text();
@@ -59,6 +60,7 @@
           cargo_type=result;
           $('#full_cargo_type').val(cargo_type);
         });
+        
       $('#from_address').on('change', function() {
           from_address=$('#from_address').val();
         });
@@ -82,7 +84,7 @@
       $('.list_head').hide();
       $('.mb_list_head').hide(); 
       $('#list_'+order_list_count).show();
-      console.log($('#list_head_'+order_list_count).show());
+
       $('#list_head_'+order_list_count).show();
       $('#mb_list_head_'+order_list_count).show();
     // }
@@ -123,7 +125,6 @@
       }
       $('#road_'+roads_counter).click();
       transition_number=roads_counter;
-      console.log(full_road);
   }
   }
   function passing_road_add(){
@@ -151,7 +152,6 @@
       full_road[i-1].to[0]=last_full_road[i].to[0];
     }
     $('#road_'+transition_number).remove();
-    console.log(full_road);
     transition_number--;  
     $('#road_'+transition_number).click();
     roads_counter--;
@@ -181,7 +181,6 @@
       to_address=$('#to_address').val();
       full_road[transition_number-1].from[0]=from_address;
       full_road[transition_number-1].to[0]=to_address;
-      console.log(transition_number-1);
   }
 
   function final_list(){
@@ -225,19 +224,15 @@
       for(var i = 0, l = $('#city_price tr').length; i <= l; i++){
         let city_name1 = $('#city_price tr').eq(i).find('td').eq(1).text();
         let city_name2 = $('#city_price tr').eq(i).find('td').eq(2).text();
-        console.log(to_address);
         if(((to_address.includes(city_name1) & from_address.includes(city_name2)) || (from_address.includes(city_name1) & to_address.includes(city_name2))) & ((city_name1!='') & (city_name2!=''))){
           current_road_price=parseInt($('#city_price tr').eq(i).find('td').eq(4).text());
           if(passing_to!=0){
             current_road_price/=2;
           }
-          console.log($('#city_price tr').eq(i).find('td').eq(4).text());
           i=l;
         }
         else{
-          console.log('Иначе');
           current_road_price=500;
-          console.log(current_road_price);
         }
       }
       return current_road_price;
@@ -246,17 +241,50 @@
   function type_add(){
     if($('#goods_type_select :selected').text()){
     full_type.type.push($('#goods_type_select :selected').text());
-    // console.log(full_type.type[1]);
     }
   }
 
   function available_list(){
     if((full_road.from!='') | (full_road.to!='')){  
-      // console.log(available_lists.indexOf(2));
       if(available_lists.indexOf(2)==-1) available_lists.push(2);
       else if(available_lists.indexOf(3)==-1) available_lists.push(3);
       else if(available_lists.indexOf(4)==-1) available_lists.push(4);
-      console.log(available_lists);
+    }
+  }
+
+  function orders_filter(obj){
+    let filter_name=obj.name;
+    if(filter_name=='status'){
+      let status_value=[];
+      console.log($('.filter_value input').not(':checked'));
+      $('.filter_value input:checkbox').each(function(){
+        if($(this).not(':checked')) status_value=[];
+      });
+      $('.filter_value input:checkbox:checked').each(function(){
+        status_value.push($(this).val());
+      });
+      for(var i = 0, l = $('.orders_tr').length; i <= l; i++){
+        let order_status = $('.orders_tr').eq(i).find('td').eq(6).text();
+        order_status=order_status.replace(/\s{2,}/g, '');
+        console.log(status_value.length!=0);
+        if(status_value.includes(order_status)) $('.orders_tr').eq(i).show();
+        else if(status_value.length!=0) $('.orders_tr').eq(i).hide();
+        else $('.orders_tr').eq(i).show();
+      }
+    }
+    if(filter_name=='date'){
+      let date1=$('#filter_date1').val();
+      let date2=$('#filter_date2').val();
+      console.log(date1);
+      for(var i = 0, l = $('.orders_tr').length; i <= l; i++){
+        order_date = $('.orders_tr').eq(i).find('td').eq(1).text();
+        order_date= (order_date.replace(/\s{2,}/g, ''));
+        if (order_date!=''){
+          if((order_date>=date1 & order_date<=date2) || (order_date>=date1 & date2=='') || (date1=='' & (order_date<=date2 & date2!=''))){
+            $('.orders_tr').eq(i).show();
+          } else $('.orders_tr').eq(i).hide();
+        } else $('.orders_tr').eq(i).hide();
+      }
     }
   }
 
@@ -268,7 +296,6 @@
     if(order_status==0) $('#order_status').text('Ожидается');
     if(order_status==1) $('#order_status').text('Выполнено');
     if(order_status==-1) $('#order_status').text('Откланено');
-    console.log(full_road_info);
     for (let i = 0; i < full_road_info.length; i++){ // Количество дорог
       if(full_road_info[i] === '/') roads_counter++;
     }
@@ -288,9 +315,6 @@
       road_passing_to = parseInt(road_passing_to.replace('passing_to:',''));
       road=road.replace(road_passing_to, '');
       road = road.replace(';','');
-      console.log(road_from);
-      console.log(road_to);
-      console.log(road_passing_to);
       road=full_road_info.substr(0,full_road_info.indexOf('/'));
       full_road_info=full_road_info.replace(road+'/','');
       $('.roads').append('<label>'+road_from+'</label><br>');
@@ -301,10 +325,8 @@
     full_road_price=parseInt(prices.substr(0,prices.indexOf('/')));
     prices = prices.replace(full_road_price+'/','');
     $('#full_road_price').text(full_road_price+' руб.');
-    console.log(prices);
     for (let l = 0; l < roads_counter; l++){
       prices=prices.replace(prices.substr(0,prices.indexOf(')')+1),'');
-      console.log(prices);
       current_road_price=parseInt(prices.substr(0,prices.indexOf(';')));
       prices = prices.replace(current_road_price+';','');
       roads_prices.push(current_road_price);

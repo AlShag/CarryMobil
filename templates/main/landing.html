@@ -110,19 +110,23 @@
                 {% for review in reviews %}
                 <div id="comment_1" class="user_comment"> 
                     <div>
-                        {{ review.author }}
+                        {{ review.author }}<br>
+                        {{ review.published_date }}<br>
                         {{ review.text }}
-                        {{ review.published_date }}
                     </div>
                 </div>
                 {% endfor %}
             </div>
-            <input type="button" value="Есть что сказать? Оставьте отзыв" id="create_comment">
-        </div>
+            {% if user.is_authenticated %}
+                <input type="button" value="Есть что сказать? Оставьте отзыв" id="create_comment">
+            {% else %}
+                <p>Вы не авторизированы</p>
+            {% endif %}
+            </div>
         <div class="comment_create">
             <form action="">
         
-            <a href="review_create"><input type="button" value="Есть что сказать? Оставьте отзыв" id="send_comment"></a>
+            <a href="review_create"><input type="button" value="Отправить отзыв" id="send_comment"></a>
         </div>
     </div>
 {% endblock %}

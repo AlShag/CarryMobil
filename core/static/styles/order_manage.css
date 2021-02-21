@@ -13,6 +13,7 @@ a{
     height: auto;
     background-color: white;
     border-radius: 50px;
+    padding-bottom: 2.5%;
 }
 .orders_filter{
     padding-top: 5%;
@@ -44,16 +45,23 @@ a{
 #orders_table_title{
     border-bottom: 1px solid #949494;
 }
-#orders_table tr td, #orders_table th{
+#orders_table tr td:not(.order_change), #orders_table th{
     text-align: center;
     height: 100%;
     padding: 1% 0;
     border-right: 1px solid black;
 }
+.order_change{
+    text-align: center;
+    height: 100%;
+    padding: 1% 0;
+    border-right: 1px solid white;
+}
 #orders_table{
     border: 1px solid white;
     border-collapse: collapse;
     height: 90%;
+    width: 100%;
 }
 #full_road_info{
     display: none;
@@ -93,4 +101,17 @@ a{
 #to_orders_list{
     font-size: 28pt;
     color:#0085ff;
+}
+.full_roads{
+    width: 30%;
+}
+.filter_value label{
+    color: white;
+}
+.data_filter{
+    color: white;
+    font-size: 14pt;
+}
+.data_filter::-webkit-calendar-picker-indicator{
+    filter: invert(1);
 }
