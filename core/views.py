@@ -91,7 +91,8 @@ def order_detail(request, pk):
 
 def order_table(request):
     orders = Order.objects.all()
-    return render(request, 'order/order_table.html', {'orders': orders})
+    all_types = CargoType.objects.all()
+    return render(request, 'order/order_table.html', {'orders': orders,'all_types': all_types})
 
 
 def order_edit(request, pk):

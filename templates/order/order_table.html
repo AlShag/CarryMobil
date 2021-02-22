@@ -27,7 +27,13 @@
                                 <section>
                                     <h2>Вид груза:</h2>
                                     <div class="filter_value">
-                                        <input type="checkbox" name="" id="">
+                                        <select name="type_filter" id="type_filter">
+                                            <option value="0" disabled selected hidden>Выберите тип груза</option>
+                                            <option value="all">Все</option>
+                                            {% for el in all_types %}
+                                                <option value="">{{ el.cargo }}</option>
+                                            {% endfor %}
+                                        </select>
                                     </div>
                                 </section>
                                 <section>
@@ -49,10 +55,8 @@
                                         </ul>
                                     </div>
                                 </section>
-                                <section id="filter_applay">
-                                    <input type="submit" value="Применить">
-                                </section>
                             </div>
+                            <input type="button" value="Отменить" name="cancel" id="filter_cancel">
                         </div>
                     </div>
                     <div>
@@ -94,7 +98,7 @@
                                         {% endif %}
                                     </td>
                                     <td class="full_roads">
-                                        <a href="{% url 'order_detail' pk=order.pk %}">{{ order.full_road | truncatewords:7 }}</a>
+                                        <a href="{% url 'order_detail' pk=order.pk %}">{{ order.full_road | truncatechars_html:35 }}</a>
                                     </td>
                                     <td class="">
                                         {% if not order.loader_count == None %}

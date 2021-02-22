@@ -25,6 +25,10 @@
   let dop_road_added=false;
   let passing_road_added=false;
   let passing_to=0;
+  let status_value=[];
+  let filter_cargo_type='';
+  let filter_date1=$('#filter_date1').val();
+  let filter_date2=$('#filter_date2').val();
   $(document).ready(function (){
       $('#order_next_list').click(function(){order_next_list()});
       $('#order_back_list').click(function(){order_back_list()});
@@ -46,9 +50,17 @@
       $('#road_choice_exit').click(function(){$('#road_add_choice').hide();});
       $('#passing_road_add').click(function(){passing_road_added=true;});
       $('#road_del').click(function(){ del_road()});
+      $('#filter_cancel').click(function(){ 
+        $('#type_filter option:first').prop('selected', true);
+        $('#filter_date1').val('');
+        $('#filter_date2').val('');
+        $('.filter_value input[name="status"]').prop('checked', false);
+        orders_filter(this);
+        });
       $('#from_address').on('change', function(){road_change();});
       $('#to_address').on('change', function(){road_change();});
       $('.filter_value input').on('change', function(){orders_filter(this)});
+      $('#type_filter').on('change', function(){orders_filter(this)});
 
       $('#goods_type_select').on('change', function(){
           $('#goods_type_select').blur();
@@ -254,36 +266,64 @@
 
   function orders_filter(obj){
     let filter_name=obj.name;
+    let date_filter=0;
+    let dates_filter=0;
     if(filter_name=='status'){
-      let status_value=[];
-      console.log($('.filter_value input').not(':checked'));
       $('.filter_value input:checkbox').each(function(){
         if($(this).not(':checked')) status_value=[];
       });
       $('.filter_value input:checkbox:checked').each(function(){
         status_value.push($(this).val());
       });
-      for(var i = 0, l = $('.orders_tr').length; i <= l; i++){
-        let order_status = $('.orders_tr').eq(i).find('td').eq(6).text();
-        order_status=order_status.replace(/\s{2,}/g, '');
-        console.log(status_value.length!=0);
-        if(status_value.includes(order_status)) $('.orders_tr').eq(i).show();
-        else if(status_value.length!=0) $('.orders_tr').eq(i).hide();
-        else $('.orders_tr').eq(i).show();
-      }
+    }
+    if(filter_name=='type_filter'){
+      filter_cargo_type=$('#type_filter option:checked').text();
     }
     if(filter_name=='date'){
-      let date1=$('#filter_date1').val();
-      let date2=$('#filter_date2').val();
-      console.log(date1);
-      for(var i = 0, l = $('.orders_tr').length; i <= l; i++){
-        order_date = $('.orders_tr').eq(i).find('td').eq(1).text();
-        order_date= (order_date.replace(/\s{2,}/g, ''));
-        if (order_date!=''){
-          if((order_date>=date1 & order_date<=date2) || (order_date>=date1 & date2=='') || (date1=='' & (order_date<=date2 & date2!=''))){
-            $('.orders_tr').eq(i).show();
-          } else $('.orders_tr').eq(i).hide();
-        } else $('.orders_tr').eq(i).hide();
+      filter_date1=$('#filter_date1').val();
+      filter_date2=$('#filter_date2').val();
+    }
+    if(filter_date1!=undefined | filter_date2!=undefined) dates_filter=1; else dates_filter=0;
+    if(filter_name=='cancel'){
+      filter_date1='';
+      filter_date2='';
+      status_value=[];
+      filter_cargo_type='';
+    }
+    for(var i = 0, l = $('.orders_tr').length; i <= l; i++){
+      let order_status = $('.orders_tr').eq(i).find('td').eq(6).text();
+      let order_type=$('.orders_tr').eq(i).find('td').eq(4).text();
+      let order_date=$('.orders_tr').eq(i).find('td').eq(1).text();
+      order_date=(order_date.replace(/\s{2,}/g, ''));
+      order_status=order_status.replace(/\s{2,}/g, '');
+      order_type=(order_type.replace(/\s{2,}/g, ''));
+      if (order_date!='')
+        if((order_date>=filter_date1 & order_date<=filter_date2) || (order_date>=filter_date1 & filter_date2=='') || (filter_date1=='' & (order_date<=filter_date2 & filter_date2!=''))) date_filter=1;
+
+      if((status_value.includes(order_status)) & (filter_cargo_type==order_type | $('#type_filter option:checked').val()=='all') & (date_filter))
+        $('.orders_tr').eq(i).show();
+
+      else if((status_value.includes(order_status)) & (date_filter) &(filter_cargo_type==''))// date and status
+        $('.orders_tr').eq(i).show();
+        
+      else if((status_value.includes(order_status)) & (dates_filter==0) & (filter_cargo_type==order_type | $('#type_filter option:checked').val()=='all'))// status and type
+        $('.orders_tr').eq(i).show();
+
+      else if((date_filter) & (filter_cargo_type==order_type | $('#type_filter option:checked').val()=='all') & (status_value.length==0))// date and type
+        $('.orders_tr').eq(i).show();
+
+      else if((status_value.includes(order_status)) & (dates_filter==0) & (filter_cargo_type=='')) //status
+        $('.orders_tr').eq(i).show();
+
+      else if((status_value.length==0) & (date_filter) & (filter_cargo_type=='')) //date
+        $('.orders_tr').eq(i).show();
+        
+      else if((status_value.length==0) & (dates_filter==0) & (filter_cargo_type==order_type | $('#type_filter option:checked').val()=='all'))//type
+        $('.orders_tr').eq(i).show();
+      
+      else $('.orders_tr').eq(i).hide();
+      if(filter_name=='cancel'){
+        $('.orders_tr').eq(i).show();
       }
     }
   }
