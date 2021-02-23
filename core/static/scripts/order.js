@@ -25,6 +25,7 @@
   let dop_road_added=false;
   let passing_road_added=false;
   let passing_to=0;
+  let passing_type='';
   let status_value=[];
   let filter_cargo_type='';
   let filter_date1=$('#filter_date1').val();
@@ -124,8 +125,6 @@
           full_road.push({from:[from_address],to:[to_address], passing_to:full_road[transition_number-1].passing_to});
         } else
         full_road.push({from:[from_address],to:[to_address], passing_to: transition_number});
-        from_address='';
-        to_address='';
         passing_road_added=false;
       }
       else{
@@ -137,18 +136,22 @@
       }
       $('#road_'+roads_counter).click();
       transition_number=roads_counter;
+      $('#road_del').show();
   }
   }
   function passing_road_add(){
     if(passing_road_added){
-      let passing_type='';
       if($('#passing_from_road').is(':checked')){
+        $('#to_address').removeAttr('disabled');
         $('#from_address').val(from_address);
+        $('#from_address').prop('disabled','true');
         passing_type = 'from';
         $('#to_address').val(''); to_address='';
       }
       if($('#passing_to_road').is(':checked')){
+        $('#from_address').removeAttr('disabled');
         $('#to_address').val(to_address);
+        $('#to_address').prop('disabled','true');
         passing_type = 'to';
         $('#from_address').val(''); from_address='';
       }
@@ -157,8 +160,13 @@
   }
   function del_road(){
     let last_full_road=full_road;
-    full_road[transition_number-1].from[0]=last_full_road[transition_number].from[0];
-    full_road[transition_number-1].to[0]=last_full_road[transition_number].to[0];
+    if(transition_number==full_road.length){
+      full_road[transition_number-2].from[0]=last_full_road[transition_number-1].from[0];
+      full_road[transition_number-2].to[0]=last_full_road[transition_number-1].to[0];
+    } else{
+      full_road[transition_number-1].from[0]=last_full_road[transition_number].from[0];
+      full_road[transition_number-1].to[0]=last_full_road[transition_number].to[0];
+    }
     for (let i=transition_number; i<=roads_counter-1; i++){
       full_road[i-1].from[0]=last_full_road[i].from[0];
       full_road[i-1].to[0]=last_full_road[i].to[0];
@@ -197,6 +205,7 @@
 
   function final_list(){
     $('#id_full_road').val('');
+    $('.all_roads div').remove();
     $('#full_road option').remove();
     full_road_price=0;
     order_price=0;
@@ -208,8 +217,14 @@
         passing_to=full_road[n].passing_to;
         roads_price=roads_price+n+')'+road_price()+';';
         full_road_price+=road_price();
-        $('#full_road').append('<option name="from" id="address_from_'+n+'">'+from_address+'</option>');
-        $('#full_road').append('<option name="to" id="address_to_'+n+'">'+to_address+'</option>');
+        if(passing_to==0){
+          $('.all_roads').append('<div id="road_id_'+(n+1)+'"><h3>Маршрут №'+(n+1)+':</h3>');
+          $('#road_id_'+(n+1)).append('<span class="main_road" id="from_address_'+n+'">Откуда:'+from_address+'</span><br>');
+          $('#road_id_'+(n+1)).append('<span class="main_road" id="to_address_'+n+'">Куда:'+to_address+'</span><br></div>');
+        } else{
+          if(from_address!='' & from_address!=full_road[n-1].from[0])$('#road_id_'+passing_to).append('<span class="passing_roads" id="address_'+n+'">'+from_address+'</span><br>');
+          if(to_address!='' & to_address!=full_road[n-1].to[0])$('#road_id_'+passing_to).append('<span class="passing_roads" id="address_'+n+'">'+to_address+'</span><br>');
+        }
         $('#id_from_address').val($('#id_from_address').val()+full_road[n].from);
         $('#id_to_address').val($('#id_to_address').val()+full_road[n].from);
         $('#id_full_road').val($('#id_full_road').val()+'['+n+']'+'from:'+full_road[n].from[0]+';to:'+full_road[n].to[0]+';passing_to:'+ full_road[n].passing_to+';/');
