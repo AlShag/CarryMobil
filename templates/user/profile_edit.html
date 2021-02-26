@@ -1,17 +1,72 @@
 {% extends "main/index.html" %}
-{% block title %}Редактировать профиль{% endblock %}
-
+{% block title %}Редактирование профиля{% endblock %}
+{% load static %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'styles/profile.css' %}">
+{% endblock %}
 {% block content %}
-    {% load static %}
     {% if user.is_authenticated %}
-
-    <form method="post">
-        {% csrf_token %}
-        {{ user_form.as_p }}
-        {{ profile_form.as_p }}
-        <button type="submit">Сохранить изменения</button>
-    </form>
-
+        <div class="profil_area">
+            <div class="container">
+                <div class="profile_content">
+                    <div class="user_content">
+                        <form method="post">
+                            <div class="flex">
+                                <div class="user_image">
+                                    <div class="user_image_content">
+                                        <img src="{% static '/images/profile/stock.svg' %}">
+                                        <a href=""><input type="submit" value="Сохранить изменения"></a>
+                                    </div>
+                                </div>
+                                <div class="user_personal_info">
+                                    <div class="user_info">
+                                        <section class="user_dop_info">
+                                            <label for="">Имя: {{ user_form.first_name }}</label><span></span>
+                                        </section>
+                                        <section class="user_dop_info">
+                                            <label for="">Фамилия: {{ user_form.last_name }}</label><span></span>
+                                        </section>
+                                        <section class="user_dop_info">
+                                            <label for="">Город: {{ profile_form.location }}</label><span></span>
+                                        </section>
+                                        <section class="user_dop_info">
+                                            <label for="">Email: {{ user_form.email }}</label><span></span>
+                                        </section>
+                                        <section class="user_dop_info">
+                                            <label for="">Компания: {{ profile_form.company }}</label><span></span>
+                                        </section>
+                                        <section class="user_dop_info">
+                                            <label for="">День рождения: {{ profile_form.birth_date }}</label><span></span>
+                                        </section>
+                                            {% csrf_token %}
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="transition_block">
+                        <div class="flex_al">
+                            <section class="transiton_param">
+                                <input type="button" value="Настройки">
+                            </section>
+                            <section class="transiton_param">
+                                <input type="button" value="Партнёры">
+                            </section>
+                            <section class="transiton_param">
+                                <input type="button" value="Сообщения">
+                            </section>
+                            <section class="transiton_param">
+                                <input type="button" value="Статистика">
+                            </section>
+                        </div>
+                    </div>
+                    <div class="post_add_block">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
     {% else %}
     <p>Вы не авторизированы</p>
 {% endif %}

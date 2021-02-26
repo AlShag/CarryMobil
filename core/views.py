@@ -48,6 +48,31 @@ def order(request):
     }
     return render(request, 'order/order.html', data)
 
+def order_create(request):
+    error = ''
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('ordered')
+        else:
+            error = 'Форма была неверной'
+
+    all_address = Address.objects.all()
+    all_cityprice = CityPrice.objects.all()
+    all_types = CargoType.objects.all()
+    form = OrderForm()
+    form.use_required_attribute = False
+
+    data = {
+        'form': form,
+        'error': error,
+        'all_address': all_address,
+        'all_cityprice': all_cityprice,
+        'all_types': all_types,
+    }
+    return render(request, 'order/order_create.html', data)
+
 
 def profile(request):
     return render(request, 'user/profile.html', {})
@@ -102,7 +127,7 @@ def order_edit(request, pk):
         if form.is_valid():
             order = form.save(commit=False)
             order.save()
-            return redirect('order_detail', pk=order.pk)
+            return redirect('order/order_detail', pk=order.pk)
     else:
         form = OrderForm(instance=order)
     redirect_url = reverse(order_table)
@@ -128,6 +153,11 @@ def order_delete(request, pk):
 
 def licenses(request):
     return render(request, 'licenses/licenses.html', {})
+
+def order_enable(request, pk):
+    order = get_object_or_404(Order, pk=pk)
+    order.status=1
+    return render(request, 'order/order_table.html')
 
 
 @login_required

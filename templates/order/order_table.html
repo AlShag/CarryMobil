@@ -94,7 +94,8 @@
                                     </td>
                                     <td class="">
                                         {% if not order.start_time == None %}
-                                        <a href="{% url 'order_detail' pk=order.pk %}">{{ order.start_time | date:'c' }}</a>
+                                        <a href="{% url 'order_detail' pk=order.pk %}">{{ order.start_time }}</a>
+                                        <a class="order_start_time" href="{% url 'order_detail' pk=order.pk %}" hidden>{{ order.start_time | date:'c' }}</a>
                                         {% endif %}
                                     </td>
                                     <td class="full_roads">
@@ -103,6 +104,8 @@
                                     <td class="">
                                         {% if not order.loader_count == None %}
                                             <a href="{% url 'order_detail' pk=order.pk %}">{{ order.loader_count }}, {{ order.loader_time_count }}</a>
+                                        {% else %}
+                                            <a href="">Не нужны</a>
                                         {% endif %}
                                     </td>
                                     <td class="">

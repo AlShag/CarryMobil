@@ -1,0 +1,14 @@
+{% extends "main/index.html" %}
+{% load static %}
+{% block title %}Оформление заказа{% endblock %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'styles/order_manage.css' %}">
+{% endblock %}
+{% block script %}
+{{ block.super }}
+    <script src="{% static 'scripts/order.js' %}"></script>
+{% endblock %}
+{% block content %}
+    вцув
+{% endblock %}

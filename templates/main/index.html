@@ -10,7 +10,6 @@
     {% block css %}
     <link rel="stylesheet" href="{% static 'styles/main.css' %}">
     <link rel="stylesheet" href="{% static 'styles/login.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/profile.css' %}">
     <link rel="stylesheet" href="{% static 'styles/media.css' %}">
     <link rel="stylesheet" href="{% static 'styles/animation.css' %}">
     <link rel="icon" type="image/png" href="{% static 'images/logo.png' %}"> 
@@ -41,6 +40,7 @@
                         {% if user.is_staff %}
                         <li><a href="/admin/">Админ.страница</a></li>
                         <li><a href="{% url 'order_table' %}">Журнал заявок</a></li>
+                        <li><a href="{% url 'order_create' %}">Создать заказ</a></li>
                         {% endif %}
                     </ul>
                 </nav>
@@ -69,7 +69,7 @@
         {% endblock %}
     </div>
 
-    <div class="footer">
+    <div class="footer" name="#contacts">
         <div class="container">
             <div class="footer_nav">
                 <div class="flex">

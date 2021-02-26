@@ -23,8 +23,8 @@
                     <section><h2>Клиент</h2></section>
                     <table>
                         <tr>
-                            <th><h2  id="order_status"for="">{{ order.status }}</h2></th>
-                            <th></th>
+                            <th>Статус</th>
+                            <th><h2 id="order_status">{{ order.status }}</h2></th>
                             <th class="order_price">Цена</th>
                             <label id="prices">{{ order.prices }}</label>
                         </tr>
@@ -32,7 +32,8 @@
                             <th>Маршрут</th>
                             <td class="order_data">
                                 <div class="roads">
-                                    <label for="" id="full_road_info">{{ order.full_road }}</label>
+                                    <label for="" id="full_road_info">{{ order.full_road }}
+                                    </label>
                                 </div>
                             </td>
                             <td class="order_price">
@@ -42,7 +43,9 @@
                         <tr>
                             <th>Грузчики</th>
                             <td class="order_data">
-                                {{ order.loader_count }} чел. / {{ order.loader_time_count }} час.
+                                {% if not order.loader_count == None %}
+                                    {{ order.loader_count }} чел. / {{ order.loader_time_count }} час.
+                                {% endif %}
                             </td>
                             <td class="order_price">
                                 <label id="loader_price"></label>
@@ -63,10 +66,24 @@
                                 {{ order.user_tel_nomer }}
                             </td>
                             <td class="order_price">
+                                
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Время отправки:</th>
+                            <td class="order_data">
+                                {% if not order.start_time == None %}
+                                    {{ order.start_time }}
+                                {% endif %}
+                            </td>
+                            <td class="order_price">
                                 Итог: {{ order.order_price }} руб.
                             </td>
                         </tr>
                     </table>
+                </div>
+                <div class="order_change">
+                    <button type="submit"><a href="{% url 'order_enable' pk=order.pk %}">Выполнить</a></button>
                 </div>
             </div>
         </div>

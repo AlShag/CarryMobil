@@ -95,6 +95,10 @@ a{
     padding: 1% 0;
     border-bottom: 1px solid black;
 }
+.order_info table th{
+    font-weight: 400;
+    font-size: 14pt;
+}
 .order_price{
     width: 30%;
     border-left: 1px solid black;
@@ -140,4 +144,7 @@ a{
     color: white;
     font-size: 14pt;
     margin-left: 90%;
+}
+#prices{
+    display: none;
 }

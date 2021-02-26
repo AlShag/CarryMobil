@@ -1,8 +1,11 @@
 {% extends "main/index.html" %}
 {% block title %}Профиль{% endblock %}
-
+{% load static %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'styles/profile.css' %}">
+{% endblock %}
 {% block content %}
-    {% load static %}
     {% if user.is_authenticated %}
         <div class="profil_area">
             <div class="container">
@@ -25,7 +28,10 @@
                                         {% endif %}
                                     </h1>
                                     <section class="user_dop_info">
-                                        <label for="">Город: {{ user.profile.location }}</label><span></span>
+                                        <label for="">Имя: {{ user.first_name }}</label><span></span>
+                                    </section>
+                                    <section class="user_dop_info">
+                                        <label for="">Фамилия: {{ user.last_name }}</label><span></span>
                                     </section>
                                     <section class="user_dop_info">
                                         <label for="">Компания: {{ user.profile.company }}</label><span></span>
