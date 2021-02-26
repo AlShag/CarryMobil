@@ -87,6 +87,12 @@ class OrderForm(ModelForm):
         }
 
 
+class OrderEditForm(ModelForm):
+    class Meta:
+        model = Order
+        fields = ['full_road','start_time','loader_count','loader_time_count','prices','order_price','user_tel_nomer']
+
+
 class AddressForm(ModelForm):
     class Meta:
         model = Address
