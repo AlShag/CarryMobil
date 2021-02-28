@@ -180,5 +180,18 @@ def review_create(request):
 
 
 def index(request):
+    if request.method == 'POST':
+        review_form = ReviewForm(request.POST)
+        if review_form.is_valid():
+            review = review_form.save(commit=False)
+            review.author = request.user
+            review.published_date = timezone.now()
+            review.save()
+            return redirect(index)
+        else:
+            return redirect(review_create)
+    else:
+        review_form = ReviewForm
+
     reviews = Review.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    return render(request, 'main/landing.html', {'reviews': reviews})
+    return render(request, 'main/landing.html', {'reviews': reviews, 'review_form': review_form})

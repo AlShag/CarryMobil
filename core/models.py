@@ -86,6 +86,8 @@ class CargoType(models.Model):
 class Review(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     text = models.TextField()
+    stars = models.IntegerField(null=True, blank=True, default=1)
+    likes = models.IntegerField(null=True, blank=True, default=0)
     published_date = models.DateTimeField(default=timezone.now)
 
     def publish(self):

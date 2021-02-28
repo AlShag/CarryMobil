@@ -316,6 +316,7 @@ input[type="radio"][name="advan_slider"]{display: none;}
 }
 .user_comment{
     width: 95%;
+    margin-bottom: 20px;
     height: auto;
     background-color: #0085ff;
     border-radius: 30px;
@@ -342,11 +343,36 @@ input[type="radio"][name="advan_slider"]{display: none;}
     position: fixed;
     top:20%;
     left: 36%;
-    height: 50%;
+    padding: 2% 0;
     width: 28%;
     background-color: white;
     border: 1px solid black;
     border-radius: 30px;
+}
+#id_text{
+    width: 70%;
+    padding: 2% 2%;
+    border-radius: 20px;
+}
+#id_stars{
+    display: none;
+}
+#send_comment{
+    font-size: 12pt;
+    transition: 0.25s;
+}
+#send_comment:hover{
+    color: #0085ff;
+}
+#comment_stars{
+    cursor: default;
+}
+#comment_stars label{
+    color: #0085ff;
+    font-size: 24pt;
+}
+#comment_stars input[type='radio']{
+    display: none;
 }
 .footer{
     height: auto;

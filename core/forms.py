@@ -104,4 +104,10 @@ class AddressForm(ModelForm):
 class ReviewForm(ModelForm):
     class Meta:
         model = Review
-        fields = ['text']
+        fields = ['text', 'stars', 'likes']
+
+        widgets = {
+            'text':  Textarea(attrs={
+                'placeholder': 'Здесь вы можете написать свой отзыв...',
+            }),
+        }

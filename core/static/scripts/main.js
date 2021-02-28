@@ -2,11 +2,32 @@ top=$(document).scrollTop();
 let slide_id='';
 let last_slide='';
 let swiper=false;
+let stars_count=1;
 $(document).ready(function (){
     last_slide=$('.slider input[type="radio"][name="advan_slider"]').last().attr('id');
     $('#view_password').click(function(){view_password()});
     $('#left_slide').click(function(){left_slide()});
     $('#right_slide').click(function(){right_slide()});
+    $('#comment_stars label').hover(function(){
+        $('#comment_stars label').html('&#9734;');
+        let label_for = $(this).attr('for');
+        let stars_cont = parseInt(label_for.replace('star_',''));
+        for (let i = 1; i <= stars_cont; i++) {
+            $('#comment_stars label[for="star_'+i+'"]').html('&#9733;');
+        }
+    });
+    $('#comment_stars').hover(function(){
+    },function () {
+        $('#comment_stars label').html('&#9734;');
+        for (let i = 1; i <= stars_count; i++) {
+            $('#comment_stars label[for="star_'+i+'"]').html('&#9733;');
+        }
+    });
+    $('#comment_stars input[type="radio"]').click(function(){
+        let label_for = $(this).attr('id');
+        stars_count = parseInt(label_for.replace('star_',''));
+        $('#id_stars').val(stars_count);
+    });
     $('#create_comment').click(function(){
         if($('.comment_create').css('display')=='none'){
             $('.comment_create').show();

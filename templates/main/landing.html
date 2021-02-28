@@ -110,7 +110,8 @@
                 {% for review in reviews %}
                 <div id="comment_1" class="user_comment"> 
                     <div>
-                        {{ review.author }}<br>
+                        <label>{{ review.author }}</label><br>
+                        <label for="">{{ review.stars }}&#9733;</label><br>
                         {{ review.published_date }}<br>
                         {{ review.text }}
                     </div>
@@ -124,9 +125,25 @@
             {% endif %}
             </div>
         <div class="comment_create">
-            <form action="">
-        
-            <a href="review_create"><input type="button" value="Отправить отзыв" id="send_comment"></a>
+            <form method="post">
+                <h2>Ваш отзыв</h2>
+                {% csrf_token %}
+                <section id="comment_stars">
+                    <input type="radio" name="stars" id="star_1">
+                    <input type="radio" name="stars" id="star_2">
+                    <input type="radio" name="stars" id="star_3">
+                    <input type="radio" name="stars" id="star_4">
+                    <input type="radio" name="stars" id="star_5">
+                    <label for="star_1">&#9734;</label>
+                    <label for="star_2">&#9734;</label>
+                    <label for="star_3">&#9734;</label>
+                    <label for="star_4">&#9734;</label>
+                    <label for="star_5">&#9734;</label>
+                    {{ review_form.stars }}
+                </section>
+                {{ review_form.text }}<br>
+                <a href="review_create"><input type="submit" value="Отправить отзыв" id="send_comment"></a>
+            </form>
         </div>
     </div>
 {% endblock %}
