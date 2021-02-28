@@ -83,6 +83,7 @@
                     </table>
                 </div>
                 <div class="order_change">
+                    <button type="submit"><a href="{% url 'order_edit' pk=order.pk %}">Редактировать</a></button>
                     <button type="submit"><a href="{% url 'order_enable' pk=order.pk %}">Выполнить</a></button>
                 </div>
             </div>

@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import SignUp, OrderEdit
+from .views import SignUp
 from django.contrib import admin
 
 
@@ -18,6 +18,6 @@ urlpatterns = [
     path('order/<int:pk>/detail', views.order_detail, name='order_detail'),
     path('order/<int:pk>/delete', views.order_delete, name='order_delete'),
     path('order/<int:pk>/order_enable', views.order_enable, name='order_enable'),
-    path('order/<int:pk>/edit', OrderEdit.as_view(), name='order_edit'),
+    path('order/<int:pk>/edit', views.order_edit, name='order_edit'),
     path('review_create', views.review_create, name='review_create'),
 ]
