@@ -10,5 +10,11 @@
     <script src="{% static 'scripts/order.js' %}"></script>
 {% endblock %}
 {% block content %}
-    вцув
+    <div class="orders_area">
+        <div class="container">
+            <div class="orders_form">
+                {{ form.as_p }}
+            </div>
+        </div>
+    </div>
 {% endblock %}

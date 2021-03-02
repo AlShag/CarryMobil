@@ -24,6 +24,7 @@
   let last_road='';
   let dop_road_added=false;
   let passing_road_added=false;
+  let edding_form = false;
   let passing_to=0;
   let status_value=[];
   let filter_cargo_type='';
@@ -43,13 +44,20 @@
         passing_road_add();
         road_add();
       });
-      $('#id_cargo_type').val($('#goods_type_select :selected').text());
+      // $('#id_cargo_type').val($('#goods_type_select :selected').text());
       $('#order_send_button').click(function(){
         $('#order_send').click();
       });
       $('#road_choice_exit').click(function(){$('#road_add_choice').hide();});
       $('#passing_road_add').click(function(){passing_road_added=true;});
       $('#road_del').click(function(){ del_road()});
+
+      $('#cancel_order').click(function(){ $('#id_status').val(-1);});// order status change
+      $('#order_enable').click(function(){ $('#id_status').val(1);});
+      $('#order_complite').click(function(){ $('#id_status').val(2);});
+      $('#add_changes').click(function(){add_order_changes();$('#send_order_changes').click()});
+      $('#changing_add_new_road').click( function(){add_roads_field(this)});
+
       $('#filter_cancel').click(function(){ 
         $('#type_filter option:first').prop('selected', true);
         $('#filter_date1').val('');
@@ -59,6 +67,7 @@
         });
       $('#from_address').on('change', function(){road_change();});
       $('#to_address').on('change', function(){road_change();});
+      $('.roads input').on('change', function(){edit_road_change(this);});
       $('.filter_value input').on('change', function(){orders_filter(this)});
       $('#type_filter').on('change', function(){orders_filter(this)});
 
@@ -159,20 +168,32 @@
     }
   }
   function del_road(){
-    let last_full_road=full_road;
-    full_road[transition_number-1].from[0]=last_full_road[transition_number].from[0];
-    full_road[transition_number-1].to[0]=last_full_road[transition_number].to[0];
-    for (let i=transition_number; i<=roads_counter-1; i++){
-      full_road[i-1].from[0]=last_full_road[i].from[0];
-      full_road[i-1].to[0]=last_full_road[i].to[0];
-    }
-    $('#road_'+transition_number).remove();
-    transition_number--;  
-    $('#road_'+transition_number).click();
-    roads_counter--;
-    $('.road_button').remove();
-    for (let n = 1; n <= roads_counter; n++){
-      $('.roads').append('<button class="road_button" id="road_'+n+'" onclick="roads_transition(this)">'+n+'</button>');
+    if(roads_counter!=transition_number){
+      let last_full_road=full_road;
+      full_road[transition_number-1].from[0]=last_full_road[transition_number].from[0];
+      full_road[transition_number-1].to[0]=last_full_road[transition_number].to[0];
+      for (let i=transition_number; i<=roads_counter-1; i++){
+        console.log(last_full_road);
+        full_road[i-1].from[0]=last_full_road[i].from[0];
+        full_road[i-1].to[0]=last_full_road[i].to[0];
+      }
+      full_road.pop();
+      $('#road_'+transition_number).remove();
+      transition_number--;  
+      $('#road_'+transition_number).click();
+      roads_counter--;
+      $('.road_button').remove();
+      for (let n = 1; n <= roads_counter; n++){
+        $('.roads').append('<button class="road_button" id="road_'+n+'" onclick="roads_transition(this)">'+n+'</button>');
+      }
+    } else{
+      console.log(transition_number);
+      $('#road_'+transition_number).remove();
+      full_road.pop();
+      transition_number--;
+      roads_counter--;
+      $('#road_'+transition_number).click();
+      road_change();
     }
   }
   function roads_transition(obj){
@@ -346,9 +367,11 @@
     roads_counter=0;
     full_road = [{from:[],to:[],passing_to:0}];
     let full_road_info=$('#full_road_info').text();
+    if($('#id_full_road').attr('type')=='text') full_road_info=$('#id_full_road').val();
     let order_status = $('#order_status').text();
     if(order_status==0) $('#order_status').text('Ожидается');
-    if(order_status==1) $('#order_status').text('Выполнено');
+    if(order_status==1) $('#order_status').text('В процессе');
+    if(order_status==2) $('#order_status').text('Выполнено');
     if(order_status==-1) $('#order_status').text('Откланено');
     for (let i = 0; i < full_road_info.length; i++){ // Количество дорог
       if(full_road_info[i] === '/') roads_counter++;
@@ -361,9 +384,11 @@
       road = road.replace(road_num,'');
       let road_from = road.substr(0,road.indexOf(';'));
       road=road.replace(road_from, '');
+      road_from=road_from.replace('from:', '');
       road = road.replace(';','');
       let road_to = road.substr(0,road.indexOf(';'));
       road=road.replace(road_to, '');
+      road_to=road_to.replace('to:', '');
       road = road.replace(';','');
       let road_passing_to = road.substr(0,road.indexOf(';'));
       road_passing_to = parseInt(road_passing_to.replace('passing_to:',''));
@@ -373,19 +398,19 @@
       full_road_info=full_road_info.replace(road+'/','');
       if(n==0) full_road[0]={from:[road_from],to:[road_to],passing_to: road_passing_to};
       else full_road.push({from:[road_from],to:[road_to],passing_to: road_passing_to});
-      // $('.roads').append('<label>'+road_from+'</label><br>');
-      // $('.roads').append('<label>'+road_to+'</label><br>');
-      if(road_passing_to==0){
-        $('.roads').append('<div class="all_roads" id="id_road_'+(n+1)+'"><h4>Маршрут №'+(n+1)+':</h4>');
-        $('#id_road_'+(n+1)).append('<span name="from" class="main_road" id="from_address_'+n+'">'+road_from+'</span><br>');
-        $('#id_road_'+(n+1)).append('<span name="to" class="main_road" id="to_address_'+n+'">'+ road_to+'</span><br></div>');
-      } else{
-        if(full_road[passing_to-1].from[0]!=from_address)$('#id_road_'+passing_to).append('<span name="from" class="passing_road" id="from_address_'+n+'">'+from_address+'</span><br>');
-        if(full_road[passing_to-1].to[0]!=to_address)$('#id_road_'+passing_to).append('<span name="to" class="passing_road" id="to_address_'+n+'">'+to_address+'</span><br>');
+      if(!edding_form){
+        if(road_passing_to==0){
+          $('.roads').append('<div class="all_roads" id="id_road_'+(n+1)+'"><h4>Маршрут №'+(n+1)+':</h4>');
+          $('#id_road_'+(n+1)).append('<span name="from" class="main_road" id="from_address_'+n+'">'+road_from+'</span><br>');
+          $('#id_road_'+(n+1)).append('<span name="to" class="main_road" id="to_address_'+n+'">'+ road_to+'</span><br></div>');
+        } else{
+          if(full_road[passing_to].from[0]!=road_from)$('#id_road_'+(passing_to+1)).append('<span name="from" class="passing_road" id="from_address_'+n+'">'+road_from+'</span><br>');
+          if(full_road[passing_to].to[0]!=road_to)$('#id_road_'+(passing_to+1)).append('<span name="to" class="passing_road" id="to_address_'+n+'">'+road_to+'</span><br>');
+        }
       }
     }
-    console.log(full_road);
     let prices = $('#prices').text();
+    if($('#id_prices').attr('type')=='text') prices=$('#id_prices').val();
     let roads_prices=[];
     full_road_price=parseInt(prices.substr(0,prices.indexOf('/')));
     prices = prices.replace(full_road_price+'/','');
@@ -395,7 +420,6 @@
       current_road_price=parseInt(prices.substr(0,prices.indexOf(';')));
       prices = prices.replace(current_road_price+';','');
       roads_prices.push(current_road_price);
-      // roads_prices.push(parseInt(prices.substr('')))
     }
     prices = prices.replace('/type_price:','');
     type_price = parseInt(prices.substr(0,prices.indexOf('/')));
@@ -405,4 +429,71 @@
     prices = prices.replace(loader_price+'/','');
     $('#type_price').text(type_price+' руб.');
     $('#loader_price').text(loader_price+' руб.');
+  }
+
+  function order_edit_form(){
+    edding_form=true;
+    order_detail();
+    for (let n = 0; n < roads_counter; n++) {
+      from_address=full_road[n].from[0];
+        to_address=full_road[n].to[0];
+        passing_to=full_road[n].passing_to;
+      if(passing_to==0){
+        $('.roads').append('<div class="all_roads" id="id_road_'+(n+1)+'"><h4>Маршрут №'+(n+1)+':</h4>');
+        $('#id_road_'+(n+1)).append('<input type="text" name="from" class="main_road" value="'+from_address+'" id="from_address_'+n+'"><br>');
+        $('#id_road_'+(n+1)).append('<input type="text" name="to" class="main_road" value="'+to_address+'" id="to_address_'+n+'"></input><br></div>');
+        $('#id_road_'+(n+1)).append('<input type="button" name="passing" id="passing_'+(n+1)+'" onclick="add_roads_field(this)" value="Добавить доп точку"><br>');
+      } else{
+          if(full_road[passing_to-1].from[0]!=from_address)$('#id_road_'+passing_to).append('<input type="text" name="from" value="'+from_address+'" class="passing_road" id="from_address_'+n+'"><br>');
+          if(full_road[passing_to-1].to[0]!=to_address)$('#id_road_'+passing_to).append('<input type="text" name="to" value="'+to_address+'" class="passing_road" id="to_address_'+n+'"><br>');
+      }
+    }
+  }
+
+  function edit_road_change(obj){
+    let input_id=(obj.id);
+    if(obj.name=='from'){
+      in_full_road=parseInt(input_id.replace('from_address_',''));
+      full_road[in_full_road].from[0]=obj.value;
+    }
+    if(obj.name=='to'){
+      in_full_road=parseInt(input_id.replace('to_address_',''));
+      console.log(in_full_road);
+      full_road[in_full_road].to[0]=obj.value;
+    }
+    console.log(obj);
+    from_address=$(obj).val();
+    to_address=$(obj).val();
+    console.log(full_road);
+    console.log(from_address);
+  }
+
+  function add_order_changes(){
+    $('#id_full_road').val('');
+    for (let n = 0; n <= full_road.length-1; n++){
+      $('#id_full_road').val($('#id_full_road').val()+'['+n+']'+'from:'+full_road[n].from[0]+';to:'+full_road[n].to[0]+';passing_to:'+ full_road[n].passing_to+';/');
+    }
+  }
+
+  function add_roads_field(obj){
+    let field_type=obj.name;
+    if (field_type=='new'){
+      from_address='';
+      to_address='';
+      road_passing_to=0;
+      full_road[roads_counter]={from:[from_address],to:[to_address],passing_to: road_passing_to};
+      $('.roads').append('<div class="all_roads" id="id_road_'+(roads_counter+1)+'"><h4>Маршрут №'+(roads_counter+1)+':</h4>');
+      $('#id_road_'+(roads_counter+1)).append('<input type="text" name="from" placeholder="Откуда" class="main_road" onchange="edit_road_change(this)" value="'+from_address+'" id="from_address_'+roads_counter+'"><br>');
+      $('#id_road_'+(roads_counter+1)).append('<input type="text" name="to" placeholder="Куда" class="main_road" onchange="edit_road_change(this)" value="'+to_address+'" id="to_address_'+roads_counter+'"></input><br></div>');
+      roads_counter++;
+    }
+    if (field_type=='passing'){
+      passing_to=parseInt(obj.id.replace('passing_',''));
+      console.log(passing_to);
+      from_address=full_road[passing_to-1].from[0];
+      to_address='';
+      road_passing_to=0;
+      full_road[roads_counter]={from:[from_address],to:[to_address],passing_to: passing_to};
+      $('#id_road_'+(passing_to)).append('<input type="text" name="to" value="'+to_address+'" class="passing_road" onchange="edit_road_change(this)" id="to_address_'+(roads_counter)+'"><br>');
+    }
   }

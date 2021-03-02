@@ -85,7 +85,10 @@
         position: absolute;
         left: 75%;
         top:30%;
-        width: auto;
+        width: 25%;
+    }
+    #login_a{
+        border: none;
     }
     .login_form {
         width: 100%;

@@ -82,9 +82,10 @@
                         </tr>
                     </table>
                 </div>
-                <div class="order_change">
-                    <button type="submit"><a href="{% url 'order_edit' pk=order.pk %}">Редактировать</a></button>
-                    <button type="submit"><a href="{% url 'order_enable' pk=order.pk %}">Выполнить</a></button>
+                <div class="order_changing">
+                    <input type="button" value="Удалить" onclick="window.location='{% url 'order_delete' pk=order.pk %}'">
+                    <input type="button" value="Редактировать" onclick="window.location='{% url 'order_edit' pk=order.pk %}'">
+                    <input type="button" value="Выполнить" onclick="window.location='{% url 'order_enable' pk=order.pk %}'">
                 </div>
             </div>
         </div>

@@ -41,16 +41,16 @@
                                     <div class="filter_value">
                                         <ul>
                                             <li>
-                                                <input type="checkbox" name="status" id="complited_orders" value="Выполнена">
-                                                <label for="complited_orders">Выполнена</label>
+                                                <input type="checkbox" name="status" id="complited_orders" value="Выполнено">
+                                                <label for="complited_orders">Выполнено</label>
                                             </li>
                                             <li>
                                                 <input type="checkbox" name="status" id="expected_orders" value="Ожидается">
                                                 <label for="expected_orders">Ожидается</label>
                                             </li>
                                             <li>
-                                                <input type="checkbox" name="status" id="canceled_orders" value="Отменена">
-                                                <label for="canceled_orders">Отменена</label>
+                                                <input type="checkbox" name="status" id="canceled_orders" value="Отменено">
+                                                <label for="canceled_orders">Отменено</label>
                                             </li>
                                         </ul>
                                     </div>
@@ -83,7 +83,7 @@
                                 <th class="">
                                     Статус
                                 </th>
-                                <th class="">
+                                <th class="" colspan="2" style="border-right: none;">
                                     Действие
                                 </th>
                             </tr>
@@ -105,7 +105,7 @@
                                         {% if not order.loader_count == None %}
                                             <a href="{% url 'order_detail' pk=order.pk %}">{{ order.loader_count }}, {{ order.loader_time_count }}</a>
                                         {% else %}
-                                            <a href="">Не нужны</a>
+                                            <a href="{% url 'order_detail' pk=order.pk %}">Не нужны</a>
                                         {% endif %}
                                     </td>
                                     <td class="">
