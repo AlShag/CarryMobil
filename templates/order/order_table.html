@@ -83,9 +83,6 @@
                                 <th class="">
                                     Статус
                                 </th>
-                                <th class="" colspan="2" style="border-right: none;">
-                                    Действие
-                                </th>
                             </tr>
                         {% for order in orders %}
                                 <tr data-href="{% url 'order_detail' pk=order.pk %}" class="orders_tr">
@@ -123,15 +120,9 @@
                                                 <a href="{% url 'order_detail' pk=order.pk %}">Выполнено</a>
                                             {% endif %}
                                             {% if order.status == -1 %}
-                                                <a href="{% url 'order_detail' pk=order.pk %}">Отменено</a>
+                                                <a href="{% url 'order_det  ail' pk=order.pk %}">Отменено</a>
                                             {% endif %}
                                         {% endif %}
-                                    </td>
-                                    <td class="">
-                                        <a href="{% url 'order_delete' pk=order.pk %}"><button type="button">Удалить</button></a>
-                                    </td>
-                                    <td class="order_change">
-                                        <a href="{% url 'order_edit' pk=order.pk %}"><button type="button">Редактировать</button></a>
                                     </td>
                                 </tr>
                         {% endfor %}

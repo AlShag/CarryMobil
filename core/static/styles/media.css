@@ -70,7 +70,7 @@
     }
     .showed{
         right: 25%;
-        transition: 0.4s;
+        transition: 0.3s;
     }
     nav li{
         display: block;

@@ -8,6 +8,7 @@ $(document).ready(function (){
     $('#view_password').click(function(){view_password()});
     $('#left_slide').click(function(){left_slide()});
     $('#right_slide').click(function(){right_slide()});
+    $('#comment_form_close').click(function(){$('.comment_create').hide();});
     $('#comment_stars label').hover(function(){
         $('#comment_stars label').html('&#9734;');
         let label_for = $(this).attr('for');

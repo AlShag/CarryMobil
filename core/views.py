@@ -2,8 +2,8 @@ from django.utils import timezone
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.contrib import auth
 from django.http import HttpResponseRedirect
-from .models import Order, Address, CityPrice, CargoType, Review
-from .forms import OrderForm, AddressForm, SignInForm, SignUpForm, UserForm, ProfileForm, ReviewForm, OrderEditForm
+from .models import Order, Address, CityPrice, CargoType, Review, Report
+from .forms import OrderForm, AddressForm, SignInForm, SignUpForm, UserForm, ProfileForm, ReviewForm, OrderEditForm, ReportForm
 from django.urls import reverse_lazy
 from django.contrib.auth.forms import UserCreationForm
 from django.views import generic
@@ -115,8 +115,10 @@ def order_edit(request, pk):
         if form.is_valid():
             form.save()
             return redirect(order_detail, pk=order.pk)
+            
     else:
         form = OrderEditForm(instance=order)
+    
     return render(request, 'order/order_edit.html', {'form': form})
 
 
@@ -133,6 +135,16 @@ def order_delete(request, pk):
 
 def ordered(request):
     return render(request, 'order/ordered.html')
+
+def report(request):
+    report = ReportForm(request.POST)
+    if request.method == 'POST':
+        if report.is_valid():
+            report.save()
+            return redirect('index')
+        else:
+            error = 'Форма была неверной'
+    return render(request, 'help/report.html', {'report': report})
 
 
 def myorders(request):

@@ -13,7 +13,104 @@
     <div class="orders_area">
         <div class="container">
             <div class="orders_form">
-                {{ form.as_p }}
+                <div class="order_info">
+                    <!-- <form action="" method="post">
+                        {% csrf_token %}
+                         {{ form.as_p }}
+                        <input type="submit" value="Отправить">
+                    </form> -->
+                    <form method="post">
+                        {% csrf_token %}
+                        <a href="{% url 'order_table' %}" id="to_orders_list">&#8617;</a>
+                        <table id="order_edit_table">
+                            <tr class="road_changes">
+                                <th>Маршрут</th>
+                                <td>
+                                    <div class="roads">
+                                        <label for="" id="full_road_info">{{ form.full_road }}</label>
+                                        <div class="all_roads" id="id_road_1">
+                                            <h4>Маршрут №1:</h4>
+                                            <input type="search" list="address_search" value="" placeholder="Населенный пункт, улица, дом отправления груза..." id="from_address">
+                                            <input type="search" list="address_search" placeholder="Населенный пункт, улица, дом направления груза..." id="to_address">
+                                        </div>
+                                    </div>
+                                    <datalist id="address_search" onselect="alert('hi')">
+                                         {% for el in all_address %}
+                                            <option value="{{ el.address }}"></option>
+                                        {% endfor %}
+                                    </datalist>
+                                </td>
+                                <td>
+                                    <input type="button" name="new" value="Добавить новую точку" id="changing_add_new_road"><br>
+                                    <input type="button" value="Удалить Маршрут:"><input type="number" value="1" id="road_delete_id">
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Комментарий для маршрута</th>
+                                <td>
+                                    {{ form.road_comment }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Тип груза</th>
+                                <td>
+                                    {{ form.cargo_type }}
+                                    <select name="" id="goods_type_select">
+                                        <option value="0" disabled selected hidden>Выберите тип груза</option>
+                                    {% for el in all_types %}
+                                        <option value="{{ el.price }}" class="{{ el.cargo_class }}">{{ el.cargo }}</option>
+                                    {% endfor %}
+                                    <option value="" class="other">Другой</option>
+                                </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Комментарии груза</th>
+                                <td>
+                                    {{ form.cargo_type_comment }}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Количество грузчиков</th>
+                                <td>{{ form.loader_count }}</td>
+                            </tr>
+                            <tr>
+                                <th>Количество часов для грузчиков</th>
+                                <td>{{ form.loader_time_count }}</td>
+                            </tr>
+                            <tr>
+                                <th>Цены заказа</th>
+                                <td>{{ form.prices }}</td>
+                            </tr>
+                            <tr>
+                                <th>Стоимость заказа</th>
+                                <td>{{ form.order_price }}</td>
+                            </tr>
+                            <tr>
+                                <th>Номер телефона заказчика</th>
+                                <td>{{ form.user_tel_nomer }}</td>
+                            </tr>
+                            <tr>
+                                <th>Время начала работы</th>
+                                <td>{{ form.start_time }}</td>
+                            </tr>
+                            <tr>
+                                <th>Время отправки заявки</th>
+                                <td>{{ form.sended_in }}</td>
+                            </tr>
+                            <tr>
+                                <th>Статус</th>
+                                <td class="order_status_changing">
+                                    {{ form.status }}
+                                    <input type="button" id="order_enable" value="Выполнить">
+                                    <input type="button" id="order_complite" value="Завершить">
+                                </td>
+                            </tr>
+                        </table>
+                        <input type="submit" name="" id="form_send" value="Отправить" hidden>
+                        <input type="button" value="Выполнить" id="create_order">
+                    </form>
+                </div>  
             </div>
         </div>
     </div>

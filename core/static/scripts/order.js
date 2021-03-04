@@ -57,6 +57,7 @@
       $('#order_complite').click(function(){ $('#id_status').val(2);});
       $('#add_changes').click(function(){add_order_changes();$('#send_order_changes').click()});
       $('#changing_add_new_road').click( function(){add_roads_field(this)});
+      $('#create_order').click( function(){add_order_changes();$('#form_send').click();});
 
       $('#filter_cancel').click(function(){ 
         $('#type_filter option:first').prop('selected', true);
@@ -129,7 +130,6 @@
       $('.roads').append('<button class="road_button" id="road_'+roads_counter+'" onclick="roads_transition(this)">'+roads_counter+'</button>');
       last_road=$('.road_button').last().attr('id');
       if(passing_road_added){
-        console.log(passing_road_added)
         if(passing_roads_info.includes(transition_number)){
           full_road.push({from:[from_address],to:[to_address], passing_to:full_road[transition_number-1].passing_to});
         } else
@@ -139,7 +139,6 @@
         passing_road_added=false;
       }
       else{
-        console.log('!!!');
         full_road.push({from:[''],to:[''],passing_to:0});
         $('#from_address').val('');
         $('#to_address').val('');
@@ -168,32 +167,37 @@
     }
   }
   function del_road(){
-    if(roads_counter!=transition_number){
-      let last_full_road=full_road;
-      full_road[transition_number-1].from[0]=last_full_road[transition_number].from[0];
-      full_road[transition_number-1].to[0]=last_full_road[transition_number].to[0];
-      for (let i=transition_number; i<=roads_counter-1; i++){
-        console.log(last_full_road);
-        full_road[i-1].from[0]=last_full_road[i].from[0];
-        full_road[i-1].to[0]=last_full_road[i].to[0];
+    if(roads_counter>1){
+      if(roads_counter!=transition_number){
+        let last_full_road=full_road;
+        full_road[transition_number-1].from[0]=last_full_road[transition_number].from[0];
+        full_road[transition_number-1].to[0]=last_full_road[transition_number].to[0];
+        for (let i=transition_number; i<=roads_counter-1; i++){
+          console.log(last_full_road);
+          full_road[i-1].from[0]=last_full_road[i].from[0];
+          full_road[i-1].to[0]=last_full_road[i].to[0];
+        }
+        full_road.pop();
+        $('#road_'+transition_number).remove();
+        transition_number--;  
+        $('#road_'+transition_number).click();
+        roads_counter--;
+        $('.road_button').remove();
+        for (let n = 1; n <= roads_counter; n++){
+          $('.roads').append('<button class="road_button" id="road_'+n+'" onclick="roads_transition(this)">'+n+'</button>');
+        }
+      } else{
+        console.log(transition_number);
+        $('#road_'+transition_number).remove();
+        full_road.pop();
+        transition_number--;
+        roads_counter--;
+        $('#road_'+transition_number).click();
+        road_change();
       }
-      full_road.pop();
-      $('#road_'+transition_number).remove();
-      transition_number--;  
-      $('#road_'+transition_number).click();
-      roads_counter--;
-      $('.road_button').remove();
-      for (let n = 1; n <= roads_counter; n++){
-        $('.roads').append('<button class="road_button" id="road_'+n+'" onclick="roads_transition(this)">'+n+'</button>');
+      if(roads_counter<2){
+        $('#road_del').hide();
       }
-    } else{
-      console.log(transition_number);
-      $('#road_'+transition_number).remove();
-      full_road.pop();
-      transition_number--;
-      roads_counter--;
-      $('#road_'+transition_number).click();
-      road_change();
     }
   }
   function roads_transition(obj){
@@ -270,7 +274,7 @@
     $('#id_order_price').val(order_price);
     $('#type_full_price').text(type_price+' р')
     $('#order_price').text(order_price+'р');
-    
+    console.log($('#id_full_road').val());
     // type_add();
   }
 
@@ -286,7 +290,9 @@
           i=l;
         }
         else{
+          if(passing_to==0)
           current_road_price=500;
+          else current_road_price=300;
         }
       }
       return current_road_price;
@@ -458,14 +464,10 @@
     }
     if(obj.name=='to'){
       in_full_road=parseInt(input_id.replace('to_address_',''));
-      console.log(in_full_road);
       full_road[in_full_road].to[0]=obj.value;
     }
-    console.log(obj);
     from_address=$(obj).val();
     to_address=$(obj).val();
-    console.log(full_road);
-    console.log(from_address);
   }
 
   function add_order_changes(){
@@ -489,7 +491,6 @@
     }
     if (field_type=='passing'){
       passing_to=parseInt(obj.id.replace('passing_',''));
-      console.log(passing_to);
       from_address=full_road[passing_to-1].from[0];
       to_address='';
       road_passing_to=0;

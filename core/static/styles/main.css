@@ -333,6 +333,18 @@ input[type="radio"][name="advan_slider"]{display: none;}
     width: 250px;
     white-space: pre-line;
 }
+#comment_form_close{
+    margin-left: 70%;
+    position: relative;
+    top: -5px;
+    font-size: 18pt;
+    color: #474747;
+    opacity: 0.7;
+}
+#comment_form_close:hover{
+    color: #0085ff;
+    opacity: 1;
+}
 #create_comment:hover{
     background-color: #0085ff;
     color: white;
@@ -453,7 +465,41 @@ input[type="radio"][name="advan_slider"]{display: none;}
     height: 25px;
     background-color:#0085ff;
     border-radius: 8pt;
+    color: white;
 }
-#footer_to_order a{
+.report_area{
+    background-color: #f5f5f5;
+    width: 100%;
+    padding: 5% 0;
+}
+.report_form{
+    width: 60%;
+    background-color: white;
+    border-radius: 20px;
+    margin: 0 auto;
+    padding: 5% 0;
+}
+.report_form h1{
+    font-size: 32pt;
+    text-align: center;
+}
+.report_form textarea{
+    width: 80%;
+    margin: 2.5% 10%;
+    padding: 1% 1%;
+    border-radius: 20px;
+    font-size: 14pt;
+}
+.report_form button[type='submit']{
+    width: 25%;
+    margin: 0 40%;
+    border: 1px solid #0085ff;
+    color: #0085ff;
+    font-size: 14pt;
+    padding: 1% 1%;
+    border-radius: 30px;
+}
+.report_form button[type='submit']:hover{
+    background-color: #0085ff;
     color: white;
 }

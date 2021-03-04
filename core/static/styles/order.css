@@ -517,6 +517,9 @@ input[type="number"]::-webkit-inner-spin-button {
     }
 }
 @media screen and (max-width: 768px){
+    select{
+        background-color: white;
+    }
     .order_title{
         display: none;
     }

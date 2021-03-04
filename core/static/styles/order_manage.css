@@ -183,7 +183,7 @@ a{
 #id_status{
     display: none;
 }
-.order_changing input[type='button']{
+.order_changing input[type='button'], #create_order{
     border: 1px solid #0085ff;
     border-radius: 20px;
     padding: 1% 2.5%;
@@ -193,7 +193,7 @@ a{
     margin-left: 1%;
     transition: 0.25s;
 }
-.order_changing input[type='button']:hover{
+.order_changing input[type='button']:hover, #create_order:hover{
     background-color: #0085ff;
     color: white;
 }
@@ -220,4 +220,11 @@ a{
 }
 .road_changes input[type='number']:not(.roads){
     width: 40px;
+}
+#create_order{
+    margin-top: 5%;
+    margin-left: 30%;
+}
+.order_edit_table #id_cargo_type{
+    display: none;
 }
