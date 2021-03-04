@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Янв 20 2021 г., 16:59
+-- Время создания: Мар 02 2021 г., 07:12
 -- Версия сервера: 10.4.17-MariaDB
 -- Версия PHP: 8.0.0
 
@@ -105,7 +105,23 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (49, 'Can add cargo type', 13, 'add_cargotype'),
 (50, 'Can change cargo type', 13, 'change_cargotype'),
 (51, 'Can delete cargo type', 13, 'delete_cargotype'),
-(52, 'Can view cargo type', 13, 'view_cargotype');
+(52, 'Can view cargo type', 13, 'view_cargotype'),
+(53, 'Can add Адрес', 10, 'add_address'),
+(54, 'Can change Адрес', 10, 'change_address'),
+(55, 'Can delete Адрес', 10, 'delete_address'),
+(56, 'Can view Адрес', 10, 'view_address'),
+(57, 'Can add Заказ', 7, 'add_order'),
+(58, 'Can change Заказ', 7, 'change_order'),
+(59, 'Can delete Заказ', 7, 'delete_order'),
+(60, 'Can view Заказ', 7, 'view_order'),
+(61, 'Can add profile', 14, 'add_profile'),
+(62, 'Can change profile', 14, 'change_profile'),
+(63, 'Can delete profile', 14, 'delete_profile'),
+(64, 'Can view profile', 14, 'view_profile'),
+(65, 'Can add review', 15, 'add_review'),
+(66, 'Can change review', 15, 'change_review'),
+(67, 'Can delete review', 15, 'delete_review'),
+(68, 'Can view review', 15, 'view_review');
 
 -- --------------------------------------------------------
 
@@ -120,6 +136,7 @@ CREATE TABLE `auth_user` (
   `is_superuser` tinyint(1) NOT NULL,
   `username` varchar(150) NOT NULL,
   `first_name` varchar(150) NOT NULL,
+  `patronymic` varchar(50) DEFAULT NULL,
   `last_name` varchar(150) NOT NULL,
   `email` varchar(254) NOT NULL,
   `is_staff` tinyint(1) NOT NULL,
@@ -131,10 +148,11 @@ CREATE TABLE `auth_user` (
 -- Дамп данных таблицы `auth_user`
 --
 
-INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
-(1, 'pbkdf2_sha256$216000$d6IF2k6WlUxo$aTSDk4VV+0r8pl5WXuhFDTBo0HXahjR1blVkx/1jIws=', '2021-01-20 07:23:43.173348', 1, 'admin', 'Артур', 'Ганиев', 'admin@admin.ru', 1, 1, '2020-12-28 08:22:09.000000'),
-(2, 'pbkdf2_sha256$216000$yDpIoixoNHII$WUZbjieJbeaOXO96mqs8QhQpBK3QOAoEOCsNBws1lx4=', NULL, 0, 'test123', '', '', '', 0, 1, '2021-01-10 07:28:29.381946'),
-(4, 'pbkdf2_sha256$216000$tetOGeaYzZD6$ay6zxiVvO38/8vkhX9oZmpuFwSIhwZYAbnJ340DleKI=', '2021-01-20 07:13:55.444089', 0, 'test1', '', '', '', 0, 1, '2021-01-20 07:13:48.849142');
+INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `patronymic`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
+(1, 'pbkdf2_sha256$216000$DEdAGQEnuD5E$WzFyPpVCzlEtQCTDz66urKKX/O7W7jKZK6uZ0lFOTPM=', '2021-02-26 07:36:24.853455', 1, 'admin', 'Артур', 'Айратович', 'Ганиев', 'admin@admin.ru', 1, 1, '2020-12-28 08:22:09.000000'),
+(2, 'pbkdf2_sha256$216000$yDpIoixoNHII$WUZbjieJbeaOXO96mqs8QhQpBK3QOAoEOCsNBws1lx4=', NULL, 0, 'test123', '', NULL, '', '', 0, 1, '2021-01-10 07:28:29.381946'),
+(4, 'pbkdf2_sha256$216000$tetOGeaYzZD6$ay6zxiVvO38/8vkhX9oZmpuFwSIhwZYAbnJ340DleKI=', '2021-01-20 07:13:55.444089', 0, 'test1', '', NULL, '', '', 0, 1, '2021-01-20 07:13:48.849142'),
+(5, 'pbkdf2_sha256$216000$16OK2AyjUs0l$V2LtXjPZ65qR0zAeWRlEACCWeejGsx0Fi5V7h0oEvEg=', '2021-03-01 11:12:09.683842', 1, 'artur', 'Артур', NULL, 'Ганиев', 'arr@mail.ri', 1, 1, '2021-02-17 09:55:11.351641');
 
 -- --------------------------------------------------------
 
@@ -163,26 +181,27 @@ CREATE TABLE `auth_user_user_permissions` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `core_adresses`
+-- Структура таблицы `core_address`
 --
 
-CREATE TABLE `core_adresses` (
+CREATE TABLE `core_address` (
   `id` int(11) NOT NULL,
-  `adress` varchar(150) NOT NULL
+  `address` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=koi8u;
 
 --
--- Дамп данных таблицы `core_adresses`
+-- Дамп данных таблицы `core_address`
 --
 
-INSERT INTO `core_adresses` (`id`, `adress`) VALUES
+INSERT INTO `core_address` (`id`, `address`) VALUES
 (29, 'г. Альметьевск, улица Ленина'),
 (30, 'г. Альметьевск, улица Шевченко'),
 (31, 'г. Альметьевск, улица Строителей'),
 (32, 'г. Альметьевск, улица Джалиля'),
 (33, 'г. Альметьевск, улица Мира'),
 (38, 'г. Казань, улица Татарстан'),
-(39, 'г. Чистополь, улица Валиева');
+(39, 'г. Чистополь, улица Валиева'),
+(40, 'г. Альметьевск, улица Гафиатуллина');
 
 -- --------------------------------------------------------
 
@@ -239,13 +258,11 @@ INSERT INTO `core_cityprice` (`id`, `city_1`, `city_2`, `distance`, `price_1_5t`
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `core_orders`
+-- Структура таблицы `core_order`
 --
 
-CREATE TABLE `core_orders` (
+CREATE TABLE `core_order` (
   `id` int(11) NOT NULL,
-  `from_adress` varchar(150) NOT NULL,
-  `to_adress` varchar(150) NOT NULL,
   `road_comment` longtext DEFAULT NULL,
   `loader_count` int(11) DEFAULT NULL,
   `loader_time_count` int(11) DEFAULT NULL,
@@ -254,36 +271,71 @@ CREATE TABLE `core_orders` (
   `order_price` int(11) NOT NULL,
   `cargo_type` varchar(50) NOT NULL,
   `cargo_type_comment` longtext DEFAULT NULL,
-  `status` int(11) DEFAULT NULL
+  `status` int(11) DEFAULT NULL,
+  `full_road` varchar(300) NOT NULL,
+  `prices` varchar(150) DEFAULT NULL,
+  `sended_in` datetime(6)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Дамп данных таблицы `core_orders`
+-- Дамп данных таблицы `core_order`
 --
 
-INSERT INTO `core_orders` (`id`, `from_adress`, `to_adress`, `road_comment`, `loader_count`, `loader_time_count`, `user_tel_nomer`, `start_time`, `order_price`, `cargo_type`, `cargo_type_comment`, `status`) VALUES
-(1, 'Альметьевск, Ленина 107', 'Альметьевск, Ленина 112', 'ауауаууац2432', 2, 2, '89872191853', '2021-01-30 13:37:00.000000', 500, '', NULL, NULL),
-(2, 'Альметьевск, Ленина 107', 'Альметьевск, Ленина 112', '', 2, 1, '89872191853', '2021-01-31 13:55:00.000000', 500, '', NULL, NULL),
-(3, 'Альметьевск, Ленина 107', 'Альметьевск, Ленина 112', '', 2, 1, '89872191853', NULL, 500, '', NULL, NULL),
-(4, 'Альметьевск, Ленина 107', 'Альметьевск, Ленина 112', '', 2, 1, '89872191853', NULL, 500, '', NULL, NULL),
-(5, 'Альметьевск, Ленина 107', 'Альметьевск, Ленина 112', '', 2, 1, '89872191853', '2021-01-16 18:32:00.000000', 500, '', NULL, NULL),
-(6, 'Альметьевск, Фахредтина 47', 'Альметьевск, Шевченко 150', '', 1, 2, '89872191853', '2021-01-29 10:13:00.000000', 500, '', NULL, NULL),
-(7, 'Альметьевск, Чехова 52', 'Альметьевск, Тукая 37', '', 2, 3, '89872191853', '2021-01-17 03:26:00.000000', 500, '', NULL, NULL),
-(8, 'Альметьевск, Ленина 105', 'Альметьевск, Марджани 105', '', 1, 1, '89196420035', '2021-01-13 06:00:00.000000', 500, '', NULL, NULL),
-(9, 'улица Джалиля 21, Альметьевск', 'улица Шевченко 105, Альметьевск', '', 1, 2, '89196420035', '2021-01-05 12:00:00.000000', 500, '', NULL, NULL),
-(10, 'улица Ленина 105, Альметьевск', 'улица Шевченко 105, Альметьевск', '', 2, 1, '89196420035', NULL, 500, '', NULL, NULL),
-(11, 'улица Ленина 112, Альметьевск', 'улица Строителей 13, Альметьевск', '', 2, 1, '89196420047', '2021-01-12 14:20:00.000000', 500, '', NULL, NULL),
-(12, 'г. Альметьевск, улица Мира', 'г. Альметьевск, улица Ленина 110', '', NULL, NULL, '89196420035', NULL, 500, '', NULL, NULL),
-(13, 'г. Альметьевск, улица Джалиля', 'г. Альметьевск, улица Мира', '', NULL, NULL, '89196420035', NULL, 500, '', NULL, NULL),
-(14, 'г. Альметьевск, улица Ленина,г. Альметьевск, улица Шевченко', 'г. Казань, улица Татарстан,г. Альметьевск, улица Мира', '', NULL, NULL, '89196420035', NULL, 500, '', NULL, NULL),
-(15, 'г. Альметьевск, улица Ленина,г. Альметьевск, улица Джалиля,г. Альметьевск, улица Шевченко', 'г. Альметьевск, улица Шевченко,г. Альметьевск, улица Строителей,г. Казань, улица Татарстан', '', NULL, NULL, '89196420035', '2021-01-17 08:50:00.000000', 500, '', NULL, NULL),
-(16, 'г. Альметьевск, улица Ленина', 'г. Альметьевск, улица Строителей', '', 1, 2, '89196420035', '2020-12-31 11:56:00.000000', 500, '', NULL, NULL),
-(17, 'г. Альметьевск, улица Ленина', 'г. Альметьевск, улица Строителей', '', 1, 2, '89196420035', NULL, 500, 'Переезд', '', NULL),
-(18, 'г. Альметьевск, улица Ленина 102', 'г. Чистополь, улица Валиева 20', '', 2, 2, '89196420035', '2021-01-22 21:40:00.000000', 5000, 'Переезд', '', NULL),
-(19, 'г. Альметьевск, улица Ленина 110', 'Альметьевск, Тукая 37', '', 2, 1, '89196250303', '2021-01-20 09:15:00.000000', 1900, 'Переезд', '', NULL),
-(20, 'г. Альметьевск, улица Ленина', 'г. Альметьевск, улица Ленина112', '', 2, 1, '89196250303', '2021-02-01 09:00:00.000000', 1900, 'Переезд', '', NULL),
-(21, 'г. Альметьевск, улица Ленина,г. Альметьевск, улица Шевченко', 'г. Альметьевск, улица Строителей,г. Чистополь, улица Валиева', '', 4, 2, '89196420035', NULL, 8300, 'Переезд', '', NULL),
-(22, 'г. Альметьевск, улица Ленина', 'г. Альметьевск, улица Мира', '', 1, 3, '89196420035', NULL, 1550, 'Переезд', '', NULL);
+INSERT INTO `core_order` (`id`, `road_comment`, `loader_count`, `loader_time_count`, `user_tel_nomer`, `start_time`, `order_price`, `cargo_type`, `cargo_type_comment`, `status`, `full_road`, `prices`, `sended_in`) VALUES
+(35, '', 1, 2, '89196420035', NULL, 9200, '', '', 0, '[0]from:г. Альметьевск, улица Строителей;to:г. Казань, улица Татарстан;passing_to:0;/[1]from:г. Альметьевск, улица Строителей;to:г. Альметьевск, улица Мира;passing_\\to:1;/', NULL, '2021-02-18 06:53:16.554744'),
+(36, '', NULL, NULL, '89196420035', NULL, 500, 'Бытовая техника', '', 0, '[0]from:г. Альметьевск, улица Шевченко;to:г. Альметьевск, улица Шевченко;passing_to:0;/', NULL, '2021-02-18 06:53:16.554744'),
+(37, '', NULL, NULL, '89196420035', NULL, 500, 'Мототехника', '', 0, '[0]from:г. Альметьевск, улица Мира;to:г. Альметьевск, улица Шевченко;passing_to:0;/', NULL, '2021-02-18 06:53:16.554744'),
+(38, '', 1, 2, '89196420035', NULL, 1200, '', '', 1, '[0]from:г. Альметьевск, улица Шевченко;to:г. Альметьевск, улица Мира;passing_to:0;/', NULL, '2021-02-18 06:53:16.554744'),
+(39, '', 1, 2, '89196420035', NULL, 1200, '', '', 0, '[0]from:г. Альметьевск, улица Шевченко 32;to:г. Альметьевск, улица Строителей 51;passing_to:0;/', '0)500;/type_price:0/loader_price:700', '2021-02-18 06:53:16.554744'),
+(40, '', 2, 2, '89196420035', NULL, 2400, 'Бытовая техника', '', 0, '[0]from:г. Альметьевск, улица Джалиля;to:г. Альметьевск, улица Строителей;passing_to:0;/[1]from:г. Альметьевск, улица Джалиля;to:г. Альметьевск, улица Мира;passing_to:1;/', '1000/0)500;1)500;/type_price:0/loader_price:1400', '2021-02-18 06:53:16.554744'),
+(43, '', NULL, NULL, '89196420035', '2021-02-27 13:00:00.000000', 1500, '', '', 0, '[0]from:г. Альметьевск, улица Ленина 12;to:г. Альметьевск, улица Гафиатуллина 21;passing_to:0;/[1]from:г. Альметьевск, улица Джалиля;to:г. Альметьевск, улица Джалиля;passing_to:0;/[2]from:г. Альметьевск, улица Шевченко;to:г. Альметьевск, улица Строителей 51;passing_to:0;/', '1500/0)500;1)500;2)500;/type_price:0/loader_price:0/', '2021-02-23 19:08:50.000000'),
+(45, '', 1, 2, '89196420035', '2021-03-26 17:13:00.000000', 1700, 'Стройматериалы', '', 0, '[0]from:г. Альметьевск, улица Ленина;to:г. Альметьевск, улица Шевченко;passing_to:0;/[1]from:г. Альметьевск, улица Ленина;to:г. Альметьевск, улица Мира 10;passing_to:1;/', '1000/0)500;1)500;/type_price:0/loader_price:700/', '2021-03-01 15:25:47.000000'),
+(46, '', 1, 1, '89196420035', NULL, 8350, 'Стройматериалы', '', 0, '[0]from:г. Альметьевск, улица Ленина;to:г. Казань, улица Татарстан;passing_to:0;/', '8000/0)8000;/type_price:0/loader_price:350/', '2021-03-02 05:57:35.000000'),
+(47, '', NULL, NULL, '8457866358764', NULL, 1000, '', '', 0, '[0]from:г. Альметьевск, улица Строителей;to:г. Альметьевск, улица Джалиля;passing_to:0;/[1]from:г. Альметьевск, улица Строителей;to:г. Альметьевск, улица Гафиатуллина;passing_to:0;/', '1000/0)500;1)500;/type_price:0/loader_price:0/', '2021-03-02 05:57:35.000000');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `core_profile`
+--
+
+CREATE TABLE `core_profile` (
+  `id` int(11) NOT NULL,
+  `company` varchar(40) NOT NULL,
+  `location` varchar(30) NOT NULL,
+  `birth_date` date DEFAULT NULL,
+  `user_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `core_profile`
+--
+
+INSERT INTO `core_profile` (`id`, `company`, `location`, `birth_date`, `user_id`) VALUES
+(1, 'Кэрримобил', 'Тайсуган аулы', '2001-09-04', 5);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `core_review`
+--
+
+CREATE TABLE `core_review` (
+  `id` int(11) NOT NULL,
+  `text` longtext NOT NULL,
+  `published_date` datetime(6) NOT NULL,
+  `author_id` int(11) NOT NULL,
+  `likes` int(11),
+  `stars` int(11)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Дамп данных таблицы `core_review`
+--
+
+INSERT INTO `core_review` (`id`, `text`, `published_date`, `author_id`, `likes`, `stars`) VALUES
+(1, 'Классный сервис)', '2021-02-18 15:19:47.935207', 5, 0, 1),
+(3, 'Хороший сервис, всем советую!', '2021-02-27 03:00:37.239123', 5, 0, 5);
 
 -- --------------------------------------------------------
 
@@ -345,7 +397,9 @@ INSERT INTO `django_admin_log` (`id`, `action_time`, `object_id`, `object_repr`,
 (36, '2021-01-20 07:49:04.169878', '3', 'Бытовая техника', 2, '[{\"changed\": {\"fields\": [\"\\u041a\\u043b\\u0430\\u0441\\u0441\"]}}]', 13, 1),
 (37, '2021-01-20 07:49:08.286886', '3', 'Бытовая техника', 2, '[]', 13, 1),
 (38, '2021-01-20 07:49:12.598838', '2', 'Мебель', 2, '[{\"changed\": {\"fields\": [\"\\u041a\\u043b\\u0430\\u0441\\u0441\"]}}]', 13, 1),
-(39, '2021-01-20 07:49:17.475418', '1', 'Переезд', 2, '[{\"changed\": {\"fields\": [\"\\u041a\\u043b\\u0430\\u0441\\u0441\"]}}]', 13, 1);
+(39, '2021-01-20 07:49:17.475418', '1', 'Переезд', 2, '[{\"changed\": {\"fields\": [\"\\u041a\\u043b\\u0430\\u0441\\u0441\"]}}]', 13, 1),
+(40, '2021-02-23 12:24:57.295880', '40', 'г. Альметьевск, улица Гафиатуллина 35', 1, '[{\"added\": {}}]', 10, 5),
+(41, '2021-02-23 12:25:04.496392', '40', 'г. Альметьевск, улица Гафиатуллина', 2, '[{\"changed\": {\"fields\": [\"\\u0410\\u0434\\u0440\\u0435\\u0441\"]}}]', 10, 5);
 
 -- --------------------------------------------------------
 
@@ -369,11 +423,13 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (2, 'auth', 'permission'),
 (4, 'auth', 'user'),
 (5, 'contenttypes', 'contenttype'),
+(10, 'core', 'address'),
 (11, 'core', 'addresses'),
-(10, 'core', 'adresses'),
 (13, 'core', 'cargotype'),
 (12, 'core', 'cityprice'),
-(7, 'core', 'orders'),
+(7, 'core', 'order'),
+(14, 'core', 'profile'),
+(15, 'core', 'review'),
 (6, 'sessions', 'session');
 
 -- --------------------------------------------------------
@@ -434,7 +490,17 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (42, 'core', '0020_auto_20210120_1033', '2021-01-20 07:33:34.216140'),
 (43, 'core', '0021_cargotype_cargo_class', '2021-01-20 07:45:47.897150'),
 (44, 'core', '0022_auto_20210120_1047', '2021-01-20 07:47:10.048091'),
-(45, 'core', '0023_orders_status', '2021-01-20 15:19:05.490137');
+(45, 'core', '0023_orders_status', '2021-01-20 15:19:05.490137'),
+(46, 'core', '0024_auto_20210122_1040', '2021-01-23 03:28:26.878863'),
+(47, 'core', '0025_profile', '2021-02-16 15:10:51.472821'),
+(48, 'core', '0026_order_full_road', '2021-02-16 15:11:47.534230'),
+(49, 'core', '0027_auto_20210217_1154', '2021-02-17 08:55:05.566998'),
+(50, 'core', '0028_order_prices', '2021-02-17 10:54:33.954955'),
+(51, 'core', '0029_auto_20210218_0653', '2021-02-18 03:53:30.218134'),
+(52, 'core', '0026_review', '2021-02-18 14:42:55.207030'),
+(53, 'core', '0027_auto_20210216_1814', '2021-02-18 14:42:55.322059'),
+(54, 'core', '0030_merge_20210218_1742', '2021-02-18 14:42:55.400078'),
+(55, 'core', '0031_auto_20210227_0550', '2021-02-27 02:50:52.086767');
 
 -- --------------------------------------------------------
 
@@ -453,8 +519,13 @@ CREATE TABLE `django_session` (
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
-('7d0k5bv0yziux6ysk7wxglhb1vfsm78b', '.eJxVjDsOwjAQBe_iGln2-kco6XMGa23v4gBypDipEHeHSCmgfTPzXiLitta4dVriVMRFaHH63RLmB7UdlDu22yzz3NZlSnJX5EG7HOdCz-vh_h1U7PVbB8MOnB3IYMgA5syKPKBOwGBUNp5DVkVzGlyyioJ1Gl0gYPboFTvx_gDOtjeX:1l27qB:CRnYmzDL-O0f9tY-gnHeHTvq3lR1BTKvDnFJ7aTq31U', '2021-02-03 07:23:43.183355'),
-('o92lxube1jc64u058pj4635xluo73hbp', '.eJxVjEEOwiAQRe_C2hDKQBGX7nsGMgODVA0kpV0Z765NutDtf-_9lwi4rSVsnZcwJ3ERIE6_G2F8cN1BumO9NRlbXZeZ5K7Ig3Y5tcTP6-H-HRTs5VurBNogOXZnA8Rs1TgOyrMxyWE20XqdsyOfICJkn2nQQOiyVlZHF1G8P-kNOF4:1kyrSt:G_j6LviPgLd9KLUAz0NjKSlypxKE4THtd070dLixCXE', '2021-01-25 07:18:11.300515');
+('3puhx8akbfgssfpqw9auxaggu8p2insn', 'e30:1lFWKB:Ty4HGZSbYRrA-muZSfofuPJUHznzpG4wQPyUK6EuZJk', '2021-03-12 06:10:03.847939'),
+('ddcsu1e1db99xc0rrbevy0venpz0ba4t', 'e30:1lFWG1:bwLNYtBhvs2RqSdwVtIg1OVmhPHlGJK1MLMcyiQZbog', '2021-03-12 06:05:45.104282'),
+('e9mzu2veowdmgk3wgon4s3k8imd2k5el', 'e30:1lFXfk:cM69Wz_wpu_JknmSPrm6uC1TeAva_-Kx6XxS0puSGlI', '2021-03-12 07:36:24.847455'),
+('f51ts03uy1iddq6apw7x7bnnt1u86uoj', 'e30:1lFWFr:E7dtgeV-7Vm_F7zddDDVJHVTf_jXqNeHz-HMkER5siU', '2021-03-12 06:05:35.393526'),
+('jcasvxmsplwew68i7qzp6war45lrtuln', '.eJxVjDsOwjAQBe_iGln4I7OmpOcM1nrXiwPIluKkQtwdIqWA9s3Me6mE61LTOsqcJlZnZdThd8tIj9I2wHdst66pt2West4UvdOhr53L87K7fwcVR_3WEi0EZ72JlsELYQbxmciAlBOEiJayBGQB4yiUI0t0kMU5QA-FUb0_9UI43Q:1l70Nr:wyDFGKLMz18ixfvjeQqXP_sdf3LjMyS015r7Dxfhwoc', '2021-02-16 18:26:39.325674'),
+('o92lxube1jc64u058pj4635xluo73hbp', '.eJxVjEEOwiAQRe_C2hDKQBGX7nsGMgODVA0kpV0Z765NutDtf-_9lwi4rSVsnZcwJ3ERIE6_G2F8cN1BumO9NRlbXZeZ5K7Ig3Y5tcTP6-H-HRTs5VurBNogOXZnA8Rs1TgOyrMxyWE20XqdsyOfICJkn2nQQOiyVlZHF1G8P-kNOF4:1kyrSt:G_j6LviPgLd9KLUAz0NjKSlypxKE4THtd070dLixCXE', '2021-01-25 07:18:11.300515'),
+('rz2emdg2zumtcjy0etzewds0bk93xt4g', '.eJxVjDEOwjAMRe-SGUWt4qQOIztnqBzbkAJKpKadKu4OlTrA-t97fzMjrUse16bzOIk5G29Ov1sifmrZgTyo3KvlWpZ5SnZX7EGbvVbR1-Vw_w4ytfyt-wBBfUc-ORw8UAzgASP3EEQ7TR1GAHUs6IQxSULPQ0RCF28cCcz7A8T1N5k:1lGgTB:j4Zqc1l4-8I44N2N-iyvfrvJoFMvd1CYtkAL4ieUlSY', '2021-03-15 11:12:09.716850');
 
 --
 -- Индексы сохранённых таблиц
@@ -506,9 +577,9 @@ ALTER TABLE `auth_user_user_permissions`
   ADD KEY `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` (`permission_id`);
 
 --
--- Индексы таблицы `core_adresses`
+-- Индексы таблицы `core_address`
 --
-ALTER TABLE `core_adresses`
+ALTER TABLE `core_address`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -524,10 +595,24 @@ ALTER TABLE `core_cityprice`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `core_orders`
+-- Индексы таблицы `core_order`
 --
-ALTER TABLE `core_orders`
+ALTER TABLE `core_order`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `core_profile`
+--
+ALTER TABLE `core_profile`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `user_id` (`user_id`);
+
+--
+-- Индексы таблицы `core_review`
+--
+ALTER TABLE `core_review`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `core_review_author_id_b9ff1c35_fk_auth_user_id` (`author_id`);
 
 --
 -- Индексы таблицы `django_admin_log`
@@ -577,13 +662,13 @@ ALTER TABLE `auth_group_permissions`
 -- AUTO_INCREMENT для таблицы `auth_permission`
 --
 ALTER TABLE `auth_permission`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT для таблицы `auth_user`
 --
 ALTER TABLE `auth_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT для таблицы `auth_user_groups`
@@ -598,10 +683,10 @@ ALTER TABLE `auth_user_user_permissions`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `core_adresses`
+-- AUTO_INCREMENT для таблицы `core_address`
 --
-ALTER TABLE `core_adresses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+ALTER TABLE `core_address`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT для таблицы `core_cargotype`
@@ -616,28 +701,40 @@ ALTER TABLE `core_cityprice`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT для таблицы `core_orders`
+-- AUTO_INCREMENT для таблицы `core_order`
 --
-ALTER TABLE `core_orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+ALTER TABLE `core_order`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+
+--
+-- AUTO_INCREMENT для таблицы `core_profile`
+--
+ALTER TABLE `core_profile`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT для таблицы `core_review`
+--
+ALTER TABLE `core_review`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT для таблицы `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
 
 --
 -- AUTO_INCREMENT для таблицы `django_content_type`
 --
 ALTER TABLE `django_content_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT для таблицы `django_migrations`
 --
 ALTER TABLE `django_migrations`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- Ограничения внешнего ключа сохраненных таблиц
@@ -669,6 +766,18 @@ ALTER TABLE `auth_user_groups`
 ALTER TABLE `auth_user_user_permissions`
   ADD CONSTRAINT `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
   ADD CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
+
+--
+-- Ограничения внешнего ключа таблицы `core_profile`
+--
+ALTER TABLE `core_profile`
+  ADD CONSTRAINT `core_profile_user_id_bf8ada58_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
+
+--
+-- Ограничения внешнего ключа таблицы `core_review`
+--
+ALTER TABLE `core_review`
+  ADD CONSTRAINT `core_review_author_id_b9ff1c35_fk_auth_user_id` FOREIGN KEY (`author_id`) REFERENCES `auth_user` (`id`);
 
 --
 -- Ограничения внешнего ключа таблицы `django_admin_log`

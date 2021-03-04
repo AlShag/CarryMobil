@@ -83,6 +83,9 @@
                                 <th class="">
                                     Статус
                                 </th>
+                                <th class="">
+                                    Автор
+                                </th>
                                 <th class="" colspan="2" style="border-right: none;">
                                     Действие
                                 </th>
@@ -126,6 +129,9 @@
                                                 <a href="{% url 'order_detail' pk=order.pk %}">Отменено</a>
                                             {% endif %}
                                         {% endif %}
+                                    </td>
+                                    <td class="">
+                                        <a href="{% url 'order_detail' pk=order.pk %}">{{ order.author }}</a>
                                     </td>
                                     <td class="">
                                         <a href="{% url 'order_delete' pk=order.pk %}"><button type="button">Удалить</button></a>

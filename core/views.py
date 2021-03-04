@@ -60,8 +60,14 @@ def order(request):
     error = ''
     if request.method == 'POST':
         form = OrderForm(request.POST)
+        user = request.user
         if form.is_valid():
-            form.save()
+            order = form.save(commit=False)
+            if user.is_authenticated:
+                order.author = user.id
+            else:
+                order.author = 0
+            order.save()
             return redirect('ordered')
         else:
             error = 'Форма была неверной'
