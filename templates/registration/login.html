@@ -30,13 +30,13 @@
             </section>
             <input type="submit" value="Войти"><br>
             <span>Войти через:</span><br>
-            <section class="login_with">
+            <!-- <section class="login_with">
                 <ul>
                     <li><a href=""><img src="{% static '/images/login/vk.svg' %}"></a></li>
                     <li><a href=""><img src="{% static '/images/login/google.svg' %}"></a></li>
                     <li><a href=""><img src="{% static '/images/login/facebook.svg' %}"></a></li>
                 </ul>
-            </section>
+            </section> -->
             <span>Или <a href="{% url 'register' %}">зарегистрироваться</a></span>
             <input type="hidden" name="next" value="{{ next }}">
         </form>

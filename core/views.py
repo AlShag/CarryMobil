@@ -1,15 +1,16 @@
 from django.utils import timezone
 from django.shortcuts import render, redirect, get_object_or_404, reverse
-from django.contrib import auth
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from .models import Order, Address, CityPrice, CargoType, Review
 from .forms import OrderForm, AddressForm, SignInForm, SignUpForm, UserForm, ProfileForm, ReviewForm, OrderEditForm
 from django.urls import reverse_lazy
-from django.contrib.auth.forms import UserCreationForm
 from django.views import generic
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages, auth
 from django.db import transaction
-from django.contrib import messages
+from datetime import timedelta, datetime
+from openpyxl import Workbook
 
 
 def index(request):
@@ -201,3 +202,70 @@ def index(request):
     return render(request, 'main/landing.html', {'reviews': reviews, 'review_form': review_form})
 def licenses(request):
     return render(request, 'licenses/licenses.html', {})
+
+
+def orders_export(request):
+    """
+    Downloads all orders as Excel file with a single worksheet
+    """
+    order_queryset = Order.objects.all()
+    
+    response = HttpResponse(
+        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    )
+    response['Content-Disposition'] = 'attachment; filename={date}-orders.xlsx'.format(
+        date=datetime.now().strftime('%Y-%m-%d'),
+    )
+    workbook = Workbook()
+    
+    # Get active worksheet/tab
+    worksheet = workbook.active
+    worksheet.title = 'Заказы'
+
+    # Define the titles for columns
+    columns = [
+        'ID',
+        'Отправитель',
+        'Номер телефона',
+        'Дата и время исполнения',
+        'Маршрут',
+        'Грузчики, чел.',
+        'Грузчики, час.',
+        'Вид груза',
+        'Сумма',
+        'Статус',
+
+    ]
+    row_num = 1
+
+    # Assign the titles for each cell of the header
+    for col_num, column_title in enumerate(columns, 1):
+        cell = worksheet.cell(row=row_num, column=col_num)
+        cell.value = column_title
+
+    # Iterate through all orders
+    for order in order_queryset:
+        row_num += 1
+        
+        # Define the data for each cell in the row 
+        row = [
+            order.id,
+            order.author,
+            order.user_tel_nomer,
+            order.start_time,
+            order.full_road,
+            order.loader_count,
+            order.loader_time_count,
+            order.cargo_type,
+            order.order_price,
+            order.status,
+        ]
+        
+        # Assign the data for each cell of the row 
+        for col_num, cell_value in enumerate(row, 1):
+            cell = worksheet.cell(row=row_num, column=col_num)
+            cell.value = cell_value
+
+    workbook.save(response)
+
+    return response

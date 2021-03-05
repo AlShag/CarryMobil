@@ -80,6 +80,7 @@ class OrderForm(ModelForm):
                 'min':'0',
             }),
             'user_tel_nomer':  NumberInput(attrs={
+                'placeholder': 'Номер телефона',
                 'id': 'user_telephone',
                 'required':'',
                 'type': 'telephone',

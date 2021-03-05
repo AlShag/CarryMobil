@@ -11,6 +11,13 @@
 {% endblock %}
 {% block content %}
     {% if user.is_staff %}
+        <div class="container">
+            <a href="{% url 'orders_export' %}">
+                <button type="button">
+                    Выгрузить отчёты
+                </button>
+            </a>
+        </div>
         <div class="orders_area">
             <div class="orders_form">
                 <div class="container">
