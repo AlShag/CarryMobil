@@ -13,6 +13,7 @@ urlpatterns = [
     path('profile_edit', views.update_profile, name='update_profile'),
     path('driver', views.myorders, name='myorders'),
     path('ordered', views.ordered, name='ordered'),
+    path('report', views.report, name='report'),
     path('licenses', views.licenses, name='licenses'),
     path('order_table', views.order_table, name='order_table'),
     path('order/<int:pk>/detail', views.order_detail, name='order_detail'),

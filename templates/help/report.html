@@ -1,0 +1,18 @@
+{% extends "main/index.html" %}
+{% block title %}Помощь{% endblock %}
+{% load static %}
+{% block content %}
+<div class="report_area">
+    <div class="container">
+        <div class="report_form">
+            <form method="post">
+                <h1>Сообщение о проблеме</h1>
+                {% csrf_token %}
+                {{ report.report_text }}<br>
+                
+                <button type="submit">Отправить</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

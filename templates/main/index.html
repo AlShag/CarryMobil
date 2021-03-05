@@ -33,7 +33,7 @@
                 <nav>
                     <ul>
                         <li><a href="{% url 'index' %}">Главная</a></li>
-                        <li><a href="#help">Помощь</a></li>
+                        <li><a href="{% url 'report' %}">Помощь</a></li>
                         <li><a href="{% url 'order' %}">Оформить заказ</a></li>
                         <li><a href="#ab_us">О нас</a></li>
                         <li><a href="#contacts">Контакты</a></li>
@@ -69,14 +69,15 @@
         {% endblock %}
     </div>
 
-    <div class="footer" name="#contacts">
+    <div class="footer">
+        <a name="contacts"></a>
         <div class="container">
             <div class="footer_nav">
                 <div class="flex">
                     <div class="footer_block" id="footer_ab_us">
                         <h2>О нас</h2>
                         <section>
-                        <p><b>CarryMobil</b> - связь логистических<br> услуг.</p>
+                        <p><b>CarryMobil</b> - Платформа логистических <br> услуг.</p>
                             <h3>&#9672; Адрес</h3>
                             <span>Альметьевск</span>      
                             <h3>&#9993; Электронная почта</h3>
@@ -115,7 +116,7 @@
                     <div class="footer_block">
                         <h2>Заказ</h2>
                         <section>
-                            <button id='footer_to_order'><img src="" alt=""><a href="">оформить сейчас</a></button>
+                            <button id='footer_to_order' onclick="window.location='{% url 'order' %}'"><img src="" alt="">оформить сейчас</button>
                         </section>
                     </div>
                 </div>

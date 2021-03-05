@@ -1,4 +1,4 @@
-from .models import Order, Address, Profile, Review
+from .models import Order, Address, Profile, Review, Report
 from django import forms
 from django.forms import ModelForm, TextInput, DateTimeInput, Textarea, NumberInput, PasswordInput
 from django.contrib.auth.forms import AuthenticationForm
@@ -16,6 +16,7 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
         fields = ('birth_date', 'location', 'company')
+
 
 
 class SignInForm(AuthenticationForm):
@@ -122,4 +123,16 @@ class ReviewForm(ModelForm):
             'text':  Textarea(attrs={
                 'placeholder': 'Здесь вы можете написать свой отзыв...',
             }),
+        }
+
+
+class ReportForm(ModelForm):
+    class Meta:
+        model = Report
+        fields = ['report_text', 'published_date']
+
+        widgets = {
+            'report_text': Textarea(attrs={
+                'placeholder':'Здесь вы можете описать суть проблемы с которой вы столкнулись'
+            })
         }

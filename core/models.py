@@ -26,7 +26,7 @@ def save_user_profile(sender, instance, **kwargs):
 
 
 class Order(models.Model):
-    full_road = models.CharField('Маршрут', max_length=300)
+    full_road = models.CharField('Маршрут', max_length=1500)
     start_time = models.DateTimeField('Время прибытия на заказ', null=True, blank=True)
     road_comment = models.TextField('Комментарий к доргоге', null=True, blank=True)
     cargo_type = models.CharField('Тип груза', max_length=50, blank=True)
@@ -97,3 +97,8 @@ class Review(models.Model):
 
     def __str__(self):
         return self.text
+
+
+class Report(models.Model):
+    report_text = models.TextField()
+    published_date = models.DateTimeField(default=timezone.now, null=True, blank=True)

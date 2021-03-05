@@ -84,8 +84,52 @@
     color: #41A4FF;
     transition: 0.2s;
 }
+.user_content form{
+    height: 100%;
+}
 @media screen and (max-width: 1700px){
     .profil_area{
         height: 1650px;
+    }
+}
+@media screen and (max-width: 1400px){
+    .user_image input{
+        font-size: 14pt;
+    }
+    .user_info label{
+        font-size: 14pt;
+    }
+    .user_info h1{
+        font-size: 20pt;
+    }
+    .user_image{
+        width: 35%;
+    }
+    .user_personal_info{
+        width:65%;
+    }
+    .transiton_param input{
+        font-size: 18pt;
+    }
+}
+@media screen and (max-width: 768px){
+    .user_content {
+        height: 50%;
+    }
+    .user_image{
+        width: 100%;
+        border-right: none;
+        height: 50%;
+    }
+    .user_image_content{
+        padding-top: 10%;
+        text-align: center;
+    }
+    
+    .user_image img{
+        height: 70%;
+    }
+    .user_image input {
+        width: 50%;
     }
 }
