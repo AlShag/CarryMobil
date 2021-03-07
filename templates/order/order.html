@@ -113,7 +113,7 @@
                                             </div>
                                         </section>
                                         <div id="road_add_choice">
-                                            <button id="road_choice_exit">	&#10006;</button>
+                                            <button id="road_choice_exit">&#10006;</button>
                                             <div class="road_add_select">
                                                 <button id="passing_road_add">Добавить как попутную точку для</button>
                                                 <select name="" id="">
@@ -264,8 +264,11 @@
                                         <section class="full_road">
                                             <div class="flex_al">
                                                 <label for=""><h2>Маршрут:</h2></label>
-                                                <div class="all_roads">
+                                                <div id="all_roads">
+                                                    
                                                 </div>
+                                                {{ form.full_road }}
+                                            </div>
                                         </section>
                                         <section class="full_type">
                                             <div class="flex_al">

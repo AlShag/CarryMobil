@@ -4,7 +4,7 @@
 }
 .order_form{
     height:65%;
-    width: 70%;
+    width: 65%;
     background-color: white;
     border-radius: 20px;
     margin: 0 auto;
@@ -26,6 +26,7 @@
 }
 .order_title h1{
     color: black;
+    font-size: 36pt;
 }
 .order_title_icon{
     height: 80px;
@@ -120,13 +121,14 @@
     display: none;
     background-color: white;
     width: 35%;
-    border: 2px solid rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
     position: fixed;
     top:32%;
     left: 32%;
 }
 #road_add_choice button:not(#road_choice_exit){
-    padding: 10% 0;
+    padding: 10% 5%;
     width: 100%;
     font-size: 18pt;
 }
@@ -138,6 +140,9 @@
 }
 .road_add_select select{
     width: 100%;
+    font-size: 14pt;
+}
+.road_add_select select option{
     font-size: 14pt;
 }
 #road_choice_exit{
@@ -324,14 +329,35 @@ input[type="number"]::-webkit-inner-spin-button {
 .full_road{
     height: 30%;
 }
-#full_road{
-    height: 90%;
-    width: 65%;
+#all_roads{
     background-color: white;
     border-radius: 20px;
-    outline: none;
+    overflow-y: scroll;
+    text-align: left;
+    padding-left: 5%;
+    height: 150px;
+    width: 70%;
+}
+#all_roads h4{
+    font-weight: 500;
+}
+#all_roads span{
+    cursor: pointer;
+}
+#all_roads span:hover{
+    background-color: #0085ff;
+    color: white;
+}
+.passing_road{
+    padding-left: 5%;
 }
 #id_full_road{
+    display: none;
+}
+#id_prices{
+    display: none;
+}
+#id_sended_in{
     display: none;
 }
 #full_road option{
@@ -526,6 +552,9 @@ input[type="number"]::-webkit-inner-spin-button {
     }
 }
 @media screen and (max-width: 768px){
+    select{
+        background-color: white;
+    }
     .order_title{
         display: none;
     }
@@ -584,6 +613,11 @@ input[type="number"]::-webkit-inner-spin-button {
     .order_area {
     height: auto;
     }
+    .roads_add button{
+        color: #0085ff;
+        border: 1px solid #0085ff;
+        border-radius: 10px;
+    }
     #time_select{
         text-align: center;
         padding-top:0;
@@ -593,6 +627,17 @@ input[type="number"]::-webkit-inner-spin-button {
         width: 100%;
         margin: 0;
         height: 50px;
+    }
+    #road_add_choice{
+        width: 80%;
+        left: 10%;
+    }
+    #road_add_choice button{
+        font-size: 14pt;
+    }
+    #road_choice_exit{
+        left: 90%;
+        top: 10px;
     }
     /* list2 */
     .type_select section {

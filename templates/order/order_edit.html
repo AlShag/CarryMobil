@@ -1,10 +1,83 @@
 {% extends "main/index.html" %}
+{% load static %}
 {% block title %}Журнал заявок{% endblock %}
-
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'styles/order_manage.css' %}">
+{% endblock %}
+{% block script %}
+{{ block.super }}
+    <script src="{% static 'scripts/order.js' %}"></script>
+{% endblock %}
 {% block content %}
 
 {% if user.is_staff %}
-
+    <div class="orders_area">
+        <div class="orders_form">
+            <div class="order_info">
+                <form method="POST" class="post-form">
+                    {% csrf_token %}
+                    <a href="{% url 'order_table' %}" id="to_orders_list">&#8617;</a>
+                    <table id="order_edit_table">
+                        <tr class="road_changes">
+                            <th>Маршрут</th>
+                            <td>
+                                <div class="roads">
+                                    <label for="" id="full_road_info">{{ form.full_road }}</label>
+                                </div>
+                            </td>
+                            <td>
+                                <input type="button" name="new" value="Добавить новую точку" id="changing_add_new_road"><br>
+                                <input type="button" value="Удалить Маршрут:"><input type="number" value="1" id="road_delete_id">
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Тип груза</th>
+                            <td>
+                                {{ form.cargo_type }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Количество грузчиков</th>
+                            <td>{{ form.loader_count }}</td>
+                        </tr>
+                        <tr>
+                            <th>Количество часов для грузчиков</th>
+                            <td>{{ form.loader_time_count }}</td>
+                        </tr>
+                        <tr>
+                            <th>Цены заказа</th>
+                            <td>{{ form.prices }}</td>
+                        </tr>
+                        <tr>
+                            <th>Стоимость заказа</th>
+                            <td>{{ form.order_price }}</td>
+                        </tr>
+                        <tr>
+                            <th>Номер телефона заказчика</th>
+                            <td>{{ form.user_tel_nomer }}</td>
+                        </tr>
+                        <tr>
+                            <th>Время начала работы</th>
+                            <td>{{ form.start_time }}</td>
+                        </tr>
+                        <tr>
+                            <th>Статус</th>
+                            <td class="order_status_changing">
+                                {{ form.status }}
+                                <input type="button" id="cancel_order" value="Откланить">
+                                <input type="button" id="order_enable" value="Выполнить">
+                                <input type="button" id="order_complite" value="Завершить">
+                            </td>
+                        </tr>
+                    </table>
+                    <button type="submit" class="" id="send_order_changes" hidden>Сохранить изменения</button>
+                    <input type="button" value="Сохранить изменения" id="add_changes">
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>order_edit_form()</script>
 {% endif %}
 
 {% endblock %}
