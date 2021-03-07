@@ -42,6 +42,9 @@
     .spec_list::-webkit-scrollbar { width: 0; }
 }
 @media screen and (max-width: 768px){
+    h1 {
+        font-size: 28pt;
+    }
     header{
         background-color: white;
         position: fixed;

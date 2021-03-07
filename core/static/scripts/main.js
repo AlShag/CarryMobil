@@ -83,19 +83,17 @@ function right_slide(){
 }
 
 function on_mobile(){
+    setInterval(function(){
+        right_slide();
+      }, 5000);
     jQuery('.slider').swipe({
         swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-            console.log(direction);
             if(direction=='right') left_slide();
             if(direction=='left') right_slide();
         }
     });
     jQuery('body').swipe({
         swipe:function(event, direction, distance, duration, fingerCount, fingerData){
-            console.log(fingerData);
-            console.log(duration);
-            console.log(fingerData[0].start['x']);
-            console.log()
             if(($('.navmenu').css('right')>'25%') & (direction=='right') & (fingerData[0].start['x']<=100))$('.navmenu').addClass('showed');
             if(($('.navmenu').css('display')=='block') & (direction=='left') & (duration>150))$('.navmenu').removeClass('showed');
         }
