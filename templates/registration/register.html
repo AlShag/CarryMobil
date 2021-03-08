@@ -32,7 +32,20 @@
               <input type="checkbox" value="" name="" id="view_password">
           </div>
         </section>
-        <input type="submit" value="Зарегистрироваться">
+        <section>
+        <table>
+          <tr>
+            <td>
+              <input type="checkbox" name="" id="user_accord" style="display: block;" checked>
+            </td>
+            <td>
+              <label for="user_accord">Выражаю согласие с условиями <a href="https://cloud.mail.ru/public/wAzK/spaTqcE16">пользовательского соглашения</a></label>
+            </td>
+          </tr>
+        </table>
+        </section>
+        <input type="submit" value="Зарегистрироваться" id="user_register" hidden>
+        <input type="button" value="Зарегистрироваться" id="registration">
         {% if form.errors %}
           <section class="form_error">
           {% for field in form %}

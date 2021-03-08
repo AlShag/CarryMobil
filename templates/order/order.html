@@ -78,8 +78,8 @@
                                                 {% endfor %}
                                             </table>
                                             <h2>Откуда</h2>
-                                            <input type="search" list="address_from_search" value="" placeholder="Населенный пункт, улица, дом отправления груза..." id="from_address">
-                                            <datalist id="address_from_search" onselect="alert('hi')">
+                                            <input type="search" list="address_search" value="" placeholder="Населенный пункт, улица, дом отправления груза..." id="from_address">
+                                            <datalist id="address_search" onselect="alert('hi')">
                                                 {% for el in all_address %}
                                                 <option value="{{ el.address }}"></option>
                                                 {% endfor %}
@@ -87,12 +87,7 @@
                                         </section>
                                         <section>
                                             <h2>Куда</h2>
-                                            <input type="search" list="address_to_search" placeholder="Населенный пункт, улица, дом направления груза..." id="to_address">
-                                            <datalist id="address_to_search">
-                                                {% for el in all_address %}
-                                                <option value="{{ el.address }}"></option>
-                                                {% endfor %}
-                                            </datalist>
+                                            <input type="search" list="address_search" placeholder="Населенный пункт, улица, дом направления груза..." id="to_address">
                                         </section>
                                         <section>
                                             <h2>Комментарий</h2>
@@ -116,7 +111,7 @@
                                             <button id="road_choice_exit">&#10006;</button>
                                             <div class="road_add_select">
                                                 <button id="passing_road_add">Добавить как попутную точку для</button>
-                                                <select name="" id="">
+                                                <select name="road_var" id="">
                                                         <option id="passing_from_road"></option>
                                                         <option id="passing_to_road"></option>
                                                     </select>
@@ -139,7 +134,7 @@
                                     <div class="flex">
                                         <h2 class="select_type_info_title">Тип груза</h2>
                                         {{ form.cargo_type }}
-                                        <select name="" id="goods_type_select">
+                                        <select name="type_select" id="goods_type_select">
                                                 <option value="0" disabled selected hidden>Выберите тип груза</option>
                                             {% for el in all_types %}
                                                 <option value="{{ el.price }}" class="{{ el.cargo_class }}">{{ el.cargo }}</option>
@@ -149,69 +144,35 @@
                                     </div>
                                 </section>
                                 <div class="type_info">
-                                    <div class="for_type" id="material_add" hidden>
-                                        <section>
-                                            <div class="flex">
-                                                <h2 class="select_type_info_title">Высота</h2>
-                                                <input type="number" min="0" step="0.1">
-                                            </div>
-                                        </section>
-                                        <section>
-                                            <div class="flex">
-                                                <h2 class="select_type_info_title">Ширина</h2>
-                                                <input type="number" min="0" step="0.1">
-                                            </div>
-                                        </section>
-                                        <section>
-                                            <div class="flex">
-                                                <h2 class="select_type_info_title">Вес</h2>
-                                                <input type="number" min="0" step="10">
-                                            </div>
-                                        </section>
-                                    </div>
-                                    <div class="for_type" id="spec_add" hidden>
-                                        <section>
-                                            <div class="flex">
-                                                <h2 class="select_type_info_title">Высота</h2>
-                                                <input type="number" min="0" step="0.1">
-                                            </div>
-                                        </section>
-                                        <section>
-                                            <div class="flex">
-                                                <h2 class="select_type_info_title">Ширина</h2>
-                                                <input type="number" min="0" step="0.1">
-                                            </div>
-                                        </section>
-                                        <section>
-                                            <div class="flex">
-                                                <h2 class="select_type_info_title">Вес</h2>
-                                                <input type="number" min="0" step="10">
-                                            </div>
-                                        </section>
-                                    </div>
-                                    <div class="for_type" id="other_add" hidden>
-                                        <section>
+                                    <div class="for_type" hidden>
+                                        <section id="cargo_name" hidden>
                                             <div class="flex">
                                                 <h2 class="select_type_info_title">Название</h2>
-                                                <input type="text">
+                                                <input type="text" name="type_title" class="cargo_value" id="cargo_name_value">
                                             </div>
                                         </section>
-                                        <section>
+                                        <section id="cargo_length">
+                                            <div class="flex">
+                                                <h2 class="select_type_info_title">Длина</h2>
+                                                <input type="number" name="cargo_length" class="cargo_value" min="0" max="9" id="cargo_len_value" step="0.1">
+                                            </div>
+                                        </section>
+                                        <section id="cargo_height">
                                             <div class="flex">
                                                 <h2 class="select_type_info_title">Высота</h2>
-                                                <input type="number" min="0" step="0.1">
+                                                <input type="number" name="cargo_height" class="cargo_value" min="0" max="9" id="cargo_height_value" step="0.1">
                                             </div>
                                         </section>
-                                        <section>
+                                        <section id="cargo_width">
                                             <div class="flex">
                                                 <h2 class="select_type_info_title">Ширина</h2>
-                                                <input type="number" min="0" step="0.1">
+                                                <input type="number" name="cargo_width" class="cargo_value" min="0" id="cargo_width_value" step="0.1">
                                             </div>
                                         </section>
-                                        <section>
+                                        <section id="cargo_weight">
                                             <div class="flex">
                                                 <h2 class="select_type_info_title">Вес</h2>
-                                                <input type="number" min="0" step="10">
+                                                <input type="number" name="cargo_weight" class="cargo_value" min="0" id="cargo_weight_value" step="10">
                                             </div>
                                         </section>
                                     </div>
@@ -273,7 +234,7 @@
                                         <section class="full_type">
                                             <div class="flex_al">
                                                 <label for=""><h2>Вид груза:</h2></label>
-                                                <input type="text" name="" id="full_cargo_type" value="Переезд" disabled>
+                                                <input type="text" name="full_type" id="full_cargo_type" value="Переезд" disabled>
                                             </div>
                                         </section>
                                         <section class="full_loader">
@@ -300,7 +261,7 @@
                                             <table>
                                                 <tr>
                                                     <td><h2>Маршрут</h2></td>
-                                                    <td><span id='road_full_price'>500р</span></td>
+                                                    <td><span id='road_full_price'>0р</span></td>
                                                 </tr>
                                                 <tr>
                                                     <td><h2>Вид груза</h2></td>
@@ -308,7 +269,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td><h2>Грузчики</h2></td>
-                                                    <td><span id='loader_price'>700р</span></td>
+                                                    <td><span id='loader_price'>0р</span></td>
                                                 </tr>
                                             </table>
                                             {{ form.prices }}
@@ -321,6 +282,18 @@
                                                 {{ form.order_price }}
                                             </div>
                                         </section>
+                                        <section>
+                                            <table>
+                                              <tr>
+                                                <td>
+                                                  <input type="checkbox" name="" id="user_accord" style="display: block;" checked>
+                                                </td>
+                                                <td>
+                                                  <label for="user_accord">Выражаю согласие с условиями <a href="https://cloud.mail.ru/public/rP83/XdrTY3kVN">обработки персональных данных</a></label>
+                                                </td>
+                                              </tr>
+                                            </table>
+                                            </section>
                                     </div>
                                 </div>
                             </div>

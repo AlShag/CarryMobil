@@ -29,7 +29,7 @@ class Order(models.Model):
     full_road = models.CharField('Маршрут', max_length=1500)
     start_time = models.DateTimeField('Время прибытия на заказ', null=True, blank=True)
     road_comment = models.TextField('Комментарий к доргоге', null=True, blank=True)
-    cargo_type = models.CharField('Тип груза', max_length=50, blank=True)
+    cargo_type = models.CharField('Тип груза', max_length=60, blank=True)
     cargo_type_comment = models.TextField('Тип груза комментарий', null=True, blank=True)
     loader_count = models.IntegerField('Количество грузчиков', null=True, blank=True)
     loader_time_count = models.IntegerField('Количество часов для грузчиков', null=True, blank=True)

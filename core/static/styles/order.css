@@ -368,13 +368,8 @@ input[type="number"]::-webkit-inner-spin-button {
 .all_roads{
     width: 100%;
     border-radius: 20px;
-    overflow-y: scroll;
     text-align: left;
     padding-left: 5%;
-}
-.all_roads{
-    width: 70%;
-    background-color: white;
 }
 .main_road{
     width: 100%;
@@ -669,19 +664,18 @@ input[type="number"]::-webkit-inner-spin-button {
     /* list3 */
     .list3_image {
         width: 100%;
-        height: 30%;
+        height: 20%;
         background-size: 40%;
-        padding-top: 15%;
-        padding-top: 20%;
-        background-size: 50%;
+        padding-top: 30%;
+        background-size: 40%;
     }
-    .list3_params{
+    .list3_params {
         width: 100%;
-        margin: 5% auto;
+        margin: 0% auto;
     }
-    .list3_param{
+    .list3_param {
         height: 30%;
-        width: 80%;
+        width: 60%;
         margin: 0 auto;
     }
     .list3_param table{
@@ -754,10 +748,13 @@ input[type="number"]::-webkit-inner-spin-button {
     #user_telephone{
         color: #474747;
     }
+}
 @media screen and (max-width: 479px) {
-    .mb_list_head h1 {
-        font-size: 18pt;
-        padding: 3% 2%;
+    .list3_image {
+        width: 100%;
+        height: 30%;
+        background-size: 50%;
+        padding-top: 30%;
     }
 }
 @media screen and (max-width: 379px) {
@@ -766,7 +763,9 @@ input[type="number"]::-webkit-inner-spin-button {
         padding: 5% 2%;
     }
     .list3_image {
-        background-size: 50%;
-        padding-top: 5%;
+        background-size: 60%;
     }
-}   
+    .list3_param {
+        width: 80%;
+    }
+}

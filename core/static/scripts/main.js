@@ -6,6 +6,9 @@ let stars_count=1;
 $(document).ready(function (){
     last_slide=$('.slider input[type="radio"][name="advan_slider"]').last().attr('id');
     $('#view_password').click(function(){view_password()});
+    console.log($('#user_accord').is(':checked'));
+    
+    $('#registration').click(function(){if($('#user_accord').is(':checked')) $('#user_register').click(); else alert('Для регистрации учётной записи необходимо подтверждение пользовательского соглашения');});
     $('#left_slide').click(function(){left_slide()});
     $('#right_slide').click(function(){right_slide()});
     $('#comment_form_close').click(function(){$('.comment_create').hide();});
@@ -46,7 +49,7 @@ $(document).ready(function (){
 });
 $(document).scroll(function (){
    let top=$(document).scrollTop();
-    if(top>1000){$('#to_up').show()} else $('#to_up').hide();
+    if(top>1000){$('#to_up').show();} else $('#to_up').hide();
 });
 jQuery('.slider').swipe({});
 function view_password(){
@@ -83,6 +86,7 @@ function right_slide(){
 }
 
 function on_mobile(){
+    if($('.advan').css('display')=='flex')
     setInterval(function(){
         right_slide();
       }, 5000);

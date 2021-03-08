@@ -180,6 +180,10 @@ nav li a:hover{
     width: 50px;
     text-align: center;
     border-radius: 100%;
+    border: 2px solid #0085ff;
+}
+#to_up:hover{
+    border: 2px solid white;
 }
 #to_up img{
    height: 100%;
@@ -293,6 +297,10 @@ input[type="radio"][name="advan_slider"]{display: none;}
 }
 .spec h1{
     padding-top: 1%;
+}
+.spec h3{
+    color: black;
+    font-weight: 400;
 }
 .spec_form div h2{
     padding-top: 5%;
@@ -425,6 +433,9 @@ input[type="radio"][name="advan_slider"]{display: none;}
 .footer_block section span{
     margin-left: 6%;
     color: white;
+}
+.footer_block a{
+    color: #fff;
 }
 .footer_block h2{
     font-size: 20pt;
