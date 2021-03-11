@@ -29,7 +29,7 @@
     width: 65%;
     margin: 0 auto;
 }
-.login_form input[type='text'], input[type='password']{
+.login_form input[type='text'], input[type='password'], input[type='email']{
     font-size: 16pt;
     width: 100%;
     color: black;
@@ -39,7 +39,7 @@
 .input_container{
     display: flex;
     border-bottom: 1px solid #474747;
-}
+}z
 /* .for_input:hover{
     border-bottom: 1px solid#0085ff;
     transition: 0.25s;

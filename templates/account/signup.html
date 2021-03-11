@@ -29,7 +29,7 @@
           <h2>Пароль</h2>
           <div class="input_container">
               <img src="{% static '/images/login/padlock.svg' %}" class='for_input_icn'>
-              {{ form.password1 }}
+              {{ form.password }}
               <input type="checkbox" value="" name="" id="view_password">
               <label for="view_password"><img src="{% static '/images/login/visibility.svg' %}" alt="" class="for_input_func" id="view_password"></label>
           </div>
@@ -38,7 +38,7 @@
           <h2>Повторите пароль</h2>
           <div class="input_container">
               <img src="{% static '/images/login/padlock.svg' %}" class='for_input_icn'>
-              {{ form.password2 }}
+              {{ form.password_confirm }}
               <input type="checkbox" value="" name="" id="view_password">
           </div>
         </section>

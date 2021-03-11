@@ -26,42 +26,42 @@
 <body>
     <div class="for_header"></div>
     <header>
-        <div class="container">
-            <div class="logo"><a href="{% url 'index' %}">CM</a></div>
-            <button id="show_nawmenu">&#9776;</button>
-            <div class="navmenu">
-                <nav>
-                    <ul>
-                        <li><a href="{% url 'index' %}">Главная</a></li>
-                        <li><a href="{% url 'report' %}">Помощь</a></li>
-                        <li><a href="{% url 'order' %}">Оформить заказ</a></li>
-                        <li><a href="#ab_us">О нас</a></li>
-                        <li><a href="#contacts">Контакты</a></li>
-                        {% if user.is_staff %}
-                        <li><a href="/admin/">Админ.страница</a></li>
-                        <li><a href="{% url 'order_table' %}">Журнал заявок</a></li>
-                        <li><a href="{% url 'order_create' %}">Создать заказ</a></li>
-                        {% endif %}
-                    </ul>
-                </nav>
-            </div>
-            <div class="login_register">
-                {% if user.is_authenticated %}
-                    <div class="user_head_inf">
-                        <div class="flex">
-                            <select name="" id="" onchange="top.location=this.value">
-                                <option value="" disabled selected hidden>{{ user.username }}</option>
-                                <option value="{% url 'profile' %}">Профиль</option>
-                                <option value="{% url 'logout' %}" id="logout_a">Выйти</option>
-                            </select>
-                        </div>
-                    </div>
-                {% else %}
-                    <a href="{% url 'login' %}" id="login_a">Войти</a>
-                    <a href="{% url 'register' %}" id="register_a">Регистрация</a>
-                {% endif %}
-            </div>
-        </div>
+<div class="container">
+<div class="logo"><a href="{% url 'index' %}">CM</a></div>
+<button id="show_nawmenu">&#9776;</button>
+<div class="navmenu">
+<nav>
+<ul>
+<li><a href="{% url 'index' %}">Главная</a></li>
+<li><a href="{% url 'report' %}">Помощь</a></li>
+<li><a href="{% url 'order' %}">Оформить заказ</a></li>
+<li><a href="#ab_us">О нас</a></li>
+<li><a href="#contacts">Контакты</a></li>
+{% if user.is_staff %}
+<li><a href="/admin/">Админ.страница</a></li>
+<li><a href="{% url 'order_table' %}">Журнал заявок</a></li>
+<li><a href="{% url 'order_create' %}">Создать заказ</a></li>
+{% endif %}
+</ul>
+</nav>
+</div>
+<div class="login_register">
+{% if user.is_authenticated %}
+<div class="user_head_inf">
+<div class="flex">
+<select name="" id="" onchange="top.location=this.value">
+<option value="" disabled selected hidden>{{ user.username }}</option>
+<option value="{% url 'profile' %}">Профиль</option>
+<option value="{% url 'logout' %}" id="logout_a">Выйти</option>
+</select>
+</div>
+</div>
+{% else %}
+<a href="{% url 'account_login' %}" id="login_a">Войти</a>
+<a href="{% url 'register' %}" id="register_a">Регистрация</a>
+{% endif %}
+</div>
+</div>
     </header>
 
     <div class="content">

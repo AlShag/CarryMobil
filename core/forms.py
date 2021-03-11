@@ -18,29 +18,33 @@ class ProfileForm(forms.ModelForm):
         fields = ('birth_date', 'location', 'company')
 
 
-
 class SignInForm(AuthenticationForm):
     class Meta:
-        username = forms.CharField(widget=TextInput(attrs={'class':'validate','placeholder': 'Email'}))
-        password = forms.CharField(widget=PasswordInput(attrs={'placeholder':'Password'}))
+        username = forms.CharField(widget=TextInput(attrs={'class': 'validate', 'placeholder': 'Email'}))
+        password = forms.CharField(widget=PasswordInput(attrs={'placeholder': 'Password'}))
 
 
 class SignUpForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ('username','password1','password2',)
+        fields = ('username', 'email', 'password1', 'password2',)
         widgets = {
             'username': forms.TextInput(attrs={
-                        'class':'form-control',
-                        'placeholder':'Придумайте свой логин',
+                        'class': 'form-control',
+                        'placeholder': 'Придумайте свой логин',
+                }),
+            'email': forms.EmailInput(attrs={
+                        'class': 'form-control',
+                        'placeholder': 'Ваша электронная почта',
+                        'required': True
                 }),
             'password1': forms.TextInput(attrs={
-                        'class':'form-control',
-                        'placeholder':'Придумайте пароль',
+                        'class': 'form-control',
+                        'placeholder': 'Придумайте пароль',
                 }),
             'password2': forms.TextInput(attrs={
-                        'class':'form-control',
-                        'placeholder':'Повторите пароль',
+                        'class': 'form-control',
+                        'placeholder': 'Повторите пароль',
                 }),
         }
 

@@ -57,6 +57,12 @@ def update_profile(request):
     })
 
 
+def user_orders(request):
+    user = request.user.id
+    orders = Order.objects.filter(author=user)
+    return render(request, 'user/profile.html', {'orders': orders})
+
+
 # ЗАКАЗЫ
 def order(request):
     error = ''
@@ -123,10 +129,10 @@ def order_edit(request, pk):
         if form.is_valid():
             form.save()
             return redirect(order_detail, pk=order.pk)
-            
+
     else:
         form = OrderEditForm(instance=order)
-    
+
     return render(request, 'order/order_edit.html', {'form': form})
 
 
@@ -218,11 +224,8 @@ def licenses(request):
 
 
 def orders_export(request):
-    """
-    Downloads all orders as Excel file with a single worksheet
-    """
     order_queryset = Order.objects.all()
-    
+
     response = HttpResponse(
         content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
     )
@@ -230,7 +233,7 @@ def orders_export(request):
         date=datetime.now().strftime('%Y-%m-%d'),
     )
     workbook = Workbook()
-    
+
     # Get active worksheet/tab
     worksheet = workbook.active
     worksheet.title = 'Заказы'
@@ -240,7 +243,6 @@ def orders_export(request):
         'ID',
         'Отправитель',
         'Номер телефона',
-        'Дата и время исполнения',
         'Маршрут',
         'Грузчики, чел.',
         'Грузчики, час.',
@@ -259,13 +261,12 @@ def orders_export(request):
     # Iterate through all orders
     for order in order_queryset:
         row_num += 1
-        
+        order.start_time = str(order.start_time)
         # Define the data for each cell in the row 
         row = [
             order.id,
             order.author,
             order.user_tel_nomer,
-            order.start_time,
             order.full_road,
             order.loader_count,
             order.loader_time_count,
@@ -273,7 +274,7 @@ def orders_export(request):
             order.order_price,
             order.status,
         ]
-        
+
         # Assign the data for each cell of the row 
         for col_num, cell_value in enumerate(row, 1):
             cell = worksheet.cell(row=row_num, column=col_num)
