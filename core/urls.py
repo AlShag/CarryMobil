@@ -22,4 +22,7 @@ urlpatterns = [
     path('order/<int:pk>/edit', views.order_edit, name='order_edit'),
     path('review_create', views.review_create, name='review_create'),
     path('orders_export', views.orders_export, name='orders_export'),
+    path('<slug:slug>/',views.snippet_detail),
+    path('about', views.about, name='about'),
+    path('yandex_66b5cc356c187df1.html', views.yandex_66b5cc356c187df1, name='yandex_66b5cc356c187df1'),
 ]

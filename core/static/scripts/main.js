@@ -6,6 +6,7 @@ let stars_count=1;
 $(document).ready(function (){
     last_slide=$('.slider input[type="radio"][name="advan_slider"]').last().attr('id');
     $('#view_password').click(function(){view_password()});
+    $('#registration').click(function(){if($('#user_accord').is(':checked')) $('#user_register').click(); else alert('Для регистрации учётной записи необходимо подтверждение пользовательского соглашения');});
     $('#left_slide').click(function(){left_slide()});
     $('#right_slide').click(function(){right_slide()});
     $('#comment_form_close').click(function(){$('.comment_create').hide();});
@@ -46,7 +47,7 @@ $(document).ready(function (){
 });
 $(document).scroll(function (){
    let top=$(document).scrollTop();
-    if(top>1000){$('#to_up').show()} else $('#to_up').hide();
+    if(top>1000){$('#to_up').show();} else $('#to_up').hide();
 });
 jQuery('.slider').swipe({});
 function view_password(){
@@ -83,19 +84,18 @@ function right_slide(){
 }
 
 function on_mobile(){
+    if($('.advan').css('display')=='flex')
+    setInterval(function(){
+        right_slide();
+      }, 5000);
     jQuery('.slider').swipe({
         swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
-            console.log(direction);
             if(direction=='right') left_slide();
             if(direction=='left') right_slide();
         }
     });
     jQuery('body').swipe({
         swipe:function(event, direction, distance, duration, fingerCount, fingerData){
-            console.log(fingerData);
-            console.log(duration);
-            console.log(fingerData[0].start['x']);
-            console.log()
             if(($('.navmenu').css('right')>'25%') & (direction=='right') & (fingerData[0].start['x']<=100))$('.navmenu').addClass('showed');
             if(($('.navmenu').css('display')=='block') & (direction=='left') & (duration>150))$('.navmenu').removeClass('showed');
         }

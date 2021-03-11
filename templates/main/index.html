@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=0.85, maximum-scale=0.85, user-scalable=0" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title>{% block title %}Главная{% endblock %}</title>
     {% block css %}
@@ -62,6 +63,43 @@
 {% endif %}
 </div>
 </div>
+=======
+        <div class="container">
+            <div class="logo"><a href="{% url 'index' %}">CM</a></div>
+            <button id="show_nawmenu">&#9776;</button>
+            <div class="navmenu">
+                <nav>
+                    <ul>
+                        <li><a href="{% url 'index' %}">Главная</a></li>
+                        <li><a href="{% url 'report' %}">Помощь</a></li>
+                        <li><a href="{% url 'order' %}">Оформить заказ</a></li>
+                        <li><a href=" {% url 'about' %}">О нас</a></li>
+                        <li><a href="#contacts">Контакты</a></li>
+                        {% if user.is_staff %}
+                        <li><a href="/admin/">Админ.страница</a></li>
+                        <li><a href="{% url 'order_table' %}">Журнал заявок</a></li>
+                        <li><a href="{% url 'order_create' %}">Создать заказ</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+            <div class="login_register">
+                {% if user.is_authenticated %}
+                    <div class="user_head_inf">
+                        <div class="flex">
+                            <select name="" id="" onchange="top.location=this.value">
+                                <option value="" disabled selected hidden>{{ user.username }}</option>
+                                <option value="{% url 'profile' %}">Профиль</option>
+                                <option value="{% url 'logout' %}" id="logout_a">Выйти</option>
+                            </select>
+                        </div>
+                    </div>
+                {% else %}
+                    <a href="{% url 'login' %}" id="login_a">Войти</a>
+                    <a href="{% url 'register' %}" id="register_a">Регистрация</a>
+                {% endif %}
+            </div>
+        </div>
     </header>
 
     <div class="content">
@@ -81,7 +119,8 @@
                             <h3>&#9672; Адрес</h3>
                             <span>Альметьевск</span>      
                             <h3>&#9993; Электронная почта</h3>
-                            <span>carrymobil@mail.ru</span>
+                            <span>carrymobil@mail.ru</span><br>
+                            <span>support@carrymobil.ru</span>
                             <h3>&#9742; Номер телефона</h3>
                             <span>8(8553)35-33-35</span>
                             <h3>&#9745; Документация</h3>
@@ -122,6 +161,16 @@
                 </div>
             </div>
         </div>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-191554181-1">
+        </script>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-191554181-1');
+        </script>
     </div>
 </body>
 </html>

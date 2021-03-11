@@ -2,6 +2,9 @@
     color: white;
     background: #FF7058;
 }
+h1{
+    font-size: 36pt;
+}
 .for_login{
     height: 800px;
     width: 100%;
@@ -112,4 +115,29 @@
 }
 .form_error{
     color:#FF7058;
+}
+label[for="user_accord"]{
+    font-size: 12pt;
+}
+label[for="user_accord"] a{
+    color: #0085ff;
+}
+#user_accord{
+    display: block;
+}
+table td{
+    vertical-align: middle;
+}
+.login_form input[type='button']{
+    color: #0085ff;
+    border: 2px solid #0085ff;
+    border-radius: 50pt;
+    width: 65%;
+    padding: 1% 0;
+    margin-top: 15%;
+    font-size: 14pt;
+}
+.login_form input[type='button']:hover{
+    background-color: #0085ff;
+    color: #fff;
 }

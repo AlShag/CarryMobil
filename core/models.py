@@ -5,6 +5,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 import datetime
 from django.utils import timezone
+from django.utils.text import slugify
 
 
 class Profile(models.Model):
@@ -29,7 +30,7 @@ class Order(models.Model):
     full_road = models.CharField('Маршрут', max_length=1500)
     start_time = models.DateTimeField('Время прибытия на заказ', null=True, blank=True)
     road_comment = models.TextField('Комментарий к доргоге', null=True, blank=True)
-    cargo_type = models.CharField('Тип груза', max_length=50, blank=True)
+    cargo_type = models.CharField('Тип груза', max_length=60, blank=True)
     cargo_type_comment = models.TextField('Тип груза комментарий', null=True, blank=True)
     loader_count = models.IntegerField('Количество грузчиков', null=True, blank=True)
     loader_time_count = models.IntegerField('Количество часов для грузчиков', null=True, blank=True)
@@ -102,3 +103,16 @@ class Review(models.Model):
 class Report(models.Model):
     report_text = models.TextField()
     published_date = models.DateTimeField(default=timezone.now, null=True, blank=True)
+
+
+class Snippet(models.Model):
+    title = models.CharField(max_length=150)
+    slug = models.SlugField(blank=True, null=True)
+    body = models.TextField()
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return f'/{self.slug}/'

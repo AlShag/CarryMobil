@@ -12,6 +12,8 @@ from django.contrib import messages, auth
 from django.db import transaction
 from datetime import timedelta, datetime
 from openpyxl import Workbook
+from django.contrib import messages
+from .models import Snippet
 
 
 def index(request):
@@ -219,6 +221,8 @@ def index(request):
 
     reviews = Review.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     return render(request, 'main/landing.html', {'reviews': reviews, 'review_form': review_form})
+
+
 def licenses(request):
     return render(request, 'licenses/licenses.html', {})
 
@@ -283,3 +287,15 @@ def orders_export(request):
     workbook.save(response)
 
     return response
+  
+  
+def about(request):
+    return render(request, 'main/about.html', {})
+
+def yandex_66b5cc356c187df1(request):
+    return render(request, 'main/yandex_66b5cc356c187df1.html', {})
+
+def snippet_detail(request, slug):
+    snippet = get_object_or_404(Snippet, slug=slug)
+    return HttpResponse(f'This should be the detail view for the slug of {slug}')
+  

@@ -113,7 +113,7 @@
 }
 @media screen and (max-width: 768px){
     .user_content {
-        height: 50%;
+        height: 40%;
     }
     .user_image{
         width: 100%;
@@ -130,5 +130,52 @@
     }
     .user_image input {
         width: 50%;
+    }
+    .profile_content{
+        width: 75%;
+    }
+    .user_info h1{
+        margin-left: 7%;
+    }
+    .user_info label {
+        font-size: 16pt;
+        margin-left: 5%;
+    }
+    .user_dop_info{
+        width: 400px;
+    }
+    .transiton_param input{
+        font-size: 14pt;
+    }
+}
+
+@media screen and (max-width: 569px) {
+    .user_image input{
+        width: 65%;
+    }
+    .user_info label {
+        font-size: 14pt;
+    }
+    .transiton_param input{
+        font-size: 12pt;
+    }
+}
+@media screen and (max-width: 479px){
+    .transiton_param input{
+        font-size: 10pt;
+    }
+    .user_image input{
+        font-size: 12pt;
+    }
+    .user_info label {
+        font-size: 12pt;
+    } 
+    .profile_content{
+        width: 85%;
+    }
+}
+@media screen and (max-width: 379px){
+    .user_info label {
+        font-size: 10pt;
     }
 }
