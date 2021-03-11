@@ -6,8 +6,6 @@ let stars_count=1;
 $(document).ready(function (){
     last_slide=$('.slider input[type="radio"][name="advan_slider"]').last().attr('id');
     $('#view_password').click(function(){view_password()});
-    console.log($('#user_accord').is(':checked'));
-    
     $('#registration').click(function(){if($('#user_accord').is(':checked')) $('#user_register').click(); else alert('Для регистрации учётной записи необходимо подтверждение пользовательского соглашения');});
     $('#left_slide').click(function(){left_slide()});
     $('#right_slide').click(function(){right_slide()});

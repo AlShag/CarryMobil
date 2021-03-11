@@ -1,0 +1,27 @@
+{% extends "main/index.html" %}
+{% block title %}Главная{% endblock %}
+{% load static %}
+{% block content %}
+<div class="about_area">
+    <div class="container">
+        <div class="about_info">
+            <img src="{% static '/images/about/about_1.svg' %}" id="about_image_1" alt="">
+            <div class="about_us">
+                <h1>О нас</h1>
+                <p>
+                    CarryMobil - компания по предоставлению логистических услуг. Наша миссия - это предоставить удобство, безопасность и хорошее, а главное, качественное обслуживание.
+                </p>
+            </div>
+            <section id="ab_services">
+                <div class="flex">
+                    <div id="ab_services_image"></div>
+                    <div id="ab_serv_text">
+                        <h2>Всегда все на готове!</h2>
+                        <p>Мы предоставляем больший выбор услуг.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+{% endblock %}

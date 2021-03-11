@@ -5,6 +5,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 import datetime
 from django.utils import timezone
+from django.utils.text import slugify
 
 
 class Profile(models.Model):
@@ -101,3 +102,16 @@ class Review(models.Model):
 class Report(models.Model):
     report_text = models.TextField()
     published_date = models.DateTimeField(default=timezone.now, null=True, blank=True)
+
+
+class Snippet(models.Model):
+    title = models.CharField(max_length=150)
+    slug = models.SlugField(blank=True, null=True)
+    body = models.TextField()
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        return f'/{self.slug}/'

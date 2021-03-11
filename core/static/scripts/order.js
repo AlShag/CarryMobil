@@ -77,6 +77,22 @@
       $('.roads input').on('change', function(){edit_road_change(this);});
       $('.filter_value input').on('change', function(){orders_filter(this)});
       $('#type_filter').on('change', function(){orders_filter(this)});
+      $('#is_passing_road').on('change', function(){
+        if($('#is_passing_road').is(':checked')){
+          
+          full_road_price=full_road_price/2;
+          order_price=full_road_price+loader_price+type_price;
+          $('#id_prices').val(order_price+'/'+full_road_price+'/type_price:'+type_price+'/loader_price:'+loader_price+'/');
+          $('#road_full_price').text(full_road_price+' р');
+          $('#order_price').text(order_price+'р');
+        } else{
+          full_road_price=full_road_price*2;
+          order_price=full_road_price+loader_price+type_price;
+          $('#id_prices').val(order_price+'/'+full_road_price+'/type_price:'+type_price+'/loader_price:'+loader_price+'/');
+          $('#road_full_price').text(full_road_price+' р');
+          $('#order_price').text(order_price+'р');
+        }
+      });
 
       $('#goods_type_select').on('change', function(){
           $('#goods_type_select').blur();
@@ -280,8 +296,9 @@
     $('#road_full_price').text(full_road_price+' р');
     loader_count=$('#id_loader_count').val();
     loader_time=$('#id_loader_time_count').val();
-    type_price=type_price+type_conf_price+parseInt($('#goods_type_select :selected').val());
+    type_price=type_conf_price+parseInt($('#goods_type_select :selected').val());
     loader_price=(loader_count*loader_time)*400;
+    if(full_road_price>=5000) $('.is_passing_road').show(); else $('.is_passing_road').hide();
     order_price=full_road_price+loader_price+type_price;
     $('#id_prices').val(full_road_price+'/'+roads_price+'/type_price:'+type_price+'/loader_price:'+loader_price+'/');
     $('#loader_price').text(loader_price+' р');
@@ -302,11 +319,11 @@
           if(cargo_weight<1500)current_road_price=parseInt($('#city_price tr').eq(i).find('td').eq(4).text());
           else if(cargo_weight<3500){
             current_road_price=parseInt($('#city_price tr').eq(i).find('td').eq(4).text());
-            type_price=parseInt($('#city_price tr').eq(i).find('td').eq(5).text())-parseInt($('#city_price tr').eq(i).find('td').eq(4).text());
+            type_conf_price=parseInt($('#city_price tr').eq(i).find('td').eq(5).text())-parseInt($('#city_price tr').eq(i).find('td').eq(4).text());
           }
           else if(cargo_weight<5000){
             current_road_price=parseInt($('#city_price tr').eq(i).find('td').eq(4).text());
-            type_price=parseInt($('#city_price tr').eq(i).find('td').eq(6).text())-parseInt($('#city_price tr').eq(i).find('td').eq(4).text());
+            type_conf_price=parseInt($('#city_price tr').eq(i).find('td').eq(6).text())-parseInt($('#city_price tr').eq(i).find('td').eq(4).text());
           }
           if(passing_to!=0){
             current_road_price/=2;
