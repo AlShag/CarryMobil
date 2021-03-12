@@ -8,7 +8,7 @@
 {% block script %}
 {{ block.super }}
     <script src="{% static 'scripts/order.js' %}"></script>
-    <script src="https://maps.api.2gis.ru/2.0/loader.js?pkg=full"></script>
+    <!-- <script src="https://maps.api.2gis.ru/2.0/loader.js?pkg=full"></script>
     <script type="text/javascript">
         var map;
     
@@ -19,7 +19,7 @@
             });
 
             DG.marker([54.98, 82.89]).addTo(map).bindPopup('Вы кликнули по мне!');
-        });
+        }); -->
     </script>
 {% endblock %}
 {% block content %}
@@ -137,7 +137,8 @@
                                     <button id="road_del">&#10006;</button>
                                 </div>
                                 <div class="map">
-                                    <div id="map" style="width:100%; height:100%"></div>
+                                    <!-- <div id="map" style="width:100%; height:100%"></div> -->
+                                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d73416.8711652847!2d52.2386084848836!3d54.898056310490446!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x41605c5672d84245%3A0xc5e4cdd6efdd5177!2z0JDQu9GM0LzQtdGC0YzQtdCy0YHQuiwg0KDQtdGB0L8uINCi0LDRgtCw0YDRgdGC0LDQvQ!5e0!3m2!1sru!2sru!4v1609421542062!5m2!1sru!2sru" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
                                 </div>
                             </div>
                         </div>
@@ -225,7 +226,7 @@
                                     </section>
                                     <div class="list_3_dop_info">
                                         <span>Время указывается в часах</span><br>
-                                        <span>1 час услуги грузчиков - 350 рублей</span>
+                                        <span>1 час услуги грузчиков - 400 рублей</span>
                                     </div>
                                 </div>
                             </div>

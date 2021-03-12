@@ -39,6 +39,7 @@ class Order(models.Model):
     user_tel_nomer = models.CharField('Номер телефона заказчика', max_length=20)
     sended_in = models.DateTimeField('Время отправки заявки', null=True, blank=True, default=datetime.datetime.now())
     status = models.IntegerField('Состояние заказа', null=True, blank=True, default=0)
+    author = models.IntegerField('ID Автора', null=True, blank=True, default=0)
 
     def __str__(self):
         return self.full_road

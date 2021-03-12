@@ -29,7 +29,7 @@
           <h2>Пароль</h2>
           <div class="input_container">
               <img src="{% static '/images/login/padlock.svg' %}" class='for_input_icn'>
-              {{ form.password1 }}
+              {{ form.password }}
               <input type="checkbox" value="" name="" id="view_password">
               <label for="view_password"><img src="{% static '/images/login/visibility.svg' %}" alt="" class="for_input_func" id="view_password"></label>
           </div>
@@ -38,24 +38,11 @@
           <h2>Повторите пароль</h2>
           <div class="input_container">
               <img src="{% static '/images/login/padlock.svg' %}" class='for_input_icn'>
-              {{ form.password2 }}
+              {{ form.password_confirm }}
               <input type="checkbox" value="" name="" id="view_password">
           </div>
         </section>
-        <section>
-        <table>
-          <tr>
-            <td>
-              <input type="checkbox" name="" id="user_accord" style="display: block;" checked>
-            </td>
-            <td>
-              <label for="user_accord">Выражаю согласие с условиями <a href="https://cloud.mail.ru/public/wAzK/spaTqcE16">пользовательского соглашения</a></label>
-            </td>
-          </tr>
-        </table>
-        </section>
-        <input type="submit" value="Зарегистрироваться" id="user_register" hidden>
-        <input type="button" value="Зарегистрироваться" id="registration">
+        <input type="submit" value="Зарегистрироваться">
         {% if form.errors %}
           <section class="form_error">
           {% for field in form %}

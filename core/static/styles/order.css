@@ -463,7 +463,7 @@ input[type="number"]::-webkit-inner-spin-button {
     height: 15%;
 }
 .total_price_info table td{
-    width: 50%  ;
+    width: 50%;
 }
 .total_full_price h2{
     font-size: 20pt;
