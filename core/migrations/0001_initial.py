@@ -12,14 +12,13 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Orders',
+            name='Order',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('from_adress', models.CharField(max_length=150, verbose_name='Откуда')),
-                ('to_adress', models.CharField(max_length=150, verbose_name='Куда')),
+                ('full_road', models.CharField(verbose_name='Маршрут', max_length=1500)),
                 ('road_comment', models.TextField(verbose_name='Комментарий к доргоге')),
-                ('gruz_type', models.CharField(max_length=50, verbose_name='Тип груза')),
-                ('gruz_type_comment', models.TextField(verbose_name='Тип груза комментарий')),
+                ('cargo_type', models.CharField(verbose_name='Тип груза', max_length=60, blank=True)),
+                ('cargo_type_comment', models.TextField(verbose_name='Тип груза комментарий')),
                 ('loader_count', models.IntegerField(max_length=2, verbose_name='Количество грузчиков')),
                 ('loader_time_count', models.IntegerField(max_length=2, verbose_name='Количество часов для грузчиков')),
                 ('user_tel_nomer', models.IntegerField(max_length=12, verbose_name='Номер телефона заказчика')),

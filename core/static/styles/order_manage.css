@@ -7,6 +7,21 @@
 a{
     color: black;
 }
+.manage_tool{
+    width: 270px;
+    height: 400px;
+    position: absolute;
+    padding: 2.5%;
+    left: 50%;
+    top: 50%;
+    border-radius: 30px;
+    background: #fff;
+    border:2px solid black;
+    transition: 0s;
+}
+.manage_tool:hover{
+    border:2px solid #0085ff;
+}
 .orders_form{
     width: 70%;
     margin: 5% auto;
@@ -227,4 +242,7 @@ a{
 }
 .order_edit_table #id_cargo_type{
     display: none;
+}
+#road_calculate input{
+    font-size: 16pt;
 }

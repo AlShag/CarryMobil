@@ -122,6 +122,12 @@
           to_address=$('#to_address').val();
           $('#id_to_address').val(to_address);
         });
+      $('#range_value').on('change', function() {
+          range_price();
+        });
+      $('#road_calculate input[type="radio"]').on('change', function() {
+          range_price();
+        });
   });
   function order_next_list(){
     available_list();
@@ -550,4 +556,11 @@
       let cargo_name=$('#cargo_name_value').val();
       $('#id_cargo_type_comment').val(cargo_name+'[Высота:'+cargo_height+';Ширина:'+cargo_width+';Вес:'+cargo_weight+';]');
     }
+  }
+  
+  function range_price(){
+    let range = $('#range_value').val();
+    let for_range_price=$('#road_calculate input[type="radio"]:checked').val();
+    let range_price=range*for_range_price;
+    $('#range_price').val(range_price);
   }

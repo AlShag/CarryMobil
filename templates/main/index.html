@@ -20,6 +20,7 @@
     {% endblock %}
     {% block script %}
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
         <script src="{% static 'scripts/jquery.touchSwipe.min.js' %}"></script>
         <script src="{% static 'scripts/main.js' %}"></script>
     {% endblock %}
@@ -28,23 +29,25 @@
     <div class="for_header"></div>
     <header>
         <div class="container">
-            <div class="logo"><a href="{% url 'index' %}">CM</a></div>
             <button id="show_nawmenu">&#9776;</button>
             <div class="navmenu">
-                <nav>
-                    <ul>
-                        <li><a href="{% url 'index' %}">Главная</a></li>
-                        <li><a href="{% url 'report' %}">Помощь</a></li>
-                        <li><a href="{% url 'order' %}">Оформить заказ</a></li>
-                        <li><a href=" {% url 'about' %}">О нас</a></li>
-                        <li><a href="#contacts">Контакты</a></li>
-                        {% if user.is_staff %}
-                        <li><a href="/admin/">Админ.страница</a></li>
-                        <li><a href="{% url 'order_table' %}">Журнал заявок</a></li>
-                        <li><a href="{% url 'order_create' %}">Создать заказ</a></li>
-                        {% endif %}
-                    </ul>
-                </nav>
+                <div id="logo" hidden> 
+                    <a href="{% url 'index' %}">CM</a>
+                </div>
+                            <nav>
+                                <ul>
+                                    <li><a href="{% url 'index' %}">Главная</a></li>
+                                    <li><a href="{% url 'report' %}">Помощь</a></li>
+                                    <li><a href="{% url 'order' %}">Оформить заказ</a></li>
+                                    <li><a href=" {% url 'about' %}">О нас</a></li>
+                                    <li><a href="#contacts">Контакты</a></li>
+                                    {% if user.is_staff %}
+                                    <li><a href="/admin/">Админ.страница</a></li>
+                                    <li><a href="{% url 'order_table' %}">Журнал заявок</a></li>
+                                    <li><a href="{% url 'order_create' %}">Создать заказ</a></li>
+                                    {% endif %}
+                                </ul>
+                            </nav>
             </div>
             <div class="login_register">
                 {% if user.is_authenticated %}
