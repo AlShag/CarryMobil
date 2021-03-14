@@ -7,11 +7,26 @@
     <div class="menu" id="menu">
         <div class="container">
             <div class="flex">
-                <div class="menu_info">
+                <div id="menu_info">
                     <section>
-                        <h1><a style="color: #474747;">CARRY</a>MOBIL</h1>
-                        <p>Сервис индивидуальных доставок, нацеленная на предоставления особого подхода к каждому клиенту.</p>
-                        <br><input type="button" value="заказать" onclick="window.location='/order'" id="to_order">
+                        <div class="flex_al">
+                            <div id="menu_logo">
+                                <h1><a style="color: #474747;">CARRY</a><br>MOBIL</h1>
+                            </div>
+                            <div id="tel_calling">
+                                <span>Телефон 8(8553)35-33-35</span><br>
+                                <input type="button" value="Заказать звонок" class="standart_button" id="tel_order">
+                            </div>
+                        </div>
+                    </section>
+                    <section id="menu_text">
+                        <p>Платформа логистических услуг в <span style="color: #0085ff;">Республике Татарстан</span></p>
+                    </section>
+                    <section id="to_order">
+                        <div class="flex">
+                            <span>Оформление заявки<br> займёт не более 5 минут!</span>
+                            <input type="button" class="standart_button" value="Оформить заявку">
+                        </div>
                     </section>
                 </div>
                 <div class="menu_image">
@@ -19,10 +34,9 @@
             </div>
         </div>
     </div>
-    <div class="label_title">CarryMobil</div>
     <div class="advantages">
         <div class="container">
-            <h1>Преимущества</h1>
+            <h1>Почему выберают именно нас?</h1>
             <div class="slider">
                 <div class="flex_al">
                     <input type="radio" name="advan_slider" id="advan_1" checked>
@@ -36,7 +50,6 @@
                         </div>
                         <div class="advan_text">
                             <section>
-                                <h2>Простота</h2>
                                 <p>Мы предерживаемся варианта - чем проще, тем лучше. Тем самым облегчаем выполнение задач пользователей.</p></div>
                             </section>
                     </div>
@@ -46,7 +59,6 @@
                         </div>
                         <div class="advan_text">
                             <section>
-                                <h2>Спец предложения</h2>
                                 <p>Рубль сэкономленный равен рублю заработанному, так же сервис спец предложений экономит ваши деньги.</p>  
                             </section>
                         </div>
@@ -57,7 +69,6 @@
                         </div>
                         <div class="advan_text">
                             <section>
-                                <h2>Индивидуальность</h2>
                                 <p>Сервис заказов в CM предоставляет индивидуальный подход к клиенту, учитывая предпочтения клиента.</p>
                             </section>
                         </div>
@@ -68,7 +79,6 @@
                         </div>
                         <div class="advan_text">
                             <section>
-                                <h2>Гибкость</h2>
                                 <p>Система CM старается как можно оперативнее предоставлять услуги, а также быстро подстраиваеться под условия.</p>
                             </section>
                         </div>
@@ -78,17 +88,30 @@
             </div>
         </div>
     </div>
-    <div class="spec">
+    <div id="spec">
         <div class="container">
-            <div class="spec_icon"><img src="{% static '/images/landing/spec_icon.svg' %}" alt="" id="spec_icon"></div>
-            <h1>Спец предложения</h1>
-            <div class="spec_list">
-                <div class="flex">
-                    <div class="spec_form">
-                        <div class="spec_1">
-                            <h2>Попутный груз</h2>
-                            <h3>19.10.2020</h3>
-                            <p>Оформляйте перевозку грузов, получая скидку до 80%, с помощью услуги попутных грузов</p>
+            <div class="flex">
+                <div id="spec_info">
+                    <h1>Спец-сервисы</h1>
+                    <p>Группа специальных услуг CarryMobil, способна обрабатывать каждую деталь,
+                        касающуюся конкретных логистических и экспедиторских потребностей наших клиентов, позаботится обо всей вашей логистике.</p>
+                </div>
+                <div id="spec_list">
+                    <div class="flex">
+                        <div class="spec_form">
+                            <div class="spec" id="spec_1">
+                                <h2>Попутный груз</h2>
+                                <p>Оформляйте перевозку грузов, получая скидку до 80%, с помощью услуги попутных грузов</p>
+                                <input class="spec_detail" type="button" value="Подробнее ->">
+                            </div>
+                            <div class="spec" id="spec_2">
+                                <h2>Попутный груз</h2>
+                                <p>Оформляйте перевозку грузов, получая скидку до 80%, с помощью услуги попутных грузов</p>
+                                <input class="spec_detail" type="button" value="Подробнее ->">
+                            </div>
+                            <input type="radio" name="spec_transition" id="for_spec_1" checked>
+                            <input type="radio" name="spec_transition" id="for_spec_2">
+                            <input type="radio" name="spec_transition" id="for_spec_3">
                         </div>
                     </div>
                 </div>
@@ -97,25 +120,29 @@
     </div>
     <div class="comment">
         <div class="container">
-            <h1>Отзывы</h1>
-            <div class="comment_area">
-                {% for review in reviews %}
-                <div id="comment_1" class="user_comment"> 
-                    <div>
-                        <label>{{ review.author }}</label><br>
-                        <label for="">{{ review.stars }}&#9733;</label><br>
-                        {{ review.published_date }}<br>
-                        {{ review.text }}
+            <div class="flex">
+                <div class="comment_area">
+                    <span>Отзывы</span>
+                    <h1>Что сказали о нас клиенты?</h1>
+                    {% for review in reviews %}
+                    <div id="comment_1" class="user_comment"> 
+                        <div>
+                            <label>{{ review.author }}</label><br>
+                            <label for="">{{ review.stars }}&#9733;</label><br>
+                            {{ review.published_date }}<br>
+                            {{ review.text }}
+                        </div>
                     </div>
+                    {% endfor %}
+                    {% if user.is_authenticated %}
+                        <button id="create_comment">&#9734;Оставить отзыв</button>
+                    {% else %}
+                        <p>Вы не авторизированы</p>
+                    {% endif %}
                 </div>
-                {% endfor %}
+                <div id="comment_image"></div>
             </div>
-            {% if user.is_authenticated %}
-                <input type="button" value="Есть что сказать? Оставьте отзыв" id="create_comment">
-            {% else %}
-                <p>Вы не авторизированы</p>
-            {% endif %}
-            </div>
+        </div>
         <div class="comment_create">
             <form method="post">
                 <button id="comment_form_close">&#10006;</button> 

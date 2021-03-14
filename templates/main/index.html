@@ -31,8 +31,11 @@
         <div class="container">
             <button id="show_nawmenu">&#9776;</button>
             <div class="navmenu">
-                <div id="logo" hidden> 
-                    <a href="{% url 'index' %}">CM</a>
+                <div id="logo">
+                    <div class="flex_al">
+                        <a href="{% url 'index' %}">CM</a>
+                        <img src="{% static '/images/landing/flag.svg' %}" id="Russian_flag" alt="" height="35px">
+                    </div>
                 </div>
                             <nav>
                                 <ul>
@@ -53,6 +56,7 @@
                 {% if user.is_authenticated %}
                     <div class="user_head_inf">
                         <div class="flex">
+                            <img src="{% static '/images/user.svg' %}" width="20px" alt="">
                             <select name="" id="" onchange="top.location=this.value">
                                 <option value="" disabled selected hidden>{{ user.username }}</option>
                                 <option value="{% url 'profile' %}">Профиль</option>
@@ -62,7 +66,7 @@
                     </div>
                 {% else %}
                     <a href="{% url 'login' %}" id="login_a">Войти</a>
-                    <a href="{% url 'register' %}" id="register_a">Регистрация</a>
+                    <a href="{% url 'register' %}" id="register_a" hidden>Регистрация</a>
                 {% endif %}
             </div>
         </div>
@@ -81,7 +85,30 @@
                     <div class="footer_block" id="footer_ab_us">
                         <h2>О нас</h2>
                         <section>
-                        <p><b>CarryMobil</b> - Платформа логистических <br> услуг.</p>
+                        <p><label>CarryMobil</label> - Платформа логистических <br> услуг.</p>
+                        </section>
+                        <section>
+                            <div class="flex">
+                                <label>Заказ </label>
+                                <button class="standart_button" id='footer_to_order' onclick="window.location='{% url 'order' %}'"><img src="" alt="">оформить сейчас</button>
+                            </div>
+                        </section>
+                        <div id="send_news_form">
+                            <form action="">
+                                <label>Подпишитесь на рассылку<br> новостей</label>
+                                <div id="send_news">
+                                    <div class="flex_al">                                  
+                                        <input type="text" placeholder="Ваша эл.почта...">
+                                        <input type="submit" value="&#10004;">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        </section>  
+                    </div>
+                    <div class="footer_block">
+                        <h2>Контакты</h2>
+                        <section>
                             <h3>&#9672; Адрес</h3>
                             <span>Альметьевск</span>      
                             <h3>&#9993; Электронная почта</h3>
@@ -91,39 +118,35 @@
                             <span>8(8553)35-33-35</span>
                             <h3>&#9745; Документация</h3>
                             <span><a href="{% url 'licenses' %}">Лицензии</a></span>
-                        </section>  
+                        </section>
                     </div>
                     <div class="footer_block">
-                        <h2>Контакты</h2>
+                        <h2>Соц-сети</h2>
                         <section>
-                            <div id="send_news">
-                                <form action="">
-                                    <input type="text" placeholder="Ваша эл.почта...">
-                                    <input type="submit" value="&#10004;">
-                                </form>
-                            </div>
                             <table>
                                 <tr>
-                                    <td></td>
-                                    <td><a href="https://vk.com/carrymobil">vk.com/carrymobil</a></td>
+                                    <td><img src="{% static '/images/login/vk.svg' %}" class="soc-icon" id="" alt=""></td>
+                                    <td><a href="https://vk.com/carrymobil"> vk.com/carrymobil</a></td>
                                 </tr>
                                 <tr>
                                     <td></td>
                                     <td><a href="">@carrymobil</a></td>
                                 </tr>
                                 <tr>
-                                    <td></td>
-                                    <td><a href="https://facebook.com/carrymobil">facebook.com/carrymobil</a></td>
+                                    <td><img src="{% static '/images/login/facebook.svg' %}" class="soc-icon" id="" alt=""></td>
+                                    <td><a href="https://facebook.com/carrymobil"> facebook.com/carrymobil</a></td>
                                 </tr>
                             </table>
                         </section>
                     </div>
-                    <div class="footer_block">
-                        <h2>Заказ</h2>
-                        <section>
-                            <button id='footer_to_order' onclick="window.location='{% url 'order' %}'"><img src="" alt="">оформить сейчас</button>
-                        </section>
-                    </div>
+                </div>
+                <div class="footer_dop_info">
+                        <div class="flex">
+                            <section><label for="">Политика конфиденциальности</label></section>
+                            <section><label for="">Политика использования файлов</label></section>
+                            <section id="language_change"><label><a>Русский</a> | <a>Английский</a></label></section>
+                        </div>
+                        <label id="cm_label">Carrymobil 2021</label>
                 </div>
             </div>
         </div>
