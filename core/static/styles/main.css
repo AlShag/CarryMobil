@@ -272,7 +272,6 @@ nav li a:hover{
 }
 .advan_text h2,.advan_text p{color: #474747;}
 .slider{width: 90%; margin: 0 auto;}
-.slider label{font-size: 36pt;}
 .advan{
     width: 25%;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
@@ -305,9 +304,11 @@ nav li a:hover{
 }
 
 input[type="radio"][name="advan_slider"]{display: none;}
-.slider_label{display: none;}
+
 .slider_label{
-    margin: 10% 2%;
+    display: none;
+    font-size: 36pt;
+    margin: 40% 2%;
 }
 /*Преимущества конец*/
 
@@ -320,6 +321,15 @@ input[type="radio"][name="advan_slider"]{display: none;}
 }
 #spec_info{
     width: 45%;
+}
+#spec_info h1:before{
+    content:"";
+    position:absolute;
+    width:120px;
+    left: 13.5%;
+    margin-top: -1%;
+    height:8px;
+    background:#41a4ff;
 }
 #spec_info p{
     font-size: 20pt;
