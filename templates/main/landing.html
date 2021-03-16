@@ -120,10 +120,10 @@
     </div>
     <div class="comment">
         <div class="container">
+            <span>Отзывы</span>
+            <h1>Что сказали о нас клиенты?</h1>
             <div class="flex">
                 <div class="comment_area">
-                    <span>Отзывы</span>
-                    <h1>Что сказали о нас клиенты?</h1>
                     {% for review in reviews %}
                     <div id="comment_1" class="user_comment"> 
                         <div>
@@ -134,14 +134,14 @@
                         </div>
                     </div>
                     {% endfor %}
-                    {% if user.is_authenticated %}
-                        <button id="create_comment">&#9734;Оставить отзыв</button>
-                    {% else %}
-                        <p>Вы не авторизированы</p>
-                    {% endif %}
                 </div>
                 <div id="comment_image"></div>
             </div>
+            {% if user.is_authenticated %}
+            {% else %}
+                 <p>Вы не авторизированы</p>
+            {% endif %}
+            <button id="create_comment">&#9734;Оставить отзыв</button>
         </div>
         <div class="comment_create">
             <form method="post">
