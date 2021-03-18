@@ -8,6 +8,7 @@ urlpatterns = [
     path('account/', include('account.urls')),
     path('accounts/register/', SignUp.as_view(), name='register'),
     path('order', views.order, name='order'),
+    path('telorder', views.telorder, name='telorder'),
     path('order_create', views.order_create, name='order_create'),
     path('profile', views.user_orders, name='profile'),
     path('profile_edit', views.update_profile, name='update_profile'),

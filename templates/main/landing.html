@@ -16,6 +16,17 @@
                             <div id="tel_calling">
                                 <span>Телефон 8(8553)35-33-35</span><br>
                                 <input type="button" value="Заказать звонок" class="standart_button" id="tel_order">
+                                <div id="user_call">
+                                    <form action="" method="post">
+                                        {% csrf_token %}
+                                        <span>Наш номер: 8(917)222-03-03</span>
+                                        {{ telorder.user_tel_number }}
+                                        <div class="window_changes">
+                                            <input type="button" class="standart_button" id="window_close" value="Отмена">
+                                            <input type="submit" class="standart_button" value="Отправить">
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -25,7 +36,7 @@
                     <section id="to_order">
                         <div class="flex">
                             <span>Оформление заявки<br> займёт не более 5 минут!</span>
-                            <input type="button" class="standart_button" value="Оформить заявку">
+                            <input type="button" class="standart_button" value="Оформить заявку" onclick="window.location='{% url 'order' %}'">
                         </div>
                     </section>
                 </div>
@@ -125,7 +136,7 @@
             <div class="flex">
                 <div class="comment_area">
                     {% for review in reviews %}
-                    <div id="comment_1" class="user_comment"> 
+                    <div class="user_comment"> 
                         <div>
                             <label>{{ review.author }}</label><br>
                             <label for="">{{ review.stars }}&#9733;</label><br>
@@ -138,10 +149,10 @@
                 <div id="comment_image"></div>
             </div>
             {% if user.is_authenticated %}
+            <button id="create_comment">&#9734;Оставить отзыв</button>
             {% else %}
                  <p>Вы не авторизированы</p>
             {% endif %}
-            <button id="create_comment">&#9734;Оставить отзыв</button>
         </div>
         <div class="comment_create">
             <form method="post">

@@ -32,10 +32,12 @@
             <button id="show_nawmenu">&#9776;</button>
             <div class="navmenu">
                 <div id="logo">
-                    <div class="flex_al">
-                        <a href="{% url 'index' %}">CM</a>
-                        <img src="{% static '/images/landing/flag.svg' %}" id="Russian_flag" alt="" height="35px">
-                    </div>
+                    <table>
+                        <tr>
+                            <td><a href="{% url 'index' %}">CM</a></td>
+                            <td><img src="{% static '/images/landing/flag.svg' %}" id="Russian_flag" alt="" height="30px"></td>
+                        </tr>
+                    </table>
                 </div>
                             <nav>
                                 <ul>
@@ -65,8 +67,7 @@
                         </div>
                     </div>
                 {% else %}
-                <a href="{% url 'account_login' %}" id="login_a">Войти</a>
-                <a href="{% url 'register' %}" id="login_a">Регистрация</a>
+                <input type="button" value="Войти" id="login_a" onclick="window.location='{% url 'account_login' %}'"> 
                 {% endif %}
             </div>
         </div>
@@ -85,7 +86,7 @@
                     <div class="footer_block" id="footer_ab_us">
                         <h2>О нас</h2>
                         <section>
-                        <p><label>CarryMobil</label> - Платформа логистических <br> услуг.</p>
+                        <p><label>CarryMobil</label> - Платформа логистических услуг.</p>
                         </section>
                         <section>
                             <div class="flex">

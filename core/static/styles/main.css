@@ -28,6 +28,14 @@ nav{
     height: 100%;
     width: 70%;
 }
+.in_window::before{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:100%;
+    z-index: 1;
+    background:rgba(0, 0, 0, 0.9);
+}
 a{text-decoration: none;}
 h1{font-weight: 300; font-size: 40pt;}
 h2{font-weight: 300;}
@@ -49,17 +57,15 @@ textarea{
 #logo{
     position: absolute;
     left: 10%;
+    top: -1%;
     width: 10%;
     text-align: center;
 }
 #logo a{
     padding-right: 2.5%;
-    font-size: 32pt;
+    font-size: 30pt;
     color: #474747;
     font-weight: bold;
-}
-#logo img{
-    margin: 7% 0;
 }
 .navmenu{ 
     border-bottom: 1px solid #aaabb8;
@@ -119,16 +125,11 @@ nav li a:hover{
 .standart_button:hover{
     border-color: white;
 }
-.logo a{
-    font-size: 54pt;
-    color:#474747;
-    font-weight: bold;
-}
 .login_register{
-    width: 15%;
-    position: relative;
-    top:-40px;
-    left:80%;
+    width: auto;
+    position: absolute;
+    top:2%;
+    left:85%;
     text-align: center;
 }
 
@@ -144,13 +145,10 @@ nav li a:hover{
     border: none;
     font-size: 14pt;
 }
-.login_register a{
-    padding: 1% 8%;
-    border-radius: 12pt;
-    margin: 0 1%;
-}
 #login_a{
     border: 1px solid#0085ff;
+    padding: 1% 30%;
+    font-size: 12pt;
     border-radius: 12pt;
     color: #0085ff;
 }
@@ -188,23 +186,43 @@ nav li a:hover{
     line-height: 0.95;
     color: #0085ff;
     font-weight: 400;
-    letter-spacing: 1;
+    letter-spacing: 1pt;
 }
 #tel_calling{
     margin-left: 15%;
     width: 40%;
-}
-#tel_calling span{
     font-size: 18pt;
     font-weight: 400;
 }
 #tel_order{
     margin-top: 12%;
 }
+#user_call{
+    display: none;
+    position: fixed;
+    padding: 1%;
+    height: 250px;
+    width: 25%;
+    background-color: white;
+    border: 2px solid #0085ff;
+    border-radius:20px;
+    left:37%;
+    top:30%;
+    z-index: 1;
+}
+.window_changes{
+    position: relative;
+    bottom: -5%;
+    width: 100%;
+    text-align: center;
+}
+#user_call input[type='tel']{
+    margin-top: 20%;
+    font-size: 20pt;
+    width: 100%;
+}
 #menu_text{
     margin-top: 20%;
-}
-#menu_text p{
     font-weight: 500;
     color: #474747;
     font-size: 36pt;
@@ -318,6 +336,7 @@ input[type="radio"][name="advan_slider"]{display: none;}
     width: 80%;
     height: auto;
     padding-bottom: 10%;
+    font-size: 16pt;
 }
 #spec_info{
     width: 45%;
@@ -332,7 +351,6 @@ input[type="radio"][name="advan_slider"]{display: none;}
     background:#41a4ff;
 }
 #spec_info p{
-    font-size: 20pt;
     font-weight: 500;
     color: #41a4ff;
 }
@@ -346,7 +364,6 @@ input[type="radio"][name="advan_slider"]{display: none;}
 #spec h1{
     margin-left: 10%;
     font-weight: 500;
-    font-size: 36pt;
     text-align: left;
     color: #41a4ff;
     padding-bottom: 2%;
@@ -355,7 +372,6 @@ input[type="radio"][name="advan_slider"]{display: none;}
     width: 80%;
     margin: 0 auto;
     text-align: center;
-    font-size: 16pt;
     text-shadow: 0.5px 1px 0.5px rgba(0, 0, 0, 0.2);
 }
 .spec:not(#spec_1){
@@ -366,13 +382,11 @@ input[type="radio"][name="advan_slider"]{display: none;}
     margin-top: 10%;
     color: black;
     font-weight: 500;
-    font-size: 14pt;
 }
 .spec_form h2{
     color: #000;
     text-align: center;
     padding-top: 5%;
-    font-size: 14;
     padding-bottom: 10%;
     font-weight: 500;
 }
@@ -424,7 +438,8 @@ input[type="radio"][name="advan_slider"]{display: none;}
     content: "";
     position: absolute;
     width: 70%;
-    height: 120%;
+    height: 200%;
+    max-height: 1200px;
     left: -20%;
     margin-top: -5%;
     z-index: -1;
@@ -441,6 +456,7 @@ input[type="radio"][name="advan_slider"]{display: none;}
     position: absolute;
     width: 100%;
     height: 50%;
+    max-height: 500px;
     left: -20%;
     margin-top: 12%;
     z-index: -1;
@@ -465,9 +481,12 @@ input[type="radio"][name="advan_slider"]{display: none;}
     background-size: 100%;
     background-position: 50%;
 }
-.user_comment h3,.user_comment p,.user_comment{
+.user_comment p,.user_comment{
     color: black;
 
+}
+.user_comment label{
+    color:#0085ff;
 }
 .user_comment label{
     font-weight: 400;
@@ -484,13 +503,12 @@ input[type="radio"][name="advan_slider"]{display: none;}
     padding-left: 5%;
 }
 #create_comment{
-
     font-size: 14pt;
     color: #000;
     border-radius: 30px;
     background-color: white;
     box-shadow: 0.5px 1px 4px  rgba(0, 0, 0, 0.5);
-    padding: 2%;
+    padding: 1%;
     white-space: pre-line;
 }
 #comment_form_close{
@@ -662,8 +680,7 @@ input[type="radio"][name="advan_slider"]{display: none;}
 }
 #cm_label{
     position: relative;
-    left: 85%;
-    margin-left: 5%;
+    left: 90%;
     font-size: 16pt;
     color: white;
 }

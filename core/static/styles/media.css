@@ -51,25 +51,44 @@
     }
 }
 @media screen and (max-width: 768px){
-    h1 {
-        font-size: 28pt;
+    h1{
+        font-size: 32pt;
         line-height: 1.4;
     }
     header{
         background-color: white;
         position: fixed;
         top:0px;
+        height: 65px;
+        border-bottom: 1px solid #474747;
+    }
+    nav li{
         height: auto;
     }
     .flex{display: block;}
+    .standart_button {
+        padding: 2% 5%;
+    }
     .for_header{
         height:70px;
     }
     .user_head_inf select, .user_head_inf select option{
         font-size: 12pt;
     }
+    #logo {
+        position: absolute;
+        left: 150%;
+        top: 0%;
+        width: 10%;
+        text-align: center;
+    }
     #show_nawmenu{
         opacity: 1;
+        position: absolute;
+        z-index: 1;
+    }
+    #tel_order{
+        margin-top: 2%;
     }
     .navmenu{
         position: absolute;
@@ -118,7 +137,7 @@
     #menu_text {
         margin-top: 7%;
     }
-    #menu_text p{
+    #menu_text{
         font-size: 28pt;
         line-height: 1.4;
     }
@@ -127,6 +146,7 @@
         height: 400px;
         position: relative;
         bottom: 570px;
+        z-index: -1;
     }
     #to_order {
         width: auto;
@@ -136,8 +156,10 @@
         margin: 0 auto;
     }
     .advantages{
-        padding-top: 25%;
-        background-position: 50% 70%;
+        padding-top: 5%;
+        background-position: 50% 75%;
+        background-size: 220%;
+        width: 100%;
     }
     .advantages h1{
         padding-bottom: 10%;
@@ -179,12 +201,15 @@
     .spec{
         padding: 2%;
     }
+    .comment{
+        padding-top: 10%;
+    }
     .comment_area{
         width: 80%;
     }
     .footer{
         padding-top: 5%;
-        padding-bottom: 40%;
+
     }
     #to_up{
         left: 80%;
@@ -193,20 +218,23 @@
         margin:0 auto;
     }
     .footer_nav{
-        width: 70%;
+        width: 90%;
         padding-top: 5%;
         margin: 0 auto;
     }
     .footer_block{
         width: 100%;
-        margin-top: 10%;
+        margin-top: 15%;
         text-align: center;
     }
     .footer_block section{
-        margin: 2% auto;
+        margin: 5% auto;
     }
     .footer_block section h3{
         margin-top: 5%;
+    }
+    #cm_label{
+        left: 35%;
     }
     .spec_form{
         width:100%;
@@ -241,12 +269,16 @@
         left: 0%;
         width: 100%;
         transform: rotate(0deg);
+        margin-top: -10%;
     }
     .comment:after{
         margin-top: 11%;
     }
     .footer_block section table{
         margin: 5% auto;
+    }
+    .footer label {
+        font-size: 18pt;
     }
     .report_form h1{
         font-size: 24pt;
@@ -261,10 +293,28 @@
 }
 @media screen and (max-width: 569px) {
     h1{
-        font-size: 32pt;
+        font-size: 28pt;
     }
+    .standart_button{
+        font-size: 14pt;
+    }
+    #menu_logo h1{
+        font-size: 40pt;
+        letter-spacing: normal;
+    }
+    #tel_calling {
+        margin-left: 10%;
+        font-size: 16pt;
+    }
+    #menu_text{
+    margin-top: 10%;
+    font-size: 24pt;
+}
 }
 @media screen and (max-width: 479px){
+    h1{
+        font-size: 26pt;
+    }
     .advan_text h2{
         font-size: 16pt;
     }
@@ -273,9 +323,6 @@
     }
     .slider{
         width: 95%;
-    }
-    .slider_label{
-        margin: 15% 0;
     }
     .comment_create{
         top: 30%;
@@ -295,6 +342,20 @@
 @media screen and (max-width: 379px) {
     h1{
         font-size: 22pt;
+    }
+    .standart_button {
+        font-size: 12pt;
+        padding: 3% 5%;
+    }
+    #tel_calling {
+        margin-left: 5%;
+        font-size: 14pt;
+    }
+    .menu_image {
+        bottom: 500px;
+    }
+    .comment h1:after {
+        margin-top: 15%;
     }
     .comment_create{
         left: 17%;

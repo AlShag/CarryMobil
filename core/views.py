@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.contrib import auth
 from django.http import HttpResponseRedirect, HttpResponse
 from .models import Order, Address, CityPrice, CargoType, Review, Report
-from .forms import OrderForm, AddressForm, SignInForm, SignUpForm, UserForm, ProfileForm, ReviewForm, OrderEditForm, ReportForm
+from .forms import OrderForm, AddressForm, SignInForm, SignUpForm, UserForm, ProfileForm, ReviewForm, OrderEditForm, ReportForm, TelOrderForm
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.forms import UserCreationForm
@@ -208,20 +208,36 @@ def review_create(request):
 def index(request):
     if request.method == 'POST':
         review_form = ReviewForm(request.POST)
-        if review_form.is_valid():
-            review = review_form.save(commit=False)
-            review.author = request.user
-            review.published_date = timezone.now()
-            review.save()
-            return redirect(index)
+        telorder = TelOrderForm(request.POST)
+        if  telorder.is_valid():
+            telorder.save()
+            return redirect(ordered)
         else:
-            return redirect(review_create)
+            if review_form.is_valid():
+                review = review_form.save(commit=False)
+                review.author = request.user
+                review.published_date = timezone.now()
+                review.save()
+                return redirect(index)
+            else:
+                return redirect(index)
     else:
         review_form = ReviewForm
+        telorder = TelOrderForm
 
     reviews = Review.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    return render(request, 'main/landing.html', {'reviews': reviews, 'review_form': review_form})
+    return render(request, 'main/landing.html', {'reviews': reviews, 'review_form': review_form, 'telorder': telorder})
 
+
+def telorder(request):
+    telorder = TelOrderForm(request.POST)
+    if request.method == 'POST':
+        if telorder.is_valid():
+            telorder.save()
+            return redirect(index)
+        else:
+            error = 'Форма была неверной'
+    return render(request, 'main/landing.html', {'telorder': telorder})
 
 def licenses(request):
     return render(request, 'licenses/licenses.html', {})
