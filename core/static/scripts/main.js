@@ -90,7 +90,7 @@ function on_mobile(){
     setInterval(function(){
         right_slide();
       }, 5000);
-    jQuery('.slider').swipe({
+    jQuery('.advan_text').swipe({
         swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
             if(direction=='right') left_slide();
             if(direction=='left') right_slide();

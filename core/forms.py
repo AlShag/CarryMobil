@@ -149,7 +149,7 @@ class TelOrderForm(ModelForm):
 
         widgets = {
             'user_tel_number':  NumberInput(attrs={
-                'placeholder': 'Номер телефона',
+                'placeholder': 'Ваш номер телефона',
                 'id': 'user_telephone',
                 'required':'',
                 'type': 'tel',

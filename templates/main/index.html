@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=0.85, maximum-scale=0.85, user-scalable=0" />
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>{% block title %}Главная{% endblock %}</title>
+    <title>{% block title %}Главная - CMobil{% endblock %}</title>
     {% block css %}
     <link rel="stylesheet" href="{% static 'styles/main.css' %}">
     <link rel="stylesheet" href="{% static 'styles/login.css' %}">
@@ -23,6 +23,18 @@
         <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
         <script src="{% static 'scripts/jquery.touchSwipe.min.js' %}"></script>
         <script src="{% static 'scripts/main.js' %}"></script>
+        <script type="text/javascript" >
+            (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+            (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+         
+            ym(74176894, "init", {
+                 clickmap:true,
+                 trackLinks:true,
+                 accurateTrackBounce:true
+            });
+         </script>
+         <noscript><div><img src="https://mc.yandex.ru/watch/74176894" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     {% endblock %}
 </head>
 <body>

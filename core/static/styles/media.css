@@ -35,6 +35,9 @@
         width: 90%;
         background-size: 100%;
     }
+    #user_call {
+        width: 40%;
+    }
     .slider{
         display: -webkit-inline-box;
         width: 95%;
@@ -89,6 +92,11 @@
     }
     #tel_order{
         margin-top: 2%;
+    }
+    #user_call {
+        width: 45%;
+        left: 25%;
+        top: 30%;
     }
     .navmenu{
         position: absolute;
@@ -323,6 +331,11 @@
     }
     .slider{
         width: 95%;
+    }
+    #user_call {
+        width: 60%;
+        left: 20%;
+        top: 30%;
     }
     .comment_create{
         top: 30%;

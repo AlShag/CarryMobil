@@ -201,23 +201,23 @@ nav li a:hover{
     display: none;
     position: fixed;
     padding: 1%;
-    height: 250px;
-    width: 25%;
+    height: auto;
+    width: 30%;
     background-color: white;
     border: 2px solid #0085ff;
     border-radius:20px;
-    left:37%;
+    left:32%;
     top:30%;
     z-index: 1;
 }
 .window_changes{
     position: relative;
-    bottom: -5%;
+    margin-top: 10%;
     width: 100%;
     text-align: center;
 }
 #user_call input[type='tel']{
-    margin-top: 20%;
+    margin-top: 15%;
     font-size: 20pt;
     width: 100%;
 }
