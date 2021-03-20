@@ -229,16 +229,6 @@ def index(request):
     return render(request, 'main/landing.html', {'reviews': reviews, 'review_form': review_form, 'telorder': telorder})
 
 
-def telorder(request):
-    telorder = TelOrderForm(request.POST)
-    if request.method == 'POST':
-        if telorder.is_valid():
-            telorder.save()
-            return redirect(index)
-        else:
-            error = 'Форма была неверной'
-    return render(request, 'main/landing.html', {'telorder': telorder})
-
 def licenses(request):
     return render(request, 'licenses/licenses.html', {})
 
