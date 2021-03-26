@@ -1,6 +1,13 @@
 @media screen and (max-width: 1800px){
-    .menu_info h1{
-        font-size: 54pt;
+    #tel_calling{
+        margin-left: 7%;
+        width: 50%;
+    }
+    .footer label{
+        font-size: 20pt;
+    }
+    .advantages{
+        background-size: 100%;
     }
 }
 @media screen and (max-width: 1700px){
@@ -310,6 +317,7 @@
         font-size: 40pt;
         letter-spacing: normal;
     }
+    .advan{height: 330px;}
     #tel_calling {
         margin-left: 10%;
         font-size: 16pt;
@@ -326,6 +334,7 @@
     .advan_text h2{
         font-size: 16pt;
     }
+    .advan{height: 330px;}
     .advan_text p{
         font-size: 10pt;
     }
@@ -360,6 +369,7 @@
         font-size: 12pt;
         padding: 3% 5%;
     }
+    .advan{height: 300px;}  
     #tel_calling {
         margin-left: 5%;
         font-size: 14pt;

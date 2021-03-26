@@ -440,6 +440,7 @@ input[type="radio"][name="advan_slider"]{display: none;}
     width: 70%;
     height: 200%;
     max-height: 1200px;
+    border-radius: 50px;
     left: -20%;
     margin-top: -5%;
     z-index: -1;
@@ -526,7 +527,6 @@ input[type="radio"][name="advan_slider"]{display: none;}
 #create_comment:hover{
     background-color: #0085ff;
     color: white;
-    border: 1px solid white;
     transition: 0.25s;
 }
 .comment_create{
