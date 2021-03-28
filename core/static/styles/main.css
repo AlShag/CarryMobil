@@ -125,6 +125,41 @@ nav li a:hover{
 .standart_button:hover{
     border-color: white;
 }
+/* текст в контейнере */
+[aria-label]{
+    position: relative;
+    cursor: help;
+}
+ /* всплывающий контейнер */
+ [aria-label]:after {
+    content: attr(aria-label); /* атрибут метка */
+    display: none; /* скрываем контейнер */
+    position: absolute;
+    top: 110%; /* расстояние от ссылки от верхней границы */
+    left: 10px; /* смещение влево */
+    z-index: 2; /* блок поверх параграфа с текстом */
+    padding: 14px;
+    line-height: 15px; /* выравнивание подсказки по центру */
+    white-space: nowrap; /* не переносить на другую строку */
+    color: #0085ff;
+    border: 1px solid #0085ff;
+    background-color: white; /* цвет контейнера */
+    border-radius: 5px; /* скругленные края блока */
+}
+ /* треугольник у контейнера */
+ /* [aria-label]:before {
+    content: " ";
+    display: none;
+    top: 66%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent black transparent;
+} */
+[aria-label]:hover:after, [aria-label]:hover:before {
+    display: block;
+}
 .login_register{
     width: auto;
     position: absolute;

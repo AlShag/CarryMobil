@@ -29,7 +29,9 @@
   let edding_form = false;
   let passing_to=0;
   let passing_type='';
+  let not_accurate_price=false;
   let status_value=[];
+  let intercity_price=[];
   let filter_cargo_type='';
   let filter_date1=$('#filter_date1').val();
   let filter_date2=$('#filter_date2').val();
@@ -267,11 +269,11 @@
   }
 
   function final_list(){
-    console.log(full_road.length);
     $('#id_full_road').val('');
     $('#all_roads div').remove();
     full_road_price=0;
     order_price=0;
+    intercity_price=[];
     let roads_price='';
     if(full_road.from!='' & full_road.to!=''){
       for (let n = 0; n <= roads_counter-1; n++){
@@ -293,7 +295,15 @@
         $('#id_full_road').val($('#id_full_road').val()+'['+n+']'+'from:'+full_road[n].from[0]+';to:'+full_road[n].to[0]+';passing_to:'+ full_road[n].passing_to+';/');
       }
     }
+    if(intercity_price.length>0){
+      $('#order_express').show();
+      $('label[for="order_express"]').show();
+     } else{
+      $('#order_express').hide();
+      $('label[for="order_express"]').hide();
+     }
     $('#road_full_price').text(full_road_price+' р');
+    if(not_accurate_price) $('#road_full_price').text($('#road_full_price').text()+' - цена может отличаться');
     loader_count=$('#id_loader_count').val();
     loader_time=$('#id_loader_time_count').val();
     type_price=type_conf_price+parseInt($('#goods_type_select :selected').val());
@@ -307,7 +317,6 @@
     $('#id_order_price').val(order_price);
     $('#type_full_price').text(type_price+' р')
     $('#order_price').text(order_price+'р');
-    console.log($('#full_cargo_type').val());
     // type_add();
   }
 
@@ -329,9 +338,11 @@
             current_road_price/=2;
           }
           i=l;
+          if(city_name1!=city_name2) intercity_price.push(current_road_price);
         }
         else{
           current_road_price=0;
+          not_accurate_price=true;
         }
       }
       return current_road_price;

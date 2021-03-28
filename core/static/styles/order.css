@@ -126,6 +126,7 @@
     position: fixed;
     top:32%;
     left: 32%;
+    z-index: 1;
 }
 #road_add_choice button:not(#road_choice_exit){
     padding: 10% 5%;
