@@ -12,6 +12,9 @@ $(document).ready(function (){
     $('#comment_form_close').click(function(){$('.comment_create').hide();});
     $('#tel_order').click(function(){in_window()});
     $('#window_close').click(function(){$('#user_call').hide(); in_window();});
+    $('.warning_apply').click(function(){
+       $('.warning').hide();
+    });
     $('#comment_stars label').hover(function(){
         $('#comment_stars label').html('&#9734;');
         let label_for = $(this).attr('for');

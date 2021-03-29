@@ -115,12 +115,23 @@ nav li a:hover{
 .standart_button{
     color: #fff;
     background-color: #0085ff;
-    padding: 3% 10%;
+    padding: 1% 10%;
     font-size: 15pt;
     font-weight: 400;
     border: 1px solid #0085ff;
     border-radius: 12px;
     text-transform: uppercase;
+}
+.warning_text{
+    font-size: 16pt;
+    width: 90%;
+    margin: 2% auto;
+}
+.warning_action{
+    position:absolute;
+    width: 100%;
+    left: 37%;
+    bottom:3%;
 }
 .standart_button:hover{
     border-color: white;
@@ -159,6 +170,16 @@ nav li a:hover{
 } */
 [aria-label]:hover:after, [aria-label]:hover:before {
     display: block;
+}
+.warning{
+    width: 25%;
+    height: 25%;
+    position: fixed;
+    top: 40%;
+    left: 40%;
+    background-color: white;
+    border: 1px solid #0085ff;
+    border-radius: 20px;
 }
 .login_register{
     width: auto;

@@ -3,8 +3,8 @@
   let city_name1='';
   let city_name2='';
   let roads_counter=1;
-  let from_address=$('#from_address').val();
-  let to_address=$('#to_address').val();
+  let from_address='';
+  let to_address='';
   to_address='';
   let current_road_price=0;
   let full_road = [{from:[],to:[],passing_to:0}];
@@ -127,8 +127,10 @@
   });
   function order_next_list(){
     available_list();
-    order_list_count+=1;
-    // if(available_lists.indexOf(order_list_count)!=-1){
+    console.log(order_list_count);
+    console.log(available_lists);
+    if(available_lists.indexOf(order_list_count+1)!=-1){
+      order_list_count++;
       $('#order_progress').val(order_list_count);
       if(order_list_count>=2 & order_list_count<=4){$('#order_back_list').show()} else $('#order_back_list').hide();
       if(order_list_count>=4){$('#order_next_list').hide()} else $('#order_next_list').show();
@@ -140,7 +142,7 @@
 
       $('#list_head_'+order_list_count).show();
       $('#mb_list_head_'+order_list_count).show();
-    // }
+    }
   }
 
   function order_back_list(){
@@ -355,11 +357,11 @@
   }
 
   function available_list(){
-    if((full_road.from!='') | (full_road.to!='')){  
+    if(from_address!='' | to_address!=''){  
       if(available_lists.indexOf(2)==-1) available_lists.push(2);
       else if(available_lists.indexOf(3)==-1) available_lists.push(3);
       else if(available_lists.indexOf(4)==-1) available_lists.push(4);
-    }
+    } else $('#warning_order_address').show();
   }
 
   function orders_filter(obj){
