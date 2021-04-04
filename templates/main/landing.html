@@ -20,6 +20,7 @@
                                     <form action="" method="post">
                                         {% csrf_token %}
                                         <span>Наш номер: 8(917)222-03-03</span>
+                                        {{ telorder.user_name }}
                                         {{ telorder.user_tel_number }}
                                         <div class="window_changes">
                                             <input type="button" class="standart_button" id="window_close" value="Отмена">

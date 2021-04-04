@@ -145,7 +145,7 @@ class ReportForm(ModelForm):
 class TelOrderForm(ModelForm):
     class Meta:
         model = TelOrder
-        fields = ('user_tel_number', 'sended_in', 'author')
+        fields = ('user_name','user_tel_number', 'sended_in', 'author')
 
         widgets = {
             'user_tel_number':  NumberInput(attrs={
@@ -153,5 +153,10 @@ class TelOrderForm(ModelForm):
                 'id': 'user_telephone',
                 'required':'',
                 'type': 'tel',
+            }),
+            'user_name':  NumberInput(attrs={
+                'placeholder': 'Как к вам обращаться?',
+                'id': 'user_name',
+                'type': 'text',
             }),
         }

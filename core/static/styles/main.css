@@ -272,8 +272,8 @@ nav li a:hover{
     width: 100%;
     text-align: center;
 }
-#user_call input[type='tel']{
-    margin-top: 15%;
+#user_call input[type='tel'], #user_call input[type='text']{
+    margin-top: 10%;
     font-size: 20pt;
     width: 100%;
 }
