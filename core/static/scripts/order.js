@@ -127,8 +127,7 @@
   });
   function order_next_list(){
     available_list();
-    console.log(order_list_count);
-    console.log(available_lists);
+
     if(available_lists.indexOf(order_list_count+1)!=-1){
       order_list_count++;
       $('#order_progress').val(order_list_count);
@@ -208,7 +207,6 @@
         full_road[transition_number-1].from[0]=last_full_road[transition_number].from[0];
         full_road[transition_number-1].to[0]=last_full_road[transition_number].to[0];
         for (let i=transition_number; i<=roads_counter-1; i++){
-          console.log(last_full_road);
           full_road[i-1].from[0]=last_full_road[i].from[0];
           full_road[i-1].to[0]=last_full_road[i].to[0];
         }
@@ -222,7 +220,6 @@
           $('.roads').append('<button class="road_button" id="road_'+n+'" onclick="roads_transition(this)">'+n+'</button>');
         }
       } else{
-        console.log(transition_number);
         $('#road_'+transition_number).remove();
         full_road.pop();
         transition_number--;
