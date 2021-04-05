@@ -58,11 +58,6 @@
                                     <li><a href="{% url 'order' %}">Оформить заказ</a></li>
                                     <li><a href=" {% url 'about' %}">О нас</a></li>
                                     <li><a href="#contacts">Контакты</a></li>
-                                    {% if user.is_staff %}
-                                    <li><a href="/admin/">Админ.страница</a></li>
-                                    <li><a href="{% url 'order_table' %}">Журнал заявок</a></li>
-                                    <li><a href="{% url 'order_create' %}">Создать заказ</a></li>
-                                    {% endif %}
                                 </ul>
                             </nav>
             </div>
@@ -74,6 +69,11 @@
                             <select name="" id="" onchange="top.location=this.value">
                                 <option value="" disabled selected hidden>{{ user.username }}</option>
                                 <option value="{% url 'profile' %}">Профиль</option>
+                                {% if user.is_staff %}
+                                    <option value="/admin/">Админка</option>
+                                    <option value="{% url 'order_table' %}">Заказы</option>
+                                    <option value="{% url 'order_create' %}">Оформить</option>
+                                    {% endif %}
                                 <option value="{% url 'logout' %}" id="logout_a">Выйти</option>
                             </select>
                         </div>

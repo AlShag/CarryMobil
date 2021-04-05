@@ -1,5 +1,6 @@
   let order_list_count=1;
   let cargo_type='';
+  let city_price=[{city_1:'',city_2:'',range: 0, price_1_5t: 0, price_3t: 0, price_5t: 0, }];
   let city_name1='';
   let city_name2='';
   let roads_counter=1;
@@ -321,17 +322,21 @@
 
   function road_price(){
       for(var i = 0, l = $('#city_price tr').length; i <= l; i++){
-        let city_name1 = $('#city_price tr').eq(i).find('td').eq(1).text();
-        let city_name2 = $('#city_price tr').eq(i).find('td').eq(2).text();
+        let city_name1 = city_price[i+1].city_1;
+        let city_name2 = city_price[i+1].city_2;
+        let range = city_price[i+1].range;
+        let price_1_5t = city_price[i+1].price_1_5t;
+        let price_3t = city_price[i+1].price_3t;
+        let price_5t = city_price[i+1].price_5t;
         if(((to_address.includes(city_name1) & from_address.includes(city_name2)) || (from_address.includes(city_name1) & to_address.includes(city_name2))) & ((city_name1!='') & (city_name2!=''))){
-          if(cargo_weight<1500)current_road_price=parseInt($('#city_price tr').eq(i).find('td').eq(4).text());
+          if(cargo_weight<1500)current_road_price=price_1_5t;
           else if(cargo_weight<3500){
-            current_road_price=parseInt($('#city_price tr').eq(i).find('td').eq(4).text());
-            type_conf_price=parseInt($('#city_price tr').eq(i).find('td').eq(5).text())-parseInt($('#city_price tr').eq(i).find('td').eq(4).text());
+            current_road_price=price_1_5t;
+            type_conf_price=price_3t-price_1_5t;
           }
           else if(cargo_weight<5000){
-            current_road_price=parseInt($('#city_price tr').eq(i).find('td').eq(4).text());
-            type_conf_price=parseInt($('#city_price tr').eq(i).find('td').eq(6).text())-parseInt($('#city_price tr').eq(i).find('td').eq(4).text());
+            current_road_price=price_1_5t;
+            type_conf_price=price_5t-price_1_5t;
           }
           if(passing_to!=0){
             current_road_price/=2;

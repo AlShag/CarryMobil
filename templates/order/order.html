@@ -77,19 +77,15 @@
                                         <h2>{{ form.non_field_errors }}</h2>
                                         <span>{{ error }}</span>
                                         <section>
-                                            <table id="city_price" hidden>
                                                 {% for el in all_cityprice %}
-                                                <tr>
-                                                    <td>{{ el.id }}</td>
-                                                    <td>{{ el.city_1 }}</td>
-                                                    <td>{{ el.city_2 }}</td>
-                                                    <td>{{ el.distance }}</td>
-                                                        <td>{{ el.price_1_5t }}</td>
-                                                        <td>{{ el.price_3t }}</td>
-                                                        <td>{{ el.price_5t }}</td>
-                                                    </tr>
+                                                <script>
+                                                    city_price.push({ city_1: '{{ el.city_1 }}', city_2: '{{ el.city_2 }}', range: {{ el.distance }}, price_1_5t: {{ el.price_1_5t }}, price_3t: {{ el.price_3t }}, price_5t: {{ el.price_5t }}});
+                                                </script>
+                            
                                                 {% endfor %}
-                                            </table>
+                                                <script>
+                                                    console.log(city_price);
+                                                </script>
                                             <h2>Откуда</h2>
                                             <input type="search" list="address_search" value="" placeholder="Населенный пункт, улица, дом отправления груза..." id="from_address">
                                             <datalist id="address_search" onselect="alert('hi')">
