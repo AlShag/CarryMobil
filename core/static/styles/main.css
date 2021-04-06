@@ -58,7 +58,6 @@ textarea{
 #logo{
     position: absolute;
     left: 10%;
-    top: -1%;
     width: 10%;
     text-align: center;
 }
@@ -67,6 +66,10 @@ textarea{
     font-size: 30pt;
     color: #474747;
     font-weight: bold;
+}
+#logo img{
+    height: 30px;
+    margin-top: 5%;
 }
 .navmenu{ 
     border-bottom: 1px solid #aaabb8;

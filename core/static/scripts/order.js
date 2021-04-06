@@ -321,13 +321,13 @@
   }
 
   function road_price(){
-      for(var i = 0, l = $('#city_price tr').length; i <= l; i++){
-        let city_name1 = city_price[i+1].city_1;
-        let city_name2 = city_price[i+1].city_2;
-        let range = city_price[i+1].range;
-        let price_1_5t = city_price[i+1].price_1_5t;
-        let price_3t = city_price[i+1].price_3t;
-        let price_5t = city_price[i+1].price_5t;
+      for(var i = 0, l = city_price.length; i <= l; i++){
+        let city_name1 = city_price[i].city_1;
+        let city_name2 = city_price[i].city_2;
+        let range = city_price[i].range;
+        let price_1_5t = city_price[i].price_1_5t;
+        let price_3t = city_price[i].price_3t;
+        let price_5t = city_price[i].price_5t;
         if(((to_address.includes(city_name1) & from_address.includes(city_name2)) || (from_address.includes(city_name1) & to_address.includes(city_name2))) & ((city_name1!='') & (city_name2!=''))){
           if(cargo_weight<1500)current_road_price=price_1_5t;
           else if(cargo_weight<3500){
