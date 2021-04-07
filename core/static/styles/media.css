@@ -110,6 +110,10 @@
     .standart_button {
         padding: 2% 5%;
     }
+    .warning{
+        width: 55%;
+        left: 25%;
+    }
     .for_header{
         height:70px;
     }
@@ -400,6 +404,10 @@
     .standart_button {
         font-size: 12pt;
         padding: 3% 5%;
+    }
+    .warning{
+        width: 70%;
+        left: 15%;
     }
     .advan{height: 300px;}  
     #tel_calling {
