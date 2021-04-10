@@ -5,6 +5,8 @@
     }
     .advantages{
         background-size: 100%;
+    .footer label{
+        font-size: 20pt;
     }
 }
 @media screen and (max-width: 1700px){
@@ -18,6 +20,9 @@
     }
     #logo{
         top: -1%;
+    }
+    #logo a{
+        font-size: 28pt;
     }
 }
 @media screen and (max-width: 1400px){
@@ -37,6 +42,11 @@
     }
     .comment h1:after{
         margin-top: 4.5%;
+    #logo a{
+        font-size: 24pt;
+    }
+    #logo img{
+        height: 25px;
     }
 }
 @media screen and (max-width: 1100px){
@@ -49,7 +59,6 @@
     }
     .advantages{
         width: 90%;
-        background-size: 100%;
     }
     #user_call {
         width: 40%;
@@ -84,8 +93,31 @@
         height: 65px;
         border-bottom: 1px solid #474747;
     }
+    #logo{
+        position: absolute;
+        left: 150%;
+        top: 0.5%;
+        width: 10%;
+        text-align: center;
+    }
+    #logo a{
+        font-size: 28pt;
+    }
+    #logo img{
+        height: 30px;
+        margin-top: 1%;
+    }
+    nav{
+        width: 100%;
+        margin-left: 0%;
+        margin-top: 10%;
+    }
     nav li{
         height: auto;
+        border-bottom: none;
+    }
+    nav li:hover{
+        border-bottom: none;
     }
     .flex{display: block;}
     .standart_button {
@@ -96,13 +128,6 @@
     }
     .user_head_inf select, .user_head_inf select option{
         font-size: 12pt;
-    }
-    #logo {
-        position: absolute;
-        left: 150%;
-        top: 0%;
-        width: 10%;
-        text-align: center;
     }
     #show_nawmenu{
         opacity: 1;
@@ -156,7 +181,7 @@
         display: none;
     }
     .menu{
-        margin-bottom: -80%;
+        margin-bottom: -55%;
     }
     #menu_info{
         width: 85%;
@@ -182,14 +207,9 @@
     .menu_info, .menu_image{
         margin: 0 auto;
     }
-    .advantages{
-        padding-top: 5%;
-        background-position: 50% 75%;
-        background-size: 220%;
-        width: 100%;
-    }
     .advantages h1{
         padding-bottom: 10%;
+        margin-left: 10%;
     }
     .advan{
         width: 80%;
@@ -207,6 +227,10 @@
         width: 70%;
         margin: 0 auto;
     }
+    #advan_slider{
+        background-size: 250%;
+        background-position: 50%;
+    }
     .slider_label{display: block;}
     input[type="radio"][name="advan_slider"]:checked ~ .advan{display: none; opacity: 0;}
     input[type="radio"][id="advan_1"]:checked ~ #advan1{display: block; opacity: 1;}
@@ -219,6 +243,9 @@
     }
     #spec_info {
         width: 100%;
+    }
+    #spec_info h1:before {
+        height: 4px;
     }
     #spec_list{
         width: 100%;
@@ -325,6 +352,9 @@
     .standart_button{
         font-size: 14pt;
     }
+    .menu{
+        margin-bottom: -65%;
+    }
     #menu_logo h1{
         font-size: 40pt;
         letter-spacing: normal;
@@ -342,6 +372,9 @@
 @media screen and (max-width: 479px){
     h1{
         font-size: 26pt;
+    }
+    .menu{
+        margin-bottom: -75%;
     }
     .advan_text h2{
         font-size: 16pt;
@@ -385,6 +418,9 @@
     #tel_calling {
         margin-left: 5%;
         font-size: 14pt;
+    }
+    .menu{
+        margin-bottom: -85%;
     }
     .menu_image {
         bottom: 500px;
