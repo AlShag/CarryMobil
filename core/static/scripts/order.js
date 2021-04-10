@@ -1,5 +1,6 @@
   let order_list_count=1;
   let cargo_type='';
+  let city_price=[{city_1:'',city_2:'',range: 0, price_1_5t: 0, price_3t: 0, price_5t: 0, }];
   let city_name1='';
   let city_name2='';
   let roads_counter=1;
@@ -127,8 +128,7 @@
   });
   function order_next_list(){
     available_list();
-    console.log(order_list_count);
-    console.log(available_lists);
+
     if(available_lists.indexOf(order_list_count+1)!=-1){
       order_list_count++;
       $('#order_progress').val(order_list_count);
@@ -208,7 +208,6 @@
         full_road[transition_number-1].from[0]=last_full_road[transition_number].from[0];
         full_road[transition_number-1].to[0]=last_full_road[transition_number].to[0];
         for (let i=transition_number; i<=roads_counter-1; i++){
-          console.log(last_full_road);
           full_road[i-1].from[0]=last_full_road[i].from[0];
           full_road[i-1].to[0]=last_full_road[i].to[0];
         }
@@ -222,7 +221,6 @@
           $('.roads').append('<button class="road_button" id="road_'+n+'" onclick="roads_transition(this)">'+n+'</button>');
         }
       } else{
-        console.log(transition_number);
         $('#road_'+transition_number).remove();
         full_road.pop();
         transition_number--;
@@ -323,18 +321,22 @@
   }
 
   function road_price(){
-      for(var i = 0, l = $('#city_price tr').length; i <= l; i++){
-        let city_name1 = $('#city_price tr').eq(i).find('td').eq(1).text();
-        let city_name2 = $('#city_price tr').eq(i).find('td').eq(2).text();
+      for(var i = 0, l = city_price.length; i <= l; i++){
+        let city_name1 = city_price[i].city_1;
+        let city_name2 = city_price[i].city_2;
+        let range = city_price[i].range;
+        let price_1_5t = city_price[i].price_1_5t;
+        let price_3t = city_price[i].price_3t;
+        let price_5t = city_price[i].price_5t;
         if(((to_address.includes(city_name1) & from_address.includes(city_name2)) || (from_address.includes(city_name1) & to_address.includes(city_name2))) & ((city_name1!='') & (city_name2!=''))){
-          if(cargo_weight<1500)current_road_price=parseInt($('#city_price tr').eq(i).find('td').eq(4).text());
+          if(cargo_weight<1500)current_road_price=price_1_5t;
           else if(cargo_weight<3500){
-            current_road_price=parseInt($('#city_price tr').eq(i).find('td').eq(4).text());
-            type_conf_price=parseInt($('#city_price tr').eq(i).find('td').eq(5).text())-parseInt($('#city_price tr').eq(i).find('td').eq(4).text());
+            current_road_price=price_1_5t;
+            type_conf_price=price_3t-price_1_5t;
           }
           else if(cargo_weight<5000){
-            current_road_price=parseInt($('#city_price tr').eq(i).find('td').eq(4).text());
-            type_conf_price=parseInt($('#city_price tr').eq(i).find('td').eq(6).text())-parseInt($('#city_price tr').eq(i).find('td').eq(4).text());
+            current_road_price=price_1_5t;
+            type_conf_price=price_5t-price_1_5t;
           }
           if(passing_to!=0){
             current_road_price/=2;

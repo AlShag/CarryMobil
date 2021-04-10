@@ -107,7 +107,6 @@ function on_mobile(){
     });
 }
 function in_window(){
-    console.log($('body').attr('class'));
     if($('body').attr('class')!='in_window'){
         $('body').addClass('in_window');
         $('body').css('overflow','hidden');

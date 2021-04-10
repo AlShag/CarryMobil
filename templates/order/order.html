@@ -77,19 +77,12 @@
                                         <h2>{{ form.non_field_errors }}</h2>
                                         <span>{{ error }}</span>
                                         <section>
-                                            <table id="city_price" hidden>
                                                 {% for el in all_cityprice %}
-                                                <tr>
-                                                    <td>{{ el.id }}</td>
-                                                    <td>{{ el.city_1 }}</td>
-                                                    <td>{{ el.city_2 }}</td>
-                                                    <td>{{ el.distance }}</td>
-                                                        <td>{{ el.price_1_5t }}</td>
-                                                        <td>{{ el.price_3t }}</td>
-                                                        <td>{{ el.price_5t }}</td>
-                                                    </tr>
+                                                <script>
+                                                    city_price.push({ city_1: '{{ el.city_1 }}', city_2: '{{ el.city_2 }}', range: {{ el.distance }}, price_1_5t: {{ el.price_1_5t }}, price_3t: {{ el.price_3t }}, price_5t: {{ el.price_5t }}});
+                                                </script>
+                            
                                                 {% endfor %}
-                                            </table>
                                             <h2>Откуда</h2>
                                             <input type="search" list="address_search" value="" placeholder="Населенный пункт, улица, дом отправления груза..." id="from_address">
                                             <datalist id="address_search" onselect="alert('hi')">
@@ -140,7 +133,7 @@
                                     <div id="map" style="width:100%; height:100%"></div>
                                 </div>
                             </div>
-                            <div class="warning" id="warning_order_address">
+                            <div class="warning" id="warning_order_address" hidden>
                                 <div class="warning_text">
                                     <p>Для продолжения - заполните поле "Откуда" или "Куда "</p>
                                 </div>
@@ -296,16 +289,6 @@
                                             {{ form.prices }}
                                             {{ form.sended_in }}
                                         </div>
-                                        <section class="is_passing_road">
-                                            <table>
-                                                <tr>
-                                                    <td>
-                                                        <input type="checkbox" name="" id="is_passing_road">
-                                                        <label for="is_passing_road">Оформить как попутный груз (до -95% от стоимости заказа)</label>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </section>
                                         <div id="passing_accept_form">
                                             <p>Изменяя текущий груз на попутный, время ожидания заказа увеличивается, для подтверждения нажмите "Да"</p>
                                             <div class="flex" style="margin: 0 auto;">
@@ -320,9 +303,19 @@
                                                 {{ form.order_price }}
                                             </div>
                                         </section>
-                                        <section>
+                                        <section class="is_passing_road">
                                             <table>
                                                 <tr>
+                                                    <td>
+                                                        <input type="checkbox" name="" id="is_passing_road">
+                                                        <label for="is_passing_road">Оформить как попутный груз (до -95% от стоимости заказа)</label>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </section>
+                                        <section>
+                                            <table>
+                                                <!-- <tr>
                                                     <td>
                                                       <input type="checkbox" name="" id="order_express">
                                                     </td>
@@ -330,7 +323,7 @@
                                                       <label for="order_express" aria-label="Выполнение междугородней доставки в выбранный вами день">Экспресс-доставка</label>
                                                     </td>
                                                   </tr>
-                                                <tr>
+                                                <tr> -->
                                                     <td>
                                                     <input type="checkbox" name="" id="user_accord" style="display: block;" checked>
                                                     </td>

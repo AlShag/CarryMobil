@@ -26,7 +26,8 @@ header{
 }
 nav{
     height: 100%;
-    width: 70%;
+    width: 60%;
+    margin-left: 25%;
 }
 .in_window::before{
     content:"";
@@ -57,7 +58,6 @@ textarea{
 #logo{
     position: absolute;
     left: 10%;
-    top: -1%;
     width: 10%;
     text-align: center;
 }
@@ -67,12 +67,12 @@ textarea{
     color: #474747;
     font-weight: bold;
 }
+#logo img{
+    height: 30px;
+    margin-top: 5%;
+}
 .navmenu{ 
     border-bottom: 1px solid #aaabb8;
-}
-nav{
-    width: 60%;
-    margin-left: 25%;
 }
 nav ul{
     height: 100%;
@@ -99,7 +99,7 @@ nav li a:hover{
 #show_nawmenu{
     position: fixed;
     font-size: 20pt;
-    top: 2%;
+    top: 20%;
     left: 5%;
     color: black;
     opacity: 0;
@@ -272,8 +272,8 @@ nav li a:hover{
     width: 100%;
     text-align: center;
 }
-#user_call input[type='tel']{
-    margin-top: 15%;
+#user_call input[type='tel'], #user_call input[type='text']{
+    margin-top: 10%;
     font-size: 20pt;
     width: 100%;
 }
@@ -333,10 +333,6 @@ nav li a:hover{
     text-align: left;
     color: black;
     overflow: hidden;
-    background-image: url('../../static/images/landing/advantages/advan.svg');
-    background-repeat: no-repeat;
-    background-size: 90%;
-    background-position: 50% 80%;
 }
 .advantages h1{
     color: #41a4ff;
@@ -346,6 +342,13 @@ nav li a:hover{
 }
 .advan_text h2,.advan_text p{color: #474747;}
 .slider{width: 90%; margin: 0 auto;}
+#advan_slider{
+    padding: 2.5% 5%;
+    background-image: url('../../static/images/landing/advantages/advan.svg');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: 50%;
+}
 .advan{
     width: 25%;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
@@ -403,8 +406,9 @@ input[type="radio"][name="advan_slider"]{display: none;}
     width:120px;
     left: 13.5%;
     margin-top: -1%;
-    height:8px;
+    height:6px;
     background:#41a4ff;
+    z-index: -1;
 }
 #spec_info p{
     font-weight: 500;
