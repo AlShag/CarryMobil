@@ -20,6 +20,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.contrib.sitemaps.views import sitemap
 from core.sitemaps import StaticViewSitemap, SnippetSitemap
+from account.views import PasswordResetTokenView
 
 sitemaps = {
     'static': StaticViewSitemap,
@@ -30,5 +31,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps}),
+    path(r"^account/password/reset/(?P<uidb36>[0-9A-Za-z]+)-(?P<token>.+)/$", PasswordResetTokenView.as_view(), name="account_password_reset_token"),
     path('accounts/', include('django.contrib.auth.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

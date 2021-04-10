@@ -3,31 +3,40 @@
         margin-left: 7%;
         width: 50%;
     }
-    .footer label{
-        font-size: 20pt;
-    }
     .advantages{
         background-size: 100%;
     }
 }
 @media screen and (max-width: 1700px){
     
-    nav li a{font-size: 12pt;}
+    nav li a{font-size: 14pt;}
     #to_order{
         width: auto;
+    }
+    .comment h1:after{
+        margin-top: 4%;
+    }
+    #logo{
+        top: -1%;
     }
 }
 @media screen and (max-width: 1400px){
     .logo a{
         font-size: 48pt;
     }
-    nav li a{font-size: 10pt;}
+    nav li a{font-size: 12pt;}
     .menu_info h1{
         font-size: 36pt;
+    }
+    .login_register{
+        top: 1%;
     }
     .login_register a{font-size: 10pt;}
     .label_title{
         font-size: 100pt;
+    }
+    .comment h1:after{
+        margin-top: 4.5%;
     }
 }
 @media screen and (max-width: 1100px){
@@ -58,6 +67,9 @@
     #about_image_1{
         height: auto;
         width: 100%;
+    }
+    .comment h1:after{
+        margin-top: 6%;
     }
 }
 @media screen and (max-width: 768px){
