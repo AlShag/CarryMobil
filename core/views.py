@@ -14,6 +14,9 @@ from datetime import timedelta, datetime
 from openpyxl import Workbook
 from django.contrib import messages
 from .models import Snippet
+import core.forms
+import account.forms
+import account.views
 
 
 def index(request):
@@ -22,6 +25,11 @@ def index(request):
 
 
 # ПОЛЬЗОВАТЕЛЬСКИЕ ФУНКЦИИ
+
+class LoginView(account.views.LoginView):
+    form_class = account.forms.LoginEmailForm
+    
+
 def sign_in(request):
     form = SignInForm
     return render(request, 'accounts/login.html', {'form': form})
@@ -31,6 +39,14 @@ class SignUp(generic.CreateView):
     form_class = SignUpForm
     success_url = reverse_lazy('login')
     template_name = 'registration/register.html'
+
+    def generate_username(self, form):
+        username = form.cleaned_data["email"]
+        return username
+
+    def after_signup(self, form):
+        # do something
+        super(SignupView, self).after_signup(form)
 
 
 def profile(request):

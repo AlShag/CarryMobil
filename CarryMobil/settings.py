@@ -78,6 +78,11 @@ TEMPLATES = [
 WSGI_APPLICATION = 'CarryMobil.wsgi.application'
 
 
+AUTHENTICATION_BACKENDS = [
+    'account.auth_backends.EmailAuthenticationBackend',
+]
+
+
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
@@ -142,11 +147,11 @@ ACCOUNT_PASSWORD_RESET_TOKEN_URL = 'core:account_password_reset_token'
 ACCOUNT_EMAIL_UNIQUE = True
 ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = True
 
-DEFAULT_FROM_EMAIL = 'support@carrymobil.ru'
-EMAIL_HOST = "vh326.timeweb.ru"
+DEFAULT_FROM_EMAIL = 'support@cmobil.ru'
+EMAIL_HOST = "smtp.timeweb.ru"
 EMAIL_PORT = 25
-EMAIL_HOST_USER = "ci82874_almaz"
-EMAIL_HOST_PASSWORD = "Almaz2002"
+EMAIL_HOST_USER = "support@cmobil.ru"
+EMAIL_HOST_PASSWORD = "Almetis171"
 
 SITE_ID = 2
 

@@ -10,7 +10,7 @@
     <script src="{% static 'scripts/order.js' %}"></script>
 {% endblock %}
 {% block content %}
-    {% if user.is_staff %}
+    {% if order.author == user.id %}
     <div class="orders_area">
         <div class="orders_form">
                 <div class="order_info">
@@ -84,8 +84,12 @@
                 </div>
                 <div class="order_changing">
                     <input type="button" value="Удалить" onclick="window.location='{% url 'order_delete' pk=order.pk %}'">
-                    <input type="button" value="Редактировать" onclick="window.location='{% url 'order_edit' pk=order.pk %}'">
-                    <input type="button" value="Выполнить" onclick="window.location='{% url 'order_enable' pk=order.pk %}'">
+                    
+                    {% if user.is_staff %}
+                        <input type="button" value="Редактировать" onclick="window.location='{% url 'order_edit' pk=order.pk %}'">
+                        <input type="button" value="Выполнить" onclick="window.location='{% url 'order_enable' pk=order.pk %}'">
+                    {% endif %}
+                        
                 </div>
             </div>
         </div>

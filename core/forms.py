@@ -4,6 +4,7 @@ from django.forms import ModelForm, TextInput, DateTimeInput, Textarea, NumberIn
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+import account.forms
 
 
 class UserForm(forms.ModelForm):
@@ -47,7 +48,7 @@ class SignUpForm(UserCreationForm):
                         'placeholder': 'Повторите пароль',
                 }),
         }
-
+        
 
 class OrderForm(ModelForm):
     class Meta:
