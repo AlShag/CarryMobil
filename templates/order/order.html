@@ -9,16 +9,25 @@
 {{ block.super }}
     <script src="{% static 'scripts/order.js' %}"></script>
     <script src="https://maps.api.2gis.ru/2.0/loader.js?pkg=full"></script>
-    <script type="text/javascript">
-        var map;
-    
-        DG.then(function () {
+    <script>
+        DG.then(function() {
+            var map;
+
             map = DG.map('map', {
                 center: [54.98, 82.89],
                 zoom: 13
             });
 
-            DG.marker([54.98, 82.89]).addTo(map).bindPopup('Вы кликнули по мне!');
+            map.locate({setView: true, watch: true})
+                .on('locationfound', function(e) {
+                    DG.marker([e.latitude, e.longitude]).addTo(map);
+                })
+                .on('locationerror', function(e) {
+                    DG.popup()
+                      .setLatLng(map.getCenter())
+                      .setContent('Доступ к определению местоположения отключён')
+                      .openOn(map);
+                });
         });
     </script>
 {% endblock %}

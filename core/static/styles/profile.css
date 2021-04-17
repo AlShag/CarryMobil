@@ -86,6 +86,27 @@
 .user_content form{
     height: 100%;
 }
+#user_orders_table_title{
+    border-bottom: 1px solid #949494;
+}
+#user_orders_table th{
+    font-size: 16pt;
+    font-weight: 400;
+}
+#user_orders_table tr td:not(.order_status), #user_orders_table :not(.order_status){
+    text-align: center;
+    height: 100%;
+    padding: 1% 0;
+}
+.user_orders_status{
+    border-right: 1px solid rgba(0, 0, 0, 0);
+}
+#user_orders_table{
+    border: 1px solid white;
+    border-collapse: collapse;
+    height: 90%;
+    width: 100%;
+}
 @media screen and (max-width: 1700px){
     .profil_area{
         height: 1650px;
@@ -109,6 +130,11 @@
     }
     .transiton_param input{
         font-size: 18pt;
+    }
+}
+@media screen and (max-width: 900px){
+    .order_start_time{
+        display: none;
     }
 }
 @media screen and (max-width: 768px){
@@ -147,6 +173,9 @@
     .transiton_param input{
         font-size: 14pt;
     }
+    .order_loaders, .order_cargo_type{
+        display: none;
+    }
 }
 
 @media screen and (max-width: 569px) {
@@ -172,6 +201,9 @@
     } 
     .profile_content{
         width: 85%;
+    }
+    #user_orders_table tr td, #userorders_table th{
+        font-size: 12pt;
     }
 }
 @media screen and (max-width: 379px){
