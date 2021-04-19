@@ -356,6 +356,9 @@
     .standart_button{
         font-size: 14pt;
     }
+    #send_news input[type='text']{
+        font-size: 14pt;
+    }
     .menu{
         margin-bottom: -65%;
     }

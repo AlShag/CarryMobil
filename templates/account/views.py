@@ -19,3 +19,6 @@ def site_base(request):
 
 def password_reset(request):
     return render(request, 'password_reset.html', {})
+
+def password_change(request):
+    return render(request, 'password_change.html', {})
