@@ -3,8 +3,12 @@
         margin-left: 7%;
         width: 50%;
     }
+    .login_register{
+        top: 1.5%;
+    }
     .advantages{
         background-size: 100%;
+    }
     .footer label{
         font-size: 20pt;
     }
@@ -15,11 +19,14 @@
     #to_order{
         width: auto;
     }
+    .login_register{
+        top: 1%;
+    }
     .comment h1:after{
         margin-top: 4%;
     }
     #logo{
-        top: -1%;
+        top: -0.5%;
     }
     #logo a{
         font-size: 28pt;
@@ -33,15 +40,13 @@
     .menu_info h1{
         font-size: 36pt;
     }
-    .login_register{
-        top: 1%;
-    }
     .login_register a{font-size: 10pt;}
     .label_title{
         font-size: 100pt;
     }
     .comment h1:after{
         margin-top: 4.5%;
+    }
     #logo a{
         font-size: 24pt;
     }
@@ -146,6 +151,9 @@
         left: 25%;
         top: 30%;
     }
+    #user_call input[type='tel'], #user_call input[type='text'] {
+        font-size: 18pt;
+    }
     .navmenu{
         position: absolute;
         padding-top: 10%;
@@ -234,6 +242,9 @@
     #advan_slider{
         background-size: 250%;
         background-position: 50%;
+    }
+    .slider_label{
+        color: #0085ff;
     }
     .slider_label{display: block;}
     input[type="radio"][name="advan_slider"]:checked ~ .advan{display: none; opacity: 0;}
@@ -380,8 +391,14 @@
     h1{
         font-size: 26pt;
     }
+    .menu_image {
+        bottom: 530px;
+    }
     .menu{
         margin-bottom: -75%;
+    }
+    #user_call input[type='tel'], #user_call input[type='text'] {
+        font-size: 16pt;
     }
     .advan_text h2{
         font-size: 16pt;
@@ -408,7 +425,6 @@
     }
     .report_form{
         width: 80%;
-    }
     .report_form button{
         width: 60%;
     }
@@ -435,6 +451,9 @@
     }
     .menu_image {
         bottom: 500px;
+    }
+    #user_call input[type='tel'], #user_call input[type='text'] {
+        font-size: 14pt;
     }
     .comment h1:after {
         margin-top: 15%;
