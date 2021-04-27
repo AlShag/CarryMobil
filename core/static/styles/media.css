@@ -219,6 +219,9 @@
     .menu_info, .menu_image{
         margin: 0 auto;
     }
+    .advantages{
+        background-color: #d3e9fa;
+    }
     .advantages h1{
         padding-bottom: 10%;
         margin-left: 10%;
@@ -255,6 +258,9 @@
     .slided{opacity: 1; transition: 0.5s;}
     #advan1{
         opacity: 1;
+    }
+    #spec {
+        margin: 20% auto;
     }
     #spec_info {
         width: 100%;
@@ -425,6 +431,7 @@
     }
     .report_form{
         width: 80%;
+    }
     .report_form button{
         width: 60%;
     }
