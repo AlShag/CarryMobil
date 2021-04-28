@@ -17,4 +17,6 @@ urlpatterns = [
 
     path('password-change/done/', views.PasswordChangeDoneView.as_view(), name='password_change_done'),
 
+    path('  ', views.email_confirm, name='email_confirm'),
+
 ]

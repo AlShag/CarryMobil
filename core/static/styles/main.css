@@ -479,7 +479,6 @@ input[type="radio"][name="advan_slider"]{display: none;}
 }
 .comment h1{
     color: #41A4FF;
-    font-size: 32pt;
     font-weight: 500;
     padding-bottom: 1%;
     margin-bottom: 10%;
@@ -759,7 +758,6 @@ input[type="radio"][name="advan_slider"]{display: none;}
     text-align: center;
 }
 .report_form h1{
-    font-size: 32pt;
     text-align: center;
 }
 .report_form textarea{
@@ -796,7 +794,6 @@ input[type="radio"][name="advan_slider"]{display: none;}
     height: 2400px;
 }
 .about_area h1{
-    font-size: 28pt;
     text-align: center;
     color: #0085ff;
 }

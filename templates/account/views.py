@@ -17,8 +17,10 @@ from django.contrib import messages
 def site_base(request):
     return render(request, 'base.html', {})
 
-def password_reset(request):
-    return render(request, 'password_reset.html', {})
 
 def password_change(request):
     return render(request, 'password_change.html', {})
+
+
+def email_confirm(request):
+    return render(request, 'email_confirm.html', {})
