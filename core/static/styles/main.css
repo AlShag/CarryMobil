@@ -116,7 +116,7 @@ nav li a:hover{
 .standart_button{
     color: #fff;
     background-color: #0085ff;
-    padding: 1% 10%;
+    padding: 2% 10%;
     font-size: 15pt;
     font-weight: 400;
     border: 1px solid #0085ff;
@@ -246,13 +246,14 @@ nav li a:hover{
     letter-spacing: 1pt;
 }
 #tel_calling{
-    margin-left: 15%;
+    margin-left: 10%;
     width: 40%;
     font-size: 18pt;
     font-weight: 400;
 }
 #tel_order{
-    margin-top: 12%;
+    margin-top: 8%;
+    padding: 5% 10%;
 }
 #user_call{
     display: none;
@@ -488,7 +489,7 @@ input[type="radio"][name="advan_slider"]{display: none;}
     position:absolute;
     width:20%;
     left: 12%;
-    margin-top: 3.5%;
+    margin-top: 4%;
     height:4px;
     background:#41a4ff;
     
