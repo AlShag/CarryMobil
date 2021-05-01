@@ -19,7 +19,8 @@
                                 <div id="user_call">
                                     <form action="" method="post">
                                         {% csrf_token %}
-                                        <span>Наш номер: 8(987)219-18-53</span>
+                                        <!-- <a class="standart_button" href="tel:+79872191853">Позвонить</a> -->
+                                        <span>Наш номер: <a class="" href="tel:+79872191853">8(987)219-18-53</a></span>
                                         {{ telorder.user_name }}
                                         {{ telorder.user_tel_number }}
                                         <div class="window_changes">
