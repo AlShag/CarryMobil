@@ -143,7 +143,6 @@ ACCOUNT_EMAIL_CONFIRMATION_URL = "core:account_confirm_email"
 ACCOUNT_SETTINGS_REDIRECT_URL = 'core:account_settings'
 ACCOUNT_PASSWORD_CHANGE_REDIRECT_URL = "core:account_password"
 ACCOUNT_PASSWORD_RESET_TOKEN_URL = 'core:account_password_reset_token'
-
 ACCOUNT_EMAIL_UNIQUE = True
 ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = True
 
@@ -152,6 +151,7 @@ EMAIL_HOST = "smtp.timeweb.ru"
 EMAIL_PORT = 25
 EMAIL_HOST_USER = "support@cmobil.ru"
 EMAIL_HOST_PASSWORD = "Almetis171"
+
 
 SITE_ID = 2
 

@@ -335,6 +335,10 @@ nav li a:hover{
     text-align: left;
     color: black;
     overflow: hidden;
+    background-image: url('../../static/images/landing/advantages/advan.svg');
+    background-repeat: no-repeat;
+    background-size: 90%;
+    background-position: 50% 80%;
 }
 .advantages h1{
     color: #41a4ff;

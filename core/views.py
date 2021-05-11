@@ -1,6 +1,5 @@
 from django.utils import timezone
 from django.shortcuts import render, redirect, get_object_or_404, reverse
-from django.contrib import auth
 from django.http import HttpResponseRedirect, HttpResponse
 from .models import Order, Address, CityPrice, CargoType, Review, Report
 from .forms import OrderForm, AddressForm, SignInForm, SignUpForm, UserForm, ProfileForm, ReviewForm, OrderEditForm, ReportForm, TelOrderForm

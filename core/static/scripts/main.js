@@ -4,6 +4,7 @@ let last_slide='';
 let swiper=false;
 let stars_count=1;
 $(document).ready(function (){
+    $('.manage_tool').draggable({ containment:'parent' });  
     last_slide=$('.slider input[type="radio"][name="advan_slider"]').last().attr('id');
     $('#view_password').click(function(){view_password()});
     $('#registration').click(function(){if($('#user_accord').is(':checked')) $('#user_register').click(); else alert('Для регистрации учётной записи необходимо подтверждение пользовательского соглашения');});
