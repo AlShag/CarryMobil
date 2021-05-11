@@ -97,57 +97,60 @@
                                     Действие
                                 </th>
                             </tr>
-                        {% for order in orders %}
-                                <tr data-href="{% url 'order_detail' pk=order.pk %}" class="orders_tr">
-                                    <td class="">
-                                        <a href="{% url 'order_detail' pk=order.pk %}">{{ order.id }}</a>
-                                    </td>
-                                    <td class="">
-                                        {% if not order.start_time == None %}
-                                        <a href="{% url 'order_detail' pk=order.pk %}">{{ order.start_time }}</a>
-                                        <a class="order_start_time" href="{% url 'order_detail' pk=order.pk %}" hidden>{{ order.start_time | date:'c' }}</a>
-                                        {% endif %}
-                                    </td>
-                                    <td class="full_roads">
-                                        <a href="{% url 'order_detail' pk=order.pk %}">{{ order.full_road | truncatechars_html:35 }}</a>
-                                    </td>
-                                    <td class="">
-                                        {% if not order.loader_count == None %}
-                                            <a href="{% url 'order_detail' pk=order.pk %}">{{ order.loader_count }}, {{ order.loader_time_count }}</a>
-                                        {% else %}
-                                            <a href="{% url 'order_detail' pk=order.pk %}">Не нужны</a>
-                                        {% endif %}
-                                    </td>
-                                    <td class="">
-                                        <a href="{% url 'order_detail' pk=order.pk %}">{{ order.cargo_type }}</a>
-                                    </td>
-                                    <td class="">
-                                        <a href="{% url 'order_detail' pk=order.pk %}">{{ order.order_price }}</a>
-                                    </td>
-                                    <td class="order_status">
-                                        {% if not order.status == None %}
-                                            {% if order.status == 0 %}
-                                                <a href="{% url 'order_detail' pk=order.pk %}">Ожидается</a>
+                        
+                        {% if user.is_superuser%}
+                            {% for order in orders %}
+                                    <tr data-href="{% url 'order_detail' pk=order.pk %}" class="orders_tr">
+                                        <td class="">
+                                            <a href="{% url 'order_detail' pk=order.pk %}">{{ order.id }}</a>
+                                        </td>
+                                        <td class="">
+                                            {% if not order.start_time == None %}
+                                            <a href="{% url 'order_detail' pk=order.pk %}">{{ order.start_time }}</a>
+                                            <a class="order_start_time" href="{% url 'order_detail' pk=order.pk %}" hidden>{{ order.start_time | date:'c' }}</a>
                                             {% endif %}
-                                            {% if order.status == 1 %}
-                                                <a href="{% url 'order_detail' pk=order.pk %}">Выполнено</a>
+                                        </td>
+                                        <td class="full_roads">
+                                            <a href="{% url 'order_detail' pk=order.pk %}">{{ order.full_road | truncatechars_html:35 }}</a>
+                                        </td>
+                                        <td class="">
+                                            {% if not order.loader_count == None %}
+                                                <a href="{% url 'order_detail' pk=order.pk %}">{{ order.loader_count }}, {{ order.loader_time_count }}</a>
+                                            {% else %}
+                                                <a href="{% url 'order_detail' pk=order.pk %}">Не нужны</a>
                                             {% endif %}
-                                            {% if order.status == -1 %}
-                                                <a href="{% url 'order_det  ail' pk=order.pk %}">Отменено</a>
+                                        </td>
+                                        <td class="">
+                                            <a href="{% url 'order_detail' pk=order.pk %}">{{ order.cargo_type }}</a>
+                                        </td>
+                                        <td class="">
+                                            <a href="{% url 'order_detail' pk=order.pk %}">{{ order.order_price }}</a>
+                                        </td>
+                                        <td class="order_status">
+                                            {% if not order.status == None %}
+                                                {% if order.status == 0 %}
+                                                    <a href="{% url 'order_detail' pk=order.pk %}">Ожидается</a>
+                                                {% endif %}
+                                                {% if order.status == 1 %}
+                                                    <a href="{% url 'order_detail' pk=order.pk %}">Выполнено</a>
+                                                {% endif %}
+                                                {% if order.status == -1 %}
+                                                    <a href="{% url 'order_det  ail' pk=order.pk %}">Отменено</a>
+                                                {% endif %}
                                             {% endif %}
-                                        {% endif %}
-                                    </td>
-                                    <td class="">
-                                        <a href="{% url 'order_detail' pk=order.pk %}">{{ order.author }}</a>
-                                    </td>
-                                    <td class="">
-                                        <a href="{% url 'order_delete' pk=order.pk %}"><button type="button">Удалить</button></a>
-                                    </td>
-                                    <td class="order_change">
-                                        <a href="{% url 'order_edit' pk=order.pk %}"><button type="button">Редактировать</button></a>
-                                    </td>
-                                </tr>
-                        {% endfor %}
+                                        </td>
+                                        <td class="">
+                                            <a href="{% url 'order_detail' pk=order.pk %}">{{ order.author }}</a>
+                                        </td>
+                                        <td class="">
+                                            <a href="{% url 'order_delete' pk=order.pk %}"><button type="button">Удалить</button></a>
+                                        </td>
+                                        <td class="order_change">
+                                            <a href="{% url 'order_edit' pk=order.pk %}"><button type="button">Редактировать</button></a>
+                                        </td>
+                                    </tr>
+                            {% endfor %}
+                        {% endif %}
                         </table>
                     </div>
                 </div>

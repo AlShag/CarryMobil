@@ -116,3 +116,10 @@ class Snippet(models.Model):
 
     def get_absolute_url(self):
         return f'/{self.slug}/'
+
+
+class TelOrder(models.Model):
+    user_name = models.CharField('Имя заказчика', max_length=255, null=True, blank=True)
+    user_tel_number = models.CharField('Номер телефона', max_length=20)
+    sended_in = models.DateTimeField('Время отправки заявки', null=True, blank=True, default=datetime.datetime.now())
+    author = models.IntegerField('ID Автора', null=True, blank=True, default=0)

@@ -1,5 +1,5 @@
 {% extends "main/index.html" %}
-{% block title %}Главная{% endblock %}
+{% block title %}Главная - CMobil{% endblock %}
 {% load static %}
 {% block content %}
     <div class="tel_order"></div>
@@ -14,8 +14,21 @@
                                 <h1><a style="color: #474747;">CARRY</a><br>MOBIL</h1>
                             </div>
                             <div id="tel_calling">
-                                <span>Телефон 8(8553)35-33-35</span><br>
+                                <span>Тел: 8(987)-219-18-53</span><br>
                                 <input type="button" value="Заказать звонок" class="standart_button" id="tel_order">
+                                <div id="user_call">
+                                    <form action="" method="post">
+                                        {% csrf_token %}
+                                        <!-- <a class="standart_button" href="tel:+79872191853">Позвонить</a> -->
+                                        <span>Наш номер: <a class="" href="tel:+79872191853">8(987)219-18-53</a></span>
+                                        {{ telorder.user_name }}
+                                        {{ telorder.user_tel_number }}
+                                        <div class="window_changes">
+                                            <input type="button" class="standart_button" id="window_close" value="Отмена">
+                                            <input type="submit" class="standart_button" value="Отправить">
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </section>
@@ -25,7 +38,7 @@
                     <section id="to_order">
                         <div class="flex">
                             <span>Оформление заявки<br> займёт не более 5 минут!</span>
-                            <input type="button" class="standart_button" value="Оформить заявку">
+                            <input type="button" class="standart_button" value="Оформить заявку" onclick="window.location='{% url 'order' %}'">
                         </div>
                     </section>
                 </div>
@@ -37,7 +50,7 @@
     <div class="advantages">
         <div class="container">
             <h1>Почему выберают именно нас?</h1>
-            <div class="slider">
+            <div class="slider" id="advan_slider">
                 <div class="flex_al">
                     <input type="radio" name="advan_slider" id="advan_1" checked>
                     <input type="radio" name="advan_slider" id="advan_2">
@@ -50,7 +63,7 @@
                         </div>
                         <div class="advan_text">
                             <section>
-                                <p>Мы предерживаемся варианта - чем проще, тем лучше. Тем самым облегчаем выполнение задач пользователей.</p></div>
+                                <p>Мы придерживаемся варианта - чем проще, тем лучше. Также оформление заказа происходит без затрудненей.</p></div>
                             </section>
                     </div>
                     <div class="advan" id="advan2">
@@ -69,7 +82,7 @@
                         </div>
                         <div class="advan_text">
                             <section>
-                                <p>Сервис заказов в CM предоставляет индивидуальный подход к клиенту, учитывая предпочтения клиента.</p>
+                                <p>Система CM старается как можно оперативнее предоставлять услуги, а также быстро подстраиваеться под условия.</p>
                             </section>
                         </div>
                     </div>
@@ -79,7 +92,7 @@
                         </div>
                         <div class="advan_text">
                             <section>
-                                <p>Система CM старается как можно оперативнее предоставлять услуги, а также быстро подстраиваеться под условия.</p>
+                                <p>Сервис заказов в CM предоставляет индивидуальный подход к клиенту, учитывая предпочтения клиента.</p>
                             </section>
                         </div>
                     </div>
@@ -92,7 +105,7 @@
         <div class="container">
             <div class="flex">
                 <div id="spec_info">
-                    <h1>Спец-сервисы</h1>
+                    <h1>Спец - сервисы</h1>
                     <p>Группа специальных услуг CarryMobil, способна обрабатывать каждую деталь,
                         касающуюся конкретных логистических и экспедиторских потребностей наших клиентов, позаботится обо всей вашей логистике.</p>
                 </div>
@@ -120,12 +133,12 @@
     </div>
     <div class="comment">
         <div class="container">
+            <span>Отзывы</span>
+            <h1>Что сказали о нас клиенты?</h1>
             <div class="flex">
                 <div class="comment_area">
-                    <span>Отзывы</span>
-                    <h1>Что сказали о нас клиенты?</h1>
                     {% for review in reviews %}
-                    <div id="comment_1" class="user_comment"> 
+                    <div class="user_comment"> 
                         <div>
                             <label>{{ review.author }}</label><br>
                             <label for="">{{ review.stars }}&#9733;</label><br>
@@ -134,14 +147,14 @@
                         </div>
                     </div>
                     {% endfor %}
-                    {% if user.is_authenticated %}
-                        <button id="create_comment">&#9734;Оставить отзыв</button>
-                    {% else %}
-                        <p>Вы не авторизированы</p>
-                    {% endif %}
                 </div>
                 <div id="comment_image"></div>
             </div>
+            {% if user.is_authenticated %}
+            <button id="create_comment">&#9734;Оставить отзыв</button>
+            {% else %}
+                 <p>Вы не авторизированы</p>
+            {% endif %}
         </div>
         <div class="comment_create">
             <form method="post">
@@ -162,7 +175,7 @@
                     {{ review_form.stars }}
                 </section>
                 {{ review_form.text }}<br>
-                <a href="review_create"><input type="submit" value="Отправить отзыв" id="send_comment"></a>
+                <a href="review_create"><input type="submit" value="Отправить отзыв" class="standart_button" id="send_comment"></a>
             </form>
         </div>
     </div>

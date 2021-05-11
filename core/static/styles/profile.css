@@ -37,9 +37,18 @@
     color: #0085ff;
     width: 100%;
     height: 12%;
-    transition: 0.25s;
 }
-.user_image input[type='button']:hover{
+#password_change_button{
+    margin: 2.5% auto;
+    font-size: 18pt;
+    border: 2px solid #0085ff;
+    border-radius: 50px;
+    color: #0085ff;
+    width: 30%;
+    height: 12%;
+}
+
+.user_image input[type='button']:hover,#password_change_button:hover, .user_image input[type='submit']:hover{
     color: white;
     background-color: #0085ff;
 }
@@ -86,13 +95,34 @@
 .user_content form{
     height: 100%;
 }
+#user_orders_table_title{
+    border-bottom: 1px solid #949494;
+}
+#user_orders_table th{
+    font-size: 16pt;
+    font-weight: 400;
+}
+#user_orders_table tr td:not(.order_status), #user_orders_table :not(.order_status){
+    text-align: center;
+    height: 100%;
+    padding: 1% 0;
+}
+.user_orders_status{
+    border-right: 1px solid rgba(0, 0, 0, 0);
+}
+#user_orders_table{
+    border: 1px solid white;
+    border-collapse: collapse;
+    height: 90%;
+    width: 100%;
+}
 @media screen and (max-width: 1700px){
     .profil_area{
         height: 1650px;
     }
 }
 @media screen and (max-width: 1400px){
-    .user_image input{
+    .user_image input,#password_change_button{
         font-size: 14pt;
     }
     .user_info label{
@@ -109,6 +139,11 @@
     }
     .transiton_param input{
         font-size: 18pt;
+    }
+}
+@media screen and (max-width: 900px){
+    .order_start_time{
+        display: none;
     }
 }
 @media screen and (max-width: 768px){
@@ -128,7 +163,7 @@
     .user_image img{
         height: 70%;
     }
-    .user_image input {
+    .user_image input,#password_change_button{
         width: 50%;
     }
     .profile_content{
@@ -147,10 +182,13 @@
     .transiton_param input{
         font-size: 14pt;
     }
+    .order_loaders, .order_cargo_type{
+        display: none;
+    }
 }
 
 @media screen and (max-width: 569px) {
-    .user_image input{
+    .user_image input,#password_change_button{
         width: 65%;
     }
     .user_info label {
@@ -164,7 +202,7 @@
     .transiton_param input{
         font-size: 10pt;
     }
-    .user_image input{
+    .user_image input,#password_change_button{
         font-size: 12pt;
     }
     .user_info label {
@@ -172,6 +210,9 @@
     } 
     .profile_content{
         width: 85%;
+    }
+    #user_orders_table tr td, #userorders_table th{
+        font-size: 12pt;
     }
 }
 @media screen and (max-width: 379px){

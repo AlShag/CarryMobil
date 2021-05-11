@@ -1,9 +1,10 @@
-from .models import Order, Address, Profile, Review, Report
+from .models import Order, Address, Profile, Review, Report, TelOrder
 from django import forms
 from django.forms import ModelForm, TextInput, DateTimeInput, Textarea, NumberInput, PasswordInput
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+import account.forms
 
 
 class UserForm(forms.ModelForm):
@@ -47,7 +48,7 @@ class SignUpForm(UserCreationForm):
                         'placeholder': 'Повторите пароль',
                 }),
         }
-
+        
 
 class OrderForm(ModelForm):
     class Meta:
@@ -139,4 +140,24 @@ class ReportForm(ModelForm):
             'report_text': Textarea(attrs={
                 'placeholder':'Здесь вы можете описать суть проблемы с которой вы столкнулись'
             })
+        }
+
+
+class TelOrderForm(ModelForm):
+    class Meta:
+        model = TelOrder
+        fields = ('user_name','user_tel_number', 'sended_in', 'author')
+
+        widgets = {
+            'user_tel_number':  NumberInput(attrs={
+                'placeholder': 'Ваш номер телефона',
+                'id': 'user_telephone',
+                'required':'',
+                'type': 'tel',
+            }),
+            'user_name':  NumberInput(attrs={
+                'placeholder': 'Как к вам обращаться?',
+                'id': 'user_name',
+                'type': 'text',
+            }),
         }

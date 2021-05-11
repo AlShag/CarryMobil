@@ -1,4 +1,7 @@
 {
-    "python.pythonPath": "C:\\Users\\User\\AppData\\Local\\Programs\\Python\\Python39\\python.exe",
-    "liveServer.settings.port": 5501
+    "python.pythonPath": "C:\\Users\\ДНС\\AppData\\Local\\Programs\\Python\\Python36-32\\python.exe",
+    "liveServer.settings.port": 5501,
+    "python.linting.flake8Enabled": true,
+    "python.linting.pylintEnabled": false,
+    "python.linting.enabled": true
 }

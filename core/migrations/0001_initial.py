@@ -66,7 +66,7 @@ class Migration(migrations.Migration):
                 ('order_price', models.IntegerField(verbose_name='Стоимость заказа')),
                 ('prices', models.CharField(blank=True, max_length=150, null=True, verbose_name='Цены заказа')),
                 ('user_tel_nomer', models.CharField(max_length=20, verbose_name='Номер телефона заказчика')),
-                ('sended_in', models.DateTimeField(blank=True, default=datetime.datetime(2021, 3, 14, 17, 14, 1, 232079), null=True, verbose_name='Время отправки заявки')),
+                ('sended_in', models.DateTimeField(blank=True, default=datetime.datetime(2021, 3, 11, 21, 22, 27, 862867), null=True, verbose_name='Время отправки заявки')),
                 ('status', models.IntegerField(blank=True, default=0, null=True, verbose_name='Состояние заказа')),
                 ('author', models.IntegerField(blank=True, default=0, null=True, verbose_name='ID Автора')),
             ],

@@ -1,10 +1,11 @@
   let order_list_count=1;
   let cargo_type='';
+  let city_price=[{city_1:'',city_2:'',range: 0, price_1_5t: 0, price_3t: 0, price_5t: 0, }];
   let city_name1='';
   let city_name2='';
   let roads_counter=1;
-  let from_address=$('#from_address').val();
-  let to_address=$('#to_address').val();
+  let from_address='';
+  let to_address='';
   to_address='';
   let current_road_price=0;
   let full_road = [{from:[],to:[],passing_to:0}];
@@ -29,7 +30,9 @@
   let edding_form = false;
   let passing_to=0;
   let passing_type='';
+  let not_accurate_price=false;
   let status_value=[];
+  let intercity_price=[];
   let filter_cargo_type='';
   let filter_date1=$('#filter_date1').val();
   let filter_date2=$('#filter_date2').val();
@@ -131,8 +134,9 @@
   });
   function order_next_list(){
     available_list();
-    order_list_count+=1;
-    // if(available_lists.indexOf(order_list_count)!=-1){
+
+    if(available_lists.indexOf(order_list_count+1)!=-1){
+      order_list_count++;
       $('#order_progress').val(order_list_count);
       if(order_list_count>=2 & order_list_count<=4){$('#order_back_list').show()} else $('#order_back_list').hide();
       if(order_list_count>=4){$('#order_next_list').hide()} else $('#order_next_list').show();
@@ -144,7 +148,7 @@
 
       $('#list_head_'+order_list_count).show();
       $('#mb_list_head_'+order_list_count).show();
-    // }
+    }
   }
 
   function order_back_list(){
@@ -210,7 +214,6 @@
         full_road[transition_number-1].from[0]=last_full_road[transition_number].from[0];
         full_road[transition_number-1].to[0]=last_full_road[transition_number].to[0];
         for (let i=transition_number; i<=roads_counter-1; i++){
-          console.log(last_full_road);
           full_road[i-1].from[0]=last_full_road[i].from[0];
           full_road[i-1].to[0]=last_full_road[i].to[0];
         }
@@ -224,7 +227,6 @@
           $('.roads').append('<button class="road_button" id="road_'+n+'" onclick="roads_transition(this)">'+n+'</button>');
         }
       } else{
-        console.log(transition_number);
         $('#road_'+transition_number).remove();
         full_road.pop();
         transition_number--;
@@ -273,11 +275,11 @@
   }
 
   function final_list(){
-    console.log(full_road.length);
     $('#id_full_road').val('');
     $('#all_roads div').remove();
     full_road_price=0;
     order_price=0;
+    intercity_price=[];
     let roads_price='';
     if(full_road.from!='' & full_road.to!=''){
       for (let n = 0; n <= roads_counter-1; n++){
@@ -299,7 +301,15 @@
         $('#id_full_road').val($('#id_full_road').val()+'['+n+']'+'from:'+full_road[n].from[0]+';to:'+full_road[n].to[0]+';passing_to:'+ full_road[n].passing_to+';/');
       }
     }
+    if(intercity_price.length>0){
+      $('#order_express').show();
+      $('label[for="order_express"]').show();
+     } else{
+      $('#order_express').hide();
+      $('label[for="order_express"]').hide();
+     }
     $('#road_full_price').text(full_road_price+' р');
+    if(not_accurate_price) $('#road_full_price').text($('#road_full_price').text()+' - цена может отличаться');
     loader_count=$('#id_loader_count').val();
     loader_time=$('#id_loader_time_count').val();
     type_price=type_conf_price+parseInt($('#goods_type_select :selected').val());
@@ -313,31 +323,36 @@
     $('#id_order_price').val(order_price);
     $('#type_full_price').text(type_price+' р')
     $('#order_price').text(order_price+'р');
-    console.log($('#full_cargo_type').val());
     // type_add();
   }
 
   function road_price(){
-      for(var i = 0, l = $('#city_price tr').length; i <= l; i++){
-        let city_name1 = $('#city_price tr').eq(i).find('td').eq(1).text();
-        let city_name2 = $('#city_price tr').eq(i).find('td').eq(2).text();
+      for(var i = 0, l = city_price.length; i <= l; i++){
+        let city_name1 = city_price[i].city_1;
+        let city_name2 = city_price[i].city_2;
+        let range = city_price[i].range;
+        let price_1_5t = city_price[i].price_1_5t;
+        let price_3t = city_price[i].price_3t;
+        let price_5t = city_price[i].price_5t;
         if(((to_address.includes(city_name1) & from_address.includes(city_name2)) || (from_address.includes(city_name1) & to_address.includes(city_name2))) & ((city_name1!='') & (city_name2!=''))){
-          if(cargo_weight<1500)current_road_price=parseInt($('#city_price tr').eq(i).find('td').eq(4).text());
+          if(cargo_weight<1500)current_road_price=price_1_5t;
           else if(cargo_weight<3500){
-            current_road_price=parseInt($('#city_price tr').eq(i).find('td').eq(4).text());
-            type_conf_price=parseInt($('#city_price tr').eq(i).find('td').eq(5).text())-parseInt($('#city_price tr').eq(i).find('td').eq(4).text());
+            current_road_price=price_1_5t;
+            type_conf_price=price_3t-price_1_5t;
           }
           else if(cargo_weight<5000){
-            current_road_price=parseInt($('#city_price tr').eq(i).find('td').eq(4).text());
-            type_conf_price=parseInt($('#city_price tr').eq(i).find('td').eq(6).text())-parseInt($('#city_price tr').eq(i).find('td').eq(4).text());
+            current_road_price=price_1_5t;
+            type_conf_price=price_5t-price_1_5t;
           }
           if(passing_to!=0){
             current_road_price/=2;
           }
           i=l;
+          if(city_name1!=city_name2) intercity_price.push(current_road_price);
         }
         else{
           current_road_price=0;
+          not_accurate_price=true;
         }
       }
       return current_road_price;
@@ -350,11 +365,11 @@
   }
 
   function available_list(){
-    if((full_road.from!='') | (full_road.to!='')){  
+    if(from_address!='' | to_address!=''){  
       if(available_lists.indexOf(2)==-1) available_lists.push(2);
       else if(available_lists.indexOf(3)==-1) available_lists.push(3);
       else if(available_lists.indexOf(4)==-1) available_lists.push(4);
-    }
+    } else $('#warning_order_address').show();
   }
 
   function orders_filter(obj){

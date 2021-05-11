@@ -74,9 +74,12 @@
 .map{
     width: 50%;
 }
-.map iframe{
+.map, #map{
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
+}
+#map div{
+    transition: 0s;
 }
 .road_select_form{
     margin-top: 7%;
@@ -126,6 +129,7 @@
     position: fixed;
     top:32%;
     left: 32%;
+    z-index: 1;
 }
 #road_add_choice button:not(#road_choice_exit){
     padding: 10% 5%;

@@ -1,4 +1,5 @@
 from django.urls import path, include
+from django.conf.urls import url
 from . import views
 from .views import SignUp
 from django.contrib.auth import views as auth_views
@@ -7,6 +8,7 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('account/', include('account.urls')),
     path('accounts/register/', SignUp.as_view(), name='register'),
+    url(r"^account/login/$", views.LoginView.as_view(), name="account_login"),
     path('order', views.order, name='order'),
     path('order_create', views.order_create, name='order_create'),
     path('profile', views.user_orders, name='profile'),

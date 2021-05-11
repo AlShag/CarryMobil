@@ -1,6 +1,6 @@
 {% extends "main/index.html" %}
 {% load static %}
-{% block title %}Оформление заказа{% endblock %}
+{% block title %}Оформление заказа - CMobil{% endblock %}
 {% block css %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'styles/order.css' %}">
@@ -8,18 +8,27 @@
 {% block script %}
 {{ block.super }}
     <script src="{% static 'scripts/order.js' %}"></script>
-    <!-- <script src="https://maps.api.2gis.ru/2.0/loader.js?pkg=full"></script>
-    <script type="text/javascript">
-        var map;
-    
-        DG.then(function () {
+    <script src="https://maps.api.2gis.ru/2.0/loader.js?pkg=full"></script>
+    <script>
+        DG.then(function() {
+            var map;
+
             map = DG.map('map', {
                 center: [54.98, 82.89],
                 zoom: 13
             });
 
-            DG.marker([54.98, 82.89]).addTo(map).bindPopup('Вы кликнули по мне!');
-        }); -->
+            map.locate({setView: true, watch: true})
+                .on('locationfound', function(e) {
+                    DG.marker([e.latitude, e.longitude]).addTo(map);
+                })
+                .on('locationerror', function(e) {
+                    DG.popup()
+                      .setLatLng(map.getCenter())
+                      .setContent('Доступ к определению местоположения отключён')
+                      .openOn(map);
+                });
+        });
     </script>
 {% endblock %}
 {% block content %}
@@ -77,19 +86,12 @@
                                         <h2>{{ form.non_field_errors }}</h2>
                                         <span>{{ error }}</span>
                                         <section>
-                                            <table id="city_price" hidden>
                                                 {% for el in all_cityprice %}
-                                                <tr>
-                                                    <td>{{ el.id }}</td>
-                                                    <td>{{ el.city_1 }}</td>
-                                                    <td>{{ el.city_2 }}</td>
-                                                    <td>{{ el.distance }}</td>
-                                                        <td>{{ el.price_1_5t }}</td>
-                                                        <td>{{ el.price_3t }}</td>
-                                                        <td>{{ el.price_5t }}</td>
-                                                    </tr>
+                                                <script>
+                                                    city_price.push({ city_1: '{{ el.city_1 }}', city_2: '{{ el.city_2 }}', range: {{ el.distance }}, price_1_5t: {{ el.price_1_5t }}, price_3t: {{ el.price_3t }}, price_5t: {{ el.price_5t }}});
+                                                </script>
+                            
                                                 {% endfor %}
-                                            </table>
                                             <h2>Откуда</h2>
                                             <input type="search" list="address_search" value="" placeholder="Населенный пункт, улица, дом отправления груза..." id="from_address">
                                             <datalist id="address_search" onselect="alert('hi')">
@@ -139,6 +141,14 @@
                                 <div class="map">
                                     <!-- <div id="map" style="width:100%; height:100%"></div> -->
                                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d73416.8711652847!2d52.2386084848836!3d54.898056310490446!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x41605c5672d84245%3A0xc5e4cdd6efdd5177!2z0JDQu9GM0LzQtdGC0YzQtdCy0YHQuiwg0KDQtdGB0L8uINCi0LDRgtCw0YDRgdGC0LDQvQ!5e0!3m2!1sru!2sru!4v1609421542062!5m2!1sru!2sru" width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                                </div>
+                            </div>
+                            <div class="warning" id="warning_order_address" hidden>
+                                <div class="warning_text">
+                                    <p>Для продолжения - заполните поле "Откуда" или "Куда "</p>
+                                </div>
+                                <div class="warning_action">
+                                    <input type="button" class="standart_button warning_apply" value="Ок">
                                 </div>
                             </div>
                         </div>
@@ -289,16 +299,6 @@
                                             {{ form.prices }}
                                             {{ form.sended_in }}
                                         </div>
-                                        <!-- <section class="is_passing_road">
-                                            <table>
-                                                <tr>
-                                                    <td>
-                                                        <input type="checkbox" name="" id="is_passing_road">
-                                                        <label for="is_passing_road">Оформить как попутный груз (до -95% от стоимости заказа)</label>
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </section> -->
                                         <div id="passing_accept_form">
                                             <p>Изменяя текущий груз на попутный, время ожидания заказа увеличивается, для подтверждения нажмите "Да"</p>
                                             <div class="flex" style="margin: 0 auto;">
@@ -313,16 +313,34 @@
                                                 {{ form.order_price }}
                                             </div>
                                         </section>
+                                        <section class="is_passing_road">
+                                            <table>
+                                                <tr>
+                                                    <td>
+                                                        <input type="checkbox" name="" id="is_passing_road">
+                                                        <label for="is_passing_road">Оформить как попутный груз (до -95% от стоимости заказа)</label>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </section>
                                         <section>
                                             <table>
-                                              <tr>
-                                                <td>
-                                                  <input type="checkbox" name="" id="user_accord" style="display: block;" checked>
-                                                </td>
-                                                <td>
-                                                  <label for="user_accord">Выражаю согласие с условиями <a href="https://cloud.mail.ru/public/rP83/XdrTY3kVN">обработки персональных данных</a></label>
-                                                </td>
-                                              </tr>
+                                                <!-- <tr>
+                                                    <td>
+                                                      <input type="checkbox" name="" id="order_express">
+                                                    </td>
+                                                    <td>
+                                                      <label for="order_express" aria-label="Выполнение междугородней доставки в выбранный вами день">Экспресс-доставка</label>
+                                                    </td>
+                                                  </tr>
+                                                <tr> -->
+                                                    <td>
+                                                    <input type="checkbox" name="" id="user_accord" style="display: block;" checked>
+                                                    </td>
+                                                    <td>
+                                                    <label for="user_accord">Выражаю согласие с условиями <a href="https://cloud.mail.ru/public/rP83/XdrTY3kVN">обработки персональных данных</a></label>
+                                                    </td>
+                                                </tr>
                                             </table>
                                         </section>
                                     </div>

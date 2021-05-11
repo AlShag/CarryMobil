@@ -2,7 +2,7 @@ from django.utils import timezone
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from .models import Order, Address, CityPrice, CargoType, Review, Report
-from .forms import OrderForm, AddressForm, SignInForm, SignUpForm, UserForm, ProfileForm, ReviewForm, OrderEditForm, ReportForm
+from .forms import OrderForm, AddressForm, SignInForm, SignUpForm, UserForm, ProfileForm, ReviewForm, OrderEditForm, ReportForm, TelOrderForm
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.forms import UserCreationForm
@@ -13,6 +13,9 @@ from datetime import timedelta, datetime
 from openpyxl import Workbook
 from django.contrib import messages
 from .models import Snippet
+import core.forms
+import account.forms
+import account.views
 
 
 def index(request):
@@ -21,6 +24,11 @@ def index(request):
 
 
 # ПОЛЬЗОВАТЕЛЬСКИЕ ФУНКЦИИ
+
+class LoginView(account.views.LoginView):
+    form_class = account.forms.LoginEmailForm
+    
+
 def sign_in(request):
     form = SignInForm
     return render(request, 'accounts/login.html', {'form': form})
@@ -30,6 +38,14 @@ class SignUp(generic.CreateView):
     form_class = SignUpForm
     success_url = reverse_lazy('login')
     template_name = 'registration/register.html'
+
+    def generate_username(self, form):
+        username = form.cleaned_data["email"]
+        return username
+
+    def after_signup(self, form):
+        # do something
+        super(SignupView, self).after_signup(form)
 
 
 def profile(request):
@@ -207,19 +223,25 @@ def review_create(request):
 def index(request):
     if request.method == 'POST':
         review_form = ReviewForm(request.POST)
-        if review_form.is_valid():
-            review = review_form.save(commit=False)
-            review.author = request.user
-            review.published_date = timezone.now()
-            review.save()
-            return redirect(index)
+        telorder = TelOrderForm(request.POST)
+        if  telorder.is_valid():
+            telorder.save()
+            return redirect(ordered)
         else:
-            return redirect(review_create)
+            if review_form.is_valid():
+                review = review_form.save(commit=False)
+                review.author = request.user
+                review.published_date = timezone.now()
+                review.save()
+                return redirect(index)
+            else:
+                return redirect(index)
     else:
         review_form = ReviewForm
+        telorder = TelOrderForm
 
     reviews = Review.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    return render(request, 'main/landing.html', {'reviews': reviews, 'review_form': review_form})
+    return render(request, 'main/landing.html', {'reviews': reviews, 'review_form': review_form, 'telorder': telorder})
 
 
 def licenses(request):

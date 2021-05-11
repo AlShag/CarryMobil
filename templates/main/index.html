@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="viewport" content="width=device-width, initial-scale=0.85, maximum-scale=0.85, user-scalable=0" />
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <title>{% block title %}Главная{% endblock %}</title>
+    <title>{% block title %}Главная - CMobil{% endblock %}</title>
     {% block css %}
     <link rel="stylesheet" href="{% static 'styles/main.css' %}">
     <link rel="stylesheet" href="{% static 'styles/login.css' %}">
@@ -17,12 +17,25 @@
     <link href="{% static 'images/logo1.png' %}" rel="apple-touch-icon">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Pattaya&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'styles/apple.css' %}" media="only screen and (max-device-width: 480px)" />
     {% endblock %}
     {% block script %}
         <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
         <script src="https://code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
         <script src="{% static 'scripts/jquery.touchSwipe.min.js' %}"></script>
         <script src="{% static 'scripts/main.js' %}"></script>
+        <script type="text/javascript" >
+            (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+            (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+         
+            ym(74176894, "init", {
+                 clickmap:true,
+                 trackLinks:true,
+                 accurateTrackBounce:true
+            });
+         </script>
+         <noscript><div><img src="https://mc.yandex.ru/watch/74176894" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
     {% endblock %}
 </head>
 <body>
@@ -32,10 +45,13 @@
             <button id="show_nawmenu">&#9776;</button>
             <div class="navmenu">
                 <div id="logo">
-                    <div class="flex_al">
-                        <a href="{% url 'index' %}">CM</a>
-                        <img src="{% static '/images/landing/flag.svg' %}" id="Russian_flag" alt="" height="35px">
-                    </div>
+                    <table>
+                        <tr>
+                            <td><a href="{% url 'index' %}">CM</a></td>
+                            <td><img src="{% static '/images/landing/flag.svg' %}" id="Russian_flag" alt="" height="30px"></td>
+                        </tr>
+                    </table>
+
                 </div>
                             <nav>
                                 <ul>
@@ -44,11 +60,6 @@
                                     <li><a href="{% url 'order' %}">Оформить заказ</a></li>
                                     <li><a href=" {% url 'about' %}">О нас</a></li>
                                     <li><a href="#contacts">Контакты</a></li>
-                                    {% if user.is_staff %}
-                                    <li><a href="/admin/">Админ.страница</a></li>
-                                    <li><a href="{% url 'order_table' %}">Журнал заявок</a></li>
-                                    <li><a href="{% url 'order_create' %}">Создать заказ</a></li>
-                                    {% endif %}
                                 </ul>
                             </nav>
             </div>
@@ -60,13 +71,17 @@
                             <select name="" id="" onchange="top.location=this.value">
                                 <option value="" disabled selected hidden>{{ user.username }}</option>
                                 <option value="{% url 'profile' %}">Профиль</option>
+                                {% if user.is_staff %}
+                                    <option value="/admin/">Админка</option>
+                                    <option value="{% url 'order_table' %}">Заказы</option>
+                                    <option value="{% url 'order_create' %}">Оформить</option>
+                                    {% endif %}
                                 <option value="{% url 'logout' %}" id="logout_a">Выйти</option>
                             </select>
                         </div>
                     </div>
                 {% else %}
-                    <a href="{% url 'login' %}" id="login_a">Войти</a>
-                    <a href="{% url 'register' %}" id="register_a" hidden>Регистрация</a>
+                <input type="button" value="Войти" id="login_a" onclick="window.location='{% url 'account_login' %}'"> 
                 {% endif %}
             </div>
         </div>
@@ -85,7 +100,7 @@
                     <div class="footer_block" id="footer_ab_us">
                         <h2>О нас</h2>
                         <section>
-                        <p><label>CarryMobil</label> - Платформа логистических <br> услуг.</p>
+                        <p><label>CarryMobil</label> - Платформа логистических услуг.</p>
                         </section>
                         <section>
                             <div class="flex">
@@ -109,12 +124,12 @@
                     <div class="footer_block">
                         <h2>Контакты</h2>
                         <section>
-                            <h3>&#9672; Адрес</h3>
+                            <h3><img src="{% static '/images/landing/point.svg' %}" class="" id="" alt=""> Адрес</h3>
                             <span>Альметьевск</span>      
-                            <h3>&#9993; Электронная почта</h3>
+                            <h3><img src="{% static '/images/landing/mail.svg' %}" class="" id="" alt=""> Электронная почта</h3>
                             <span>carrymobil@mail.ru</span><br>
                             <span>support@carrymobil.ru</span>
-                            <h3>&#9742; Номер телефона</h3>
+                            <h3><img src="{% static '/images/landing/call.svg' %}" class="" id="" alt=""> Номер телефона</h3>
                             <span>8(8553)35-33-35</span>
                             <h3>&#9745; Документация</h3>
                             <span><a href="{% url 'licenses' %}">Лицензии</a></span>
@@ -125,15 +140,15 @@
                         <section>
                             <table>
                                 <tr>
-                                    <td><img src="{% static '/images/login/vk.svg' %}" class="soc-icon" id="" alt=""></td>
+                                    <td><img src="{% static '/images/login/vk.svg' %}" width="30px" class="soc-icon" id="" alt=""></td>
                                     <td><a href="https://vk.com/carrymobil"> vk.com/carrymobil</a></td>
                                 </tr>
                                 <tr>
-                                    <td></td>
+                                    <td><img src="{% static '/images/landing/inst.svg' %}" width="30px" class="soc-icon" id="" alt=""></td>
                                     <td><a href="">@carrymobil</a></td>
                                 </tr>
                                 <tr>
-                                    <td><img src="{% static '/images/login/facebook.svg' %}" class="soc-icon" id="" alt=""></td>
+                                    <td><img src="{% static '/images/login/facebook.svg' %}" width="30px" class="soc-icon" id="" alt=""></td>
                                     <td><a href="https://facebook.com/carrymobil"> facebook.com/carrymobil</a></td>
                                 </tr>
                             </table>
