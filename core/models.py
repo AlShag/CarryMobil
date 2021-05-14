@@ -13,6 +13,7 @@ class Profile(models.Model):
     company = models.CharField(max_length=40, blank=True)
     location = models.CharField(max_length=30, blank=True)
     birth_date = models.DateField(null=True, blank=True)
+    telephone_number = models.CharField('Номер телефона', max_length=20)
 
 
 @receiver(post_save, sender=User)
@@ -47,6 +48,29 @@ class Order(models.Model):
     class Meta:
         verbose_name = 'Заказ'
         verbose_name_plural = 'Заказы'
+
+
+class ComplitedOrder(models.Model):
+    full_road = models.CharField('Маршрут', max_length=1500)
+    start_time = models.DateTimeField('Время прибытия на заказ', null=True, blank=True)
+    road_comment = models.TextField('Комментарий к доргоге', null=True, blank=True)
+    cargo_type = models.CharField('Тип груза', max_length=60, blank=True)
+    cargo_type_comment = models.TextField('Тип груза комментарий', null=True, blank=True)
+    loader_count = models.IntegerField('Количество грузчиков', null=True, blank=True)
+    loader_time_count = models.IntegerField('Количество часов для грузчиков', null=True, blank=True)
+    order_price = models.IntegerField('Стоимость заказа')
+    prices = models.CharField('Цены заказа', null=True, blank=True, max_length=150)
+    user_tel_nomer = models.CharField('Номер телефона заказчика', max_length=20)
+    sended_in = models.DateTimeField('Время отправки заявки', null=True, blank=True, default=datetime.datetime.now())
+    status = models.IntegerField('Состояние заказа', null=True, blank=True, default=0)
+    author = models.IntegerField('ID Автора', null=True, blank=True, default=0)
+
+    def __str__(self):
+        return self.full_road
+
+    class Meta:
+        verbose_name = 'Завершенный заказ'
+        verbose_name_plural = 'Завершенные заказы'
 
 
 class Address(models.Model):

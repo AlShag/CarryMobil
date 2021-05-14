@@ -39,6 +39,9 @@
                                         <section class="user_dop_info">
                                             <label for="">День рождения: {{ profile_form.birth_date }}</label><span></span>
                                         </section>
+                                        <section class="user_dop_info">
+                                            <label for="">Номер телефона: {{ profile_form.telephone_number }}</label><span></span><br>
+                                        </section>
                                         <input type="button" id="password_change_button" value="Сменить пароль" onclick="window.location='{% url 'password_change' %}'">
                                             {% csrf_token %}
                                     </div>

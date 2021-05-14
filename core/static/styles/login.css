@@ -141,3 +141,8 @@ table td{
     background-color: #0085ff;
     color: #fff;
 }
+@media screen and (max-width: 768px){
+    .login_form{
+        width: 100%;
+    }
+}

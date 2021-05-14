@@ -10,7 +10,7 @@
 }
 .user_content{
     width: 100%;
-    height: 25%;
+    height: 30%;
     background-color: white;
     border-radius: 50px;
 }
@@ -72,6 +72,10 @@
 .user_dop_info span{
     color: #41A4FF;
 }
+.user_dop_info input{
+    font-size: 14pt;
+}
+
 .transition_block, .post_add_block{
     margin-top: 2.5%;
     padding: 2% 5%;

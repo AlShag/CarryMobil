@@ -73,12 +73,20 @@
 }
 .map{
     width: 50%;
+    transition: 0s;
 }
 .map, #map{
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
 }
 #map div{
+    transition: 0s;
+}
+/* yandex */
+.ymaps-2-1-78-controls__toolbar_left{
+    display: none;
+}
+.map div, .map ymaps, .map canvas{
     transition: 0s;
 }
 .road_select_form{
@@ -611,9 +619,6 @@ input[type="number"]::-webkit-inner-spin-button {
         width: 100%;
         border-radius: 0;
         background-color: white;
-    }
-    .map{
-        display: none;
     }
     .road_select section input, .road_select section textarea{
         border: 1px solid #aaabb8;

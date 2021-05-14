@@ -1,5 +1,5 @@
 {% extends "main/index.html" %}
-{% block title %}Главная - CMobil{% endblock %}
+{% block title %}Грузоперевозки - CMobil{% endblock %}
 {% load static %}
 {% block content %}
     <div class="tel_order"></div>
@@ -14,13 +14,13 @@
                                 <h1><a style="color: #474747;">CARRY</a><br>MOBIL</h1>
                             </div>
                             <div id="tel_calling">
-                                <span>Тел: 8(987)-219-18-53</span><br>
+                                <span>Тел: 8(919)-646-03-03</span><br>
                                 <input type="button" value="Заказать звонок" class="standart_button" id="tel_order">
                                 <div id="user_call">
                                     <form action="" method="post">
                                         {% csrf_token %}
                                         <!-- <a class="standart_button" href="tel:+79872191853">Позвонить</a> -->
-                                        <span>Наш номер: <a class="" href="tel:+79872191853">8(987)219-18-53</a></span>
+                                        <span>Наш номер: <a class="" href="tel:+79196460303">8(919)-646-03-03</a></span>
                                         {{ telorder.user_name }}
                                         {{ telorder.user_tel_number }}
                                         <div class="window_changes">
@@ -33,7 +33,7 @@
                         </div>
                     </section>
                     <section id="menu_text">
-                        <p>Платформа логистических услуг в <span style="color: #0085ff;">Республике Татарстан</span></p>
+                        <p>Платформа грузоперевозочных услуг в <span style="color: #0085ff;">Республике Татарстан</span></p>
                     </section>
                     <section id="to_order">
                         <div class="flex">
