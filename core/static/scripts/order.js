@@ -50,7 +50,8 @@
         passing_road_add();
         road_add();
       });
-      
+
+
       $('#order_send_button').click(function(){//Отправка order
         if($('#user_accord').is(':checked')){
         $('.type_info').remove();
@@ -75,7 +76,8 @@
         $('.filter_value input[name="status"]').prop('checked', false);
         orders_filter(this);
         });
-      $('#from_address').on('change', function(){road_change();});//Изменение маршрута
+      $('#from_address').on('input', function(){$('.ymaps-2-1-78-searchbox-input__input').val($('#from_address').val()); road_change();});//Изменение маршрута
+      // $('.road_select_form ymaps').on('input', function(){$('.ymaps-2-1-78-searchbox-input__input').val($('#from_address').val()); road_change();});//Изменение маршрута
       $('#to_address').on('change', function(){road_change();});
       $('.roads input').on('change', function(){edit_road_change(this);});
       $('.filter_value input').on('change', function(){orders_filter(this)});
@@ -274,6 +276,7 @@
     full_road_price=0;
     order_price=0;
     intercity_price=[];
+    $('#user_telephone').val($('#user_number').val());
     let roads_price='';
     if(full_road.from!='' & full_road.to!=''){
       for (let n = 0; n <= roads_counter-1; n++){
@@ -321,7 +324,8 @@
   }
 
   function road_price(){
-      for(var i = 0, l = city_price.length; i <= l; i++){
+      for(var i = 1, l = city_price.length; i <= l; i++){
+        console.log(city_price);
         let city_name1 = city_price[i].city_1;
         let city_name2 = city_price[i].city_2;
         let range = city_price[i].range;

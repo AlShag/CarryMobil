@@ -7,6 +7,7 @@ from .forms import OrderForm, AddressForm, SignInForm, SignUpForm, UserForm, Pro
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User, Group
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages, auth
 from django.db import transaction
@@ -49,8 +50,11 @@ class SignUp(generic.CreateView):
         super(SignupView, self).after_signup(form)
 
 
-def profile(request):
-    return render(request, 'user/profile.html', {})
+def profile(request, pk):
+    group = Group.objects.get( pk = 1 )
+    for g in request.user.groups.all():
+        l.append(g.name)
+    return render(request, 'user/profile.html', {'group': group, 'l': l})
 
 
 @login_required

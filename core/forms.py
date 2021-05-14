@@ -16,7 +16,7 @@ class UserForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('birth_date', 'location', 'company')
+        fields = ('birth_date', 'location', 'company', 'telephone_number')
 
 
 class SignInForm(AuthenticationForm):
@@ -101,6 +101,7 @@ class OrderEditForm(ModelForm):
 
         widgets = {
             'start_time':  DateTimeInput(attrs={
+                'type': 'datetime-local',
             }),
         }
 

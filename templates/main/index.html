@@ -10,7 +10,6 @@
     <title>{% block title %}Главная - CMobil{% endblock %}</title>
     {% block css %}
     <link rel="stylesheet" href="{% static 'styles/main.css' %}">
-    <link rel="stylesheet" href="{% static 'styles/login.css' %}">
     <link rel="stylesheet" href="{% static 'styles/media.css' %}">
     <link rel="stylesheet" href="{% static 'styles/animation.css' %}">
     <link rel="icon" type="image/png" href="{% static 'images/logo1.png' %}"> 
@@ -58,7 +57,7 @@
                                     <li><a href="{% url 'report' %}">Помощь</a></li>
                                     <li><a href="{% url 'order' %}">Оформить заказ</a></li>
                                     <li><a href=" {% url 'about' %}">О нас</a></li>
-                                    <li><a href="#contacts">Контакты</a></li>
+                                    <li><a href="tel:+79196460303">Позвонить</a></li>
                                 </ul>
                             </nav>
             </div>

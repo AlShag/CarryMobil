@@ -2,9 +2,12 @@
  
 {% load account_tags %}
 {% load i18n %}
-
-{% block content %}
 {% load static %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'styles/login.css' %}">
+{% endblock %}
+{% block content %}
   <div class="for_login">
     <div class="login_form">
       <h1>Регистрация</h1>

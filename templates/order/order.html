@@ -8,8 +8,10 @@
 {% block script %}
 {{ block.super }}
     <script src="{% static 'scripts/order.js' %}"></script>
-    <script src="https://maps.api.2gis.ru/2.0/loader.js?pkg=full"></script>
-    <script>
+    <!-- <script src="https://maps.api.2gis.ru/2.0/loader.js?pkg=full"></script> -->
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=fba8ad26-ca67-4764-9232-cb0bcfb53413" type="text/javascript"></script>
+    <script src="{% static 'scripts/yandex-api.js' %}"></script>
+    <!-- <script>
         DG.then(function() {
             var map;
 
@@ -29,7 +31,7 @@
                       .openOn(map);
                 });
         });
-    </script>
+    </script> -->
 {% endblock %}
 {% block content %}
     <div class="order_area">
@@ -93,16 +95,18 @@
                             
                                                 {% endfor %}
                                             <h2>Откуда</h2>
-                                            <input type="search" list="address_search" value="" placeholder="Населенный пункт, улица, дом отправления груза..." id="from_address">
-                                            <datalist id="address_search" onselect="alert('hi')">
+                                            <input type="search" id="from_address" class="from_address" placeholder="Введите адрес">
+                                            <!-- <input type="search" list="address_search" value="" placeholder="Населенный пункт, улица, дом отправления груза..." id="from_address"> -->
+                                            <!-- <datalist id="address_search" onselect="alert('hi')">
                                                 {% for el in all_address %}
                                                 <option value="{{ el.address }}"></option>
                                                 {% endfor %}
-                                            </datalist>
+                                            </datalist> -->
                                         </section>
                                         <section>
                                             <h2>Куда</h2>
-                                            <input type="search" list="address_search" placeholder="Населенный пункт, улица, дом направления груза..." id="to_address">
+                                            <input type="search" id="to_address" class="to_address" placeholder="Введите адрес">
+                                            <!-- <input type="search" list="address_search" placeholder="Населенный пункт, улица, дом направления груза..." id="to_address"> -->
                                         </section>
                                         <section>
                                             <h2>Комментарий</h2>
@@ -274,6 +278,7 @@
                                         <section class="user_tel_number">
                                             <span><h1>Введите номер телефона:</h1></span>
                                             {{ form.user_tel_nomer }}
+                                            <input type="tel" name="" value="{{ user.profile.telephone_number }}" id="user_number" hidden>
                                         </section>
                                     </div>
                                 </div>

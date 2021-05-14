@@ -3,16 +3,19 @@
 
 {% load account_tags %}
 {% load i18n %}
-
-{% block content %}
 {% load static %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'styles/login.css' %}">
+{% endblock %}
+{% block content %}
 <div class="for_login">
     <div class="login_form">
         <h1>Вход</h1>
         <form method="post" action="{% url 'login' %}">
             {% csrf_token %}
             <section class="for_input">
-                <h2>Имя пользователя</h2>
+                <h2>Емайл пользователя</h2>
                 <div class="input_container" id="login_insert">
                     <img src="{% static '/images/login/user.svg' %}" class="for_input_icn">
                     {{ form.username }}
