@@ -2,7 +2,7 @@
  
 {% load account_tags %}
 {% load i18n %}
-
+{% block title %}Регистрация - CMobil{% endblock %}
 {% block content %}
 {% load static %}
   <div class="for_login">
@@ -67,7 +67,7 @@
           {% endfor %}
         </section>
       {% endif %}
-      {% trans "Уже зарегистрированы?" %}  <strong><a href="{% urlnext 'account_login' %}">{% trans "fАвторизация" %}</a></strong>
+      {% trans "Уже зарегистрированы?" %}  <strong><a href="{% urlnext 'account_login' %}">{% trans "Авторизация" %}</a></strong>
     </form>
     {% if redirect_field_value %}
       <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
