@@ -38,7 +38,7 @@ nav{
     background:rgba(0, 0, 0, 0.9);
 }
 a{text-decoration: none;}
-h1{font-weight: 300; font-size: 40pt;}
+h1{font-weight: 300; font-size: 36pt;}
 h2{font-weight: 300;}
 button, input{
     background: none;
@@ -181,6 +181,11 @@ nav li a:hover{
     background-color: white;
     border: 1px solid #0085ff;
     border-radius: 20px;
+}
+.white_area{
+    background-color: white;
+    width: 100%;
+    height: 100%;
 }
 .login_register{
     width: auto;
@@ -644,7 +649,7 @@ input[type="radio"][name="advan_slider"]{display: none;}
     width: 100%;
 }
 .footer_block section{
-    margin: 10% 5%;
+    margin: 4% 8%;
 }
 .footer_block section h3{
     color:#0085ff;
@@ -736,8 +741,8 @@ input[type="radio"][name="advan_slider"]{display: none;}
 }
 .footer_dop_info{
     margin-top: 5%;
-    padding-top: 2.5%;
-    width: 90%;
+    padding-top: 2%;
+    width: 95%;
     border-top: 4px solid #c4c4c4;
 }
 .footer_dop_info section{

@@ -12,7 +12,7 @@
   <div class="for_login">
     <div class="login_form">
       <h1>Регистрация</h1>
-      <form method="post" autocomplete="off" action="{% url 'register' %}">
+      <form method="post" autocomplete="off" action="{% url 'SignUp' %}">
         {% csrf_token %}
         <section class="for_input">
           <h2>Имя пользователя</h2>
@@ -33,7 +33,7 @@
           <h2>Пароль</h2>
           <div class="input_container">
               <img src="{% static '/images/login/padlock.svg' %}" class='for_input_icn'>
-              {{ form.password }}
+              {{ form.password1 }}
               <input type="checkbox" value="" name="" id="view_password">
               <label for="view_password"><img src="{% static '/images/login/visibility.svg' %}" alt="" class="for_input_func" id="view_password"></label>
           </div>
@@ -42,7 +42,7 @@
           <h2>Повторите пароль</h2>
           <div class="input_container">
               <img src="{% static '/images/login/padlock.svg' %}" class='for_input_icn'>
-              {{ form.password_confirm }}
+              {{ form.password2 }}
               <input type="checkbox" value="" name="" id="view_password">
           </div>
         </section>

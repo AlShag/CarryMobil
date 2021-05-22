@@ -2,7 +2,7 @@ from django.utils import timezone
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.http import HttpResponseRedirect, HttpResponse
 from .models import Order, Address, CityPrice, CargoType, Review, Report
-from .forms import OrderForm, AddressForm, SignInForm, SignUpForm, UserForm, ProfileForm, ReviewForm, OrderEditForm, ReportForm, TelOrderForm
+from .forms import OrderForm, AddressForm, SignInForm, SignUpForm, UserForm, ProfileForm, ReviewForm, OrderEditForm, ReportForm, TelOrderForm, JobApplicationForm
 from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.forms import UserCreationForm
@@ -38,7 +38,7 @@ def sign_in(request):
 class SignUp(generic.CreateView):
     form_class = SignUpForm
     success_url = reverse_lazy('login')
-    template_name = 'registration/register.html'
+    template_name = 'account/signup.html'
 
     def generate_username(self, form):
         username = form.cleaned_data["email"]
@@ -54,6 +54,21 @@ def profile(request, pk):
     for g in request.user.groups.all():
         l.append(g.name)
     return render(request, 'user/profile.html', {'group': group, 'l': l})
+
+@login_required
+def job_application(request):
+    application = JobApplicationForm(request.POST)
+    user_form = UserForm(request.POST, instance=request.user)
+    # application.user = request.user
+    if request.method == 'POST':
+        if application.is_valid():
+            post = application.save(commit=False)
+            post.user = request.user
+            post.save()
+            return render(request, 'user/profile.html')
+        else:
+            error = 'Форма была неверной'
+    return render(request, 'user/job_application.html', {'application': application,'user_form': user_form})
 
 
 @login_required

@@ -1,4 +1,4 @@
-from .models import Order, Address, Profile, Review, Report, TelOrder
+from .models import Order, Address, Profile, Review, Report, TelOrder, JobApplication
 from django import forms
 from django.forms import ModelForm, TextInput, DateTimeInput, Textarea, NumberInput, PasswordInput
 from django.contrib.auth.forms import AuthenticationForm
@@ -16,7 +16,7 @@ class UserForm(forms.ModelForm):
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('birth_date', 'location', 'company', 'telephone_number')
+        fields = ('patronymic','birth_date', 'location', 'company', 'telephone_number')
 
 
 class SignInForm(AuthenticationForm):
@@ -162,3 +162,9 @@ class TelOrderForm(ModelForm):
                 'type': 'text',
             }),
         }
+
+
+class JobApplicationForm(ModelForm):
+    class Meta:
+        model = JobApplication
+        fields = ['user', 'job_type', 'passport_series','passport_number', 'registration_address','driver_licenses_series', 'driver_licenses_number','telephone_number']

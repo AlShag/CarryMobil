@@ -1,0 +1,89 @@
+{% extends "main/index.html" %}
+{% block title %}Заявление на работу - Cmobil{% endblock %}
+{% load static %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'styles/profile.css' %}">
+{% endblock %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="container">
+            <div class="white_area">
+                <div class="application_form">
+                    <form method="post">
+                        {% csrf_token %}
+                        <h1>Приём на работу</h1>
+                        <p>Мы гарантируем конфиденциальность и неразглашения 
+                            Ваших персональных данных, полученных в ходе заполнения анкеты</p>
+                        <section>
+                                <label for=""><h2>Должность</h2></label>
+                                <select name="job_name" id="job_type_select" onchange="$('#id_job_type').val($('#job_type_select :selected').text());">
+                                    <option value="Диспетчер" selected disabled hidden>Выберите</option>
+                                    <option value="Диспетчер">Диспетчер</option>
+                                    <option value="Водитель">Водитель</option>
+                                    <option value="Грузчик">Грузчик</option>
+                                </select>
+                                <span hidden>{{ application.job_type }}</span>
+                        </section>
+                        <section>
+                            <h2>Личные данные</h2>
+                            <section class="user_dop_info">
+                                <!-- {{ application.user }} -->
+                            </section>
+                            <section class="user_dop_info">
+                                <label for="">Имя</label> 
+                                <input type="text" name="" value="{{ user.first_name }}" id="">
+                            </section>
+                            <section class="user_dop_info">
+                                <label for="">Отчество</label>
+                                <input type="text" name="" value="{{ user.profile.patronymic }}" id="">
+                            </section>
+                            <section class="user_dop_info">
+                                <label for="">Фамилия {{ user.last_name }}</label>
+                                <input type="text" name="" value="{{ user.last_name }}" id="">
+                            </section>
+                            <section class="user_dop_info">
+                                <label for="">День рождения</label> 
+                                <input type="datetime-local" name="" value="{{ user.profile.birth_date }}" id="">
+                            </section>
+                            <section class="user_dop_info">
+                                <label for="">Номер телефона</label>
+                                <input type="tel" name="" value="{{ user.profile.telephone_number }}" id="">
+                            </section>
+                            <section class="user_dop_info">
+                                <label for="">Серия паспорта {{ application.passport_series }}</label> 
+                            </section>
+                            <section class="user_dop_info">
+                                <label for="">Номер паспорта {{ application.passport_number }}</label> 
+                            </section>
+                            <section class="user_dop_info">
+                                <label for="">Адрес прописки {{ application.registration_address }}</label> 
+                            </section>
+                            <section class="user_dop_info">
+                                <label for="">Серия водительского удостоверения {{ application.driver_licenses_series }}</label>  
+                            </section>
+                            <section class="user_dop_info">
+                                <label for="">Номер водительского удостоверения{{ application.driver_licenses_number }}</label>  
+                            </section>
+                            <section class="user_dop_info">
+                                <label for="">Номер телефона {{ application.telephone_number }}</label>  
+                            </section>
+                        </section>
+                        {% if application.errors %}
+                        <section class="form_error">
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    {{field.label}}: {{ error|escape }}
+                                {% endfor %}
+                            {% endfor %}
+                        </section>
+                        {% endif %}
+                        <input type="submit" value="Отправить">
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <p>Вы не авторизированы</p>
+    {% endif %}
+{% endblock %}

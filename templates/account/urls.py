@@ -2,8 +2,10 @@ from django.urls import path, include
 from django.conf.urls import url
 from django.contrib.auth import views as auth_views
 from . import views
+from .views import SignUp
 
 urlpatterns = [
+    path('account/signup/', SignUp.as_view(), name='SignUp'),
     path('base.html', views.site_base, name='site_base'),
     path('/password/reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
     

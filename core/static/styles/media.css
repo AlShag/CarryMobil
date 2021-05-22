@@ -53,6 +53,9 @@
     #logo img{
         height: 25px;
     }
+    .footer_dop_info section{
+        padding-right: 1%;
+    }
 }
 @media screen and (max-width: 1100px){
     .logo a{

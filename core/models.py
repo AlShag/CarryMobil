@@ -2,7 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
-from django.dispatch import receiver
+from django.dispatch import dispatcher, receiver
 import datetime
 from django.utils import timezone
 from django.utils.text import slugify
@@ -10,11 +10,60 @@ from django.utils.text import slugify
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    patronymic = models.CharField(max_length=50, blank=True)
     company = models.CharField(max_length=40, blank=True)
     location = models.CharField(max_length=30, blank=True)
     birth_date = models.DateField(null=True, blank=True)
     telephone_number = models.CharField('Номер телефона', max_length=20)
 
+    def __str__(self):
+        return self.user.username 
+
+
+class DriverProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    passport_series = models.CharField('Серия паспорта', max_length=4)
+    passport_number = models.CharField('Номер паспорта', max_length=6)
+    driver_licenses_series = models.CharField('Серия водительского удостоверения', max_length=4)
+    driver_licenses_number = models.CharField('Номер водительского удостоверения', max_length=6)
+    registration_address = models.CharField('Адрес прописки', max_length=250)
+    complited_orders = models.CharField('Завершенные заказы', max_length=40, blank=True)
+    canceled_orders = models.CharField('Отмененные заказы', max_length=40, blank=True)
+    driver_rating = models.CharField('Рейтинг водителя', max_length=40, blank=True, default=0)
+
+    def __str__(self):
+        return self.user.username 
+
+
+class JobApplication(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    job_type = models.CharField('Вид деятельности', max_length=50)
+    passport_series = models.CharField('Серия паспорта', max_length=4)
+    passport_number = models.CharField('Номер паспорта', max_length=6)
+    registration_address = models.CharField('Адресс прописки', max_length=250)
+    driver_licenses_series = models.CharField('Серия водительского удостоверения', max_length=4, blank=True)
+    driver_licenses_number = models.CharField('Номер водительского удостоверения', max_length=6, blank=True)
+    telephone_number = models.CharField('Номер телефона', max_length=20)
+
+    def __str__(self):
+        return self.user.username 
+
+
+class Car(models.Model):
+    name = models.CharField('Марка', max_length=50)
+    model = models.CharField('Модель', max_length=50)
+    type = models.CharField('Тип', max_length=50)
+    registration_number = models.CharField('Регистрационные номера', max_length=9)
+    length = models.CharField('Длина', max_length=4)
+    height = models.CharField('Высота', max_length=4)
+    width = models.CharField('Ширина', max_length=4)
+    volume = models.CharField('Объём', max_length=4)
+    tonnage = models.CharField('Тоннаж', max_length=4)
+    owner = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+    
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
@@ -41,6 +90,7 @@ class Order(models.Model):
     sended_in = models.DateTimeField('Время отправки заявки', null=True, blank=True, default=datetime.datetime.now())
     status = models.IntegerField('Состояние заказа', null=True, blank=True, default=0)
     author = models.IntegerField('ID Автора', null=True, blank=True, default=0)
+    dispatcher = models.IntegerField('ID диспетчера', null=True, blank=True, default=0)
 
     def __str__(self):
         return self.full_road

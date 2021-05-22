@@ -6,13 +6,16 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    url(r"^account/login/$", views.LoginView.as_view(), name="login"),
+    path('account/signup/', SignUp.as_view(), name='SignUp'),
+    path('account/signup/', SignUp.as_view(), name='register'),
     path('account/', include('account.urls')),
-    path('accounts/register/', SignUp.as_view(), name='register'),
-    url(r"^account/login/$", views.LoginView.as_view(), name="account_login"),
+    path('/password/reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
     path('order', views.order, name='order'),
     path('order_create', views.order_create, name='order_create'),
     path('profile', views.user_orders, name='profile'),
     path('profile_edit', views.update_profile, name='update_profile'),
+    path('job_application', views.job_application, name='job_application'),
     path('driver', views.myorders, name='myorders'),
     path('ordered', views.ordered, name='ordered'),
     path('report', views.report, name='report'),
