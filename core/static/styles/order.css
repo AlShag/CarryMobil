@@ -89,6 +89,12 @@
 .map div, .map ymaps, .map canvas{
     transition: 0s;
 }
+.map yamaps{
+    width: 50%;
+}
+.yamaps{
+    width: 50%;
+}
 .road_select_form{
     margin-top: 7%;
     height: 90%;
@@ -640,6 +646,9 @@ input[type="number"]::-webkit-inner-spin-button {
     }
     .order_area {
     height: auto;
+    }
+    #map{
+        display: none;
     }
     .roads_add button{
         color: #0085ff;

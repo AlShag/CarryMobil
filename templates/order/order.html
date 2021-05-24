@@ -8,6 +8,7 @@
 {% block script %}
 {{ block.super }}
     <script src="{% static 'scripts/order.js' %}"></script>
+    <script src="{% static 'scripts/assistant.js' %}"></script>
     <!-- <script src="https://maps.api.2gis.ru/2.0/loader.js?pkg=full"></script> -->
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&amp;apikey=fba8ad26-ca67-4764-9232-cb0bcfb53413" type="text/javascript"></script>
     <script src="{% static 'scripts/yandex-api.js' %}"></script>
@@ -36,6 +37,42 @@
 {% block content %}
     <div class="order_area">
         <div class="order_main">
+            <div id="assistant_form" class="closed-assistant">
+                <div class="flex_al">
+                    <div id="assistant_title" onclick="
+                    if($('#assistant_form').hasClass('closed-assistant')){$('#assistant_form').removeClass('closed-assistant');$('#assistant_form').addClass('opened-assistant');} else{$('#assistant_form').removeClass('opened-assistant');$('#assistant_form').addClass('closed-assistant');};">
+                        <label>
+                            Ассистент Cmobil
+                        </label>
+                    </div>
+                    <div id="assistant_content">
+                        <div id="assistant-area">
+                            <div id="assistant">
+                                <img src="{% static '/images/assistant.svg' %}" height="70%" alt="">
+                            </div>
+                        </div>
+                        <div id="user-area">
+                            <div id="user-assistant-dialog">
+                                <script>user_name={{ user.username }}</script>
+                                <div class="assistant-message">
+                                    <label>Ассистент</label>
+                                    <p>Здравствуйте, чем могу быть полезен?</p>
+                                </div>
+                            </div>
+                            <div id="user-variable">
+                                <span id="take-order-assistant">Оформи заказ</span>
+                                <span>Что ты умеешь?</span>
+                            </div>
+                            <div id="user-messager">
+                                <div class="flex_al">
+                                    <input type="text" name="" id="user-assistant-text">
+                                    <input type="button" id="user-message-sent" value="Отправить">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="container">
                 <div class="order_title">
                     <div class="list_head" id="list_head_1">
@@ -148,7 +185,7 @@
                             </div>
                             <div class="warning" id="warning_order_address" hidden>
                                 <div class="warning_text">
-                                    <p>Для продолжения - заполните поле "Откуда" или "Куда "</p>
+                                    <p>Для продолжения - заполните поле "Откуда" и "Куда "</p>
                                 </div>
                                 <div class="warning_action">
                                     <input type="button" class="standart_button warning_apply" value="Ок">

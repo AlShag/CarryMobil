@@ -88,6 +88,7 @@
                     {% if user.is_staff %}
                         <input type="button" value="Редактировать" onclick="window.location='{% url 'order_edit' pk=order.pk %}'">
                         <input type="button" value="Выполнить" onclick="window.location='{% url 'order_enable' pk=order.pk %}'">
+                        <input type="button" value="Завершить" onclick="window.location='{% url 'order_enable' pk=order.pk %}'">
                     {% endif %}
                         
                 </div>

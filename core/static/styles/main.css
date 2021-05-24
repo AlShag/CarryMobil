@@ -826,3 +826,98 @@ input[type="radio"][name="advan_slider"]{display: none;}
     font-size: 18pt;
     text-align: right;
 }
+/* Ассистент */
+#assistant_form{
+    position: fixed;
+    top:30%;
+    z-index: 1;
+    width: 25%;
+    height: 50%;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    background-color: white;
+    border: 2px solid #0085ff;
+    transition: 0.25s;
+}
+.opened-assistant{
+    left: 75%;
+}
+.closed-assistant{
+    left: 98%;
+}
+#assistant_title{
+    width: 10%;
+    height: 100%;
+    vertical-align: middle;
+}
+#assistant_content{
+    width: 90%;
+    height: 100%;
+}
+#assistant_title label{
+    margin-top: 200%;
+    font-size: 20pt;
+    -webkit-writing-mode: vertical-rl; writing-mode:tb-rl;
+}
+#assistant_content{
+    height: 100%;
+    border-left: 2px solid #0085ff;
+}
+#assistant-area{
+    width: 100%;
+    height: 40%;
+}
+#user-area{
+    width: 100%;
+    height: 55%;
+}
+#user-assistant-dialog{
+    height: 69%;
+    width: 90%;
+    padding: 2% 5%;
+    overflow-y: scroll;
+    font-size: 16pt;
+}
+#user-assistant-dialog label{
+    color: #0085ff;
+}
+.user-message{
+    text-align: right;
+}
+#user-variable{
+    height: 15%;
+    width: 100%;
+}
+#user-messager{
+    height: 15%;
+    width: 100%;
+    background-color: white;
+    border-top: 2px solid #0085ff;
+}
+#user-assistant-text{
+    width: 70%;
+    height: 100%;
+    font-size: 18pt;
+}
+#user-messager button{
+    width: 30%;
+    height: 100%;
+    font-size: 20pt;
+}
+#assistant{
+    height: 100%;
+    margin-top: 1%;
+    text-align: center;
+}
+#user-variable span{
+    font-size: 16pt;
+    border: 1px solid #0085ff;
+    margin-left: 5%;
+    padding: 0 2.5%;
+    border-radius: 20px;
+    cursor: pointer;
+}
+#user-variable span:hover{
+    background-color: #0085ff;
+    color: white;
+}

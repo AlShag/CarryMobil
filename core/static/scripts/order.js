@@ -136,7 +136,6 @@
   });
   function order_next_list(){
     available_list();
-
     if(available_lists.indexOf(order_list_count+1)!=-1){
       order_list_count++;
       $('#order_progress').val(order_list_count);
@@ -187,8 +186,9 @@
       $('#road_'+roads_counter).click();
       transition_number=roads_counter;
       if($('#road_del').css('display')=='none') $('#road_del').show();
+    }
   }
-  }
+  
   function passing_road_add(){
     if(passing_road_added){
       if($('#passing_from_road').is(':checked')){
@@ -241,6 +241,7 @@
       }
     }
   }
+
   function roads_transition(obj){
     button_id=obj.id;
     if($(window).width()>768){
@@ -330,8 +331,7 @@
   }
 
   function road_price(){
-      for(var i = 1, l = city_price.length; i <= l; i++){
-        console.log(city_price);
+      for(var i = 0, l = city_price.length-1; i <= l; i++){
         let city_name1 = city_price[i].city_1;
         let city_name2 = city_price[i].city_2;
         let range = city_price[i].range;
@@ -369,7 +369,7 @@
   }
 
   function available_list(){
-    if(from_address!='' | to_address!=''){  
+    if(from_address!='' & to_address!=''){  
       if(available_lists.indexOf(2)==-1) available_lists.push(2);
       else if(available_lists.indexOf(3)==-1) available_lists.push(3);
       else if(available_lists.indexOf(4)==-1) available_lists.push(4);
