@@ -789,6 +789,143 @@ input[type="radio"][name="advan_slider"]{display: none;}
     background-color: #0085ff;
     color: white;
 }
+.help_table {
+    color: rgba(29, 30, 31, 0.8);
+    font-size: 20px;
+    text-align: -webkit-auto;
+    line-height: 26px;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+    max-height: 800px;
+    opacity: 1;
+    transform: translate(0, 0);
+    margin-top: 14px;
+    z-index: 0;
+  }
+  
+  .help_table:before {
+    content: '+';
+    margin-right: 1ex;
+  }
+  
+  .help_table.opened:before {
+    content: '-';
+    margin-right: 1.5ex;
+  }
+  
+  .info {
+    display: none;
+    margin-left: 2ex;
+  }
+  
+  .opened .info {
+    display: block;
+  }
+
+  .hbox {
+    font-size: 26px;
+    line-height: 34px;
+    font-weight: 300;
+    letter-spacing: 1px;
+    display: block;
+    background-color: #fefffa;
+    margin: 0;
+    cursor: pointer;
+  }
+  
+  
+  .help {
+    list-style: none;
+    perspective: 900;
+    padding: 0;
+    margin: 0;
+    z-index: 0;
+  }
+  .help li {
+    padding: 2%;
+    margin: 2%;
+    padding-bottom: 4px;
+    padding-top: 18px;
+    border-top: 1px dotted #dce7eb;
+  }
+  .help li:nth-of-type(1) {
+    animation-delay: 0.5s;
+  }
+  .help li:nth-of-type(2) {
+    animation-delay: 0.75s;
+  }
+  .help li:nth-of-type(3) {
+    animation-delay: 1s;
+  }
+  .help li:last-of-type {
+    padding-bottom: 0;
+  }
+  .help li i {
+    position: absolute;
+    transform: translate(-6px, 0);
+    margin-top: 16px;
+    right: 0;
+  }
+
+  .help li i:before {
+    transform: translate(-100px, 0) rotate(45deg);
+  }
+  .help li i:after {
+    transform: translate(100px, 0) rotate(-45deg);
+  }
+  .help li input[type=checkbox] {
+    position: absolute;
+    cursor: pointer;
+    width: 50%;
+    transform: translate(-240px, -10px);
+    height: 10%;
+    z-index: 0;
+    opacity: 0;
+  }
+  .help li input[type=checkbox]:checked ~ .help_table {
+    margin-top: 0;
+    max-height: 0;
+    opacity: 0;
+  }
+  .help li input[type=checkbox]:checked ~ i:before {
+    transform: translate(300px, 0) rotate(45deg);
+  }
+  .help li input[type=checkbox]:checked ~ i:after {
+    transform: translate(-300px, 0) rotate(-45deg);
+  }
+  
+  @keyframes flipdown {
+    0% {
+      opacity: 0;
+      transform-origin: top center;
+      transform: rotateX(-90deg);
+    }
+    5% {
+      opacity: 1;
+    }
+    80% {
+      transform: rotateX(8deg);
+    }
+    83% {
+      transform: rotateX(6deg);
+    }
+    92% {
+      transform: rotateX(-3deg);
+    }
+    100% {
+      transform-origin: top center;
+      transform: rotateX(0deg);
+    }
+  }
+
+
+
+
+
+
+
+
 #about_image_1{
     height: 30%;
     width: 100%;
