@@ -23,7 +23,7 @@ a{
     border:2px solid #0085ff;
 }
 .orders_form{
-    width: 70%;
+    width: 80%;
     margin: 5% auto;
     height: auto;
     max-width: 1920px;
@@ -208,7 +208,7 @@ a{
     padding: 1% 2.5%;
     color: #0085ff;
     font-size: 14pt;
-    width: 30%;
+    width: 22%;
     margin-left: 1%;
     transition: 0.25s;
 }
@@ -217,7 +217,7 @@ a{
     color: white;
 }
 .order_changing{
-    width: 40%;
+    width: 60%;
     margin: 0 auto;
 }
 .order_status_changing input[type='button']{

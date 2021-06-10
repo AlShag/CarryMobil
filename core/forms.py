@@ -1,4 +1,4 @@
-from .models import Order, Address, Profile, Review, Report, TelOrder, JobApplication
+from .models import Order, Address, Profile, Review, Report, TelOrder, JobApplication, AssistantLibrary
 from django import forms
 from django.forms import ModelForm, TextInput, DateTimeInput, Textarea, NumberInput, PasswordInput
 from django.contrib.auth.forms import AuthenticationForm
@@ -53,8 +53,7 @@ class SignUpForm(UserCreationForm):
 class OrderForm(ModelForm):
     class Meta:
         model = Order
-        fields = ['full_road','start_time','road_comment','cargo_type','cargo_type_comment','loader_count','loader_time_count','prices','order_price','user_tel_nomer','sended_in','status']
-
+        fields = ['full_road','start_time','road_comment','cargo_type','cargo_type_comment','loader_count','loader_time_count','prices','order_price','user_tel_nomer','sended_in','status','author', 'dispatcher','driver']
         widgets = {
             'from_address':  TextInput(attrs={
                 'placeholder': 'Населенный пункт, улица, дом отправления груза...',
@@ -97,7 +96,7 @@ class OrderForm(ModelForm):
 class OrderEditForm(ModelForm):
     class Meta:
         model = Order
-        fields = ['full_road','start_time','cargo_type','loader_count','loader_time_count','prices','order_price','user_tel_nomer','status']
+        fields = ['full_road','start_time','cargo_type','loader_count','loader_time_count','prices','order_price','user_tel_nomer','status', 'driver']
 
         widgets = {
             'start_time':  DateTimeInput(attrs={
@@ -168,3 +167,9 @@ class JobApplicationForm(ModelForm):
     class Meta:
         model = JobApplication
         fields = ['user', 'job_type', 'passport_series','passport_number', 'registration_address','driver_licenses_series', 'driver_licenses_number','telephone_number']
+
+
+class AssistantLibraryForm(ModelForm):
+    class Meta:
+        model = AssistantLibrary
+        fields = ['user_answer','assistant_text','function_id']

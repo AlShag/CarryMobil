@@ -23,12 +23,12 @@
                                     <option value="Водитель">Водитель</option>
                                     <option value="Грузчик">Грузчик</option>
                                 </select>
-                                <span hidden>{{ application.job_type }}</span>
+                                <span hidden>{{ application_form.job_type }}</span>
                         </section>
                         <section>
                             <h2>Личные данные</h2>
                             <section class="user_dop_info">
-                                <!-- {{ application.user }} -->
+                                <!-- {{ application_form.user }} -->
                             </section>
                             <section class="user_dop_info">
                                 <label for="">Имя</label> 
@@ -51,25 +51,25 @@
                                 <input type="tel" name="" value="{{ user.profile.telephone_number }}" id="">
                             </section>
                             <section class="user_dop_info">
-                                <label for="">Серия паспорта {{ application.passport_series }}</label> 
+                                <label for="">Серия паспорта {{ application_form.passport_series }}</label> 
                             </section>
                             <section class="user_dop_info">
-                                <label for="">Номер паспорта {{ application.passport_number }}</label> 
+                                <label for="">Номер паспорта {{ application_form.passport_number }}</label> 
                             </section>
                             <section class="user_dop_info">
-                                <label for="">Адрес прописки {{ application.registration_address }}</label> 
+                                <label for="">Адрес прописки {{ application_form.registration_address }}</label> 
                             </section>
                             <section class="user_dop_info">
-                                <label for="">Серия водительского удостоверения {{ application.driver_licenses_series }}</label>  
+                                <label for="">Серия водительского удостоверения {{ application_form.driver_licenses_series }}</label>  
                             </section>
                             <section class="user_dop_info">
-                                <label for="">Номер водительского удостоверения{{ application.driver_licenses_number }}</label>  
+                                <label for="">Номер водительского удостоверения{{ application_form.driver_licenses_number }}</label>  
                             </section>
                             <section class="user_dop_info">
-                                <label for="">Номер телефона {{ application.telephone_number }}</label>  
+                                <label for="">Номер телефона {{ application_form.telephone_number }}</label>  
                             </section>
                         </section>
-                        {% if application.errors %}
+                        {% if application_form.errors %}
                         <section class="form_error">
                             {% for field in form %}
                                 {% for error in field.errors %}

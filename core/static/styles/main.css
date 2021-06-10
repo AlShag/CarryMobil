@@ -137,6 +137,12 @@ nav li a:hover{
 .standart_button:hover{
     border-color: white;
 }
+.open{
+    display: block;
+}
+.closed{
+    display: none;
+}
 /* текст в контейнере */
 [aria-label]{
     position: relative;
@@ -355,7 +361,6 @@ nav li a:hover{
 .slider{width: 90%; margin: 0 auto;}
 #advan_slider{
     padding: 2.5% 5%;
-    background-image: url('../../static/images/landing/advantages/advan.svg');
     background-repeat: no-repeat;
     background-size: 100%;
     background-position: 50%;

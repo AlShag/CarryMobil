@@ -61,12 +61,26 @@
                             <td>{{ form.start_time }}</td>
                         </tr>
                         <tr>
+                            <th>Водитель</th>
+                            <td>{{ form.driver }}</td>
+                        </tr>
+                        <tr>
                             <th>Статус</th>
                             <td class="order_status_changing">
-                                {{ form.status }}
-                                <input type="button" class="standart_button" id="cancel_order" value="Отклонить">
-                                <input type="button" class="standart_button"class="standart_button" id="order_enable" value="Выполнить">
-                                <input type="button" class="standart_button" id="order_complite" value="Завершить">
+                                {% if not order.status == None %}
+                                {% if form.status == 0 %}
+                                    Ожидается
+                                {% endif %}
+                                {% if form.status == 1 %}
+                                    Выполняется
+                                {% endif %}
+                                {% if form.status == 2 %}
+                                    Завершено
+                                {% endif %}
+                                {% if form.status == -1 %}
+                                    Отменено
+                                {% endif %}
+                                {% endif %}
                             </td>
                         </tr>
                     </table>

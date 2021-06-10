@@ -39,13 +39,7 @@
     height: 12%;
 }
 #password_change_button{
-    margin: 2.5% auto;
-    font-size: 18pt;
-    border: 2px solid #0085ff;
-    border-radius: 50px;
-    color: #0085ff;
-    width: 30%;
-    height: 12%;
+    margin-top: 5%;
 }
 
 .user_image input[type='button']:hover,#password_change_button:hover, .user_image input[type='submit']:hover{
@@ -86,13 +80,13 @@
     width: 25%;
     height: 100%;
 }
-.transiton_param input{
+.transiton_param-input{
     height: 100%;
     width: 100%;
     font-size: 20pt;
     color: black;
 }
-.transiton_param input:hover{
+.transiton_param-input:hover{
     color: #41A4FF;
     transition: 0.2s;
 }
@@ -127,6 +121,9 @@
     height: 90%;
     margin: 5% auto;
     text-align: center;
+}
+.profile_dop{
+    padding-left: 5%;
 }
 @media screen and (max-width: 1700px){
     .profil_area{

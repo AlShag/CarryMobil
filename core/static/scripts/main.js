@@ -47,6 +47,15 @@ $(document).ready(function (){
         let docum25 = (($(document).width()/100)*25).toFixed(0);
         if(navmenu_pos-1==docum25 | navmenu_pos+1==docum25 | navmenu_pos==docum25){$('.navmenu').removeClass('showed');} else{$('.navmenu').addClass('showed');};
     });
+    $('#profile_dop_info').click(function(){
+        if($('#profile_dop').hasClass('closed')){
+            $('#profile_dop').removeClass('closed');
+            $('#profile_dop').addClass('open');
+        } else{
+            $('#profile_dop').removeClass('open');
+            $('#profile_dop').addClass('closed');
+        }
+    });
     if($(window).width() < 768) {
         on_mobile();
     }

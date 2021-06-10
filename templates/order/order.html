@@ -40,7 +40,8 @@
             <div id="assistant_form" class="closed-assistant">
                 <div class="flex_al">
                     <div id="assistant_title" onclick="
-                    if($('#assistant_form').hasClass('closed-assistant')){$('#assistant_form').removeClass('closed-assistant');$('#assistant_form').addClass('opened-assistant');} else{$('#assistant_form').removeClass('opened-assistant');$('#assistant_form').addClass('closed-assistant');};">
+                    if($('#assistant_form').hasClass('closed-assistant')){$('#assistant_form').removeClass('closed-assistant');
+                    $('#assistant_form').addClass('opened-assistant');} else{$('#assistant_form').removeClass('opened-assistant');$('#assistant_form').addClass('closed-assistant');};">
                         <label>
                             Ассистент Cmobil
                         </label>
@@ -61,12 +62,12 @@
                             </div>
                             <div id="user-variable">
                                 <span id="take-order-assistant">Оформи заказ</span>
-                                <span>Что ты умеешь?</span>
+                                <span onclick="assistant_message='Я умею делать всё то, чему меня научили=) ';assistant_to_user_message();">Что ты умеешь?</span>
                             </div>
                             <div id="user-messager">
                                 <div class="flex_al">
                                     <input type="text" name="" id="user-assistant-text">
-                                    <input type="button" id="user-message-sent" value="Отправить">
+                                    <input type="button" id="user-message-sent" style="font-size: 16pt;" value="Отправить">
                                 </div>
                             </div>
                         </div>
@@ -128,6 +129,12 @@
                                                 {% for el in all_cityprice %}
                                                 <script>
                                                     city_price.push({ city_1: '{{ el.city_1 }}', city_2: '{{ el.city_2 }}', range: {{ el.distance }}, price_1_5t: {{ el.price_1_5t }}, price_3t: {{ el.price_3t }}, price_5t: {{ el.price_5t }}});
+                                                </script>
+                            
+                                                {% endfor %}
+                                                {% for el in assistant_library %}
+                                                <script>
+                                                    assistant_library.push({ user_answer: '{{ el.user_answer }}', assistant_text: '{{ el.assistant_text }}', function: '{{ el.function_id }}'});
                                                 </script>
                             
                                                 {% endfor %}

@@ -10,152 +10,157 @@
     <script src="{% static 'scripts/order.js' %}"></script>
 {% endblock %}
 {% block content %}
-    {% if user.is_staff %}
+    {% if user.is_authenticated %}
         <div class="container">
-            <a href="{% url 'orders_export' %}">
-                <button type="button">
-                    Выгрузить отчёты
-                </button>
-            </a>
-        </div>
-        <div class="orders_area">
-            <div class="orders_form">
-                <div class="container">
-                    <div class="orders_filter">
-                        <div class="orders_filter_form">
-                            <div class="flex">
-                                <section>
-                                    <h2>Дата отправки:</h2>
-                                    <div class="filter_value">
-                                        <label for="">От:</label><input type="datetime-local" name="date" class="data_filter" id="filter_date1"><br>
-                                        <label for="">До:</label><input type="datetime-local" name="date" class="data_filter" id="filter_date2">
-                                    </div>
-                                </section>
-                                <section>
-                                    <h2>Вид груза:</h2>
-                                    <div class="filter_value">
-                                        <select name="type_filter" id="type_filter">
-                                            <option value="0" disabled selected hidden>Выберите тип груза</option>
-                                            <option value="all">Все</option>
-                                            {% for el in all_types %}
-                                                <option value="">{{ el.cargo }}</option>
-                                            {% endfor %}
-                                        </select>
-                                    </div>
-                                </section>
-                                <section>
-                                    <h2>Статус заявки:</h2>
-                                    <div class="filter_value">
-                                        <ul>
-                                            <li>
-                                                <input type="checkbox" name="status" id="complited_orders" value="Выполнено">
-                                                <label for="complited_orders">Выполнено</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" name="status" id="expected_orders" value="Ожидается">
-                                                <label for="expected_orders">Ожидается</label>
-                                            </li>
-                                            <li>
-                                                <input type="checkbox" name="status" id="canceled_orders" value="Отменено">
-                                                <label for="canceled_orders">Отменено</label>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </section>
+            <div class="orders_area">
+                <div class="orders_form">
+                    <div class="container">
+                        <div class="orders_filter">
+                            <div class="orders_filter_form">
+                                <div class="flex">
+                                    <section>
+                                        <h2>Дата отправки:</h2>
+                                        <div class="filter_value">
+                                            <label for="">От:</label><input type="datetime-local" name="date" class="data_filter" id="filter_date1"><br>
+                                            <label for="">До:</label><input type="datetime-local" name="date" class="data_filter" id="filter_date2">
+                                        </div>
+                                    </section>
+                                    <section>
+                                        <h2>Вид груза:</h2>
+                                        <div class="filter_value">
+                                            <select name="type_filter" id="type_filter">
+                                                <option value="0" disabled selected hidden>Выберите тип груза</option>
+                                                <option value="all">Все</option>
+                                                {% for el in all_types %}
+                                                    <option value="">{{ el.cargo }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </section>
+                                    <section>
+                                        <h2>Статус заявки:</h2>
+                                        <div class="filter_value">
+                                            <ul>
+                                                <li>
+                                                    <input type="checkbox" name="status" id="complited_orders" value="Выполнено">
+                                                    <label for="complited_orders">Выполнено</label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" name="status" id="expected_orders" value="Ожидается">
+                                                    <label for="expected_orders">Ожидается</label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" name="status" id="canceled_orders" value="Отменено">
+                                                    <label for="canceled_orders">Отменено</label>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </section>
+                                </div>
+                                <input type="button" value="Отменить" name="cancel" id="filter_cancel">
                             </div>
-                            <input type="button" value="Отменить" name="cancel" id="filter_cancel">
+                            <a href="{% url 'orders_export' %}">
+                                <button type="button">
+                                    Выгрузить отчёты
+                                </button>
+                            </a>
+                        </div>
+                        <div>
+                            <table id="orders_table">
+                                <tr id="orders_table_title">
+                                    <th class="">
+                                        Номер заявки
+                                    </th>
+                                    <th class="">
+                                        Дата исполнения
+                                    </th>
+                                    <th class="">
+                                        Маршрут
+                                    </th>
+                                    <th class="">
+                                        Грузчики<br>( чел/час )
+                                    </th>
+                                    <th class="">
+                                        Вид груза
+                                    </th>
+                                    <th class="">
+                                        Сумма
+                                    </th>
+                                    <th class="">
+                                        Статус
+                                    </th>
+                                    <th class="">
+                                        Автор
+                                    </th>
+                                    <th class="" colspan="2" style="border-right: none;">
+                                        Действие
+                                    </th>
+                                </tr>
+                            
+                            {% if user.is_staff%}
+                                {% for order in orders %}
+                                        <tr data-href="{% url 'order_detail' pk=order.pk %}" class="orders_tr">
+                                            <td class="">
+                                                <a href="{% url 'order_detail' pk=order.pk %}">{{ order.id }}</a>
+                                            </td>
+                                            <td class="">
+                                                {% if not order.start_time == None %}
+                                                <a href="{% url 'order_detail' pk=order.pk %}">{{ order.start_time }}</a>
+                                                <a class="order_start_time" href="{% url 'order_detail' pk=order.pk %}" hidden>{{ order.start_time | date:'c' }}</a>
+                                                {% endif %}
+                                            </td>
+                                            <td class="full_roads">
+                                                <a href="{% url 'order_detail' pk=order.pk %}">{{ order.full_road | truncatechars_html:35 }}</a>
+                                            </td>
+                                            <td class="">
+                                                {% if not order.loader_count == None %}
+                                                    <a href="{% url 'order_detail' pk=order.pk %}">{{ order.loader_count }}, {{ order.loader_time_count }}</a>
+                                                {% else %}
+                                                    <a href="{% url 'order_detail' pk=order.pk %}">Не нужны</a>
+                                                {% endif %}
+                                            </td>
+                                            <td class="">
+                                                <a href="{% url 'order_detail' pk=order.pk %}">{{ order.cargo_type }}</a>
+                                            </td>
+                                            <td class="">
+                                                <a href="{% url 'order_detail' pk=order.pk %}">{{ order.order_price }}</a>
+                                            </td>
+                                            <td class="order_status">
+                                                {% if not order.status == None %}
+                                                    {% if order.status == 0 %}
+                                                        <a href="{% url 'order_detail' pk=order.pk %}">Ожидается</a>
+                                                    {% endif %}
+                                                    {% if order.status == 1 %}
+                                                        <a href="{% url 'order_detail' pk=order.pk %}">Выполнено</a>
+                                                    {% endif %}
+                                                    {% if order.status == -1 %}
+                                                        <a href="{% url 'order_det  ail' pk=order.pk %}">Отменено</a>
+                                                    {% endif %}
+                                                {% endif %}
+                                            </td>
+                                            <td class="">
+                                                <a href="{% url 'profile' pk=order.author.id %}">{{ order.author }}</a>
+                                            </td>
+                                            {% if not order.driver == None %}
+                                            <td class="">
+                                            <a href="{% url 'profile' pk=order.driver.user.id %}">{{ order.driver }}</a>
+                                            </td>
+                                            {% endif %}
+                                            <td class="">
+                                                <a href="{% url 'order_delete' pk=order.pk %}"><button type="button">Удалить</button></a>
+                                            </td>
+                                            <td class="order_change">
+                                                <a href="{% url 'order_edit' pk=order.pk %}"><button type="button">Редактировать</button></a>
+                                            </td>
+                                        </tr>
+                                {% endfor %}
+                            {% endif %}
+                            </table>
                         </div>
                     </div>
-                    <div>
-                        <table id="orders_table">
-                            <tr id="orders_table_title">
-                                <th class="">
-                                    Номер заявки
-                                </th>
-                                <th class="">
-                                    Дата исполнения
-                                </th>
-                                <th class="">
-                                    Маршрут
-                                </th>
-                                <th class="">
-                                    Грузчики<br>( чел/час )
-                                </th>
-                                <th class="">
-                                    Вид груза
-                                </th>
-                                <th class="">
-                                    Сумма
-                                </th>
-                                <th class="">
-                                    Статус
-                                </th>
-                                <th class="">
-                                    Автор
-                                </th>
-                                <th class="" colspan="2" style="border-right: none;">
-                                    Действие
-                                </th>
-                            </tr>
-                        
-                        {% if user.is_superuser%}
-                            {% for order in orders %}
-                                    <tr data-href="{% url 'order_detail' pk=order.pk %}" class="orders_tr">
-                                        <td class="">
-                                            <a href="{% url 'order_detail' pk=order.pk %}">{{ order.id }}</a>
-                                        </td>
-                                        <td class="">
-                                            {% if not order.start_time == None %}
-                                            <a href="{% url 'order_detail' pk=order.pk %}">{{ order.start_time }}</a>
-                                            <a class="order_start_time" href="{% url 'order_detail' pk=order.pk %}" hidden>{{ order.start_time | date:'c' }}</a>
-                                            {% endif %}
-                                        </td>
-                                        <td class="full_roads">
-                                            <a href="{% url 'order_detail' pk=order.pk %}">{{ order.full_road | truncatechars_html:35 }}</a>
-                                        </td>
-                                        <td class="">
-                                            {% if not order.loader_count == None %}
-                                                <a href="{% url 'order_detail' pk=order.pk %}">{{ order.loader_count }}, {{ order.loader_time_count }}</a>
-                                            {% else %}
-                                                <a href="{% url 'order_detail' pk=order.pk %}">Не нужны</a>
-                                            {% endif %}
-                                        </td>
-                                        <td class="">
-                                            <a href="{% url 'order_detail' pk=order.pk %}">{{ order.cargo_type }}</a>
-                                        </td>
-                                        <td class="">
-                                            <a href="{% url 'order_detail' pk=order.pk %}">{{ order.order_price }}</a>
-                                        </td>
-                                        <td class="order_status">
-                                            {% if not order.status == None %}
-                                                {% if order.status == 0 %}
-                                                    <a href="{% url 'order_detail' pk=order.pk %}">Ожидается</a>
-                                                {% endif %}
-                                                {% if order.status == 1 %}
-                                                    <a href="{% url 'order_detail' pk=order.pk %}">Выполнено</a>
-                                                {% endif %}
-                                                {% if order.status == -1 %}
-                                                    <a href="{% url 'order_det  ail' pk=order.pk %}">Отменено</a>
-                                                {% endif %}
-                                            {% endif %}
-                                        </td>
-                                        <td class="">
-                                            <a href="{% url 'order_detail' pk=order.pk %}">{{ order.author }}</a>
-                                        </td>
-                                        <td class="">
-                                            <a href="{% url 'order_delete' pk=order.pk %}"><button type="button">Удалить</button></a>
-                                        </td>
-                                        <td class="order_change">
-                                            <a href="{% url 'order_edit' pk=order.pk %}"><button type="button">Редактировать</button></a>
-                                        </td>
-                                    </tr>
-                            {% endfor %}
-                        {% endif %}
-                        </table>
-                    </div>
+                    {% else %}
+                    <span class="text-red font-bold italic text-xl">У вас нет доступа к этой странице</span>
                 </div>
-                {% else %}
-                <span class="text-red font-bold italic text-xl">У вас нет доступа к этой странице</span>
             </div>
         </div>
     {% endif %}

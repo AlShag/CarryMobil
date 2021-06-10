@@ -1,6 +1,6 @@
 {% extends "main/index.html" %}
 {% load static %}
-{% block title %}Журнал заявок{% endblock %}
+{% block title %}Заказ №{{ order.id }}{% endblock %}
 {% block css %}
     {{ block.super }}
     <link rel="stylesheet" href="{% static 'styles/order_manage.css' %}">
@@ -10,7 +10,7 @@
     <script src="{% static 'scripts/order.js' %}"></script>
 {% endblock %}
 {% block content %}
-    {% if order.author == user.id or user.is_superuser %}
+    {% if order.author == user.id or user.is_superuser or is_dispatcher or is_driver %}
     <div class="orders_area">
         <div class="orders_form">
                 <div class="order_info">
@@ -24,7 +24,21 @@
                     <table>
                         <tr>
                             <th>Статус</th>
-                            <th><h2 id="order_status">{{ order.status }}</h2></th>
+                            <th><h2 id="order_status">
+                                {% if not order.status == None %}
+                                {% if order.status == 0 %}
+                                    Ожидается
+                                {% endif %}
+                                {% if order.status == 1 %}
+                                    Выполняется
+                                {% endif %}
+                                {% if order.status == 2 %}
+                                    Завершено
+                                {% endif %}
+                                {% if order.status == -1 %}
+                                    Отменено
+                                {% endif %}
+                            {% endif %}</h2></th>
                             <th class="order_price">Цена</th>
                             <label id="prices">{{ order.prices }}</label>
                         </tr>
@@ -85,10 +99,10 @@
                 <div class="order_changing">
                     <input type="button" value="Удалить" onclick="window.location='{% url 'order_delete' pk=order.pk %}'">
                     
-                    {% if user.is_staff %}
+                    {% if is_dispatcher or user.is_superuser %}
                         <input type="button" value="Редактировать" onclick="window.location='{% url 'order_edit' pk=order.pk %}'">
                         <input type="button" value="Выполнить" onclick="window.location='{% url 'order_enable' pk=order.pk %}'">
-                        <input type="button" value="Завершить" onclick="window.location='{% url 'order_enable' pk=order.pk %}'">
+                        <input type="button" value="Завершить" onclick="window.location='{% url 'order_complete' pk=order.pk %}'">
                     {% endif %}
                         
                 </div>

@@ -62,16 +62,16 @@
                             </nav>
             </div>
             <div class="login_register">
-                {% if user.is_authenticated %}
+                {% if request.user.is_authenticated %}
                     <div class="user_head_inf">
                         <div class="flex">
                             <img src="{% static '/images/user.svg' %}" width="20px" alt="">
                             <select name="" id="" onchange="top.location=this.value">
-                                <option value="" disabled selected hidden>{{ user.username }}</option>
-                                <option value="{% url 'profile' %}">Профиль</option>
-                                {% if user.is_staff %}
+                                <option value="" disabled selected hidden>{{ request.user.username }}</option>
+                                <option value="{% url 'profile' pk=request.user.id %}">Профиль</option>
+                                {% if request.user.is_staff %}
                                     <option value="/admin/">Админка</option>
-                                    <option value="{% url 'order_table' %}">Заказы</option>
+                                    <option value="{% url 'order_table' %}">Журнал</option>
                                     <option value="{% url 'order_create' %}">Оформить</option>
                                     {% endif %}
                                 <option value="{% url 'logout' %}" id="logout_a">Выйти</option>
@@ -126,7 +126,7 @@
                             <span>Альметьевск</span>      
                             <h3><img src="{% static '/images/landing/mail.svg' %}" class="" id="" alt=""> Электронная почта</h3>
                             <span>carrymobil@mail.ru</span><br>
-                            <span>support@carrymobil.ru</span>
+                            <span>support@cmobil.ru</span>
                             <h3><img src="{% static '/images/landing/call.svg' %}" class="" id="" alt=""> Номер телефона</h3>
                             <span>8(8553)35-33-35</span>
                             <h3>&#9745; Документация</h3>

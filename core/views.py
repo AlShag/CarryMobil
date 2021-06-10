@@ -1,7 +1,7 @@
 from django.utils import timezone
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.http import HttpResponseRedirect, HttpResponse
-from .models import Order, Address, CityPrice, CargoType, Review, Report
+from .models import AssistantLibrary, DriverProfile, Order, Address, CityPrice, CargoType, Profile, Review, Report, AssistantLibrary, DispatcherProfile
 from .forms import OrderForm, AddressForm, SignInForm, SignUpForm, UserForm, ProfileForm, ReviewForm, OrderEditForm, ReportForm, TelOrderForm, JobApplicationForm
 from django.urls import reverse_lazy
 from django.views import generic
@@ -32,7 +32,7 @@ class LoginView(account.views.LoginView):
 
 def sign_in(request):
     form = SignInForm
-    return render(request, 'accounts/login.html', {'form': form})
+    return render(request, 'account/login.html', {'form': form})
 
 
 class SignUp(generic.CreateView):
@@ -51,24 +51,57 @@ class SignUp(generic.CreateView):
 
 def profile(request, pk):
     group = Group.objects.get( pk = 1 )
+    users_list = User.objects.all()
+    driver_lvl=''
+    l = []
     for g in request.user.groups.all():
         l.append(g.name)
-    return render(request, 'user/profile.html', {'group': group, 'l': l})
+    user = User.objects.get(pk=pk)
+    its_driver=0
+    if is_driver(user):
+        its_driver=1
+        driver=DriverProfile.objects.get(user=user)
+        if driver.driver_rating>100:
+            driver_lvl='Бронза'
+        else:
+            driver_lvl='Новичок'
+    else:
+        its_driver=0
+        driver=[]
+    profile = get_object_or_404(User, pk=pk)
+    orders = Order.objects.filter(author=user)
+    return render(request, 'user/profile.html', {'group': group,
+    'orders': orders,
+    'users_list':users_list,
+    'profile': profile,
+    'user': user,
+    'its_driver': its_driver,
+    'driver': driver,
+    'driver_lvl': driver_lvl,
+    })
+
 
 @login_required
+def view_user_profile(request, user_pk):
+    user = User.objects.get(pk=user_pk)
+    return render(request, 'profile.html')
+
+
 def job_application(request):
-    application = JobApplicationForm(request.POST)
-    user_form = UserForm(request.POST, instance=request.user)
-    # application.user = request.user
     if request.method == 'POST':
-        if application.is_valid():
-            post = application.save(commit=False)
-            post.user = request.user
-            post.save()
-            return render(request, 'user/profile.html')
+        application_form = JobApplicationForm(request.POST)
+        if application_form.is_valid():
+            application = application_form.save(commit=False)
+            application.user = request.user
+            application.save()
+            return redirect(index)
         else:
-            error = 'Форма была неверной'
-    return render(request, 'user/job_application.html', {'application': application,'user_form': user_form})
+            return redirect(job_application)
+    else:
+        application_form = JobApplicationForm
+    return render(request, 'user/job_application.html', {
+        'application_form': application_form
+    })
 
 
 @login_required
@@ -93,12 +126,6 @@ def update_profile(request):
     })
 
 
-def user_orders(request):
-    user = request.user.id
-    orders = Order.objects.filter(author=user)
-    return render(request, 'user/profile.html', {'orders': orders})
-
-
 # ЗАКАЗЫ
 def order(request):
     error = ''
@@ -108,9 +135,8 @@ def order(request):
         if form.is_valid():
             order = form.save(commit=False)
             if user.is_authenticated:
-                order.author = user.id
-            else:
-                order.author = 0
+                order.author = user
+            
             order.save()
             return redirect('ordered')
         else:
@@ -119,6 +145,7 @@ def order(request):
     all_address = Address.objects.all()
     all_cityprice = CityPrice.objects.all()
     all_types = CargoType.objects.all()
+    assistant_library = AssistantLibrary.objects.all()
     form = OrderForm()
     form.use_required_attribute = False
 
@@ -128,6 +155,7 @@ def order(request):
         'all_address': all_address,
         'all_cityprice': all_cityprice,
         'all_types': all_types,
+        'assistant_library': assistant_library,
     }
     return render(request, 'order/order.html', data)
 
@@ -203,21 +231,63 @@ def myorders(request):
 
 
 def order_detail(request, pk):
+    user = request.user
     order = get_object_or_404(Order, pk=pk)
-    return render(request, 'order/order_detail.html', {'order': order})
-
-
-def order_table(request):
-    orders = Order.objects.all()
-    all_types = CargoType.objects.all()
-    return render(request, 'order/order_table.html', {'orders': orders, 'all_types': all_types})
+    if not order.dispatcher == None:
+        if order.dispatcher.user == request.user:
+            is_dispatcher=1
+        else:
+            is_dispatcher=0
+    else:
+        is_dispatcher=0
+            
+    if not order.driver == None:
+        if order.driver.user == request.user:
+            is_driver=1
+        else:
+            is_driver=0
+    else:
+        is_driver=0
+    return render(request, 'order/order_detail.html', {'order': order, 'is_dispatcher': is_dispatcher, 'is_driver': is_driver})
 
 
 def order_enable(request, pk):
     order = get_object_or_404(Order, pk=pk)
     order.status = 1
-    return render(request, 'order/order_table.html')
+    order.save()
+    return render(request, 'order/order_detail.html', {'order': order})
 
+
+def order_complete(request, pk):
+    order = get_object_or_404(Order, pk=pk)
+    order.status = 2
+    order.save()
+    return render(request, 'order/order_detail.html', {'order': order})
+
+
+def order_table(request):
+    user = request.user
+    drivers=DriverProfile.objects.filter(user=user)
+    dispatcher=DispatcherProfile.objects.filter(user=user)
+    if user.is_superuser:
+        orders = Order.objects.all()
+    else:
+        if user.is_staff:
+            if is_driver(user):
+                orders = Order.objects.filter(driver=drivers[0].id)
+            if is_dispatcher(user):
+                orders = Order.objects.filter(dispatcher=dispatcher[0].id)
+        else:   
+            orders = Order.objects.filter(author=user)
+    all_types = CargoType.objects.all()
+    return render(request, 'order/order_table.html', {'orders': orders, 'all_types': all_types, 'drivers': drivers})
+
+
+def is_driver(user):
+    return user.groups.filter(name='Водитель').exists()
+
+def is_dispatcher(user):
+    return user.groups.filter(name='Диспетчер').exists()
 
 # ОТЗЫВЫ
 @login_required

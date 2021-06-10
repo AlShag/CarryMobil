@@ -15,7 +15,7 @@
         <form method="post" action="{% url 'login' %}">
             {% csrf_token %}
             <section class="for_input">
-                <h2>Имя пользователя</h2>
+                <h2>Емайл пользователя</h2>
                 <div class="input_container" id="login_insert">
                     <img src="{% static '/images/login/user.svg' %}" class="for_input_icn">
                     {{ form.email }}
@@ -45,6 +45,7 @@
                 </ul>
             </section> -->
             {% trans "Ещё не зарегистрированы?" %}  <strong><a href="{% urlnext 'account_signup' %}">{% trans "Регистрация" %}</a></strong>
+            <!-- <span>Или <a href="{% url 'register' %}">зарегистрироваться</a></span> -->
             <input type="hidden" name="next" value="{{ next }}">
         </form>
         {% if form.errors %}

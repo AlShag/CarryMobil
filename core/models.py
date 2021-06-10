@@ -35,6 +35,18 @@ class DriverProfile(models.Model):
         return self.user.username 
 
 
+class DispatcherProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    passport_series = models.IntegerField('Серия паспорта', max_length=4)
+    passport_number = models.IntegerField('Номер паспорта', max_length=6)
+    registration_address = models.IntegerField('Адрес прописки', max_length=250)
+    complited_orders = models.IntegerField('Завершенные заказы', max_length=40, blank=True)
+    canceled_orders = models.IntegerField('Отмененные заказы', max_length=40, blank=True)
+    dispatcher_rating = models.IntegerField('Рейтинг Диспетчера', max_length=40, blank=True, default=0)
+
+    def __str__(self):
+        return self.user.username 
+
 class JobApplication(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     job_type = models.CharField('Вид деятельности', max_length=50)
@@ -59,10 +71,10 @@ class Car(models.Model):
     width = models.CharField('Ширина', max_length=4)
     volume = models.CharField('Объём', max_length=4)
     tonnage = models.CharField('Тоннаж', max_length=4)
-    owner = models.OneToOneField(User, on_delete=models.CASCADE)
+    owner = models.OneToOneField(DriverProfile, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.name
+        return self.registration_number + ' - ' + self.name + ' ' + self.model
     
 
 @receiver(post_save, sender=User)
@@ -89,9 +101,10 @@ class Order(models.Model):
     user_tel_nomer = models.CharField('Номер телефона заказчика', max_length=20)
     sended_in = models.DateTimeField('Время отправки заявки', null=True, blank=True, default=datetime.datetime.now())
     status = models.IntegerField('Состояние заказа', null=True, blank=True, default=0)
-    author = models.IntegerField('ID Автора', null=True, blank=True, default=0)
-    dispatcher = models.IntegerField('ID диспетчера', null=True, blank=True, default=0)
-
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author', verbose_name='author', null=True, blank=True)
+    dispatcher= models.ForeignKey(DispatcherProfile, on_delete=models.CASCADE, related_name='dispatcher', verbose_name='dispatcher', null=True, blank=True)
+    driver= models.ForeignKey(DriverProfile, on_delete=models.CASCADE, related_name='driver', verbose_name='driver', null=True, blank=True)
+    
     def __str__(self):
         return self.full_road
 
@@ -197,3 +210,16 @@ class TelOrder(models.Model):
     user_tel_number = models.CharField('Номер телефона', max_length=20)
     sended_in = models.DateTimeField('Время отправки заявки', null=True, blank=True, default=datetime.datetime.now())
     author = models.IntegerField('ID Автора', null=True, blank=True, default=0)
+
+
+class AssistantLibrary(models.Model):
+    user_answer = models.CharField('Ответ пользователя', max_length=150,blank=True)
+    assistant_text = models.TextField('Текст ассистента',blank=True)
+    function_id = models.IntegerField('Функция',null=True, blank=True, default=0)
+
+    def __str__(self):
+        return self.user_answer
+
+    class Meta:
+        verbose_name = 'Ответ ассистента'
+        verbose_name_plural = 'Словарь ассистента'
