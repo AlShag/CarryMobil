@@ -30,6 +30,12 @@ class DriverProfile(models.Model):
     complited_orders = models.CharField('Завершенные заказы', max_length=40, blank=True)
     canceled_orders = models.CharField('Отмененные заказы', max_length=40, blank=True)
     driver_rating = models.CharField('Рейтинг водителя', max_length=40, blank=True, default=0)
+    car = models.ForeignKey(
+        "core.Car",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+    )
 
     def __str__(self):
         return self.user.username 
@@ -63,7 +69,7 @@ class JobApplication(models.Model):
 
 class Car(models.Model):
     name = models.CharField('Марка', max_length=50)
-    model = models.CharField('Модель', max_length=50)
+    car_model = models.CharField('Модель', max_length=50, blank=True, null=True)
     type = models.CharField('Тип', max_length=50)
     registration_number = models.CharField('Регистрационные номера', max_length=9)
     length = models.CharField('Длина', max_length=4)
@@ -71,10 +77,9 @@ class Car(models.Model):
     width = models.CharField('Ширина', max_length=4)
     volume = models.CharField('Объём', max_length=4)
     tonnage = models.CharField('Тоннаж', max_length=4)
-    owner = models.OneToOneField(DriverProfile, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.registration_number + ' - ' + self.name + ' ' + self.model
+        return self.registration_number + ' - ' + self.name + ' ' + self.car_model
     
 
 @receiver(post_save, sender=User)
@@ -99,11 +104,33 @@ class Order(models.Model):
     order_price = models.IntegerField('Стоимость заказа')
     prices = models.CharField('Цены заказа', null=True, blank=True, max_length=150)
     user_tel_nomer = models.CharField('Номер телефона заказчика', max_length=20)
-    sended_in = models.DateTimeField('Время отправки заявки', null=True, blank=True, default=datetime.datetime.now())
+    sended_in = models.DateTimeField('Время отправки заявки', null=True, blank=True)
     status = models.IntegerField('Состояние заказа', null=True, blank=True, default=0)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author', verbose_name='author', null=True, blank=True)
-    dispatcher= models.ForeignKey(DispatcherProfile, on_delete=models.CASCADE, related_name='dispatcher', verbose_name='dispatcher', null=True, blank=True)
-    driver= models.ForeignKey(DriverProfile, on_delete=models.CASCADE, related_name='driver', verbose_name='driver', null=True, blank=True)
+
+    author = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='author',
+        verbose_name='author',
+        null=True,
+        blank=True
+    )
+    dispatcher = models.ForeignKey(
+        DispatcherProfile,
+        on_delete=models.CASCADE,
+        related_name='dispatcher',
+        verbose_name='dispatcher',
+        null=True,
+        blank=True
+    )
+    driver = models.ForeignKey(
+        DriverProfile,
+        on_delete=models.CASCADE,
+        related_name='driver',
+        verbose_name='driver',
+        null=True,
+        blank=True
+    )
     
     def __str__(self):
         return self.full_road
@@ -124,7 +151,7 @@ class ComplitedOrder(models.Model):
     order_price = models.IntegerField('Стоимость заказа')
     prices = models.CharField('Цены заказа', null=True, blank=True, max_length=150)
     user_tel_nomer = models.CharField('Номер телефона заказчика', max_length=20)
-    sended_in = models.DateTimeField('Время отправки заявки', null=True, blank=True, default=datetime.datetime.now())
+    sended_in = models.DateTimeField('Время отправки заявки', null=True, blank=True)
     status = models.IntegerField('Состояние заказа', null=True, blank=True, default=0)
     author = models.IntegerField('ID Автора', null=True, blank=True, default=0)
 
@@ -208,7 +235,7 @@ class Snippet(models.Model):
 class TelOrder(models.Model):
     user_name = models.CharField('Имя заказчика', max_length=255, null=True, blank=True)
     user_tel_number = models.CharField('Номер телефона', max_length=20)
-    sended_in = models.DateTimeField('Время отправки заявки', null=True, blank=True, default=datetime.datetime.now())
+    sended_in = models.DateTimeField('Время отправки заявки', null=True, blank=True)
     author = models.IntegerField('ID Автора', null=True, blank=True, default=0)
 
 

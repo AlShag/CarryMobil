@@ -96,8 +96,7 @@
                                         Действие
                                     </th>
                                 </tr>
-                            
-                            {% if user.is_staff%}
+
                                 {% for order in orders %}
                                         <tr data-href="{% url 'order_detail' pk=order.pk %}" class="orders_tr">
                                             <td class="">
@@ -139,14 +138,6 @@
                                                 {% endif %}
                                             </td>
                                             <td class="">
-                                                <a href="{% url 'profile' pk=order.author.id %}">{{ order.author }}</a>
-                                            </td>
-                                            {% if not order.driver == None %}
-                                            <td class="">
-                                            <a href="{% url 'profile' pk=order.driver.user.id %}">{{ order.driver }}</a>
-                                            </td>
-                                            {% endif %}
-                                            <td class="">
                                                 <a href="{% url 'order_delete' pk=order.pk %}"><button type="button">Удалить</button></a>
                                             </td>
                                             <td class="order_change">
@@ -154,7 +145,6 @@
                                             </td>
                                         </tr>
                                 {% endfor %}
-                            {% endif %}
                             </table>
                         </div>
                     </div>

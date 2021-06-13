@@ -69,9 +69,9 @@
                             <select name="" id="" onchange="top.location=this.value">
                                 <option value="" disabled selected hidden>{{ request.user.username }}</option>
                                 <option value="{% url 'profile' pk=request.user.id %}">Профиль</option>
+                                <option value="{% url 'order_table' %}">Журнал</option>
                                 {% if request.user.is_staff %}
                                     <option value="/admin/">Админка</option>
-                                    <option value="{% url 'order_table' %}">Журнал</option>
                                     <option value="{% url 'order_create' %}">Оформить</option>
                                     {% endif %}
                                 <option value="{% url 'logout' %}" id="logout_a">Выйти</option>

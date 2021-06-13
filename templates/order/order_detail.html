@@ -10,7 +10,7 @@
     <script src="{% static 'scripts/order.js' %}"></script>
 {% endblock %}
 {% block content %}
-    {% if order.author == user.id or user.is_superuser or is_dispatcher or is_driver %}
+    {% if permission == True %}
     <div class="orders_area">
         <div class="orders_form">
                 <div class="order_info">
