@@ -15,6 +15,8 @@
                             <div class="user_image">
                                 <div class="user_image_content">
                                     <img src="{% static '/images/profile/stock.svg' %}">
+                                    <img src="{{ user.profile.avatar.url }}">
+                                    {{ user.profile.avatar }}
                                     {% if user.id == request.user.id %}
                                     <a href="{% url 'update_profile' %}"><input type="button" value="Редактировать"></a>
                                     {% endif %}
@@ -67,6 +69,12 @@
                                             {% if its_driver %}
                                                 <section class="user_dop_info">
                                                     <label for="">Рейтинг водителя: {{ driver_lvl }}({{ driver.driver_rating }})</label><span></span><br>
+                                                </section>
+                                                <section class="user_dop_info">
+                                                    <label for="">Авто:</label>
+                                                    {% for car in cars %}
+                                                        <a href="">{{ car.registration_number }}</a>
+                                                    {% endfor %}
                                                 </section>
                                                 <section class="user_dop_info">
                                                     <label for="">Выполненые заказы: {{ driver.complited_orders }}</label><span></span><br>

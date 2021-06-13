@@ -1,0 +1,51 @@
+{% extends "main/index.html" %}
+{% load static %}
+{% block title %}Заказ №{{ order.id }}{% endblock %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'styles/order_manage.css' %}">
+{% endblock %}
+{% block script %}
+{{ block.super }}
+    <script src="{% static 'scripts/order.js' %}"></script>
+{% endblock %}
+{% block content %}
+    {% if order.author == user.id or user.is_superuser or is_dispatcher or is_driver %}
+    <div class="orders_area">
+        <div class="orders_form">
+                <div class="order_info">
+                   <table>
+                       <tr>
+                           <th>Водитель</th>
+                           <th>Рейтинг</th>
+                           <th>Номер телефона</th>
+                           <th></th>
+                       </tr>
+                       {% for driver in drivers %}
+                        <tr>
+                            <td><a href="{% url 'profile' pk=driver.user.id %}">{{ driver.user }}</a></td>
+                            <td>{{ driver.driver_rating }}</td>
+                            <td>{{ driver.telephone_number }}</td>
+                            <td><a href="{% url 'order_driver_select' pk=order.pk driver_pk=driver.id %}">Выбрать</a></td>
+                        </tr>
+                       {% endfor %}
+                   </table>
+                </div>
+                {% if messages %}
+                <div class="warning">
+                    <div class="warning_text">
+                        {% for message in messages %}
+                            <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="warning_action">
+                        <input type="button" class="standart_button warning_apply" value="Ок">
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        <script>order_detail()</script>
+{% endif %}
+
+{% endblock %}

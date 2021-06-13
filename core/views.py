@@ -1,7 +1,7 @@
 from django.utils import timezone
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.http import HttpResponseRedirect, HttpResponse
-from .models import AssistantLibrary, DriverProfile, Order, Address, CityPrice, CargoType, Profile, Review, Report, AssistantLibrary, DispatcherProfile
+from .models import AssistantLibrary, DriverProfile, Order, Address, CityPrice, CargoType, Profile, Review, Report, AssistantLibrary, DispatcherProfile, Car
 from .forms import OrderForm, AddressForm, SignInForm, SignUpForm, UserForm, ProfileForm, ReviewForm, OrderEditForm, ReportForm, TelOrderForm, JobApplicationForm
 from django.urls import reverse_lazy
 from django.views import generic
@@ -50,17 +50,22 @@ class SignUp(generic.CreateView):
 
 
 def profile(request, pk):
-    group = Group.objects.get( pk = 1 )
+    user = User.objects.get(pk=pk)
+    if user.is_staff:
+        group = Group.objects.get( pk = 1 )
+    else:
+        group = ''
     users_list = User.objects.all()
     driver_lvl=''
+    cars=[]
     l = []
     for g in request.user.groups.all():
         l.append(g.name)
-    user = User.objects.get(pk=pk)
     its_driver=0
     if is_driver(user):
         its_driver=1
         driver=DriverProfile.objects.get(user=user)
+        cars=Car.objects.filter(owner=driver)
         if driver.driver_rating>100:
             driver_lvl='Бронза'
         else:
@@ -77,6 +82,7 @@ def profile(request, pk):
     'user': user,
     'its_driver': its_driver,
     'driver': driver,
+    'cars': cars,
     'driver_lvl': driver_lvl,
     })
 
@@ -260,27 +266,44 @@ def order_enable(request, pk):
 
 def order_complete(request, pk):
     order = get_object_or_404(Order, pk=pk)
-    order.status = 2
-    order.save()
+    if not order.driver == None:
+        order.status = 2
+        order.save()
+    else:
+        messages.info(request, 'К данному заказу не присвоен водитель, добавьте водителя к заказу для продолжения.')
     return render(request, 'order/order_detail.html', {'order': order})
 
 
+def order_drivers(request, pk):
+    order = get_object_or_404(Order, pk=pk)
+    drivers=DriverProfile.objects.all()
+    return render(request, 'order/order_drivers.html', {'order': order, 'drivers': drivers})
+
+
+def order_driver_select(request, pk, driver_pk):
+    order = get_object_or_404(Order, pk=pk)
+    order.driver = DriverProfile.objects.get(pk=driver_pk)
+    order.save()
+    return order_detail(request, pk)
+
 def order_table(request):
     user = request.user
-    drivers=DriverProfile.objects.filter(user=user)
-    dispatcher=DispatcherProfile.objects.filter(user=user)
+    driver=[]
+    dispatcher=[]
     if user.is_superuser:
         orders = Order.objects.all()
     else:
         if user.is_staff:
             if is_driver(user):
-                orders = Order.objects.filter(driver=drivers[0].id)
+                driver=DriverProfile.objects.get(user=user)
+                orders = Order.objects.get(driver=driver)
             if is_dispatcher(user):
-                orders = Order.objects.filter(dispatcher=dispatcher[0].id)
+                dispatcher=DispatcherProfile.objects.get(user=user)
+                orders = Order.objects.get(dispatcher=dispatcher.id)
         else:   
             orders = Order.objects.filter(author=user)
     all_types = CargoType.objects.all()
-    return render(request, 'order/order_table.html', {'orders': orders, 'all_types': all_types, 'drivers': drivers})
+    return render(request, 'order/order_table.html', {'orders': orders, 'all_types': all_types, 'driver': driver})
 
 
 def is_driver(user):

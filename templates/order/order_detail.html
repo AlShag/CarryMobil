@@ -75,6 +75,19 @@
                             </td>
                         </tr>
                         <tr>
+                            <th>Водитель</th>
+                            <td class="order_data">
+                            {% if not order.driver == None %}
+                                <a href="{% url 'profile' pk=order.driver.user.id %}">{{ order.driver }}</a>
+                            {% else %}
+                                <a href="{% url 'order_drivers' pk=order.pk %}">Выбрать водителя</a>
+                            {% endif %}
+                            </td>
+                            <td class="order_price">
+                                <label id="type_price"></label>
+                            </td>
+                        </tr>
+                        <tr>
                             <th>Номер тел. клиента:</th>
                             <td class="order_data">
                                 {{ order.user_tel_nomer }}
@@ -106,6 +119,18 @@
                     {% endif %}
                         
                 </div>
+                {% if messages %}
+                <div class="warning">
+                    <div class="warning_text">
+                        {% for message in messages %}
+                            <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                        {% endfor %}
+                    </div>
+                    <div class="warning_action">
+                        <input type="button" class="standart_button warning_apply" value="Ок">
+                    </div>
+                </div>
+                {% endif %}
             </div>
         </div>
         <script>order_detail()</script>
