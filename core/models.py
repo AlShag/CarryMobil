@@ -99,7 +99,7 @@ class Order(models.Model):
     order_price = models.IntegerField('Стоимость заказа')
     prices = models.CharField('Цены заказа', null=True, blank=True, max_length=150)
     user_tel_nomer = models.CharField('Номер телефона заказчика', max_length=20)
-    sended_in = models.DateTimeField('Время отправки заявки', null=True, blank=True, default=datetime.datetime.now())
+    sended_in = models.DateTimeField('Время отправки заявки', null=True, blank=True)
     status = models.IntegerField('Состояние заказа', null=True, blank=True, default=0)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name='author', verbose_name='author', null=True, blank=True)
     dispatcher= models.ForeignKey(DispatcherProfile, on_delete=models.CASCADE, related_name='dispatcher', verbose_name='dispatcher', null=True, blank=True)
@@ -124,7 +124,7 @@ class ComplitedOrder(models.Model):
     order_price = models.IntegerField('Стоимость заказа')
     prices = models.CharField('Цены заказа', null=True, blank=True, max_length=150)
     user_tel_nomer = models.CharField('Номер телефона заказчика', max_length=20)
-    sended_in = models.DateTimeField('Время отправки заявки', null=True, blank=True, default=datetime.datetime.now())
+    sended_in = models.DateTimeField('Время отправки заявки', null=True, blank=True)
     status = models.IntegerField('Состояние заказа', null=True, blank=True, default=0)
     author = models.IntegerField('ID Автора', null=True, blank=True, default=0)
 
@@ -208,7 +208,7 @@ class Snippet(models.Model):
 class TelOrder(models.Model):
     user_name = models.CharField('Имя заказчика', max_length=255, null=True, blank=True)
     user_tel_number = models.CharField('Номер телефона', max_length=20)
-    sended_in = models.DateTimeField('Время отправки заявки', null=True, blank=True, default=datetime.datetime.now())
+    sended_in = models.DateTimeField('Время отправки заявки', null=True, blank=True)
     author = models.IntegerField('ID Автора', null=True, blank=True, default=0)
 
 

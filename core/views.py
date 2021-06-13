@@ -50,7 +50,6 @@ class SignUp(generic.CreateView):
 
 
 def profile(request, pk):
-    group = Group.objects.get( pk = 1 )
     users_list = User.objects.all()
     driver_lvl=''
     l = []
@@ -70,7 +69,7 @@ def profile(request, pk):
         driver=[]
     profile = get_object_or_404(User, pk=pk)
     orders = Order.objects.filter(author=user)
-    return render(request, 'user/profile.html', {'group': group,
+    return render(request, 'user/profile.html', {
     'orders': orders,
     'users_list':users_list,
     'profile': profile,
