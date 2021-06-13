@@ -229,27 +229,6 @@ def myorders(request):
     return render(request, 'driver/driver_profile.html', {'orders': orders})
 
 
-def order_detail(request, pk):
-    user = request.user
-    order = get_object_or_404(Order, pk=pk)
-    if not order.dispatcher == None:
-        if order.dispatcher.user == request.user:
-            is_dispatcher=1
-        else:
-            is_dispatcher=0
-    else:
-        is_dispatcher=0
-            
-    if not order.driver == None:
-        if order.driver.user == request.user:
-            is_driver=1
-        else:
-            is_driver=0
-    else:
-        is_driver=0
-    return render(request, 'order/order_detail.html', {'order': order, 'is_dispatcher': is_dispatcher, 'is_driver': is_driver})
-
-
 def order_enable(request, pk):
     order = get_object_or_404(Order, pk=pk)
     order.status = 1
@@ -266,21 +245,51 @@ def order_complete(request, pk):
 
 def order_table(request):
     user = request.user
-    drivers=DriverProfile.objects.filter(user=user)
-    dispatcher=DispatcherProfile.objects.filter(user=user)
+    all_types = CargoType.objects.all()
+
     if user.is_superuser:
         orders = Order.objects.all()
-    else:
-        if user.is_staff:
-            if is_driver(user):
-                orders = Order.objects.filter(driver=drivers[0].id)
-            if is_dispatcher(user):
-                orders = Order.objects.filter(dispatcher=dispatcher[0].id)
-        else:   
-            orders = Order.objects.filter(author=user)
-    all_types = CargoType.objects.all()
-    return render(request, 'order/order_table.html', {'orders': orders, 'all_types': all_types, 'drivers': drivers})
+        drivers = DriverProfile.objects.all()
+        return render(request, 'order/order_table.html', {
+            'orders': orders, 'all_types': all_types, 'drivers': drivers})
 
+    elif DispatcherProfile.objects.filter(user=user):
+        drivers = DriverProfile.objects.all()
+        orders = Order.objects.all()
+        return render(request, 'order/order_table.html',
+                      {'orders': orders, 'all_types': all_types, 'drivers': drivers})
+
+    elif DriverProfile.objects.filter(user=user):
+        driver = DriverProfile.objects.get(user=user)
+        orders = Order.objects.filter(driver=driver)
+        print(orders)
+        return render(request, 'order/order_table.html',
+                      {'orders': orders, 'all_types': all_types})
+
+    else:
+        orders = Order.objects.filter(author=user)
+        drivers = DriverProfile.objects.all()
+        return render(request, 'order/order_table.html', {
+            'orders': orders, 'all_types': all_types, 'drivers': drivers})
+
+
+def order_detail(request, pk):
+    permission = False
+    order_object = get_object_or_404(Order, pk=pk)
+    if order_object.driver:
+        if order_object.driver.user == request.user:
+            permission = True
+    elif order_object.author == request.user:
+        permission = True
+    elif request.user.is_superuser:
+        permission = True
+    elif DispatcherProfile.objects.filter(user=request.user):
+        permission = True
+    return render(request, 'order/order_detail.html', {'order': order_object, 'permission': permission})
+
+
+def set_dispatcher():
+    pass
 
 def is_driver(user):
     return user.groups.filter(name='Водитель').exists()
@@ -378,7 +387,7 @@ def orders_export(request):
         # Define the data for each cell in the row 
         row = [
             order.id,
-            order.author,
+            order.author.username,
             order.user_tel_nomer,
             order.full_road,
             order.loader_count,
