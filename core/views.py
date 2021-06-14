@@ -1,20 +1,17 @@
-from django.utils import timezone
+from datetime import datetime
+
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.db import transaction
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404, reverse
-from django.http import HttpResponseRedirect, HttpResponse
-from .models import AssistantLibrary, DriverProfile, Order, Address, CityPrice, CargoType, Profile, Review, Report, AssistantLibrary, DispatcherProfile, Car
-from .forms import OrderForm, AddressForm, SignInForm, SignUpForm, UserForm, ProfileForm, ReviewForm, OrderEditForm, ReportForm, TelOrderForm, JobApplicationForm
 from django.urls import reverse_lazy
 from django.views import generic
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User, Group
-from django.contrib.auth.decorators import login_required
-from django.contrib import messages, auth
-from django.db import transaction
-from datetime import timedelta, datetime
 from openpyxl import Workbook
-from django.contrib import messages
+
+from .forms import *
+from .models import *
 from .models import Snippet
-import core.forms
 import account.forms
 import account.views
 
@@ -44,46 +41,38 @@ class SignUp(generic.CreateView):
         username = form.cleaned_data["email"]
         return username
 
-    def after_signup(self, form):
-        # do something
-        super(SignupView, self).after_signup(form)
-
 
 def profile(request, pk):
     user = User.objects.get(pk=pk)
-    if user.is_staff:
-        group = Group.objects.get( pk = 1 )
-    else:
-        group = ''
     users_list = User.objects.all()
-    driver_lvl=''
-    cars=[]
+    driver_lvl = ''
+    cars = []
     l = []
     for g in request.user.groups.all():
         l.append(g.name)
-    its_driver=0
+    its_driver = 0
     if is_driver(user):
-        its_driver=1
-        driver=DriverProfile.objects.get(user=user)
-        cars=Car.objects.filter(owner=driver)
-        if driver.driver_rating>100:
-            driver_lvl='Бронза'
+        its_driver = 1
+        driver = DriverProfile.objects.get(user=user)
+        cars = Car.objects.filter(owner=driver)
+        if driver.driver_rating > 100:
+            driver_lvl = 'Бронза'
         else:
-            driver_lvl='Новичок'
+            driver_lvl = 'Новичок'
     else:
-        its_driver=0
-        driver=[]
+        its_driver = 0
+        driver = []
     profile = get_object_or_404(User, pk=pk)
     orders = Order.objects.filter(author=user)
     return render(request, 'user/profile.html', {
-    'orders': orders,
-    'users_list':users_list,
-    'profile': profile,
-    'user': user,
-    'its_driver': its_driver,
-    'driver': driver,
-    'cars': cars,
-    'driver_lvl': driver_lvl,
+        'orders': orders,
+        'users_list': users_list,
+        'profile': profile,
+        'user': user,
+        'its_driver': its_driver,
+        'driver': driver,
+        'cars': cars,
+        'driver_lvl': driver_lvl,
     })
 
 
@@ -119,10 +108,10 @@ def update_profile(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request, ('Ваш профиль был успешно обновлен!'))
+            messages.success(request, 'Ваш профиль был успешно обновлен!')
             return render(request, 'user/profile.html')
         else:
-            messages.error(request, ('Пожалуйста, исправьте ошибки.'))
+            messages.error(request, 'Пожалуйста, исправьте ошибки.')
     else:
         user_form = UserForm(instance=request.user)
         profile_form = ProfileForm(instance=request.user.profile)
@@ -220,6 +209,7 @@ def order_delete(request, pk):
 def ordered(request):
     return render(request, 'order/ordered.html')
 
+
 def report(request):
     report = ReportForm(request.POST)
     if request.method == 'POST':
@@ -238,24 +228,24 @@ def myorders(request):
 
 def order_enable(request, pk):
     order = get_object_or_404(Order, pk=pk)
-    order.status = 1
+    order.status = 1  # Выполняется
     order.save()
-    return render(request, 'order/order_detail.html', {'order': order})
+    return redirect(order_detail, pk=order.pk)
 
 
 def order_complete(request, pk):
     order = get_object_or_404(Order, pk=pk)
-    if not order.driver == None:
+    if order.driver:
         order.status = 2
         order.save()
     else:
         messages.info(request, 'К данному заказу не присвоен водитель, добавьте водителя к заказу для продолжения.')
-    return render(request, 'order/order_detail.html', {'order': order})
+    return redirect(order_detail, pk=order.pk)
 
 
 def order_drivers(request, pk):
     order = get_object_or_404(Order, pk=pk)
-    drivers=DriverProfile.objects.all()
+    drivers = DriverProfile.objects.all()
     return render(request, 'order/order_drivers.html', {'order': order, 'drivers': drivers})
 
 
@@ -264,6 +254,7 @@ def order_driver_select(request, pk, driver_pk):
     order.driver = DriverProfile.objects.get(pk=driver_pk)
     order.save()
     return order_detail(request, pk)
+
 
 def order_table(request):
     user = request.user
@@ -284,7 +275,6 @@ def order_table(request):
     elif DriverProfile.objects.filter(user=user):
         driver = DriverProfile.objects.get(user=user)
         orders = Order.objects.filter(driver=driver)
-        print(orders)
         return render(request, 'order/order_table.html',
                       {'orders': orders, 'all_types': all_types})
 
@@ -298,14 +288,14 @@ def order_table(request):
 def order_detail(request, pk):
     permission = False
     order_object = get_object_or_404(Order, pk=pk)
+    if request.user.is_superuser:
+        permission = True
     if order_object.driver:
         if order_object.driver.user == request.user:
             permission = True
-    elif order_object.author == request.user:
+    if order_object.author == request.user:
         permission = True
-    elif request.user.is_superuser:
-        permission = True
-    elif DispatcherProfile.objects.filter(user=request.user):
+    if DispatcherProfile.objects.filter(user=request.user):
         permission = True
     return render(request, 'order/order_detail.html', {'order': order_object, 'permission': permission})
 
@@ -313,11 +303,14 @@ def order_detail(request, pk):
 def set_dispatcher():
     pass
 
+
 def is_driver(user):
     return user.groups.filter(name='Водитель').exists()
 
+
 def is_dispatcher(user):
     return user.groups.filter(name='Диспетчер').exists()
+
 
 # ОТЗЫВЫ
 @login_required
@@ -343,7 +336,7 @@ def index(request):
     if request.method == 'POST':
         review_form = ReviewForm(request.POST)
         telorder = TelOrderForm(request.POST)
-        if  telorder.is_valid():
+        if telorder.is_valid():
             telorder.save()
             return redirect(ordered)
         else:
@@ -432,10 +425,94 @@ def orders_export(request):
 def about(request):
     return render(request, 'main/about.html', {})
 
+
 def yandex_66b5cc356c187df1(request):
     return render(request, 'main/yandex_66b5cc356c187df1.html', {})
+
 
 def snippet_detail(request, slug):
     snippet = get_object_or_404(Snippet, slug=slug)
     return HttpResponse(f'This should be the detail view for the slug of {slug}')
-  
+
+
+def company(request, pk):
+    company = Company.objects.get(pk=pk)
+    company_orders = CompanyOrder.objects.filter(
+        company=company
+    )
+    return render(request, 'company/company_profile.html', {
+        'company_orders': company_orders,
+        })
+
+
+def company_create(request):
+    if request.method == 'POST':
+        form = CompanyForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return render(request, 'company/company_profile.html', {'pk': form.pk})
+
+
+def company_edit(request, pk):
+    company = get_object_or_404(Company, pk=pk)
+    if request.method == 'POST':
+        form = CompanyForm(request.POST, instance=company)
+        if form.is_valid():
+            form.save()
+            return render(request, 'company/company_profile.html', {'pk': company.pk})
+
+
+def company_order_driver_select(request, pk, driver_pk):
+    order = get_object_or_404(CompanyOrder, pk=pk)
+    order.driver = DriverProfile.objects.get(pk=driver_pk)
+    order.save()
+    return order_detail(request, pk)
+
+
+def company_order_detail(request, pk):
+    permission = False
+    order_object = get_object_or_404(CompanyOrder, pk=pk)
+    if request.user.is_superuser:
+        permission = True
+    if order_object.driver:
+        if order_object.driver.user == request.user:
+            permission = True
+    if order_object.company.contact_user == request.user:
+        permission = True
+    if DispatcherProfile.objects.filter(user=request.user):
+        permission = True
+    return render(request, 'company_order/company_order_detail.html', {'order': order_object, 'permission': permission})
+
+
+def company_order_create(request):
+    if request.method == 'POST':
+        form = CompanyOrderForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('ordered')
+
+
+def company_order_edit(request, pk):
+    company_order = get_object_or_404(CompanyOrder, pk=pk)
+    if request.method == 'POST':
+        form = OrderEditForm(request.POST, instance=company_order)
+        if form.is_valid():
+            form.save()
+            return redirect(order_detail, pk=company_order.pk)
+
+
+def company_order_delete(request, pk):
+    try:
+        company_order = get_object_or_404(CompanyOrder, pk=pk)
+        company_order.delete()
+        return redirect(reverse(order_table))
+
+    except ValueError:
+        return render(request, 'company/company_profile.html')
+
+
+def company_orders(request):
+    orders = CompanyOrder.objects.filter(
+        company__contact_user=request.user
+    )
+    return render(request, 'company/company_profile.html', {'orders': orders})

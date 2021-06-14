@@ -117,7 +117,7 @@
                         <input type="button" value="Выполнить" onclick="window.location='{% url 'order_enable' pk=order.pk %}'">
                         <input type="button" value="Завершить" onclick="window.location='{% url 'order_complete' pk=order.pk %}'">
                     {% endif %}
-                        
+
                 </div>
                 {% if messages %}
                 <div class="warning">

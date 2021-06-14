@@ -1,10 +1,9 @@
-from .models import Order, Address, Profile, Review, Report, TelOrder, JobApplication, AssistantLibrary
+from .models import *
 from django import forms
 from django.forms import ModelForm, TextInput, DateTimeInput, Textarea, NumberInput, PasswordInput
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-import account.forms
 
 
 class UserForm(forms.ModelForm):
@@ -12,11 +11,11 @@ class UserForm(forms.ModelForm):
         model = User
         fields = ('first_name', 'last_name', 'email')
 
-    
+
 class ProfileForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('patronymic','birth_date', 'location', 'company', 'telephone_number')
+        fields = ('patronymic', 'birth_date', 'location', 'company', 'telephone_number')
 
 
 class SignInForm(AuthenticationForm):
@@ -31,64 +30,116 @@ class SignUpForm(UserCreationForm):
         fields = ('username', 'email', 'password1', 'password2',)
         widgets = {
             'username': forms.TextInput(attrs={
-                        'class': 'form-control',
-                        'placeholder': 'Придумайте свой логин',
-                }),
+                'class': 'form-control',
+                'placeholder': 'Придумайте свой логин',
+            }),
             'email': forms.EmailInput(attrs={
-                        'class': 'form-control',
-                        'placeholder': 'Ваша электронная почта',
-                        'required': True
-                }),
+                'class': 'form-control',
+                'placeholder': 'Ваша электронная почта',
+                'required': True
+            }),
             'password1': forms.TextInput(attrs={
-                        'class': 'form-control',
-                        'placeholder': 'Придумайте пароль',
-                }),
+                'class': 'form-control',
+                'placeholder': 'Придумайте пароль',
+            }),
             'password2': forms.TextInput(attrs={
-                        'class': 'form-control',
-                        'placeholder': 'Повторите пароль',
-                }),
+                'class': 'form-control',
+                'placeholder': 'Повторите пароль',
+            }),
         }
-        
+
 
 class OrderForm(ModelForm):
     class Meta:
         model = Order
-        fields = ['full_road','start_time','road_comment','cargo_type','cargo_type_comment','loader_count','loader_time_count','prices','order_price','user_tel_nomer','sended_in','status','author', 'dispatcher','driver']
+        fields = ['full_road', 'start_time', 'road_comment', 'cargo_type', 'cargo_type_comment', 'loader_count',
+                  'loader_time_count', 'prices', 'order_price', 'user_tel_nomer', 'sended_in', 'status', 'author',
+                  'dispatcher', 'driver']
         widgets = {
-            'from_address':  TextInput(attrs={
+            'from_address': TextInput(attrs={
                 'placeholder': 'Населенный пункт, улица, дом отправления груза...',
-                'required':'',
+                'required': '',
             }),
-            'to_address':  TextInput(attrs={
+            'to_address': TextInput(attrs={
                 'placeholder': 'Населенный пункт, улица, дом направления груза...',
-                'required':'',
+                'required': '',
             }),
-            'start_time':  DateTimeInput(attrs={
+            'start_time': DateTimeInput(attrs={
                 'type': 'datetime-local',
             }),
-            'road_comment':  Textarea(attrs={
+            'road_comment': Textarea(attrs={
                 'placeholder': 'Необязательное поле',
                 'rows': '5',
             }),
-            'cargo_type_comment':  Textarea(attrs={
+            'cargo_type_comment': Textarea(attrs={
                 'placeholder': 'Необязательное поле',
                 'rows': '4',
             }),
-            'loader_count':  NumberInput(attrs={
+            'loader_count': NumberInput(attrs={
                 'placeholder': '0 чел.',
-                'max':'12',
-                'min':'0',
+                'max': '12',
+                'min': '0',
             }),
-            'loader_time_count':  NumberInput(attrs={
+            'loader_time_count': NumberInput(attrs={
                 'placeholder': '0 час.',
-                'max':'8',
-                'min':'0',
+                'max': '8',
+                'min': '0',
             }),
-            'user_tel_nomer':  NumberInput(attrs={
+            'user_tel_nomer': NumberInput(attrs={
                 'placeholder': 'Номер телефона',
                 'id': 'user_telephone',
-                'required':'',
+                'required': '',
                 'type': 'telephone',
+            }),
+        }
+
+
+class CompanyOrderForm(ModelForm):
+    class Meta:
+        model = CompanyOrder
+        fields = ['company', 'schedule', 'full_road', 'start_time', 'road_comment', 'cargo_type', 'cargo_type_comment',
+                  'loader_count', 'loader_time_count', 'prices', 'order_price', 'user_tel_nomer', 'sended_in', 'status',
+                  'author', 'dispatcher', 'driver']
+        widgets = {
+            'from_address': TextInput(attrs={
+                'placeholder': 'Населенный пункт, улица, дом отправления груза...',
+                'required': '',
+            }),
+            'to_address': TextInput(attrs={
+                'placeholder': 'Населенный пункт, улица, дом направления груза...',
+                'required': '',
+            }),
+            'start_time': DateTimeInput(attrs={
+                'type': 'datetime-local',
+            }),
+            'road_comment': Textarea(attrs={
+                'placeholder': 'Необязательное поле',
+                'rows': '5',
+            }),
+            'cargo_type_comment': Textarea(attrs={
+                'placeholder': 'Необязательное поле',
+                'rows': '4',
+            }),
+            'loader_count': NumberInput(attrs={
+                'placeholder': '0 чел.',
+                'max': '12',
+                'min': '0',
+            }),
+            'loader_time_count': NumberInput(attrs={
+                'placeholder': '0 час.',
+                'max': '8',
+                'min': '0',
+            }),
+            'user_tel_nomer': NumberInput(attrs={
+                'placeholder': 'Номер телефона',
+                'id': 'user_telephone',
+                'required': '',
+                'type': 'telephone',
+            }),
+            'schedule': TextInput(attrs={
+                'placeholder': 'Каждый второй четверг месяца',
+                'id': 'schedule',
+                'required': True,
             }),
         }
 
@@ -96,10 +147,24 @@ class OrderForm(ModelForm):
 class OrderEditForm(ModelForm):
     class Meta:
         model = Order
-        fields = ['full_road','start_time','cargo_type','loader_count','loader_time_count','prices','order_price','user_tel_nomer','status', 'driver']
+        fields = ['full_road', 'start_time', 'cargo_type', 'loader_count', 'loader_time_count', 'prices', 'order_price',
+                  'user_tel_nomer', 'status', 'driver']
 
         widgets = {
-            'start_time':  DateTimeInput(attrs={
+            'start_time': DateTimeInput(attrs={
+                'type': 'datetime-local',
+            }),
+        }
+
+
+class CompanyOrderEditForm(ModelForm):
+    class Meta:
+        model = CompanyOrder
+        fields = ['schedule', 'full_road', 'start_time', 'cargo_type', 'loader_count', 'loader_time_count', 'prices',
+                  'order_price', 'user_tel_nomer', 'status', 'driver']
+
+        widgets = {
+            'start_time': DateTimeInput(attrs={
                 'type': 'datetime-local',
             }),
         }
@@ -111,9 +176,9 @@ class AddressForm(ModelForm):
         fields = ['address']
 
         widgets = {
-            'address':  TextInput(attrs={
+            'address': TextInput(attrs={
                 'placeholder': 'улица, дом, населенный пункт отправки груза...',
-                'required':'',
+                'required': '',
                 'type': 'search',
             }),
         }
@@ -125,7 +190,7 @@ class ReviewForm(ModelForm):
         fields = ['text', 'stars', 'likes']
 
         widgets = {
-            'text':  Textarea(attrs={
+            'text': Textarea(attrs={
                 'placeholder': 'Здесь вы можете написать свой отзыв...',
             }),
         }
@@ -138,7 +203,7 @@ class ReportForm(ModelForm):
 
         widgets = {
             'report_text': Textarea(attrs={
-                'placeholder':'Здесь вы можете описать суть проблемы с которой вы столкнулись'
+                'placeholder': 'Здесь вы можете описать суть проблемы с которой вы столкнулись'
             })
         }
 
@@ -146,16 +211,16 @@ class ReportForm(ModelForm):
 class TelOrderForm(ModelForm):
     class Meta:
         model = TelOrder
-        fields = ('user_name','user_tel_number', 'sended_in', 'author')
+        fields = ('user_name', 'user_tel_number', 'sended_in', 'author')
 
         widgets = {
-            'user_tel_number':  NumberInput(attrs={
+            'user_tel_number': NumberInput(attrs={
                 'placeholder': 'Ваш номер телефона',
                 'id': 'user_telephone',
-                'required':'',
+                'required': '',
                 'type': 'tel',
             }),
-            'user_name':  NumberInput(attrs={
+            'user_name': NumberInput(attrs={
                 'placeholder': 'Как к вам обращаться?',
                 'id': 'user_name',
                 'type': 'text',
@@ -166,10 +231,18 @@ class TelOrderForm(ModelForm):
 class JobApplicationForm(ModelForm):
     class Meta:
         model = JobApplication
-        fields = ['user', 'job_type', 'passport_series','passport_number', 'registration_address','driver_licenses_series', 'driver_licenses_number','telephone_number']
+        fields = ['user', 'job_type', 'passport_series', 'passport_number', 'registration_address',
+                  'driver_licenses_series', 'driver_licenses_number', 'telephone_number']
 
 
 class AssistantLibraryForm(ModelForm):
     class Meta:
         model = AssistantLibrary
-        fields = ['user_answer','assistant_text','function_id']
+        fields = ['user_answer', 'assistant_text', 'function_id']
+
+
+class CompanyForm(ModelForm):
+    class Meta:
+        model = Company
+        fields = ['company_name', 'company_inn', 'business_type', 'legal_address', 'actual_address', 'contact_name',
+                  'contact_phone', 'contact_email', 'contact_user']

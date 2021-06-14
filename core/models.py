@@ -1,9 +1,8 @@
-from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import User
+from django.db import models
 from django.db.models.signals import post_save
-from django.dispatch import dispatcher, receiver
-import datetime
+from django.dispatch import receiver
 from django.utils import timezone
 from django.utils.text import slugify
 
@@ -250,3 +249,29 @@ class AssistantLibrary(models.Model):
     class Meta:
         verbose_name = 'Ответ ассистента'
         verbose_name_plural = 'Словарь ассистента'
+
+
+class Company(models.Model):
+    company_name = models.CharField('Имя компании', max_length=128)
+    company_inn = models.CharField('ИНН компании', max_length=12)
+    business_type = models.CharField('Вид деятельности', max_length=128)
+    legal_address = models.CharField('Юридический адрес', max_length=128)
+    actual_address = models.CharField('Фактический адрес', max_length=128)
+    contact_name = models.CharField('Имя контакта', max_length=128)
+    contact_phone = models.CharField('Телефон контакта', max_length=12)
+    contact_email = models.EmailField('Эл.почта контакта', max_length=64)
+    contact_user = models.OneToOneField(
+        User,
+        related_name='company',
+        on_delete=models.PROTECT
+    )
+
+
+class CompanyOrder(Order):
+    schedule = models.CharField('Расписание грузоперевозок', max_length=64)
+
+    company = models.ForeignKey(
+        Company,
+        on_delete=models.CASCADE,
+        related_name='company_regular_order',
+    )
