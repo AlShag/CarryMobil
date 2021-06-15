@@ -272,3 +272,11 @@ class CompanyOrder(Order):
         on_delete=models.CASCADE,
         related_name='company_regular_order',
     )
+
+
+class XeroConnectionData(models.Model):
+    access_token = models.TextField(blank=True, null=True)
+    refresh_token = models.CharField(max_length=200, blank=True, null=True)
+    client_id = models.CharField(max_length=200, blank=True, null=True)
+    client_secret = models.CharField(max_length=200, blank=True, null=True)
+    tenant_id = models.CharField(max_length=200, blank=True, null=True)
