@@ -28,7 +28,6 @@ a{
     height: auto;
     max-width: 1920px;
     background-color: white;
-    border-radius: 50px;
     padding-bottom: 2.5%;
     border: 2px solid white;
 }
@@ -162,7 +161,6 @@ a{
 #filter_cancel{
     color: white;
     font-size: 14pt;
-    margin-left: 90%;
 }
 #prices{
     display: none;
@@ -208,7 +206,7 @@ a{
     padding: 1% 2.5%;
     color: #0085ff;
     font-size: 14pt;
-    width: 22%;
+    width: 30%;
     margin-left: 1%;
     transition: 0.25s;
 }
@@ -247,4 +245,32 @@ a{
 }
 #road_calculate input{
     font-size: 16pt;
+}
+.order_table_function{
+    width: 100%;
+}
+.order_table_function section{
+    color: white;
+    width: 33%;
+    text-align: center;
+}
+.order_table_function a, .order_table_function input{
+    color: white;
+}
+
+@media screen and (max-width: 1100px){
+    #orders_table th, #orders_table td{
+        font-size: 12pt;
+    }
+    #orders_table td{
+        font-size: 10pt;
+    }
+}
+@media screen and (max-width: 768px){
+    #orders_table th:not(.row_on_mobile), #orders_table td:not(.row_on_mobile){
+        display: none;
+    }
+    .orders_filter_form section {
+        width: 100%;
+    }
 }

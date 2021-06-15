@@ -1,0 +1,73 @@
+{% extends "main/index.html" %}
+{% block title %}Список авто - {{ driver }}{% endblock %}
+{% load static %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'styles/profile.css' %}">
+{% endblock %}
+{% block content %}
+    {% if request.user.is_authenticated and not user.is_superuser or request.user.is_superuser %}
+        {% for car in cars %}    
+            <div class="profil_area">
+                <div class="container">
+                    <div class="profile_content">
+                        <div class="user_content">
+                            <div class="flex">
+                                <div class="user_image">
+                                    <div class="user_image_content">
+                                        <img src="{% static '/images/driver/stock-truck.svg' %}">
+                                    </div>
+                                </div>
+                                <div class="user_personal_info">
+                                    <div class="user_info">
+                                            <section class="user_dop_info">
+                                                <label for="">Владелец: <a href="{% url 'profile' pk=car.owner.user.id %}">{{ car.owner }}</a></label><span></span>
+                                            </section>
+                                            <section class="user_dop_info">
+                                                <label for="">Марка: {{ car.name }}</label><span></span>
+                                            </section>
+                                        <section class="user_dop_info">
+                                            <label for="">Модель: {{ car.car_model }}</label><span></span>
+                                        </section>
+                                        <section class="user_dop_info">
+                                            <label for="">Тип: {{ car.type }}</label><span></span>
+                                        </section>
+                                        <section class="user_dop_info">
+                                            <label for="">Регистрационный номер: {{ car.registration_number }}</label><span></span><br>
+                                        </section>
+                                        <section class="user_dop_info">
+                                            <label id="profile_dop_info">Доп. информация ...</label>
+                                        </section>
+                                        <div class="profile_dop closed" id="profile_dop">
+                                            <section class="user_dop_info">
+                                                <label for="">Длина: {{ car.length }}</label><span></span><br>
+                                            </section>
+                                            <section class="user_dop_info">
+                                                <label for="">Высота: {{ car.height }}</label><span></span><br>
+                                            </section>
+                                            <section class="user_dop_info">
+                                                <label for="">Ширина: {{ car.width }}</label><span></span><br>
+                                            </section>
+                                            <section class="user_dop_info">
+                                                <label for="">Объём: {{ car.volume }}</label><span></span><br>
+                                            </section>
+                                            <section class="user_dop_info">
+                                                <label for="">Тоннаж: {{ car.tonnage }}</label><span></span><br>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        {% if not user.is_authenticated %}
+        <p>Вы не авторизированы</p>
+        {% else %}
+        <p>У вас недостаточно прав</p>
+        {% endif %}
+    {% endif %}
+{% endblock %}

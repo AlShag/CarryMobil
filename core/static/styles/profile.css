@@ -1,5 +1,5 @@
 .profil_area{
-    height: 2000px;
+    padding-bottom: 5%;
     background-color: #e5e5e5;
 }
 .profile_content{
@@ -126,9 +126,7 @@
     padding-left: 5%;
 }
 @media screen and (max-width: 1700px){
-    .profil_area{
-        height: 1650px;
-    }
+    
 }
 @media screen and (max-width: 1400px){
     .user_image input,#password_change_button{

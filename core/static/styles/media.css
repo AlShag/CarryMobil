@@ -19,9 +19,6 @@
     #to_order{
         width: auto;
     }
-    .login_register{
-        top: 1%;
-    }
     .comment h1:after{
         margin-top: 5%;
     }
@@ -55,6 +52,9 @@
     }
     .footer_dop_info section{
         padding-right: 1%;
+    }
+    #cm_label{
+        left: 80%;
     }
 }
 @media screen and (max-width: 1100px){

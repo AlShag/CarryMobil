@@ -30,9 +30,12 @@
                                     Ожидается
                                 {% endif %}
                                 {% if order.status == 1 %}
-                                    Выполняется
+                                    Обрабатывается
                                 {% endif %}
                                 {% if order.status == 2 %}
+                                    Выполняется
+                                {% endif %}
+                                {% if order.status == 3 %}
                                     Завершено
                                 {% endif %}
                                 {% if order.status == -1 %}
@@ -114,8 +117,14 @@
                     
                     {% if is_dispatcher or user.is_superuser %}
                         <input type="button" value="Редактировать" onclick="window.location='{% url 'order_edit' pk=order.pk %}'">
-                        <input type="button" value="Выполнить" onclick="window.location='{% url 'order_enable' pk=order.pk %}'">
-                        <input type="button" value="Завершить" onclick="window.location='{% url 'order_complete' pk=order.pk %}'">
+                        {% if order.status == 0 %}
+                            <input type="button" value="Выбрать диспетчера" onclick="window.location='{% url 'order_dispatchers' pk=order.pk %}'">    
+                        {% elif order.status == 1 %}
+                            <input type="button" value="Выполнить" onclick="window.location='{% url 'order_enable' pk=order.pk %}'">
+                        {% elif order.status == 2 %}
+                            <input type="button" value="Отменить" onclick="window.location='{% url 'order_disable' pk=order.pk %}'">
+                            <input type="button" value="Завершить" onclick="window.location='{% url 'order_complete' pk=order.pk %}'">
+                        {% endif %}
                     {% endif %}
                         
                 </div>

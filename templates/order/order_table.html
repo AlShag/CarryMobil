@@ -57,18 +57,25 @@
                                         </div>
                                     </section>
                                 </div>
-                                <input type="button" value="Отменить" name="cancel" id="filter_cancel">
+                                <div class="order_table_function">
+                                    <div class="flex">
+                                        <section>
+                                            <a href="{% url 'orders_export' %}">Выгрузить отчёты</a>
+                                        </section>
+                                        <section>
+                                            <a href="">Принять заказ</a>
+                                        </section>
+                                        <section>
+                                            <input type="button" value="Отменить" name="cancel" id="filter_cancel">
+                                        </section>
+                                    </div>
+                                </div>
                             </div>
-                            <a href="{% url 'orders_export' %}">
-                                <button type="button">
-                                    Выгрузить отчёты
-                                </button>
-                            </a>
                         </div>
                         <div>
                             <table id="orders_table">
                                 <tr id="orders_table_title">
-                                    <th class="">
+                                    <th class="row_on_mobile">
                                         Номер заявки
                                     </th>
                                     <th class="">
@@ -80,10 +87,10 @@
                                     <th class="">
                                         Грузчики<br>( чел/час )
                                     </th>
-                                    <th class="">
+                                    <th class="row_on_mobile">
                                         Вид груза
                                     </th>
-                                    <th class="">
+                                    <th class="row_on_mobile">
                                         Сумма
                                     </th>
                                     <th class="">
@@ -92,14 +99,10 @@
                                     <th class="">
                                         Автор
                                     </th>
-                                    <th class="" colspan="2" style="border-right: none;">
-                                        Действие
-                                    </th>
                                 </tr>
-
                                 {% for order in orders %}
                                         <tr data-href="{% url 'order_detail' pk=order.pk %}" class="orders_tr">
-                                            <td class="">
+                                            <td class="row_on_mobile">
                                                 <a href="{% url 'order_detail' pk=order.pk %}">{{ order.id }}</a>
                                             </td>
                                             <td class="">
@@ -118,10 +121,10 @@
                                                     <a href="{% url 'order_detail' pk=order.pk %}">Не нужны</a>
                                                 {% endif %}
                                             </td>
-                                            <td class="">
+                                            <td class="row_on_mobile">
                                                 <a href="{% url 'order_detail' pk=order.pk %}">{{ order.cargo_type }}</a>
                                             </td>
-                                            <td class="">
+                                            <td class="row_on_mobile">
                                                 <a href="{% url 'order_detail' pk=order.pk %}">{{ order.order_price }}</a>
                                             </td>
                                             <td class="order_status">
@@ -138,10 +141,9 @@
                                                 {% endif %}
                                             </td>
                                             <td class="">
-                                                <a href="{% url 'order_delete' pk=order.pk %}"><button type="button">Удалить</button></a>
-                                            </td>
-                                            <td class="order_change">
-                                                <a href="{% url 'order_edit' pk=order.pk %}"><button type="button">Редактировать</button></a>
+                                                {% if not order.author == None %}
+                                                    {{ order.author }}
+                                                {% endif %}
                                             </td>
                                         </tr>
                                 {% endfor %}
@@ -155,3 +157,4 @@
         </div>
     {% endif %}
 {% endblock %}
+

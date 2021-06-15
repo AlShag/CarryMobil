@@ -18,17 +18,14 @@
                        <tr>
                            <th>Водитель</th>
                            <th>Рейтинг</th>
-                           <th>Текущие заказы</th>
-                           <th>Номер телефона</th>
                            <th></th>
                        </tr>
-                       {% for driver in drivers %}
+                       {% for dispatcher in dispatchers %}
                         <tr>
-                            <td><a href="{% url 'profile' pk=driver.user.id %}">{{ driver.user }}</a></td>
-                            <td>{{ driver.driver_rating }}</td>
-                            <td>{{ driver.current_orders }}</td>
-                            <td><a href="tel:{{ driver.telephone_number }}">{{ driver.telephone_number }}</a></td>
-                            <td><a href="{% url 'order_driver_select' pk=order.pk driver_pk=driver.id %}">Выбрать</a></td>
+                            <td><a href="{% url 'profile' pk=dispatcher.user.id %}">{{ dispatcher.user }}</a></td>
+                            <td>{{ dispatcher.dispatcher_rating }}</td>
+                            <!-- <td>{{ dispatcher.current_orders }}</td> -->
+                            <td><a href="{% url 'order_dispatcher_select' pk=order.pk dispatcher_pk=dispatcher.id %}">Выбрать</a></td>
                         </tr>
                        {% endfor %}
                    </table>

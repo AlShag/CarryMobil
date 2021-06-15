@@ -1,3 +1,4 @@
+from django.dispatch import dispatcher
 from django.utils import timezone
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.http import HttpResponseRedirect, HttpResponse
@@ -51,10 +52,6 @@ class SignUp(generic.CreateView):
 
 def profile(request, pk):
     user = User.objects.get(pk=pk)
-    if user.is_staff:
-        group = Group.objects.get( pk = 1 )
-    else:
-        group = ''
     users_list = User.objects.all()
     driver_lvl=''
     cars=[]
@@ -238,15 +235,26 @@ def myorders(request):
 
 def order_enable(request, pk):
     order = get_object_or_404(Order, pk=pk)
+    if not order.driver == None:
+        order.status = 2
+        order.save()
+    else:
+        messages.info(request, 'К данному заказу не присвоен водитель, добавьте водителя к заказу для продолжения.')
+
+    return order_detail(request, pk)
+
+
+def order_disable(request, pk):
+    order = get_object_or_404(Order, pk=pk)
     order.status = 1
     order.save()
-    return render(request, 'order/order_detail.html', {'order': order})
+    return order_detail(request, pk)
 
 
 def order_complete(request, pk):
     order = get_object_or_404(Order, pk=pk)
     if not order.driver == None:
-        order.status = 2
+        order.status = 3
         order.save()
     else:
         messages.info(request, 'К данному заказу не присвоен водитель, добавьте водителя к заказу для продолжения.')
@@ -255,7 +263,8 @@ def order_complete(request, pk):
 
 def order_drivers(request, pk):
     order = get_object_or_404(Order, pk=pk)
-    drivers=DriverProfile.objects.all()
+    drivers=DriverProfile.objects.all().order_by('-driver_rating')
+    users=Profile.objects.all()
     return render(request, 'order/order_drivers.html', {'order': order, 'drivers': drivers})
 
 
@@ -265,19 +274,34 @@ def order_driver_select(request, pk, driver_pk):
     order.save()
     return order_detail(request, pk)
 
+
+def order_dispatchers(request, pk):
+    order = get_object_or_404(Order, pk=pk)
+    dispatchers=DispatcherProfile.objects.all().order_by('-dispatcher_rating')
+    return render(request, 'order/order_dispatchers.html', {'order': order, 'dispatchers': dispatchers})
+
+
+def order_dispatcher_select(request, pk, dispatcher_pk):
+    order = get_object_or_404(Order, pk=pk)
+    order.dispatcher = DispatcherProfile.objects.get(pk=dispatcher_pk)
+    order.status=1
+    order.save()
+    return order_detail(request, pk)
+
+
 def order_table(request):
     user = request.user
     all_types = CargoType.objects.all()
 
     if user.is_superuser:
-        orders = Order.objects.all()
+        orders = Order.objects.all().order_by('start_time')
         drivers = DriverProfile.objects.all()
         return render(request, 'order/order_table.html', {
             'orders': orders, 'all_types': all_types, 'drivers': drivers})
 
     elif DispatcherProfile.objects.filter(user=user):
         drivers = DriverProfile.objects.all()
-        orders = Order.objects.all()
+        orders = Order.objects.all().order_by('-sended_in')
         return render(request, 'order/order_table.html',
                       {'orders': orders, 'all_types': all_types, 'drivers': drivers})
 
@@ -295,17 +319,23 @@ def order_table(request):
             'orders': orders, 'all_types': all_types, 'drivers': drivers})
 
 
+def driver_cars(request, pk):
+    driver = DriverProfile.objects.get(pk=pk)
+    cars = Car.objects.filter(owner=driver)
+    return render(request, 'driver/driver_cars.html', {'driver': driver, 'cars': cars})
+
+
 def order_detail(request, pk):
     permission = False
     order_object = get_object_or_404(Order, pk=pk)
     if order_object.driver:
         if order_object.driver.user == request.user:
             permission = True
-    elif order_object.author == request.user:
+    if order_object.author == request.user:
         permission = True
-    elif request.user.is_superuser:
+    if request.user.is_superuser:
         permission = True
-    elif DispatcherProfile.objects.filter(user=request.user):
+    if DispatcherProfile.objects.filter(user=request.user):
         permission = True
     return render(request, 'order/order_detail.html', {'order': order_object, 'permission': permission})
 

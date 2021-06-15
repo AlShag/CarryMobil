@@ -27,15 +27,11 @@ class DriverProfile(models.Model):
     driver_licenses_series = models.CharField('Серия водительского удостоверения', max_length=4)
     driver_licenses_number = models.CharField('Номер водительского удостоверения', max_length=6)
     registration_address = models.CharField('Адрес прописки', max_length=250)
-    complited_orders = models.CharField('Завершенные заказы', max_length=40, blank=True)
-    canceled_orders = models.CharField('Отмененные заказы', max_length=40, blank=True)
-    driver_rating = models.CharField('Рейтинг водителя', max_length=40, blank=True, default=0)
-    car = models.ForeignKey(
-        "core.Car",
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-    )
+    current_orders = models.IntegerField('Текущие заказы', blank=True, default=0)
+    complited_orders = models.IntegerField('Завершенные заказы', blank=True, default=0)
+    canceled_orders = models.IntegerField('Отмененные заказы', blank=True, default=0)
+    driver_rating = models.IntegerField('Рейтинг водителя', blank=True, default=0)
+    telephone_number = models.CharField('Номер телефона', max_length=20, blank=True, default=0)
 
     def __str__(self):
         return self.user.username 
@@ -45,7 +41,7 @@ class DispatcherProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     passport_series = models.IntegerField('Серия паспорта', max_length=4)
     passport_number = models.IntegerField('Номер паспорта', max_length=6)
-    registration_address = models.IntegerField('Адрес прописки', max_length=250)
+    registration_address = models.CharField('Адрес прописки', max_length=250)
     complited_orders = models.IntegerField('Завершенные заказы', max_length=40, blank=True)
     canceled_orders = models.IntegerField('Отмененные заказы', max_length=40, blank=True)
     dispatcher_rating = models.IntegerField('Рейтинг Диспетчера', max_length=40, blank=True, default=0)
@@ -71,12 +67,13 @@ class Car(models.Model):
     name = models.CharField('Марка', max_length=50)
     car_model = models.CharField('Модель', max_length=50, blank=True, null=True)
     type = models.CharField('Тип', max_length=50)
-    registration_number = models.CharField('Регистрационные номера', max_length=9)
+    registration_number = models.CharField('Регистрационный номер', max_length=9)
     length = models.CharField('Длина', max_length=4)
-    height = models.CharField('Высота', max_length=4)
-    width = models.CharField('Ширина', max_length=4)
-    volume = models.CharField('Объём', max_length=4)
+    height = models.CharField('Высота', max_length=4, blank=True, null=True)
+    width = models.CharField('Ширина', max_length=4, blank=True, null=True)
+    volume = models.CharField('Объём', max_length=4, blank=True, null=True)
     tonnage = models.CharField('Тоннаж', max_length=4)
+    owner = models.ForeignKey(DriverProfile, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.registration_number + ' - ' + self.name + ' ' + self.car_model
