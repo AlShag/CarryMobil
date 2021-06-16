@@ -28,6 +28,7 @@ urlpatterns = [
     path('order_table', views.order_table, name='order_table'),
 
     path('order/<int:pk>/detail', views.order_detail, name='order_detail'),
+    path('order_table/order_search', views.order_for_dispatcher, name='order_for_dispatcher'),
     path('order/<int:pk>/dispatcher_select', views.order_dispatchers, name='order_dispatchers'),
     path('order/<int:pk>/order_dispatcher_select/<str:dispatcher_pk>', views.order_dispatcher_select, name='order_dispatcher_select'),
     path('order/<int:pk>/driver_select', views.order_drivers, name='order_drivers'),

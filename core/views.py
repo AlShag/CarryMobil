@@ -260,7 +260,11 @@ def order_drivers(request, pk):
     order = get_object_or_404(Order, pk=pk)
     drivers=DriverProfile.objects.all().order_by('-driver_rating')
     users=Profile.objects.all()
-    return render(request, 'order/order_drivers.html', {'order': order, 'drivers': drivers})
+    if order.dispatcher.user == request.user:
+        is_dispatcher=True
+    else:
+        is_dispatcher=False
+    return render(request, 'order/order_drivers.html', {'order': order, 'drivers': drivers, 'is_dispatcher': is_dispatcher})
 
 
 def order_driver_select(request, pk, driver_pk):
@@ -284,6 +288,37 @@ def order_dispatcher_select(request, pk, dispatcher_pk):
     return order_detail(request, pk)
 
 
+def order_for_dispatcher(request):
+    dispatchers=DispatcherProfile.objects.all()
+    dispatcher = {}
+    for dispatch in dispatchers:
+        if dispatch.user == request.user:
+            dispatcher=dispatch
+    if dispatcher:
+        dispatcher_orders=Order.objects.filter(dispatcher=dispatcher)
+        for order in dispatcher_orders:
+            if order.status<2:
+                messages.info(request, 'У вас есть не обработанные заказы')
+                pk=order.id
+                return order_detail(request, pk)
+        if(Order.objects.filter(dispatcher=None).order_by('-sended_in') and Order.objects.filter(status=0).order_by('-sended_in')[0]):
+            order=Order.objects.filter(dispatcher=None).order_by('-sended_in')
+            order=Order.objects.filter(status=0).order_by('-sended_in')[0]
+            order.dispatcher=dispatcher
+            order.status=1
+            order.save()
+            pk=order.id
+            return order_detail(request, pk)
+        else:
+            messages.info(request, 'Нет текущих заказов для вас')
+            return order_table(request)
+
+    else:
+        messages.info(request, 'Вы не диспетчер')
+        return order_table(request)
+
+
+
 def order_table(request):
     user = request.user
     all_types = CargoType.objects.all()
@@ -296,7 +331,8 @@ def order_table(request):
 
     elif DispatcherProfile.objects.filter(user=user):
         drivers = DriverProfile.objects.all()
-        orders = Order.objects.all().order_by('-sended_in')
+        dispatcher=DispatcherProfile.objects.get(user=request.user)
+        orders = Order.objects.filter(dispatcher=dispatcher).order_by('-sended_in')
         return render(request, 'order/order_table.html',
                       {'orders': orders, 'all_types': all_types, 'drivers': drivers})
 
@@ -333,7 +369,8 @@ def order_detail(request, pk):
         permission = True
     if DispatcherProfile.objects.filter(user=request.user):
         permission = True
-    return render(request, 'order/order_detail.html', {'order': order_object, 'permission': permission})
+        is_dispatcher=True
+    return render(request, 'order/order_detail.html', {'order': order_object, 'permission': permission, 'is_dispatcher': is_dispatcher})
 
 
 def set_dispatcher():
@@ -526,6 +563,7 @@ def company_order_create(request):
         if form.is_valid():
             form.save()
             return redirect('ordered')
+
 
 
 def company_order_edit(request, pk):

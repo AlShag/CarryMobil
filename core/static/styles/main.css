@@ -1063,3 +1063,6 @@ input[type="radio"][name="advan_slider"]{display: none;}
     background-color: #0085ff;
     color: white;
 }
+#language_change a{
+    color: white;
+}

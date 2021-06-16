@@ -42,8 +42,12 @@
                                         <div class="filter_value">
                                             <ul>
                                                 <li>
-                                                    <input type="checkbox" name="status" id="complited_orders" value="Выполнено">
-                                                    <label for="complited_orders">Выполнено</label>
+                                                    <input type="checkbox" name="status" id="complited_orders" value="Завершено">
+                                                    <label for="complited_orders">Завершено</label>
+                                                </li>
+                                                <li>
+                                                    <input type="checkbox" name="status" id="complit_orders" value="Выполняется">
+                                                    <label for="complit_orders">Выполняется</label>
                                                 </li>
                                                 <li>
                                                     <input type="checkbox" name="status" id="expected_orders" value="Ожидается">
@@ -63,7 +67,7 @@
                                             <a href="{% url 'orders_export' %}">Выгрузить отчёты</a>
                                         </section>
                                         <section>
-                                            <a href="">Принять заказ</a>
+                                            <a href="{% url 'order_for_dispatcher' %}">Принять заказ</a>
                                         </section>
                                         <section>
                                             <input type="button" value="Отменить" name="cancel" id="filter_cancel">
@@ -131,12 +135,14 @@
                                                 {% if not order.status == None %}
                                                     {% if order.status == 0 %}
                                                         <a href="{% url 'order_detail' pk=order.pk %}">Ожидается</a>
-                                                    {% endif %}
-                                                    {% if order.status == 1 %}
+                                                    {% elif order.status == 1 %}
+                                                        <a href="{% url 'order_detail' pk=order.pk %}">В обработке</a>
+                                                    {% elif order.status == 2 %}
+                                                        <a href="{% url 'order_detail' pk=order.pk %}">Выполняется</a>
+                                                    {% elif order.status == 3 %}
                                                         <a href="{% url 'order_detail' pk=order.pk %}">Выполнено</a>
-                                                    {% endif %}
-                                                    {% if order.status == -1 %}
-                                                        <a href="{% url 'order_det  ail' pk=order.pk %}">Отменено</a>
+                                                    {% elif order.status == -1 %}
+                                                        <a href="{% url 'order_detail' pk=order.pk %}">Отменено</a>
                                                     {% endif %}
                                                 {% endif %}
                                             </td>
@@ -150,6 +156,18 @@
                             </table>
                         </div>
                     </div>
+                    {% if messages %}
+                        <div class="warning">
+                            <div class="warning_text">
+                                {% for message in messages %}
+                                    <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                                {% endfor %}
+                            </div>
+                            <div class="warning_action">
+                                <input type="button" class="standart_button warning_apply" value="Ок">
+                            </div>
+                        </div>
+                    {% endif %}
                     {% else %}
                     <span class="text-red font-bold italic text-xl">У вас нет доступа к этой странице</span>
                 </div>
