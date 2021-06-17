@@ -14,8 +14,13 @@
                         <div class="flex">
                             <div class="user_image">
                                 <div class="user_image_content">
-                                    <img src="{% static '/images/profile/stock.svg' %}">
-                                    <img src="{{ user.profile.avatar.url }}">
+                                    <img src="https://eu.ui-avatars.com/api/?name=
+                                        {% if request.user.first_name and request.user.last_name %}
+                                        {{ request.user.first_name}}+{{ request.user.last_name }}
+                                        {% else %}
+                                        {{ request.user.username }}
+                                        {% endif %}
+                                        &background=41A4FF&color=F0FFF0" style="border-radius: 100%" alt="">                                    <img src="{{ user.profile.avatar.url }}">
                                     {{ user.profile.avatar }}
                                     {% if user.id == request.user.id %}
                                     <a href="{% url 'update_profile' %}"><input type="button" value="Редактировать"></a>
@@ -93,15 +98,6 @@
                         <div class="flex_al">
                             <section class="transiton_param">
                                 <a href="{% url 'order_table' %}" class="transiton_param-input">Мои заказы</a>
-                            </section>
-                            <section class="transiton_param">
-                                <input type="button" class="transiton_param-input" value="Партнёры">
-                            </section>
-                            <section class="transiton_param">
-                                <input type="button" class="transiton_param-input" value="Сообщения">
-                            </section>
-                            <section class="transiton_param">
-                                <input type="button" class="transiton_param-input" value="Статистика">
                             </section>
                         </div>
                     </div>

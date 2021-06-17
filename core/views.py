@@ -110,7 +110,6 @@ def update_profile(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request, 'Ваш профиль был успешно обновлен!')
             return render(request, 'user/profile.html')
         else:
             messages.error(request, 'Пожалуйста, исправьте ошибки.')
@@ -260,11 +259,7 @@ def order_drivers(request, pk):
     order = get_object_or_404(Order, pk=pk)
     drivers=DriverProfile.objects.all().order_by('-driver_rating')
     users=Profile.objects.all()
-    if order.dispatcher.user == request.user:
-        is_dispatcher=True
-    else:
-        is_dispatcher=False
-    return render(request, 'order/order_drivers.html', {'order': order, 'drivers': drivers, 'is_dispatcher': is_dispatcher})
+    return render(request, 'order/order_drivers.html', {'order': order, 'drivers': drivers})
 
 
 def order_driver_select(request, pk, driver_pk):
@@ -369,7 +364,6 @@ def order_detail(request, pk):
         permission = True
     if DispatcherProfile.objects.filter(user=request.user):
         permission = True
-        is_dispatcher=True
     return render(request, 'order/order_detail.html', {'order': order_object, 'permission': permission, 'is_dispatcher': is_dispatcher})
 
 
@@ -475,7 +469,7 @@ def orders_export(request):
         # Define the data for each cell in the row 
         row = [
             order.id,
-            order.author.username,
+            order.author.username if order.author else None,
             order.user_tel_nomer,
             order.full_road,
             order.loader_count,

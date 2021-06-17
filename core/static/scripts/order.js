@@ -439,10 +439,11 @@
     let full_road_info=$('#full_road_info').text();
     if($('#id_full_road').attr('type')=='text') full_road_info=$('#id_full_road').val();
     let order_status = $('#order_status').text();
-    if(order_status==0) $('#order_status').text('Ожидается');
-    if(order_status==1) $('#order_status').text('В процессе');
-    if(order_status==2) $('#order_status').text('Выполнено');
-    if(order_status==-1) $('#order_status').text('Откланено');
+    if(order_status==0) $('#order_status').text('Не утвержден');
+    if(order_status==1) $('#order_status').text('Утвержден');
+    if(order_status==2) $('#order_status').text('Выполнен');
+    if(order_status==-1) $('#order_status').text('Отменен пользователем');
+    if(order_status==-2) $('#order_status').text('Отклонен');
     for (let i = 0; i < full_road_info.length; i++){ // Количество дорог
       if(full_road_info[i] === '/') roads_counter++;
     }

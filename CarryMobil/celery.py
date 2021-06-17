@@ -5,7 +5,7 @@ from celery.schedules import crontab
 
 
 # Set the default Django settings module for the 'celery' program.
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'tools.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'CarryMobil.settings')
 
 app = Celery('CarryMobil')
 
