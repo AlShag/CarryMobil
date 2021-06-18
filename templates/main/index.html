@@ -65,7 +65,13 @@
                 {% if request.user.is_authenticated %}
                     <div class="user_head_inf">
                         <div class="flex">
-                            <img src="{% static '/images/user.svg' %}" width="20px" alt="">
+                            <img src="https://eu.ui-avatars.com/api/?name=
+                                {% if request.user.first_name and request.user.last_name %}
+                                {{ request.user.first_name }}+{{ request.user.last_name }}
+                                {% else %}
+                                {{ request.user.username }}
+                                {% endif %}
+                                &background=41A4FF&color=F0FFF0" style="border-radius: 100%; padding-top: 2px; margin-right: 5px" height="20px" alt="">
                             <select name="" id="" onchange="top.location=this.value">
                                 <option value="" disabled selected hidden>{{ request.user.username }}</option>
                                 <option value="{% url 'profile' pk=request.user.id %}">Профиль</option>

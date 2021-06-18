@@ -112,7 +112,6 @@ def update_profile(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            messages.success(request, 'Ваш профиль был успешно обновлен!')
             return render(request, 'user/profile.html')
         else:
             messages.error(request, 'Пожалуйста, исправьте ошибки.')
@@ -509,7 +508,7 @@ def orders_export(request):
         # Define the data for each cell in the row 
         row = [
             order.id,
-            order.author.username,
+            order.author.username if order.author else None,
             order.user_tel_nomer,
             order.full_road,
             order.loader_count,

@@ -63,6 +63,7 @@ def get_access_token():
     get_access_token_json = get_access_token.json()
     xero_connection_data = XeroConnectionData.objects.first()
     xero_connection_data.access_token = get_access_token_json.get("access_token")
+    print(get_access_token_json)
     xero_connection_data.refresh_token = get_access_token_json.get("refresh_token")
     xero_connection_data.save()
     return get_access_token_json.get("access_token")
