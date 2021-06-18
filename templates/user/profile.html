@@ -16,7 +16,6 @@
                                 <div class="user_image_content">
                                     <img src="{% static '/images/profile/stock.svg' %}">
                                     <img src="{{ user.profile.avatar.url }}">
-                                    {{ user.profile.avatar }}
                                     {% if user.id == request.user.id %}
                                     <a href="{% url 'update_profile' %}"><input type="button" value="Редактировать"></a>
                                     {% endif %}
@@ -107,9 +106,6 @@
                     </div>
                     <div class="post_add_block">
                         <div>
-                            {% for us in users_list %}
-                            <a href="{% url 'profile' pk=us.id %}">{{ us.username }}</a>
-                            {% endfor %}
                             <table id="user_orders_table">
                                 <tr id="user_orders_table_title">
                                     <th class="order_start_time">
@@ -178,6 +174,18 @@
                 </div>
             </div>
         </div>
+        {% if messages %}
+                        <div class="warning">
+                            <div class="warning_text">
+                                {% for message in messages %}
+                                    <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                                {% endfor %}
+                            </div>
+                            <div class="warning_action">
+                                <input type="button" class="standart_button warning_apply" value="Ок">
+                            </div>
+                        </div>
+        {% endif %}
     {% else %}
         {% if not user.is_authenticated %}
         <p>Вы не авторизированы</p>

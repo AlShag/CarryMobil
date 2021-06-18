@@ -67,7 +67,9 @@
                                             <a href="{% url 'orders_export' %}">Выгрузить отчёты</a>
                                         </section>
                                         <section>
-                                            <a href="{% url 'order_for_dispatcher' %}">Принять заказ</a>
+                                            {% if user.is_staff %}
+                                            <a href="{% url 'order_for_dispatcher' %}">Найти заказ</a>
+                                            {% endif %}
                                         </section>
                                         <section>
                                             <input type="button" value="Отменить" name="cancel" id="filter_cancel">

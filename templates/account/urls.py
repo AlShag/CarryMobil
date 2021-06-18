@@ -7,7 +7,6 @@ from .views import SignUp
 
 urlpatterns = [
     path('account/signup/', SignUp.as_view(), name='SignUp'),
-    url(r'^logout/$', {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
     path('base.html', views.site_base, name='site_base'),
     path('/password/reset/', auth_views.PasswordResetView.as_view(), name='password_reset'),
     

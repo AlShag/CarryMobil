@@ -16,6 +16,8 @@ from .models import *
 from .models import Snippet
 import account.forms
 import account.views
+import random
+import string
 
 
 def index(request):
@@ -131,11 +133,13 @@ def order(request):
         user = request.user
         if form.is_valid():
             order = form.save(commit=False)
+            order.sended_in = datetime.now()
             if user.is_authenticated:
                 order.author = user
-            
+            size=8
+            order.identificator=(''.join(random.choice(string.ascii_letters + string.digits) for _ in range(size)))
             order.save()
-            return redirect('ordered')
+            return ordered(request, pk=order.id)
         else:
             error = 'Форма была неверной'
 
@@ -156,6 +160,10 @@ def order(request):
     }
     return render(request, 'order/order.html', data)
 
+
+def order_view(request, identificator):
+    order_object = get_object_or_404(Order, identificator=identificator)
+    return render(request, 'order/order_view.html', {'order': order_object})
 
 def order_create(request):
     error = ''
@@ -200,6 +208,10 @@ def order_edit(request, pk):
 def order_delete(request, pk):
     try:
         order = get_object_or_404(Order, pk=pk)
+        if order.driver and order.status<3:
+            driver = DriverProfile.objects.get(driver=order.driver)
+            driver.current_orders-=1
+            driver.save()
         order.delete()
         redirect_url = reverse(order_table)
         return redirect(redirect_url)
@@ -208,8 +220,9 @@ def order_delete(request, pk):
         return render(request, 'order/order_table.html')
 
 
-def ordered(request):
-    return render(request, 'order/ordered.html')
+def ordered(request, pk):
+    order_object = get_object_or_404(Order, pk=pk)
+    return render(request, 'order/ordered.html', {'order': order_object})
 
 
 def report(request):
@@ -248,9 +261,12 @@ def order_disable(request, pk):
 
 def order_complete(request, pk):
     order = get_object_or_404(Order, pk=pk)
-    if not order.driver == None:
+    if order.driver:
         order.status = 3
+        driver = DriverProfile.objects.get(driver=order.driver)
+        driver.current_orders-=1
         order.save()
+        driver.save()
     else:
         messages.info(request, 'К данному заказу не присвоен водитель, добавьте водителя к заказу для продолжения.')
     return redirect(order_detail, pk=order.pk)
@@ -258,10 +274,22 @@ def order_complete(request, pk):
 
 def order_drivers(request, pk):
     order = get_object_or_404(Order, pk=pk)
+    orders = Order.objects.all()
     drivers=DriverProfile.objects.all().order_by('-driver_rating')
     users=Profile.objects.all()
-    if order.dispatcher.user == request.user:
-        is_dispatcher=True
+    for driver in drivers:
+        driver_orders=0
+        for order in orders:
+            if order.driver == driver:
+                driver_orders+=1
+        if not driver_orders == driver.current_orders:
+            driver.current_orders=driver_orders
+            driver.save()
+    if DispatcherProfile.objects.filter(user=request.user):
+        if order.dispatcher.user == request.user:
+            is_dispatcher=True
+        else:
+            is_dispatcher=False  
     else:
         is_dispatcher=False
     return render(request, 'order/order_drivers.html', {'order': order, 'drivers': drivers, 'is_dispatcher': is_dispatcher})
@@ -269,7 +297,10 @@ def order_drivers(request, pk):
 
 def order_driver_select(request, pk, driver_pk):
     order = get_object_or_404(Order, pk=pk)
-    order.driver = DriverProfile.objects.get(pk=driver_pk)
+    driver=DriverProfile.objects.get(pk=driver_pk)
+    order.driver = driver
+    driver.current_orders+=1
+    driver.save()
     order.save()
     return order_detail(request, pk)
 
@@ -363,13 +394,16 @@ def order_detail(request, pk):
     if order_object.driver:
         if order_object.driver.user == request.user:
             permission = True
-    if order_object.author == request.user:
-        permission = True
+    if order_object.author:
+        if order_object.author == request.user:
+            permission = True
     if request.user.is_superuser:
         permission = True
     if DispatcherProfile.objects.filter(user=request.user):
         permission = True
         is_dispatcher=True
+    else:
+        is_dispatcher=False
     return render(request, 'order/order_detail.html', {'order': order_object, 'permission': permission, 'is_dispatcher': is_dispatcher})
 
 

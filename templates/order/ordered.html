@@ -28,6 +28,13 @@
                             <div class="list_5_text">
                                 <h2>На ваш номер в скором времени поступит звонок
                                     для уточнения заказа</h2>
+                                {% if not pk == 0 %}
+                                    {% if request.user.is_authenticated and order.author == request.user  %}
+                                        <h2><a href="{% url 'order_detail' pk=order.pk %}">Детали заказа</a></h2>
+                                    {% elif order.identificator %}
+                                        <h2><a href="{% url 'order_view' identificator=order.identificator %}">Детали заказа</a></h2>
+                                    {% endif %}
+                                {% endif %}
                             </div>
                         </section>
                     </div>

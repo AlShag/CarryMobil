@@ -10,11 +10,9 @@
     <script src="{% static 'scripts/order.js' %}"></script>
 {% endblock %}
 {% block content %}
-    {% if permission == True %}
     <div class="orders_area">
         <div class="orders_form">
                 <div class="order_info">
-                    <a href="{% url 'order_table' %}" id="to_orders_list">&#8617;</a>
                     <h1>Номер заказа № {{ order.id }}</h1>
                     <div class="flex_al">
                         <h2>Детали заказа</h2>
@@ -57,7 +55,6 @@
                                     Не указана
                                 {% endif %}
                             </td>
-                        {% endif %}
                             <td>{{ order.start_time }}</td>
                         </tr>
                         <tr>
@@ -128,35 +125,12 @@
                     </table>
                 </div>
                 <div class="order_changing">
-                    {% if order.status < 2 %}
+                    {% if order.status < 1 %}
                         <input type="button" value="Удалить" onclick="window.location='{% url 'order_delete' pk=order.pk %}'">
                     {% endif %}
-                    {% if is_dispatcher or user.is_superuser %}
-                        <input type="button" value="Редактировать" onclick="window.location='{% url 'order_edit' pk=order.pk %}'">
-                        {% if order.status == 0 %}
-                            <input type="button" value="Выбрать диспетчера" onclick="window.location='{% url 'order_dispatchers' pk=order.pk %}'">    
-                        {% elif order.status == 1 %}
-                            <input type="button" value="Выполнить" onclick="window.location='{% url 'order_enable' pk=order.pk %}'">
-                        {% elif order.status == 2 %}
-                            <input type="button" value="Отменить" onclick="window.location='{% url 'order_disable' pk=order.pk %}'">
-                            <input type="button" value="Завершить" onclick="window.location='{% url 'order_complete' pk=order.pk %}'">
-                        {% endif %}
                 </div>
-                {% if messages %}
-                    <div class="warning">
-                        <div class="warning_text">
-                            {% for message in messages %}
-                                <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
-                            {% endfor %}
-                        </div>
-                        <div class="warning_action">
-                            <input type="button" class="standart_button warning_apply" value="Ок">
-                        </div>
-                    </div>
-                {% endif %}
             </div>
         </div>
         <script>order_detail()</script>
-{% endif %}
 
 {% endblock %}

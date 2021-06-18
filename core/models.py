@@ -102,6 +102,7 @@ class Order(models.Model):
     user_tel_nomer = models.CharField('Номер телефона заказчика', max_length=20)
     sended_in = models.DateTimeField('Время отправки заявки', null=True, blank=True)
     status = models.IntegerField('Состояние заказа', null=True, blank=True, default=0)
+    identificator = models.CharField('Идентификатор заказа', max_length=20, null=True, blank=True)
 
     author = models.ForeignKey(
         User,
