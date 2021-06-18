@@ -39,11 +39,15 @@
   $(document).ready(function (){
       $('#order_next_list').click(function(){order_next_list()});// Переходы по order
       $('#order_back_list').click(function(){order_back_list()});
-      $('#add_dop_road').click(function(){// Добавление доп. маршрута
-        $('#passing_from_road').text(from_address);
-        $('#passing_to_road').text(to_address);
-        $('#road_add_choice').show();});
-      $('#dop_road_adding').click(function(){passing_road_added=false;$('#road_add_choice').hide();road_add();});
+      $('#add_dop_road').click(function(){// Добавление доп. маршрута'
+        if(from_address!='' & to_address!=''){
+          $('#passing_from_road').text(from_address);
+          $('#passing_to_road').text(to_address);
+          $('#road_add_choice').show();
+        } else $('#warning_order_address').show();
+
+      });
+      $('#dop_road_adding').click(function(){passing_road_added=false;$('#road_add_choice').hide();road_add(); $('#from_address').removeAttr('disabled'); $('#to_address').removeAttr('disabled');});
       $('#passing_road_add').click(function(){
         passing_road_added=true;
         $('#road_add_choice').hide();
