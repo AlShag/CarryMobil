@@ -63,9 +63,11 @@
                                 </div>
                                 <div class="order_table_function">
                                     <div class="flex">
+                                        {% if request.user.is_superuser %}
                                         <section>
                                             <a href="{% url 'orders_export' %}">Выгрузить отчёты</a>
                                         </section>
+                                        {% endif %}
                                         <section>
                                             {% if user.is_staff %}
                                             <a href="{% url 'order_for_dispatcher' %}">Найти заказ</a>

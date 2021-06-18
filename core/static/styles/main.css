@@ -8,13 +8,13 @@
 @font-face {
     font-family: Jost; /* Гарнитура шрифта */
     font-weight: 100 1000;
-    src: url('../../static/fonts/jost/Jost-VariableFont_wght.ttf'); /* Путь к файлу со шрифтом */
+    src: url('/static/fonts/jost/Jost-VariableFont_wght.ttf'); /* Путь к файлу со шрифтом */
     font-style: normal;
 }
 @font-face {
     font-family: Jost; /* Гарнитура шрифта */
     font-weight: 100 1000;
-    src: url('../../static/fonts/jost/Jost-Italic-VariableFont_wght.ttf'); /* Путь к файлу со шрифтом */
+    src: url('/static/fonts/jost/Jost-Italic-VariableFont_wght.ttf'); /* Путь к файлу со шрифтом */
     font-style: italic;
 }
 html {
@@ -879,30 +879,30 @@ input[type="radio"][name="advan_slider"]{display: none;}
     right: 0;
   }
 
-  .help li i:before {
+  .help i:before {
     transform: translate(-100px, 0) rotate(45deg);
   }
-  .help li i:after {
+  .help i:after {
     transform: translate(100px, 0) rotate(-45deg);
   }
-  .help li input[type=checkbox] {
+  .help input[type=checkbox] {
     position: absolute;
     cursor: pointer;
     width: 50%;
-    transform: translate(-240px, -10px);
+    transform: translate(-150px, -10px);
     height: 10%;
     z-index: 0;
     opacity: 0;
   }
-  .help li input[type=checkbox]:checked ~ .help_table {
+  .help input[type=checkbox]:checked ~ .help_table {
     margin-top: 0;
     max-height: 0;
     opacity: 0;
   }
-  .help li input[type=checkbox]:checked ~ i:before {
+  .help input[type=checkbox]:checked ~ i:before {
     transform: translate(300px, 0) rotate(45deg);
   }
-  .help li input[type=checkbox]:checked ~ i:after {
+  .help input[type=checkbox]:checked ~ i:after {
     transform: translate(-300px, 0) rotate(-45deg);
   }
   
