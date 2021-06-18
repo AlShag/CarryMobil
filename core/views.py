@@ -208,10 +208,6 @@ def order_edit(request, pk):
 def order_delete(request, pk):
     try:
         order = get_object_or_404(Order, pk=pk)
-        if order.driver and order.status<3:
-            driver = DriverProfile.objects.get(driver=order.driver)
-            driver.current_orders-=1
-            driver.save()
         order.delete()
         redirect_url = reverse(order_table)
         return redirect(redirect_url)
@@ -259,14 +255,25 @@ def order_disable(request, pk):
     return order_detail(request, pk)
 
 
+def order_cancel(request, pk):
+    order = get_object_or_404(Order, pk=pk)
+    order.status = -1
+    order.save()
+    return order_detail(request, pk)
+
+
+def order_refresh(request, pk):
+    order = get_object_or_404(Order, pk=pk)
+    order.status = 0
+    order.save()
+    return order_detail(request, pk)
+
+
 def order_complete(request, pk):
     order = get_object_or_404(Order, pk=pk)
     if order.driver:
         order.status = 3
-        driver = DriverProfile.objects.get(driver=order.driver)
-        driver.current_orders-=1
         order.save()
-        driver.save()
     else:
         messages.info(request, 'К данному заказу не присвоен водитель, добавьте водителя к заказу для продолжения.')
     return redirect(order_detail, pk=order.pk)
@@ -280,7 +287,7 @@ def order_drivers(request, pk):
     for driver in drivers:
         driver_orders=0
         for order in orders:
-            if order.driver == driver:
+            if order.driver == driver and not order.status == 3:
                 driver_orders+=1
         if not driver_orders == driver.current_orders:
             driver.current_orders=driver_orders

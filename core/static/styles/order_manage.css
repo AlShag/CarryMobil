@@ -271,4 +271,17 @@ a{
     .orders_filter_form section {
         width: 100%;
     }
+    .order_info table th h2 {
+        font-size: 14pt;
+    }
+    .orders_form{
+        width: 100%;
+    }
+    .order_changing{
+        width: 80%;
+    }
+    .order_changing input[type='button'], #create_order{
+        width: auto;
+        padding: 1% 1%;
+    }
 }

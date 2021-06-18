@@ -128,8 +128,10 @@
                     </table>
                 </div>
                 <div class="order_changing">
-                    {% if order.status < 2 %}
-                        <input type="button" value="Удалить" onclick="window.location='{% url 'order_delete' pk=order.pk %}'">
+                    {% if order.status < 2 and not order.status == -1 %}
+                        <input type="button" value="Отменить" onclick="window.location='{% url 'order_cancel' pk=order.pk %}'">
+                    {% elif order.status == -1 %}
+                        <input type="button" value="Возобновить" onclick="window.location='{% url 'order_refresh' pk=order.pk %}'">
                     {% endif %}
                     {% if is_dispatcher or user.is_superuser %}
                         <input type="button" value="Редактировать" onclick="window.location='{% url 'order_edit' pk=order.pk %}'">

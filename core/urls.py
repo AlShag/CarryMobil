@@ -3,6 +3,8 @@ from django.conf.urls import url
 from . import views
 from .views import SignUp
 from django.contrib.auth import views as auth_views
+
+
 urlpatterns = [
     path('', views.index, name='index'),
     url(r"^account/login/$", views.LoginView.as_view(), name="login"),
@@ -33,6 +35,8 @@ urlpatterns = [
     path('order/<int:pk>/order_dispatcher_select/<str:dispatcher_pk>', views.order_dispatcher_select, name='order_dispatcher_select'),
     path('order/<int:pk>/driver_select', views.order_drivers, name='order_drivers'),
     path('order/<int:pk>/order_driver_select/<str:driver_pk>', views.order_driver_select, name='order_driver_select'),
+    path('order/<int:pk>/order_cancel', views.order_cancel, name='order_cancel'),
+    path('order/<int:pk>/order_refresh', views.order_refresh, name='order_refresh'),
     path('order/<int:pk>/complete', views.order_complete, name='order_complete'),
     path('order/<int:pk>/delete', views.order_delete, name='order_delete'),
     path('order/<int:pk>/order_enable', views.order_enable, name='order_enable'),
