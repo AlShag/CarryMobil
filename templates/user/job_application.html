@@ -69,15 +69,18 @@
                                 <label for="">Номер телефона {{ application_form.telephone_number }}</label>  
                             </section>
                         </section>
-                        {% if application_form.errors %}
-                        <section class="form_error">
-                            {% for field in form %}
-                                {% for error in field.errors %}
-                                    {{field.label}}: {{ error|escape }}
+                        {% if messages %}
+                        <div class="warning">
+                            <div class="warning_text">
+                                {% for message in messages %}
+                                    <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
                                 {% endfor %}
-                            {% endfor %}
-                        </section>
-                        {% endif %}
+                            </div>
+                            <div class="warning_action">
+                                <input type="button" class="standart_button warning_apply" value="Ок">
+                            </div>
+                        </div>
+                    {% endif %}
                         <input type="submit" value="Отправить">
                     </form>
                 </div>

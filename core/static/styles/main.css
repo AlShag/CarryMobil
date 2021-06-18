@@ -143,6 +143,9 @@ nav li a:hover{
 .closed{
     display: none;
 }
+.info_block{
+    padding: 1% 2%;
+}
 /* текст в контейнере */
 [aria-label]{
     position: relative;
@@ -206,6 +209,9 @@ nav li a:hover{
     background: none;
     border: none;
     font-size: 14pt;
+}
+.user_head_inf table td{
+    vertical-align: middle;
 }
 .user_head_inf select option{
     color: black;
@@ -943,7 +949,8 @@ input[type="radio"][name="advan_slider"]{display: none;}
 }
 .about_area{
     background-color: white;
-    height: 2400px;
+    height: auto;
+    padding-bottom: 10%;
 }
 .about_area h1{
     text-align: center;
@@ -954,19 +961,21 @@ input[type="radio"][name="advan_slider"]{display: none;}
 }
 #ab_services_image{
     width: 60%;
-    background-image: url('../../static/images/about/about_2.svg');
-    background-size: 70%;
-    background-position: 50%;
-    background-repeat: no-repeat;
 }
 #ab_services{
-    margin: 10% 0;
-    height: 28%;
+    padding: 20% 0;
 }
 #ab_serv_text{
     margin-top: 5%;
     font-size: 18pt;
     text-align: right;
+}
+.about_team{
+    height: 100%;
+    width: 100%;
+}
+#creating_team_image{
+    width: 60%;
 }
 /* Ассистент */
 #assistant_form{
@@ -1065,4 +1074,29 @@ input[type="radio"][name="advan_slider"]{display: none;}
 }
 #language_change a{
     color: white;
+}
+
+/* Форма заявления */
+.application_form{
+    width: 70%;
+    margin: 0 auto;
+}
+.application_info{
+    font-size: 14pt;
+    width: 100%;
+    margin: 0.5% 0;
+    text-align: left;
+}
+.application_title{
+    width: 30%;
+}
+.application_data{
+    width: 65%;
+    background-color: #e3e3e3;
+}
+.application_data input{
+    padding-left: 1%;
+    font-size: 14pt;
+    text-align: left;
+    width: 100%;
 }

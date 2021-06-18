@@ -81,5 +81,6 @@ admin.site.register(DispatcherProfile)
 admin.site.register(JobApplication)
 admin.site.register(Car)
 admin.site.register(AssistantLibrary)
+admin.site.register(Company)
 
 # Register your models here.

@@ -374,6 +374,12 @@
         height: 100%;
         width: 100%;
     }
+    .about_info{
+        width: 80%;
+    }
+    #creating_team_image{
+        width: 100%;
+    }
 }
 @media screen and (max-width: 569px) {
     h1{
@@ -404,7 +410,7 @@
     #menu_text{
     margin-top: 10%;
     font-size: 24pt;
-}
+    }
 }
 @media screen and (max-width: 479px){
     h1{

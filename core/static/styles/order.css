@@ -163,6 +163,12 @@
 .road_add_select select option{
     font-size: 14pt;
 }
+#add_dop_road{
+    width: auto;
+    padding: 0 1%;
+    margin-left: 1%;
+    font-size: 12pt;
+}
 #road_choice_exit{
     color:#FF7058;
     position: relative;

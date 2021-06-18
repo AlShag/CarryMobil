@@ -89,12 +89,13 @@ def view_user_profile(request, user_pk):
 def job_application(request):
     if request.method == 'POST':
         application_form = JobApplicationForm(request.POST)
+        application_form.user = request.user
         if application_form.is_valid():
             application = application_form.save(commit=False)
-            application.user = request.user
             application.save()
             return redirect(index)
         else:
+            messages.error(request, 'Пожалуйста, исправьте ошибки.')
             return redirect(job_application)
     else:
         application_form = JobApplicationForm
@@ -555,8 +556,12 @@ def company_create(request):
     if request.method == 'POST':
         form = CompanyForm(request.POST)
         if form.is_valid():
+            form.contact_user=request.user
             form.save()
             return render(request, 'company/company_profile.html', {'pk': form.pk})
+    form=CompanyForm()
+    return render(request, 'company/company_create.html', {'form': form})
+    
 
 
 def company_edit(request, pk):

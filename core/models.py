@@ -263,6 +263,7 @@ class Company(models.Model):
         related_name='company',
         on_delete=models.PROTECT
     )
+    status = models.BooleanField('Статус компании', default=0)
 
 
 class CompanyOrder(Order):

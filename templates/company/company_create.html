@@ -1,0 +1,94 @@
+{% extends "main/index.html" %}
+{% block title %}Заявление на работу - Cmobil{% endblock %}
+{% load static %}
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{% static 'styles/profile.css' %}">
+{% endblock %}
+{% block content %}
+    {% if user.is_authenticated %}
+        <div class="container">
+            <div class="white_area">
+                <div class="application_form">
+                    <form method="post">
+                        {% csrf_token %}
+                        <h1>Приём на работу</h1>
+                        <p>Мы гарантируем конфиденциальность и неразглашения 
+                            Ваших персональных данных, полученных в ходе заполнения анкеты</p>
+                        <section>
+                        </section>
+                        <section>
+                            <h2>Личные данные</h2>
+                            <section class="application_info">
+                                <div class="flex_al">
+                                    <label class="application_title">Название компании</label>
+                                    <span class="application_data">{{ form.company_name }}</span>
+                                </div>
+                            </section>
+                            <section class="application_info">
+                                <div class="flex_al">
+                                    <label class="application_title">ИНН</label>
+                                    <span class="application_data">{{ form.company_inn }}</span>
+                                </div>
+                            </section>
+                            <section class="application_info">
+                                <div class="flex_al">
+                                    <label class="application_title">Вид деятельности</label>
+                                    <span class="application_data">{{ form.business_type }}</span>
+                                </div>
+                            </section>
+                            <section class="application_info">
+                                <div class="flex_al">
+                                    <label class="application_title">Юр. Адрес</label>
+                                    <span class="application_data">{{ form.legal_address }}</span>
+                                </div>
+                            </section>
+                            <section class="application_info">
+                                <div class="flex_al">
+                                    <label class="application_title">Фактический адрес</label>
+                                    <span class="application_data">{{ form.actual_address }}</span>
+                                </div>
+                            </section>
+                        </section>
+                        <section>
+                            <h2>Контактная информация</h2>
+                            <section class="application_info">
+                                <div class="flex_al">
+                                    <label class="application_title">Имя контакта</label>
+                                    <span class="application_data">{{ form.contact_name }}</span>
+                                </div>
+                            </section>
+                            <section class="application_info">
+                                <div class="flex_al">
+                                    <label class="application_title">Телефон контакта</label>
+                                    <span class="application_data">{{ form.contact_name }}</span>
+                                </div>
+                            </section>
+                            <section class="application_info">
+                                <div class="flex_al">
+                                    <label class="application_title">Почта контакта</label>
+                                    <span class="application_data">{{ form.contact_name }}</span>
+                                </div>
+                            </section>
+                        </section>
+                        {% if messages %}
+                        <div class="warning">
+                            <div class="warning_text">
+                                {% for message in messages %}
+                                    <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                                {% endfor %}
+                            </div>
+                            <div class="warning_action">
+                                <input type="button" class="standart_button warning_apply" value="Ок">
+                            </div>
+                        </div>
+                    {% endif %}
+                        <input type="submit" value="Отправить">
+                    </form>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <p>Вы не авторизированы</p>
+    {% endif %}
+{% endblock %}
