@@ -12,7 +12,7 @@
     <input type="checkbox" checked="">
     <i></i>
     <h2 class="hbox">Доставка</h2>
-    <div class="help_table"><label class="help_info_title">Как правильно оформить заявку</label>
+    <div class="help_table" id="help1"><label class="help_info_title">Как правильно оформить заявку</label>
       <div class="help_info">На первый форме оформления заявки в поле "откуда" введите точки маршрута откуда вы хотите чтобы забрали ваш заказ
     , а в поле "куда" Соответсвенно нужно написать куда вы хотите чтобы доставили ваш груз.
     На второй стадии оформления выберите типо груза, который вы хотите перевести.
@@ -22,7 +22,7 @@
     Если вы не знаете на сколько вам нужны груsзчики или они и вовсе не нужны, тогда оставте поля пустыми и переходите дальше.
     На четвертой стадии вам выходит вся инофрмация о вашем заказе. В этом поле обязательно нужно ввести номер телефона для того чтобы диспетчер мог связаться с вами и уточнить заказ.  </div>
       </div>
-      <div class="help_table"><label class="help_info_title">Связь с водителем</label>
+      <div class="help_table" id="help2"><label class="help_info_title">Связь с водителем</label>
       <div class="help_info">Если нужно будет связаться с водителем. то вы можете позвонить диспетчеру и спросить номер телефона водителя, номер машины. Или же в профиле в разделе "журнал", 
       посмотреть все необходимую информацию.</div>
       </div>
@@ -31,11 +31,11 @@
     <input type="checkbox" checked="">
     <i></i>
     <h2 class="hbox">Технчиеские вопросы</h2>
-    <div class="help_table"><label class="help_info_title">Отменить заказ</label>
+    <div class="help_table" id="help3"><label class="help_info_title">Отменить заказ</label>
     <div class="help_info">Чтобы отменить заказ нужно зайти в свой профиль и на страничке "журнал" выбрать заказ, который хотите удалить.
     Внизу будет кнопка "удалить" нажимаете ее и ваш заказ удалится. </div>
     </div>
-    <div class="help_table"><label class="help_info_title">Изменить заказ</label>
+    <div class="help_table" id="help4"><label class="help_info_title">Изменить заказ</label>
     <div class="help_info">Для изменнения заказа нужно дождаться звонка от диспетчера, которой позвонит вам для уточнения заказа.
     И ему вы можете сказать какие изменения хотели бы внести в ваш заказ.</div>
     </div>
@@ -55,8 +55,8 @@
 
 <script>
 jQuery(function($) {
-  $('.help_info_title').click(function() {
-    $($(this).parent()).toggleClass('opened');
+  $('.help_table').click(function() {
+    $('#'+$(this).attr('id')+' div').toggleClass('opened');
   });
 });
 </script>

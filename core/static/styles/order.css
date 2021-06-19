@@ -83,9 +83,9 @@
     transition: 0s;
 }
 /* yandex */
-.ymaps-2-1-78-controls__toolbar_left{
+/* .ymaps-2-1-78-controls__toolbar_left{
     display: none;
-}
+} */
 .map div, .map ymaps, .map canvas{
     transition: 0s;
 }

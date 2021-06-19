@@ -78,7 +78,7 @@
                                                 <section class="user_dop_info">
                                                     <label for="">Авто:</label>
                                                     {% for car in cars %}
-                                                        <a href="">{{ car.registration_number }}</a>
+                                                        <a href="{% url 'driver_cars' pk=driver.id %}">{{ car.registration_number }}</a>
                                                     {% endfor %}
                                                 </section>
                                                 <section class="user_dop_info">
