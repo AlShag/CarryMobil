@@ -12,7 +12,7 @@
 <div class="for_login">
     <div class="login_form">
         <h1>Вход</h1>
-        <form method="post" action="{% url 'login' %}">
+        <form method="post" action="{% url 'signin' %}">
             {% csrf_token %}
             <section class="for_input">
                 <h2>Емайл пользователя</h2>
@@ -31,6 +31,9 @@
                     <label for="view_password"><img src="{% static '/images/login/visibility.svg' %}" alt="" class="for_input_func" id="view_password"></label>
                 </div>
             </section>
+            <section class="forget_password">
+                <a href="{% url "password_reset" %}">Забыли пароль?</a><br>
+            </section>
             <input type="submit" value="Войти"><br>
             <!-- <span>Войти через:</span><br>
             <section class="login_with">
@@ -40,7 +43,7 @@
                     <li><a href=""><img src="{% static '/images/login/facebook.svg' %}"></a></li>
                 </ul>
             </section> -->
-            {% trans "Ещё не зарегистрированы?" %}  <strong><a href="{% urlnext 'account_signup' %}">{% trans "Регистрация" %}</a></strong>
+            {% trans "Ещё не зарегистрированы?" %}  <strong><a href="{% urlnext 'register' %}">{% trans "Регистрация" %}</a></strong>
             <!-- <span>Или <a href="{% url 'register' %}">зарегистрироваться</a></span> -->
             <input type="hidden" name="next" value="{{ next }}">
         </form>

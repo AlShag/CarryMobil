@@ -95,7 +95,7 @@
                             {% if not order.driver == None %}
                                 <a href="{% url 'profile' pk=order.driver.user.id %}">{{ order.driver }}</a>
                             {% else %}
-                                <a href="{% url 'order_drivers' pk=order.pk %}">Выбрать водителя</a>
+                                <a href=""> Не выбран</a>
                             {% endif %}
                             </td>
                             <td class="order_price">

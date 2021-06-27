@@ -1,0 +1,47 @@
+{% extends "main/index.html" %}
+{% load static %}
+{% block title %}Заявка отправлена{% endblock %}
+{% block css %}
+    {{ block.super }}
+        <link rel="stylesheet" href="{% static 'styles/order.css' %}">
+{% endblock %}
+{% block script %}
+{{ block.super }}
+    <script src="{% static 'scripts/order.js' %}"></script>
+{% endblock %}
+{% block content %}
+    <div class="order_area">
+        <div class="order_main">
+            <div class="container">
+                <div class="order_title">
+                    <div class="list_head" id="list_head_5">
+                        <section class="order_title_icon">
+                            <img src="{% static '/images/order/map.svg' %}" alt="">
+                        </section>
+                        <h1>Оформление заказа, завершено</h1>
+                    </div>
+                </div>
+                <div class="order_form">
+                    <div class="list" id="list_5">
+                        <section class="list_5_container">
+                            <div class="list_5_image"></div>
+                            <div class="list_5_text">
+                                <h2>На ваш номер в скором времени поступит звонок
+                                    для уточнения заказа</h2>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="order_transition">
+            <div class="container">
+                <div class="order_transition_buttons">
+                    <div class="flex">
+                        <input type="button" value="На главную" id='to_main' onclick="window.location.href=`{% url 'index' %}`">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

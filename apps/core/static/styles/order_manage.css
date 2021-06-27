@@ -1,0 +1,290 @@
+.orders_area{
+    padding: 0.1% 0;
+    width: 100%;
+    height: auto;
+    background-color: #e5e5e5;
+}
+a{
+    color: black;
+}
+.manage_tool{
+    width: 270px;
+    height: 400px;
+    position: absolute;
+    padding: 2.5%;
+    left: 50%;
+    top: 50%;
+    border-radius: 30px;
+    background: #fff;
+    border:2px solid black;
+    transition: 0s;
+}
+.manage_tool:hover{
+    border:2px solid #0085ff;
+}
+.orders_form{
+    width: 80%;
+    margin: 5% auto;
+    height: auto;
+    max-width: 1920px;
+    background-color: white;
+    padding-bottom: 2.5%;
+    border: 2px solid white;
+}
+.orders_form:hover{
+    border: 2px solid #0085ff;
+}
+.orders_filter{
+    padding: 4% 0;
+    background-color: #545454;
+}
+.orders_filter h2{
+    color: white;
+    font-size: 18pt;
+}
+.orders_filter_form{
+    width: 85%;
+    margin: 0 auto;
+}
+.orders_filter_form section{
+    width: 33%;
+}
+.filter_value{
+    width: 90%;
+    margin: 2% 10%;
+}
+.filter_value li{
+    list-style-type: none;
+    color: white;
+}
+#filter_applay{
+    text-align: right;
+    padding-top: 10%;
+    padding-bottom: 2%;
+}
+#filter_applay input{
+    color: white;
+}
+#orders_table_title{
+    border-bottom: 1px solid #949494;
+}
+#orders_table th{
+    font-size: 16pt;
+    font-weight: 400;
+}
+#orders_table tr td:not(.order_change), #orders_table th{
+    text-align: center;
+    height: 100%;
+    padding: 1% 0;
+    border-right: 1px solid #949494;
+}
+.order_change{
+    text-align: center;
+    height: 100%;
+    padding: 1% 0;
+    border-right: 1px solid white;
+}
+#orders_table{
+    border: 1px solid white;
+    border-collapse: collapse;
+    height: 90%;
+    width: 100%;
+}
+#full_road_info{
+    display: none;
+}
+.order_info{
+    padding: 2.5% 10%;
+}
+.order_info h1{
+    text-align: center;
+    font-size: 26pt;
+}
+.order_info table{
+    border-collapse: collapse;
+    width: 100%;
+}
+.order_info table th h2{
+    font-size: 24pt;
+}
+.order_info table tr td, .order_info table th{
+    text-align: center;
+    height: 100%;
+    padding: 1% 0;
+    border-bottom: 1px solid black;
+}
+.order_info table th{
+    font-weight: 400;
+    font-size: 14pt;
+}
+.order_price{
+    width: 30%;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+}
+#order_status{
+    color: #9e7200;
+}
+#order_sended_time{
+    text-align: right;
+    width: 80%;
+}
+#to_orders_list{
+    font-size: 28pt;
+    color:#0085ff;
+}
+.full_roads{
+    width: 30%;
+}
+.filter_value label{
+    color: white;
+    width: 35%;
+}
+.data_filter{
+    color: white;
+    font-size: 14pt;
+    width: 65%;
+}
+.data_filter::-webkit-calendar-picker-indicator{
+    filter: invert(1);
+}
+#type_filter,#type_filter option{
+    background: none;
+    border: none;
+    color: white;
+    font-size: 12pt;
+    outline: none;
+}
+#type_filter option{
+    background: #575757;
+}
+
+#prices{
+    display: none;
+}
+#order_edit_table{
+
+}
+#order_edit_table th{
+    text-align: center; 
+    vertical-align: middle;
+    border-right: 1px solid #575757;
+    width: 30%;
+}
+.order_data .all_roads{
+    border-left: 1px solid #575757;
+}
+.order_data a{
+    color: #0085ff;
+}
+.all_roads:not(.all_roads:last-child){
+    border-bottom: 1px solid #575757;
+    padding: 2% 2%;
+}
+.road_changes .roads input{
+    width: 100%;
+}
+#add_changes{
+    border: 1px solid #0085ff;
+    border-radius: 20px;
+    padding: 1% 2.5%;
+    font-size: 14pt;
+    color: #0085ff;
+    margin: 0 35%;
+    margin-top: 5%;
+}
+#add_changes:hover{
+    background-color: #0085ff;
+    color: white;
+}
+#id_status{
+    display: none;
+}
+.order_changing input[type='button'], #create_order{
+    border: 1px solid #0085ff;
+    border-radius: 20px;
+    padding: 1% 2.5%;
+    color: #0085ff;
+    font-size: 14pt;
+    width: 30%;
+    margin-left: 1%;
+    transition: 0.25s;
+}
+.order_changing input[type='button']:hover, #create_order:hover{
+    background-color: #0085ff;
+    color: white;
+}
+.order_changing{
+    width: 60%;
+    margin: 0 auto;
+}
+.order_status_changing input[type='button']{
+    transition: 0.25s;
+    font-size: 14pt;
+    margin-left: 5%;
+    padding: 1% 2%;
+}
+#order_edit_table input{
+    font-size: 12pt;
+}
+.road_changes input:not(.roads input){
+    height: 50px;
+}
+.road_changes input[type='button']:not(.roads input):hover{
+    color: #0085ff;
+}
+.road_changes input[type='number']:not(.roads){
+    width: 40px;
+}
+#create_order{
+    margin-top: 5%;
+    margin-left: 30%;
+}
+.order_edit_table #id_cargo_type{
+    display: none;
+}
+#road_calculate input{
+    font-size: 16pt;
+}
+.order_table_function{
+    width: 100%;
+}
+.order_table_function section{
+    color: white;
+    width: 33%;
+    text-align: center;
+}
+.order_table_function a, .order_table_function input{
+    color: white;
+    font-size: 14pt;
+}
+
+@media screen and (max-width: 1100px){
+    #orders_table th, #orders_table td{
+        font-size: 14pt;
+    }
+    #orders_table td{
+        font-size: 12pt;
+    }
+}
+@media screen and (max-width: 768px){
+    #orders_table th:not(.row_on_mobile), #orders_table td:not(.row_on_mobile){
+        display: none;
+    }
+    .orders_filter_form section {
+        width: 100%;
+    }
+    .order_info table th h2 {
+        font-size: 14pt;
+    }
+    .orders_form{
+        width: 100%;
+    }
+    .order_changing{
+        width: 80%;
+    }
+    .order_changing input[type='button'], #create_order{
+        width: auto;
+        padding: 1% 1%;
+    }
+}

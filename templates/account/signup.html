@@ -12,7 +12,7 @@
   <div class="for_login">
     <div class="login_form">
       <h1>Регистрация</h1>
-      <form method="post" autocomplete="off" action="{% url 'SignUp' %}">
+      <form method="post" autocomplete="off" action="{% url 'register' %}">
         {% csrf_token %}
         <section class="for_input">
           <h2>Имя пользователя</h2>
@@ -58,7 +58,7 @@
           {% endfor %}
         </section>
       {% endif %}
-      {% trans "Уже зарегистрированы?" %}  <strong><a href="{% urlnext 'account_login' %}">{% trans "Авторизация" %}</a></strong>
+      {% trans "Уже зарегистрированы?" %}  <strong><a href="{% urlnext 'signin' %}">{% trans "Авторизация" %}</a></strong>
     </form>
     {% if redirect_field_value %}
       <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />

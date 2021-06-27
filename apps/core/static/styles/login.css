@@ -1,0 +1,148 @@
+#logaut_a:hover{
+    color: white;
+    background: #FF7058;
+}
+h1{
+    font-size: 36pt;
+}
+.for_login{
+    height: 800px;
+    width: 100%;
+    background-color:#f5f5f5;
+    padding-top: 4%;
+}
+.login_form h2{
+    color: black;
+    text-align: left;
+}
+.login_form span{
+    color:#474747;
+    font-size: 16pt;
+    margin-top: 25px;
+}
+.login_form{
+    width: 500px;
+    height: 600px;
+    background-color: white;
+    border-radius: 50px;
+    margin: 0 auto;
+    text-align: center; 
+}
+.login_form form{
+    width: 65%;
+    margin: 0 auto;
+}
+.login_form input[type='text'], input[type='password'], input[type='email']{
+    font-size: 16pt;
+    width: 100%;
+    color: black;
+    text-align: left;
+    cursor:text;
+}
+.input_container{
+    display: flex;
+    border-bottom: 1px solid #474747;
+}z
+/* .for_input:hover{
+    border-bottom: 1px solid#0085ff;
+    transition: 0.25s;
+} */
+.for_input{
+    margin-top: 5%;
+}
+.for_input_icn{
+    color: #474747;
+    width: 14px;
+    font-size: 15pt;
+    pointer-events: none;
+}
+.input_container label img{
+    top: 50%;
+    pointer-events: none;
+    user-select: none;
+}
+.for_input_func{
+    color: #474747;
+    font-size: 16pt;
+    width: 14px;
+    pointer-events: none;
+    height: 100%;
+}
+.login_form a{
+    color: #474747;
+}
+.login_form label{
+    color:#474747;
+    user-select: none;
+    font-size: 16pt;
+}
+.forget_password{
+    text-align: right;
+    margin-top: 1%;
+}
+.login input::placeholder{
+    color: #474747;
+    text-align: left;
+    padding-left: 3.5%;
+}
+.login_form input[type='submit']{
+    font-size: 18pt;
+    color: white;
+    background-color:#0085ff;
+    border-radius: 50pt;
+    width: 100%;
+    text-align: center;
+    margin-top: 17%;
+    margin-bottom: 5%;
+}
+.login_form h1{
+    text-align: center;
+    color: black;
+    padding-bottom: 10%;
+    padding-top: 7%;
+}
+#register h1{
+    padding-bottom: 5%;
+}
+.login_with ul li{
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    margin: 2% 2%;
+}
+.login_form input[type='checkbox']{
+    display: none;
+}
+.form_error{
+    color:#FF7058;
+}
+label[for="user_accord"]{
+    font-size: 12pt;
+}
+label[for="user_accord"] a{
+    color: #0085ff;
+}
+#user_accord{
+    display: block;
+}
+table td{
+    vertical-align: middle;
+}
+.login_form input[type='button']{
+    color: #0085ff;
+    border: 2px solid #0085ff;
+    border-radius: 50pt;
+    width: 65%;
+    padding: 1% 0;
+    margin-top: 15%;
+    font-size: 14pt;
+}
+.login_form input[type='button']:hover{
+    background-color: #0085ff;
+    color: #fff;
+}
+@media screen and (max-width: 768px){
+    .login_form{
+        width: 100%;
+    }
+}

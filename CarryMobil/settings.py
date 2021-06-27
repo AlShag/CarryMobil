@@ -11,10 +11,12 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import sys
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
 
 # Quick-start development settings - unsuitable for production
@@ -42,6 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'account',
     'core',
+    'users',
+    'order',
 ]
 
 MIDDLEWARE = [
@@ -136,13 +140,13 @@ USE_TZ = True
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
 
-ACCOUNT_LOGIN_URL = 'core:account_login'
+ACCOUNT_LOGIN_URL = 'account:login'
 ACCOUNT_EMAIL_CONFIRMATION_ANONYMOUS_REDIRECT_URL = ACCOUNT_LOGIN_URL
 ACCOUNT_PASSWORD_RESET_REDIRECT_URL = ACCOUNT_LOGIN_URL
-ACCOUNT_EMAIL_CONFIRMATION_URL = "core:account_confirm_email"
-ACCOUNT_SETTINGS_REDIRECT_URL = 'core:account_settings'
-ACCOUNT_PASSWORD_CHANGE_REDIRECT_URL = "core:account_password"
-ACCOUNT_PASSWORD_RESET_TOKEN_URL = 'core:account_password_reset_token'
+ACCOUNT_EMAIL_CONFIRMATION_URL = "account:confirm_email"
+ACCOUNT_SETTINGS_REDIRECT_URL = 'account:settings'
+ACCOUNT_PASSWORD_CHANGE_REDIRECT_URL = "account:password_change"
+ACCOUNT_PASSWORD_RESET_TOKEN_URL = 'account:password_reset_token'
 ACCOUNT_EMAIL_UNIQUE = True
 ACCOUNT_EMAIL_CONFIRMATION_REQUIRED = True
 
